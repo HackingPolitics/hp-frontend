@@ -57,3 +57,10 @@ The Official Documenation for the project is work in progress and will be linked
 1. Projects that inspired you
 2. Related projects
 3. Books, papers, talks, or other sources that have meaningful impact or influence on this project
+
+
+## Supported by
+The project is a finalist of the [PrototypeFund Round 9](https://prototypefund.de/projects/round-9/ "Prototypefund Website"), see https://prototypefund.de/project/hackingpoliticsonline/ for details.
+
+[<img alt="BMBF" src="https://zukunftsstadt.de/wp-content/uploads/2019/12/BMBF_gefo%CC%88rdert-vom_deutsch.jpg" height="150">](https://www.bmbf.de/de/software-sprint-freie-programmierer-unterstuetzen-3512.html "BMBF Software Sprint Förderrichtlinie")
+[<img alt="Prototypefund" src="https://i0.wp.com/blog.okfn.org/files/2017/12/22137279_1679687182104997_6759961652435307500_o.jpg" height="150">](https://prototypefund.de "Prototypefund Website")
