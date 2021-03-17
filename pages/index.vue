@@ -3,7 +3,7 @@
     <div>
       <Logo class="mb-12" />
       <h1 class="font-medium text-6xl mb-16 text-center">
-        Let hack the politics!
+        Let's hack the politics!
       </h1>
       <div class="w-48 mx-auto">
         <FormulateInput label="Name" type="text" placeholder="Name eingeben" />
