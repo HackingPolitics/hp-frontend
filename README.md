@@ -10,7 +10,7 @@ By
 [Pauline Grahlmann](https://github.com/pascalknecht),
 [Tina Hoffmann](https://github.com/palmiak),
 [Philipp Munzert](https://github.com/philmuze) ([@philmuze](https://twitter.com/philmuze)),
-[Frieder Jacobi](https://github.com/f-jacobi),
+[Frieder Jacobi](https://github.com/f-jacobi)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ae3eedab-ffdd-4036-9d99-dde1fe6d76ff/deploy-status)](https://app.netlify.com/sites/hacking-politics/deploys)
 [![Coverage Status](https://img.shields.io/coveralls/timber/timber.svg?style=flat-square)](https://coveralls.io/github/timber/timber)
