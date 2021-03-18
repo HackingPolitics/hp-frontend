@@ -6,9 +6,9 @@
 
 By
 [Norbert Rost](https://github.com/norbertrost) ([@Zukunftsstadtde](https://twitter.com/Zukunftsstadtde)),
-[Jakob Schumann ](https://github.com/j-schumann) ,
-[Pauline Grahlmann](https://github.com/pascalknecht) ,
-[Tina Hoffmann](https://github.com/palmiak) ,
+[Jakob Schumann](https://github.com/j-schumann),
+[Pauline Grahlmann](https://github.com/pascalknecht),
+[Tina Hoffmann](https://github.com/palmiak),
 [Philipp Munzert](https://github.com/philmuze) ([@philmuze](https://twitter.com/philmuze)),
 [Frieder Jacobi](https://github.com/f-jacobi),
 
