@@ -23,7 +23,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/formulate.js'],
+  plugins: ['~/plugins/composition-api.ts', '~/plugins/click-outside.js'],
+
+  env: {
+    version: require('./package.json').version,
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,14 +47,24 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-socket-io',
   ],
+
+  axios: {
+    baseUrl: 'https://api-dev.hpo.vrok.de/',
+  },
+
+  io: {
+    sockets: [
+      {
+        url: 'https://socket.hpo.vrok.de', // IO server lives here
+      },
+    ],
+  },
 
   tailwindcss: {
     jit: true,
   },
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

@@ -8,6 +8,7 @@
       <div class="w-48 mx-auto">
         <FormulateInput label="Name" type="text" placeholder="Name eingeben" />
       </div>
+      <nuxt-link to="/collaboration">Collab Editor</nuxt-link>
     </div>
   </div>
 </template>

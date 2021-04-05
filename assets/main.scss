@@ -1,0 +1,18 @@
+// @import "~variables";
+/* stylelint-disable */
+$color-black: #000000;
+$color-white: #ffffff;
+$color-grey: #dddddd;
+
+.message {
+  background-color: rgba($color-black, 0.05);
+  color: rgba($color-black, 0.7);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+@import './editor';
+@import './menubar';
+@import './yjs.scss';
