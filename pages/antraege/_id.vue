@@ -46,8 +46,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, useRoute } from '@nuxtjs/composition-api'
 export default defineComponent({
   name: 'MeineAntraegePage',
+  setup() {
+    const route = useRoute()
+    console.log(route.value.params.id)
+  },
 })
 </script>

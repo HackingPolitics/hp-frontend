@@ -1,4 +1,6 @@
-export default {
+import { defineNuxtConfig } from '@nuxtjs/composition-api'
+
+export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -23,7 +25,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/composition-api.ts', '~/plugins/click-outside.js'],
+  plugins: [
+    '~/plugins/composition-api.ts',
+    '~/plugins/click-outside.js',
+    '~/plugins/api.ts',
+  ],
 
   env: {
     version: require('./package.json').version,
@@ -41,7 +47,13 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@braid/vue-formulate/nuxt',
+    '@nuxtjs/composition-api',
   ],
+
+  generate: {
+    // choose to suit your project
+    interval: 2000,
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -68,4 +80,4 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-}
+})

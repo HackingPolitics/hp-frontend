@@ -19,11 +19,17 @@
 
         <div class="mt-8">
           <div class="mt-6">
-            <form action="#" method="POST" class="space-y-6">
+            <FormulateForm
+              v-slot="{ isLoading }"
+              v-model="credentials"
+              name="login"
+              class="space-y-6"
+              @submit="handleLogin"
+            >
               <FormulateInput
                 label="E-Mail-Adresse"
                 placeholder="E-Mail-Adresse eingeben"
-                name="email"
+                name="username"
                 type="email"
                 validation="required|email"
               />
@@ -57,7 +63,7 @@
                   :label="isLoading ? 'Sie werden eingeloggt...' : 'Einloggen'"
                 />
               </div>
-            </form>
+            </FormulateForm>
           </div>
         </div>
       </div>
@@ -72,8 +78,29 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {
+  defineComponent,
+  ref,
+  useMeta,
+  useStore,
+} from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'LoginPage',
-}
+  setup() {
+    const credentials = ref(null)
+    const store = useStore()
+
+    const handleLogin = () => {
+      store.dispatch('auth/login', credentials.value)
+    }
+    useMeta({ title: 'Login | HackingPolitics' })
+    return {
+      credentials,
+      handleLogin,
+    }
+  },
+  head: {},
+})
 </script>

@@ -5,21 +5,47 @@
     >
       <div class="mx-auto w-full max-w-sm lg:w-96">
         <div>
-          <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Anmelden</h2>
+          <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+            Registrieren
+          </h2>
           <p class="mt-2 text-sm text-gray-600 max-w">
             Oder
             <nuxt-link
-              to="/registrieren"
+              to="/login"
               class="font-medium text-yellow-400 hover:text-yellow-500"
             >
-              einen neuen Account anlegen
+              mit bereits vorhandenem Account einloggen
             </nuxt-link>
           </p>
         </div>
 
         <div class="mt-8">
           <div class="mt-6">
-            <form action="#" method="POST" class="space-y-6">
+            <FormulateForm
+              v-slot="{ isLoading }"
+              v-model="credentials"
+              name="login"
+              class="space-y-6"
+              @submit="createAccount"
+            >
+              <FormulateInput
+                label="Username"
+                placeholder="Username eingeben"
+                name="username"
+                validation="required"
+              />
+              <FormulateInput
+                label="Vorname"
+                placeholder="Vorname eingeben"
+                name="firstname"
+                validation="required"
+              />
+              <FormulateInput
+                label="Nachname"
+                placeholder="Nachname eingeben"
+                name="lastname"
+                validation="required"
+              />
               <FormulateInput
                 label="E-Mail-Adresse"
                 placeholder="E-Mail-Adresse eingeben"
@@ -57,7 +83,7 @@
                   :label="isLoading ? 'Sie werden eingeloggt...' : 'Einloggen'"
                 />
               </div>
-            </form>
+            </FormulateForm>
           </div>
         </div>
       </div>
@@ -72,8 +98,31 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {
+  defineComponent,
+  ref,
+  useMeta,
+  useStore,
+} from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'RegisterPage',
-}
+  setup() {
+    const credentials = ref({
+      validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
+    })
+    const store = useStore()
+
+    const createAccount = () => {
+      store.dispatch('auth/register', credentials.value)
+    }
+    useMeta({ title: 'Account anlegen | HackingPolitics' })
+    return {
+      credentials,
+      createAccount,
+    }
+  },
+  head: {},
+})
 </script>
