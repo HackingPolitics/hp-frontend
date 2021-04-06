@@ -32,6 +32,16 @@ export default (axios: AxiosInstance) => ({
     }) as Promise<IAuthReply>
   },
 
+  /* #region Validation */
+  // public confirmValidation = (data: IValidation): Promise<boolean> => {
+  //     return this.post(`/validations/${data.id}/confirm`, data) as Promise<boolean>
+  //   }
+
+  //   public resetPassword = (data: IPasswordReset): Promise<boolean> => {
+  //     return this.post(`/validations/${data.id}/confirm`, data) as Promise<boolean>
+  //   }
+  /* #endregion */
+
   logout() {
     return axios.get('/auth/logout')
   },
