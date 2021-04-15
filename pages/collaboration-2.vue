@@ -641,7 +641,7 @@ export default defineComponent({
       reconnection: false,
       auth: {
         token:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTU3OTgxMzEsImV4cCI6MTY0NzMzNDEzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIm5hbWUiOiJQTSIsInVzZXJJRCI6IjIiLCJncm91cElEIjoiMSJ9.GfojrcZ3J9kZwic0BP8J27Gx8NbWtn0TNKtkSktN9hU',
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTU3OTgxMzEsImV4cCI6MTY0NzMzNDEzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIm5hbWUiOiJKUyIsInVzZXJJRCI6IjEiLCJncm91cElEIjoiMSJ9.qmaJLpHXWTZae24T781IJBYjjLcYfF-hXmlH7Qx_JVM',
       },
     })
     console.log(socket)
