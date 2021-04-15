@@ -1,6 +1,6 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { getStoredAuthToken, storeAuthToken } from '@/utils/authToken'
-import { IUser } from '~/types/apiSchema'
+import { IUser } from '../types/apiSchema'
 
 export interface AuthState {
   user: IUser | null
@@ -59,7 +59,7 @@ export const actions: ActionTree<RootState, RootState> = {
       //   storeAuthToken(response.access_token)
       //   this.$axios.setToken(response.access_token, 'Bearer')
       //   this.$router.push('/')
-      console.log(response)
+
       commit('SET_LOADING_FLAG', false)
     } catch (error) {
       commit('SET_ERRORS', error.response?.data?.errorDetails?.errorMessage)
@@ -76,14 +76,20 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   // request password reset
-  // async requestPasswordReset({ commit }, email) {
-  //   try {
-  //     await this.$axios.$post(`/auth/forgot`, { email })
-  //     return 'Reset requested'
-  //   } catch {
-  //     commit('SET_ERRORS', true)
-  //   }
-  // },
+  async resetPassword({ commit }, payload) {
+    try {
+      commit('SET_LOADING_FLAG', true)
+      const response = await this.$api.auth.passwordReset(payload)
+      commit('SET_LOADING_FLAG', false)
+      return response
+    } catch {
+      commit('SET_ERRORS', true)
+      commit('SET_LOADING_FLAG', false)
+      return {
+        success: false,
+      }
+    }
+  },
 
   // Request Password Reset
   async passwordResetRequest({ commit }, data) {
@@ -105,7 +111,6 @@ export const actions: ActionTree<RootState, RootState> = {
   async register({ commit }, credentials) {
     try {
       const response = await this.$api.auth.registerUser(credentials)
-      console.log(response)
       commit('SET_LOADING_FLAG', false)
       return response
     } catch (e) {

@@ -44,7 +44,7 @@
       </FormulateForm>
       <nuxt-link
         to="/login"
-        class="mt-6 text-sm text-gray-600 max-w font-medium text-yellow-400 hover:text-yellow-500"
+        class="mt-6 text-sm text-yellow-400 max-w font-medium text-yellow-400 hover:text-yellow-500"
       >
         Zurück zum Login
       </nuxt-link>

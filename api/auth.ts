@@ -1,24 +1,15 @@
-import { AxiosInstance, AxiosResponse } from 'axios'
+import { AxiosInstance } from 'axios'
 import {
   IAuthReply,
   ICredentials,
-  IEmailChange,
-  IHydraCollection,
-  INewPasswordRequest,
-  IPasswordChange,
   IPasswordReset,
   IPasswordResetRequest,
   IRegistration,
   IUser,
-  IUserStatistics,
   IValidation,
-} from '@/types/apiSchema'
+} from '../types/apiSchema'
 
 export default (axios: AxiosInstance) => ({
-  forgotPassword(email: string) {
-    return axios.post('/auth/password/forgot', { email })
-  },
-
   requestAuthToken(credentials: ICredentials): Promise<IAuthReply> {
     return axios.post(
       '/authentication_token',
@@ -32,16 +23,6 @@ export default (axios: AxiosInstance) => ({
     }) as Promise<IAuthReply>
   },
 
-  /* #region Validation */
-  // public confirmValidation = (data: IValidation): Promise<boolean> => {
-  //     return this.post(`/validations/${data.id}/confirm`, data) as Promise<boolean>
-  //   }
-
-  //   public resetPassword = (data: IPasswordReset): Promise<boolean> => {
-  //     return this.post(`/validations/${data.id}/confirm`, data) as Promise<boolean>
-  //   }
-  /* #endregion */
-
   confirmEmailAddress(data: IValidation): Promise<boolean> {
     return axios.post(`/validations/${data.id}/confirm`, { token: data.token })
   },
@@ -51,7 +32,10 @@ export default (axios: AxiosInstance) => ({
   },
 
   passwordReset(data: IPasswordReset): Promise<boolean> {
-    return axios.post(`/users/reset-password`, data) as Promise<boolean>
+    return axios.post(`/validations/${data.id}/confirm`, {
+      token: data.token,
+      password: data.password,
+    })
   },
 
   logout() {
@@ -61,16 +45,4 @@ export default (axios: AxiosInstance) => ({
   registerUser(user: IRegistration): Promise<IUser> {
     return axios.post('/users/register', user) as Promise<IUser>
   },
-
-  // resetPassword(
-  //   password: string,
-  //   passwordConfirmation: string,
-  //   resetToken: string
-  // ) {
-  //   return axios.post('/auth/password/reset', {
-  //     password,
-  //     password_confirmation: passwordConfirmation,
-  //     token: resetToken,
-  //   })
-  // },
 })

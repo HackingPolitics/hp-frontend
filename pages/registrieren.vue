@@ -64,6 +64,7 @@
                 placeholder="Passwort eingeben"
                 name="password"
                 type="password"
+                help="Passwort soll mindestens einen Klein- und Großbuchstabe, eine Zahl und ein Zeichen enthalten."
                 :validation="[
                   ['required'],
                   ['min', 4, 'length'],
@@ -76,7 +77,6 @@
                   matches:
                     'Passwort soll mindestens einen Klein- und Großbuchstabe, eine Zahl und ein Zeichen enthalten.',
                 }"
-                error-behavior="live"
               />
 
               <FormulateInput
@@ -85,7 +85,6 @@
                 name="password_confirm"
                 type="password"
                 validation="required|confirm"
-                error-behavior="live"
               />
 
               <div>
@@ -160,9 +159,9 @@ export default defineComponent({
     const store = useStore()
     const formSent = ref(false)
 
-    const createAccount = () => {
-      store.dispatch('auth/register', credentials.value)
-      formSent.value = true
+    const createAccount = async () => {
+      formSent.value = await store.dispatch('auth/register', credentials.value)
+      // TODO: handle form errors
     }
     useMeta({ title: 'Account anlegen | HackingPolitics' })
     return {

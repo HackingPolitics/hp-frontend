@@ -12,7 +12,7 @@
           Ihre E-Mail wird bestätitgt...
         </div>
       </div>
-      <div v-if="error && loading" class="text-green-600 text-center">
+      <div v-if="!error && !loading" class="text-green-600 text-center">
         <div key="success-notice">
           <div class="my-8">
             <div
@@ -98,16 +98,14 @@
           </div>
         </div>
       </div>
-      <div v-if="!error && !loading">
-        <nuxt-link to="/login">
-          <button
-            type="button"
-            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+      <!-- <div v-if="!error && !loading">
+        <nuxt-link
+            to="/login"
+            class="transition duration-150 inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-400 text-base font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:text-sm"
           >
             Zum Login
-          </button>
-        </nuxt-link>
-      </div>
+          </nuxt-link>
+      </div> -->
     </div>
   </div>
 </template>

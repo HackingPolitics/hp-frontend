@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="/">
+  <nuxt-link :to="{ name: 'index' }">
     <div
       class="bg-yellow-400 shadow rounded-md h-12 w-12 flex justify-center items-center transform -rotate-12 hover:rotate-0 transition duration-300 ease-in-out"
     >
