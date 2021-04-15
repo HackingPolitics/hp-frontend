@@ -1,7 +1,8 @@
 <template>
   <nuxt-link :to="{ name: 'index' }">
     <div
-      class="bg-yellow-400 shadow rounded-md h-12 w-12 flex justify-center items-center transform -rotate-12 hover:rotate-0 transition duration-300 ease-in-out"
+      class="bg-white shadow rounded-md h-12 w-12 flex justify-center items-center transform -rotate-12 hover:rotate-0 transition duration-300 ease-in-out"
+      :class="colored ? 'bg-yellow-400' : ''"
     >
       <span class="sr-only">HackingPolitics</span>
       <svg
@@ -19,15 +20,16 @@
   </nuxt-link>
 </template>
 
-<style>
-.NuxtLogo {
-  animation: 1s appear;
-  margin: auto;
-}
+<script>
+import { defineComponent } from '@vue/composition-api'
 
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-}
-</style>
+export default defineComponent({
+  name: 'Logo',
+  props: {
+    colored: {
+      type: Boolean,
+      default: false,
+    },
+  },
+})
+</script>

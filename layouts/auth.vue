@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-white flex">
     <div class="flex-1 flex flex-col lg:flex-none">
       <div class="pt-12 px-4 sm:px-6 lg:px-20 xl:px-24">
-        <logo></logo>
+        <logo colored></logo>
       </div>
       <div
         class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24"
