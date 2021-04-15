@@ -1,8 +1,8 @@
 <template>
   <nuxt-link :to="{ name: 'index' }">
     <div
-      class="bg-white shadow rounded-md h-12 w-12 flex justify-center items-center transform -rotate-12 hover:rotate-0 transition duration-300 ease-in-out"
-      :class="colored ? 'bg-yellow-400' : ''"
+      class="shadow rounded-md h-12 w-12 flex justify-center items-center transform -rotate-12 hover:rotate-0 transition duration-300 ease-in-out"
+      :class="colored ? 'bg-yellow-400' : 'bg-white'"
     >
       <span class="sr-only">HackingPolitics</span>
       <svg
