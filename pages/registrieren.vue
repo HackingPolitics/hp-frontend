@@ -1,9 +1,14 @@
 <template>
-  <div class="min-h-screen bg-white flex">
-    <div
-      class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
+  <div class="mx-auto w-full max-w-sm lg:w-96">
+    <transition
+      enter-active-class="transition ease-out duration-300"
+      enter-class="transform opacity-0 translate-y-16"
+      enter-to-class="transform opacity-100 "
+      leave-active-class="transition ease-in duration-75"
+      leave-class="transform opacity-100 "
+      leave-to-class="transform opacity-0 "
     >
-      <div class="mx-auto w-full max-w-sm lg:w-96">
+      <div v-if="!formSent" key="register-form">
         <div>
           <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
             Registrieren
@@ -54,47 +59,86 @@
                 validation="required|email"
               />
 
-              <div class="space-y-1">
-                <FormulateInput
-                  label="Passwort"
-                  placeholder="Passwort eingeben"
-                  name="password"
-                  type="password"
-                  validation="required"
-                />
-              </div>
+              <FormulateInput
+                label="Passwort"
+                placeholder="Passwort eingeben"
+                name="password"
+                type="password"
+                :validation="[
+                  ['required'],
+                  ['min', 4, 'length'],
+                  [
+                    'matches',
+                    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.,(){}]).{4,}$/,
+                  ],
+                ]"
+                :validation-messages="{
+                  matches:
+                    'Passwort soll mindestens einen Klein- und Großbuchstabe, eine Zahl und ein Zeichen enthalten.',
+                }"
+                error-behavior="live"
+              />
 
-              <div class="flex items-center justify-between">
-                <div class="flex items-center"></div>
-
-                <div class="text-sm">
-                  <nuxt-link
-                    to="/passwort-vergessen"
-                    class="font-medium text-yellow-400 hover:text-yellow-500"
-                  >
-                    Passwort vergessen
-                  </nuxt-link>
-                </div>
-              </div>
+              <FormulateInput
+                label="Passwort wiederholen"
+                placeholder="Passwort wiederholen"
+                name="password_confirm"
+                type="password"
+                validation="required|confirm"
+                error-behavior="live"
+              />
 
               <div>
                 <FormulateInput
                   type="submit"
-                  :label="isLoading ? 'Sie werden eingeloggt...' : 'Einloggen'"
+                  :label="
+                    isLoading ? 'Account wird erstellt...' : 'Account erstellen'
+                  "
                 />
               </div>
             </FormulateForm>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hidden lg:block relative w-0 flex-1">
-      <img
-        class="absolute inset-0 h-full w-full object-cover"
-        src="https://images.unsplash.com/photo-1511044676171-fa1c680222c4?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
-        alt=""
-      />
-    </div>
+      <div v-else key="success-notice">
+        <div class="my-8">
+          <div
+            class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-black"
+          >
+            <!-- Heroicon name: outline/check -->
+            <svg
+              class="h-6 w-6 text-yellow-400"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+          <div class="mt-3 text-center sm:mt-5">
+            <h3
+              id="modal-title"
+              class="text-lg leading-6 font-medium text-gray-900"
+            >
+              Account erstellt
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                Wir haben an die angegebene Emailadresse eine Nachricht
+                geschickt. Bitte überprüfe deine Inbox.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -108,19 +152,23 @@ import {
 
 export default defineComponent({
   name: 'RegisterPage',
+  layout: 'auth',
   setup() {
     const credentials = ref({
       validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
     })
     const store = useStore()
+    const formSent = ref(false)
 
     const createAccount = () => {
       store.dispatch('auth/register', credentials.value)
+      formSent.value = true
     }
     useMeta({ title: 'Account anlegen | HackingPolitics' })
     return {
       credentials,
       createAccount,
+      formSent,
     }
   },
   head: {},

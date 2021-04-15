@@ -5,5 +5,10 @@
 <script>
 export default {
   name: 'ProfilPage',
+  data() {
+    return {
+      confirmationData: null,
+    }
+  },
 }
 </script>

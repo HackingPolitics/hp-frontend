@@ -1,10 +1,23 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { getStoredAuthToken, storeAuthToken } from '@/utils/authToken'
+import { IUser } from '~/types/apiSchema'
 
-export const state = () => ({
+export interface AuthState {
+  user: IUser | null
+  isLoading: boolean
+  errors: boolean
+  passwordResetRequestSuccess: boolean
+}
+
+const defaultAuthState: AuthState = {
   user: null,
   isLoading: false,
   errors: false,
+  passwordResetRequestSuccess: false,
+}
+
+export const state = () => ({
+  ...defaultAuthState,
 })
 
 export type RootState = ReturnType<typeof state>
@@ -24,6 +37,9 @@ export const mutations: MutationTree<RootState> = {
   },
   SET_ERRORS(state, flag: boolean) {
     state.errors = flag
+  },
+  SET_REQ_PW_RESET_SUCCESS(state, flag: boolean) {
+    state.passwordResetRequestSuccess = flag
   },
 }
 
@@ -60,12 +76,28 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   // request password reset
-  async requestPasswordReset({ commit }, email) {
+  // async requestPasswordReset({ commit }, email) {
+  //   try {
+  //     await this.$axios.$post(`/auth/forgot`, { email })
+  //     return 'Reset requested'
+  //   } catch {
+  //     commit('SET_ERRORS', true)
+  //   }
+  // },
+
+  // Request Password Reset
+  async passwordResetRequest({ commit }, data) {
     try {
-      await this.$axios.$post(`/auth/forgot`, { email })
-      return 'Reset requested'
-    } catch {
+      commit('SET_LOADING_FLAG', true)
+      const response = await this.$api.auth.passwordResetRequest(data)
+      commit('SET_LOADING_FLAG', false)
+      commit('SET_REQ_PW_RESET_SUCCESS', true)
+      return response
+    } catch (error) {
+      commit('SET_LOADING_FLAG', false)
       commit('SET_ERRORS', true)
+      commit('SET_REQ_PW_RESET_SUCCESS', false)
+      return error
     }
   },
 
@@ -115,12 +147,16 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
 
-  // confirm email address
-  async confirmEmailAddress(_, token) {
+  // Confirm E-mail Address
+  async confirmEmailAddress({ commit }, data) {
     try {
-      await this.$axios.$post(`/auth/confirm/${token}`, {})
-      return true
+      commit('SET_LOADING_FLAG', true)
+      const response = await this.$api.auth.confirmEmailAddress(data)
+      commit('SET_LOADING_FLAG', false)
+      return response
     } catch (error) {
+      commit('SET_LOADING_FLAG', false)
+      commit('SET_ERRORS', true)
       return error
     }
   },

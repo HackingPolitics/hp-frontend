@@ -25,11 +25,7 @@ export default defineNuxtConfig({
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/composition-api.ts',
-    '~/plugins/click-outside.js',
-    '~/plugins/api.ts',
-  ],
+  plugins: ['~/plugins/click-outside.js', '~/plugins/api.ts'],
 
   env: {
     version: require('./package.json').version,
@@ -40,11 +36,8 @@ export default defineNuxtConfig({
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
-    // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@braid/vue-formulate/nuxt',
     '@nuxtjs/composition-api',

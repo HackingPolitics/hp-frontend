@@ -42,6 +42,18 @@ export default (axios: AxiosInstance) => ({
   //   }
   /* #endregion */
 
+  confirmEmailAddress(data: IValidation): Promise<boolean> {
+    return axios.post(`/validations/${data.id}/confirm`, { token: data.token })
+  },
+
+  passwordResetRequest(data: IPasswordResetRequest): Promise<boolean> {
+    return axios.post(`/users/reset-password`, data) as Promise<boolean>
+  },
+
+  passwordReset(data: IPasswordReset): Promise<boolean> {
+    return axios.post(`/users/reset-password`, data) as Promise<boolean>
+  },
+
   logout() {
     return axios.get('/auth/logout')
   },
@@ -50,15 +62,15 @@ export default (axios: AxiosInstance) => ({
     return axios.post('/users/register', user) as Promise<IUser>
   },
 
-  resetPassword(
-    password: string,
-    passwordConfirmation: string,
-    resetToken: string
-  ) {
-    return axios.post('/auth/password/reset', {
-      password,
-      password_confirmation: passwordConfirmation,
-      token: resetToken,
-    })
-  },
+  // resetPassword(
+  //   password: string,
+  //   passwordConfirmation: string,
+  //   resetToken: string
+  // ) {
+  //   return axios.post('/auth/password/reset', {
+  //     password,
+  //     password_confirmation: passwordConfirmation,
+  //     token: resetToken,
+  //   })
+  // },
 })
