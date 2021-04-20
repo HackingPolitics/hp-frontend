@@ -28,7 +28,7 @@
     "@headlessui/vue": "^1.0.0",
     "@heroicons/vue": "^1.0.1",
     "@nuxtjs/axios": "^5.12.5",
-    "@nuxtjs/composition-api": "^0.22.4",
+    "@nuxtjs/composition-api": "^0.23.2",
     "@tailwindcss/forms": "^0.2.1",
     "core-js": "^3.8.3",
     "node-sass": "^5.0.0",
