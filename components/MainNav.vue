@@ -1,60 +1,44 @@
 <template>
-  <nav
-    class="bg-transparent relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none"
-  >
+  <nav class="bg-yellow-400" aria-label="Global">
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-      <div
-        class="relative h-16 flex items-center justify-between lg:border-b lg:border-light-blue-800"
-      >
-        <div class="px-2 flex items-center lg:px-0">
-          <div class="flex-shrink-0"></div>
-          <div v-if="false" class="hidden lg:block lg:ml-6 lg:space-x-4">
-            <div class="flex">
-              <!-- Current: "bg-black bg-opacity-25", Default: "hover:bg-light-blue-800" -->
-              <a
-                href="#"
-                class="bg-black bg-opacity-25 rounded-md py-2 px-3 text-sm font-medium text-white"
-                >Dashboard</a
-              >
+      <div class="flex justify-between h-16">
+        <div class="flex items-center px-2 lg:px-0">
+          <div class="flex-shrink-0 flex items-center">
+            <logo></logo>
+          </div>
+          <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
+            <a
+              href="#"
+              class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-yellow-400"
+            >
+              Übersicht
+            </a>
 
-              <a
-                href="#"
-                class="hover:bg-light-blue-800 rounded-md py-2 px-3 text-sm font-medium text-white"
-                >Jobs</a
-              >
-
-              <a
-                href="#"
-                class="hover:bg-light-blue-800 rounded-md py-2 px-3 text-sm font-medium text-white"
-                >Applicants</a
-              >
-
-              <a
-                href="#"
-                class="hover:bg-light-blue-800 rounded-md py-2 px-3 text-sm font-medium text-white"
-                >Company</a
-              >
-            </div>
+            <a
+              href="#"
+              class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-yellow-500"
+            >
+              FAQ
+            </a>
           </div>
         </div>
-        <div class="flex lg:hidden">
+
+        <div class="flex items-center lg:hidden">
           <!-- Mobile menu button -->
           <button
             type="button"
-            class="p-2 rounded-md inline-flex items-center justify-center text-light-blue-200 hover:text-white hover:bg-light-blue-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            class="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-white hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
+            @click="toggleMobileDropdown"
           >
-            <span class="sr-only">Open main menu</span>
+            <span class="sr-only">Open menu</span>
             <!--
-                Icon when menu is closed.
-
-                Heroicon name: outline/menu
-
-                Menu open: "hidden", Menu closed: "block"
-              -->
+            Icon when menu is closed.
+          -->
             <svg
-              class="block flex-shrink-0 h-6 w-6"
+              class="h-6 w-6"
+              :class="isMobileDropdownOpen ? 'hidden' : 'block'"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -69,14 +53,11 @@
               />
             </svg>
             <!--
-                Icon when menu is open.
-
-                Heroicon name: outline/x
-
-                Menu open: "block", Menu closed: "hidden"
-              -->
+            Icon when menu is open.
+          -->
             <svg
-              class="hidden flex-shrink-0 h-6 w-6"
+              class="h-6 w-6"
+              :class="isMobileDropdownOpen ? 'block' : 'hidden'"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -92,137 +73,124 @@
             </svg>
           </button>
         </div>
-        <div class="hidden lg:block lg:ml-4">
-          <div class="flex items-center">
-            <nuxt-link
-              :to="{ name: 'antraege' }"
-              class="flex-shrink-0 rounded-full p-1 text-light-blue-200 hover:bg-light-blue-800 hover:text-white focus:outline-none focus:bg-light-blue-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-900 focus:ring-white"
-            >
-              <span class="sr-only">View notifications</span>
-              <!-- Heroicon name: outline/bell -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+        <div class="hidden lg:ml-4 lg:flex lg:items-center">
+          <!-- Profile dropdown -->
+          <div class="ml-4 relative flex-shrink-0">
+            <div>
+              <button
+                id="user-menu-button"
+                type="button"
+                class="bg-light-blue-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-500 focus:ring-white"
+                aria-expanded="false"
+                aria-haspopup="true"
+                @click="toggleDropdown"
               >
-                <path
-                  d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 w-8 rounded-full"
+                  src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
                 />
-              </svg>
-            </nuxt-link>
-
-            <!-- Profile dropdown -->
-            <div
-              v-click-outside="closeDropdown"
-              class="relative flex-shrink-0 ml-4"
-            >
-              <div>
-                <button
-                  id="user-menu"
-                  type="button"
-                  class="rounded-full flex text-sm text-white focus:outline-none focus:bg-light-blue-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-900 focus:ring-white"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  @click="toggleDropdown"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                    class="rounded-full h-8 w-8"
-                    src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-
-              <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
-              >
-                <div
-                  v-if="isDropdownOpen"
-                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu"
-                >
-                  <nuxt-link
-                    to="/profil"
-                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    >Dein Profil</nuxt-link
-                  >
-
-                  <nuxt-link
-                    to="/einstellungen"
-                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    >Einstellungen</nuxt-link
-                  >
-
-                  <a
-                    href="#"
-                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    >Ausloggen</a
-                  >
-                </div>
-              </transition>
+              </button>
             </div>
+
+            <!--
+            Dropdown menu, show/hide based on menu state.
+          -->
+            <transition
+              enter-active-class="transition ease-out duration-100"
+              enter-class="transform opacity-0 scale-95"
+              enter-to-class="transform opacity-100 scale-100"
+              leave-active-class="transition ease-in duration-75"
+              leave-class="transform opacity-100 scale-100"
+              leave-to-class="transform opacity-0 scale-95"
+            >
+              <div
+                v-if="isDropdownOpen"
+                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <a
+                  id="user-menu-item-0"
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  >Your Profile</a
+                >
+
+                <a
+                  id="user-menu-item-1"
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  >Settings</a
+                >
+
+                <a
+                  id="user-menu-item-2"
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  >Sign out</a
+                >
+              </div>
+            </transition>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div v-if="false" id="mobile-menu" class="bg-light-blue-900 lg:hidden">
+    <div v-if="isMobileDropdownOpen" id="mobile-menu" class="lg:hidden">
       <div class="pt-2 pb-3 px-2 space-y-1">
-        <!-- Current: "bg-black bg-opacity-25", Default: "hover:bg-light-blue-800" -->
         <a
           href="#"
-          class="bg-black bg-opacity-25 block rounded-md py-2 px-3 text-base font-medium text-white"
-          >Dashboard</a
+          class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
+          >Übersicht</a
         >
 
         <a
           href="#"
-          class="hover:bg-light-blue-800 block rounded-md py-2 px-3 text-base font-medium text-white"
+          class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
           >Jobs</a
         >
 
         <a
           href="#"
-          class="hover:bg-light-blue-800 block rounded-md py-2 px-3 text-base font-medium text-white"
+          class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
           >Applicants</a
         >
 
         <a
           href="#"
-          class="hover:bg-light-blue-800 block rounded-md py-2 px-3 text-base font-medium text-white"
-          >Company</a
+          class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
+          >FAQ</a
         >
       </div>
-      <div class="pt-4 pb-3 border-t border-light-blue-800">
+      <div class="pt-4 pb-3 border-t border-light-blue-500">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
             <img
-              class="rounded-full h-10 w-10"
-              src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
+              class="h-10 w-10 rounded-full"
+              src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             />
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-white">Debbie Lewis</div>
+            <div class="text-base font-medium text-white">Floyd Miles</div>
             <div class="text-sm font-medium text-light-blue-200">
-              debbielewis@example.com
+              floydmiles@example.com
             </div>
           </div>
           <button
-            class="ml-auto flex-shrink-0 rounded-full p-1 text-light-blue-200 hover:bg-light-blue-800 hover:text-white focus:outline-none focus:bg-light-blue-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-900 focus:ring-white"
+            class="ml-auto flex-shrink-0 bg-light-blue-500 rounded-full p-1 text-light-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-500 focus:ring-white"
           >
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
@@ -246,20 +214,20 @@
         <div class="mt-3 px-2">
           <a
             href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-800"
-            >Dein Profil</a
+            class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
+            >Your Profile</a
           >
 
           <a
             href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-800"
-            >Einstellungen</a
+            class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
+            >Settings</a
           >
 
           <a
             href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-800"
-            >Ausloggen</a
+            class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
+            >Sign out</a
           >
         </div>
       </div>
@@ -274,6 +242,7 @@ export default defineComponent({
   name: 'MainNav',
   setup() {
     const isDropdownOpen = ref(false)
+
     const toggleDropdown = (): void => {
       isDropdownOpen.value = !isDropdownOpen.value
     }
@@ -281,10 +250,25 @@ export default defineComponent({
     const closeDropdown = (): void => {
       isDropdownOpen.value = false
     }
+
+    // Mobile Dropdown
+
+    const isMobileDropdownOpen = ref(false)
+
+    const toggleMobileDropdown = (): void => {
+      isDropdownOpen.value = !isDropdownOpen.value
+    }
+
+    const closeMobileDropdown = (): void => {
+      isDropdownOpen.value = false
+    }
     return {
       isDropdownOpen,
       closeDropdown,
       toggleDropdown,
+      isMobileDropdownOpen,
+      toggleMobileDropdown,
+      closeMobileDropdown,
     }
   },
 })

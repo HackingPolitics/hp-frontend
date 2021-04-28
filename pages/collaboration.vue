@@ -1,339 +1,19 @@
 <template>
-  <!--
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          'light-blue': colors.lightBlue,
-        }
-      }
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
--->
   <div>
-    <nav class="bg-yellow-400" aria-label="Global">
-      <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex items-center px-2 lg:px-0">
-            <div class="flex-shrink-0 flex items-center">
-              <logo></logo>
-            </div>
-            <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-              <a
-                href="#"
-                class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-yellow-400"
-              >
-                Übersicht
-              </a>
-
-              <a
-                href="#"
-                class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-yellow-500"
-              >
-                FAQ
-              </a>
-            </div>
-          </div>
-
-          <div class="flex items-center lg:hidden">
-            <!-- Mobile menu button -->
-            <button
-              type="button"
-              class="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-white hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Open menu</span>
-              <!--
-            Icon when menu is closed.
-
-            Heroicon name: outline/menu
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
-              <svg
-                class="block h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <!--
-            Icon when menu is open.
-
-            Heroicon name: outline/x
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
-              <svg
-                class="hidden h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div class="hidden lg:ml-4 lg:flex lg:items-center">
-            <!-- Profile dropdown -->
-            <div class="ml-4 relative flex-shrink-0">
-              <div>
-                <button
-                  id="user-menu-button"
-                  type="button"
-                  class="bg-light-blue-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-500 focus:ring-white"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-
-              <!--
-            Dropdown menu, show/hide based on menu state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-              <div
-                v-if="false"
-                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu-button"
-                tabindex="-1"
-              >
-                <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a
-                  id="user-menu-item-0"
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  >Your Profile</a
-                >
-
-                <a
-                  id="user-menu-item-1"
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  >Settings</a
-                >
-
-                <a
-                  id="user-menu-item-2"
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  >Sign out</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile menu, show/hide based on menu state. -->
-      <div v-if="false" id="mobile-menu" class="lg:hidden">
-        <div class="pt-2 pb-3 px-2 space-y-1">
-          <a
-            href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
-            >Übersicht</a
-          >
-
-          <a
-            href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
-            >Jobs</a
-          >
-
-          <a
-            href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
-            >Applicants</a
-          >
-
-          <a
-            href="#"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-light-blue-400"
-            >FAQ</a
-          >
-        </div>
-        <div class="pt-4 pb-3 border-t border-light-blue-500">
-          <div class="flex items-center px-4">
-            <div class="flex-shrink-0">
-              <img
-                class="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-            </div>
-            <div class="ml-3">
-              <div class="text-base font-medium text-white">Floyd Miles</div>
-              <div class="text-sm font-medium text-light-blue-200">
-                floydmiles@example.com
-              </div>
-            </div>
-            <button
-              class="ml-auto flex-shrink-0 bg-light-blue-500 rounded-full p-1 text-light-blue-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-blue-500 focus:ring-white"
-            >
-              <span class="sr-only">View notifications</span>
-              <!-- Heroicon name: outline/bell -->
-              <svg
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-            </button>
-          </div>
-          <div class="mt-3 px-2">
-            <a
-              href="#"
-              class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-              >Your Profile</a
-            >
-
-            <a
-              href="#"
-              class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-              >Settings</a
-            >
-
-            <a
-              href="#"
-              class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-              >Sign out</a
-            >
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Breadcrumb -->
-    <nav
-      class="hidden bg-white border-b border-gray-200 lg:flex"
-      aria-label="Breadcrumb"
-    >
-      <ol
-        class="max-w-screen-xl w-full mx-auto px-4 flex space-x-4 sm:px-6 lg:px-8"
-      >
-        <li class="flex">
-          <div class="flex items-center">
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-              <!-- Heroicon name: solid/home -->
-              <svg
-                class="flex-shrink-0 h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-                />
-              </svg>
-              <span class="sr-only">Home</span>
-            </a>
-          </div>
-        </li>
-
-        <li class="flex">
-          <div class="flex items-center">
-            <svg
-              class="flex-shrink-0 w-6 h-full text-gray-200"
-              preserveAspectRatio="none"
-              viewBox="0 0 24 44"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <a
-              href="#"
-              class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-              >Anträge</a
-            >
-          </div>
-        </li>
-
-        <li class="flex">
-          <div class="flex items-center">
-            <svg
-              class="flex-shrink-0 w-6 h-full text-gray-200"
-              preserveAspectRatio="none"
-              viewBox="0 0 24 44"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
-            <a
-              href="#"
-              class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-              aria-current="page"
-              >Projekt 1</a
-            >
-          </div>
-        </li>
-      </ol>
-    </nav>
-
+    <main-nav></main-nav>
+    <breadcrumps-bar></breadcrumps-bar>
     <main class="max-w-lg mx-auto pt-10 pb-12 px-4 lg:pb-16">
+      <div class="w-full flex justify-end">
+        <div class="flex -space-x-1 overflow-hidden">
+          <div
+            v-for="user in users"
+            :key="user.userID"
+            class="flex items-center justify-center bg-blue-500 text-white text-xs font-semibold h-8 w-8 rounded-full ring-2 ring-white"
+          >
+            {{ user.name }}
+          </div>
+        </div>
+      </div>
       <form @submit.prevent>
         <div class="space-y-6">
           <div>
@@ -346,23 +26,32 @@
             </p>
           </div>
 
+          <button
+            type="submit"
+            class="inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-light-blue-500 hover:bg-light-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
+            @click="lock"
+          >
+            Join Group
+          </button>
+
           <div>
             <label
               for="project_name"
               class="block text-sm font-medium text-gray-700"
             >
-              Project Name
+              Projekttitel
             </label>
+
             <div class="mt-1">
               <input
-                id="project_name"
+                id="project_title"
                 v-model="title"
                 type="text"
                 name="project_name"
                 class="block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md"
-                @blur="blurEvent"
-                @click="clickEvent"
-                @input="changeEvent"
+                @blur="blurEvent('title', title)"
+                @click="clickEvent('title', title)"
+                @input="changeEvent('title', title)"
               />
             </div>
           </div>
@@ -372,14 +61,18 @@
               for="description"
               class="block text-sm font-medium text-gray-700"
             >
-              Description
+              Projektbeschreibung
             </label>
             <div class="mt-1">
               <textarea
-                id="description"
+                id="project_description"
+                v-model="description"
                 name="description"
                 rows="3"
                 class="block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md"
+                @blur="blurEvent('description', description)"
+                @click="clickEvent('description', description)"
+                @input="changeEvent('description', description)"
               ></textarea>
             </div>
           </div>
@@ -619,13 +312,23 @@ import {
   useContext,
   onUnmounted,
   ref,
+  Ref,
 } from '@nuxtjs/composition-api'
+
+interface Field {
+  fieldID: string
+  fieldValue: any
+  lockedByUserID: string
+  lockedByUserName: string
+}
 
 export default defineComponent({
   name: 'CollaborationPage',
   setup() {
     const testSocket = ref({})
+
     const title = ref('Project Nero')
+    const description = ref('Project Nero')
     // Here, we want Nuxt context instead.
     const ctx: any = useContext()
     console.log(ctx)
@@ -644,38 +347,50 @@ export default defineComponent({
           'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTU3OTgxMzEsImV4cCI6MTY0NzMzNDEzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIm5hbWUiOiJQTSIsInVzZXJJRCI6IjIiLCJncm91cElEIjoiMSJ9.GfojrcZ3J9kZwic0BP8J27Gx8NbWtn0TNKtkSktN9hU',
       },
     })
-    console.log(socket)
+
     const lock = () => {
-      console.log('clicked', socket.emit)
-      socket.emit('joinGroup', 'test', (resp: any) => {
-        console.log('hallo', resp)
-        /* handle resp */
-      })
+      socket.emit('joinGroup', 'test')
     }
 
+    socket.emit('joinGroup', 'test')
+
+    const users = ref([])
     socket.on('updateUsers', (data: any) => {
-      console.log(data)
+      users.value = data
     })
 
+    const lockedFields = ref([])
     socket.on('updateDocument', (data: any) => {
-      console.log(data)
+      const fields = Object.keys(data)
+      const lockedFieldsArray = fields.map((element: any) => {
+        if (data[element].lockedByUserID) {
+          return data[element]
+        }
+        return null
+      })
+      const cleanedFields = lockedFieldsArray.filter((el) => el != null)
+      console.log('cleaned: ', cleanedFields)
+      console.log(lockedFieldsArray)
+      console.log(fields)
+      // title.value = data.title.fieldValue
     })
 
-    const blurEvent = () => {
-      console.log('blurred')
-      socket.emit('unlockField', { fieldID: 'title', fieldValue: title.value })
+    const blurEvent = (field: string, ref: Ref) => {
+      socket.emit('unlockField', { fieldID: field, fieldValue: ref })
     }
 
-    const clickEvent = () => {
-      socket.emit('lockField', { fieldID: 'title', fieldValue: title.value })
-      console.log('clicked')
+    const clickEvent = (field: string, ref: Ref) => {
+      socket.emit('lockField', { fieldID: field, fieldValue: ref })
     }
 
-    const changeEvent = () => {
-      socket.emit('updateField', { fieldID: 'title', fieldValue: title.value })
-      console.log('changed', title.value)
+    const changeEvent = (field: string, ref: Ref) => {
+      socket.emit('updateField', { fieldID: field, fieldValue: ref })
     }
-    // socket.emit('lockField', 'password')
+
+    onUnmounted(() => {
+      socket.emit('leaveGroup', 'test')
+    })
+
     return {
       lock,
       testSocket,
@@ -683,6 +398,9 @@ export default defineComponent({
       blurEvent,
       clickEvent,
       changeEvent,
+      users,
+      lockedFields,
+      description,
     }
   },
 })
