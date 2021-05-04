@@ -9,7 +9,7 @@
     >
       <li class="flex">
         <div class="flex items-center">
-          <a href="#" class="text-gray-400 hover:text-gray-500">
+          <nuxt-link to="/" class="text-gray-400 hover:text-gray-500">
             <!-- Heroicon name: solid/home -->
             <svg
               class="flex-shrink-0 h-5 w-5"
@@ -23,7 +23,7 @@
               />
             </svg>
             <span class="sr-only">Home</span>
-          </a>
+          </nuxt-link>
         </div>
       </li>
 
@@ -39,10 +39,10 @@
           >
             <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
           </svg>
-          <a
-            href="#"
+          <nuxt-link
+            to="/antraege"
             class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-            >Anträge</a
+            >Anträge</nuxt-link
           >
         </div>
       </li>

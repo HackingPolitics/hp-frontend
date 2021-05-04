@@ -4,7 +4,7 @@
       <!-- Menu open: "bg-light-blue-900", Menu closed: "bg-transparent" -->
       <main-nav></main-nav>
       <!-- Menu open: "bottom-0", Menu closed: "inset-y-0" -->
-      <div
+      <!--      <div
         class="inset-y-0 absolute flex justify-center inset-x-0 left-1/2 transform -translate-x-1/2 w-full overflow-hidden lg:inset-y-0"
         aria-hidden="true"
       >
@@ -28,7 +28,7 @@
           />
         </svg>
         <div class="flex-grow bg-light-blue-800 bg-opacity-75"></div>
-      </div>
+      </div>-->
       <header class="relative py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 class="text-3xl font-bold text-white">{{ title }}</h1>

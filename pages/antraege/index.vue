@@ -7,7 +7,7 @@
           :key="i"
           :application="item"
         ></application-card>
-        <application-card>
+        <application-card route-to="antraege-erstellen">
           <template #content>
             <h3 class="text-gray-900 text-sm font-medium truncate">
               + Antrag erstellen

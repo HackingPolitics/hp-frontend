@@ -17,25 +17,29 @@
             :key="index"
             class="flex flex-col justify-between p-4 h-40 bg-gray-100"
           >
-            <div>
-              <div class="text-sm text-gray-400">
-                {{ applicationStep.step.current }}/{{
-                  applicationStep.step.total
-                }}
-                erledigt
+            <NuxtLink
+              :to="{ name: applicationStep.href, params: { id: projectId } }"
+            >
+              <div>
+                <div class="text-sm text-gray-400">
+                  {{ applicationStep.step.current }}/{{
+                    applicationStep.step.total
+                  }}
+                  erledigt
+                </div>
+                <h3 class="text-xl">{{ applicationStep.title }}</h3>
               </div>
-              <h3 class="text-xl">{{ applicationStep.title }}</h3>
-            </div>
-            <div class="text-gray-500 text-sm">
-              <span
-                class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500"
-              >
-                <span class="text-sm font-medium leading-none text-white"
-                  >TW</span
+              <div class="text-gray-500 text-sm">
+                <span
+                  class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500"
                 >
-              </span>
-              gerade aktiv
-            </div>
+                  <span class="text-sm font-medium leading-none text-white"
+                    >TW</span
+                  >
+                </span>
+                gerade aktiv
+              </div>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -45,8 +49,6 @@
             Antrag schreiben
           </h3>
         </div>
-        <forms-application-thema></forms-application-thema>
-        <forms-application-probleme></forms-application-probleme>
       </div>
     </div>
   </layouts-single-view>
@@ -59,6 +61,7 @@ export default defineComponent({
   name: 'MeineAntraegePage',
   setup() {
     const route = useRoute()
+    const projectId = ref(route.value.params.id)
     const applicationSteps = ref([
       {
         title: 'Thema',
@@ -66,6 +69,7 @@ export default defineComponent({
           current: 1,
           total: 3,
         },
+        href: 'antraege-id-thema',
       },
       {
         title: 'Probleme Handlungsfelder',
@@ -80,6 +84,7 @@ export default defineComponent({
           current: 0,
           total: 2,
         },
+        href: 'antraege-id-problem',
       },
       {
         title: 'Argumente und Gegenargumente',
@@ -87,6 +92,7 @@ export default defineComponent({
           current: 0,
           total: 2,
         },
+        href: 'antraege-id-argument',
       },
       {
         title: 'Strategie',
@@ -96,7 +102,7 @@ export default defineComponent({
         },
       },
     ])
-    return { applicationSteps }
+    return { applicationSteps, projectId }
   },
 })
 </script>

@@ -243,7 +243,7 @@
             >
               <div class="rounded-md shadow">
                 <nuxt-link
-                  to="/neuer-antrag"
+                  to="/antraege/erstellen"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500 md:py-4 md:text-lg md:px-10"
                 >
                   Antrag starten

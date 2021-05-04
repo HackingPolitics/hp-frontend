@@ -1,6 +1,6 @@
 <template>
   <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-    <nuxt-link :to="{ name: 'antraege-id', params: { id: 'erster' } }">
+    <nuxt-link :to="{ name: routeTo, params: { id: 'erster' } }">
       <div class="w-full flex items-center justify-between p-6 space-x-6">
         <div v-if="!hasContent" class="flex-1 truncate">
           <div class="flex items-center space-x-3">
@@ -31,6 +31,10 @@ export default defineComponent({
     application: {
       type: Object,
       default: null,
+    },
+    routeTo: {
+      type: String,
+      default: 'antraege-id',
     },
   },
   setup(props, context) {
