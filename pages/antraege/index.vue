@@ -7,6 +7,13 @@
           :key="i"
           :application="item"
         ></application-card>
+        <application-card>
+          <template #content>
+            <h3 class="text-gray-900 text-sm font-medium truncate">
+              + Antrag erstellen
+            </h3></template
+          >
+        </application-card>
       </ul>
     </div>
   </layouts-single-view>

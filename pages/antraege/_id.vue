@@ -13,13 +13,18 @@
         </div>
         <div class="grid sm:grid-cols-3 gap-8">
           <div
-            v-for="item in 5"
-            :key="item"
+            v-for="(applicationStep, index) in applicationSteps"
+            :key="index"
             class="flex flex-col justify-between p-4 h-40 bg-gray-100"
           >
             <div>
-              <div class="text-sm text-gray-400">2/3 erledigt</div>
-              <h3 class="text-xl">Thema</h3>
+              <div class="text-sm text-gray-400">
+                {{ applicationStep.step.current }}/{{
+                  applicationStep.step.total
+                }}
+                erledigt
+              </div>
+              <h3 class="text-xl">{{ applicationStep.title }}</h3>
             </div>
             <div class="text-gray-500 text-sm">
               <span
@@ -40,6 +45,8 @@
             Antrag schreiben
           </h3>
         </div>
+        <forms-application-thema></forms-application-thema>
+        <forms-application-probleme></forms-application-probleme>
       </div>
     </div>
   </layouts-single-view>
@@ -47,11 +54,49 @@
 
 <script lang="ts">
 import { defineComponent, useRoute } from '@nuxtjs/composition-api'
+import { ref } from '@vue/composition-api'
 export default defineComponent({
   name: 'MeineAntraegePage',
   setup() {
     const route = useRoute()
-    console.log(route.value.params.id)
+    const applicationSteps = ref([
+      {
+        title: 'Thema',
+        step: {
+          current: 1,
+          total: 3,
+        },
+      },
+      {
+        title: 'Probleme Handlungsfelder',
+        step: {
+          current: 0,
+          total: 2,
+        },
+      },
+      {
+        title: 'Ratsmehrheiten und Fraktionsinteressen',
+        step: {
+          current: 0,
+          total: 2,
+        },
+      },
+      {
+        title: 'Argumente und Gegenargumente',
+        step: {
+          current: 0,
+          total: 2,
+        },
+      },
+      {
+        title: 'Strategie',
+        step: {
+          current: 0,
+          total: 6,
+        },
+      },
+    ])
+    return { applicationSteps }
   },
 })
 </script>

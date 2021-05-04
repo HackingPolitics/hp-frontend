@@ -9,14 +9,14 @@
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
             <a
               href="#"
-              class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-yellow-400"
+              class="rounded-md py-2 px-3 font-medium text-white hover:bg-yellow-400"
             >
               Übersicht
             </a>
 
             <a
               href="#"
-              class="rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-yellow-500"
+              class="rounded-md py-2 px-3 font-medium text-white hover:bg-yellow-500"
             >
               FAQ
             </a>
