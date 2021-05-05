@@ -44,11 +44,12 @@
         </div>
       </div>
       <div class="pb-5 border-b border-gray-200 mb-8">
-        <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
-          <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
+        <div class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline">
+          <h3 class="ml-2 mt-2 text-xl leading-6 font-medium text-gray-900">
             Antrag schreiben
           </h3>
         </div>
+        <application-list></application-list>
       </div>
     </div>
   </layouts-single-view>

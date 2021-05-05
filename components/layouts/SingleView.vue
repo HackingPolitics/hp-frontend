@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative bg-light-blue-700 pb-32 overflow-hidden">
+    <div class="relative bg-purple-800 pb-56 overflow-hidden">
       <!-- Menu open: "bg-light-blue-900", Menu closed: "bg-transparent" -->
       <main-nav></main-nav>
       <!-- Menu open: "bottom-0", Menu closed: "inset-y-0" -->
@@ -31,12 +31,12 @@
       </div>-->
       <header class="relative py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 class="text-3xl font-bold text-white">{{ title }}</h1>
+          <h1 class="text-4xl font-bold text-white">{{ title }}</h1>
         </div>
       </header>
     </div>
 
-    <main class="relative -mt-32">
+    <main class="relative 2xl:-mt-56">
       <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
         <slot />
       </div>

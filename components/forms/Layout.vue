@@ -1,7 +1,48 @@
 <template>
   <div>
-    <main class="max-w-lg mx-auto pt-10 pb-12 px-4 lg:pb-16">
-      <h1 class="text-3xl font-extrabold text-blue-gray-900 mb-4">{{ title }}</h1>
+    <nav class="flex items-center justify-end" aria-label="Progress" v-if="steps">
+      <p class="text-sm font-medium">
+        Step {{ steps.findIndex((step) => step.status === 'current') + 1 }} of
+        {{ steps.length }}
+      </p>
+      <ol class="ml-8 flex items-center space-x-5">
+        <li v-for="step in steps" :key="step.name">
+          <a
+            v-if="step.status === 'complete'"
+            :href="step.href"
+            class="block w-2.5 h-2.5 bg-indigo-600 rounded-full hover:bg-indigo-900"
+          >
+            <span class="sr-only">{{ step.name }}</span>
+          </a>
+          <a
+            v-else-if="step.status === 'current'"
+            :href="step.href"
+            class="relative flex items-center justify-center"
+            aria-current="step"
+          >
+            <span class="absolute w-5 h-5 p-px flex" aria-hidden="true">
+              <span class="w-full h-full rounded-full bg-indigo-200" />
+            </span>
+            <span
+              class="relative block w-2.5 h-2.5 bg-indigo-600 rounded-full"
+              aria-hidden="true"
+            />
+            <span class="sr-only">{{ step.name }}</span>
+          </a>
+          <a
+            v-else
+            :href="step.href"
+            class="block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400"
+          >
+            <span class="sr-only">{{ step.name }}</span>
+          </a>
+        </li>
+      </ol>
+    </nav>
+    <main class="max-w-xl mx-auto pt-10 pb-12 px-4 lg:pb-16">
+      <h1 class="text-3xl font-extrabold text-blue-gray-900 mb-4">
+        {{ title }}
+      </h1>
       <slot> </slot>
       <div class="pt-8 flex justify-end">
         <slot name="actions"></slot>
@@ -17,6 +58,10 @@ export default {
     title: {
       type: String,
       default: '',
+    },
+    steps: {
+      type: Array,
+      default: null,
     },
   },
 }

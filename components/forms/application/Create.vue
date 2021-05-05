@@ -1,44 +1,7 @@
 <template>
   <div>
-    <nav aria-label="Progress" class="mb-16">
-      <ol class="space-y-4 md:flex md:space-y-0 md:space-x-8">
-        <li v-for="step in steps" :key="step.name" class="md:flex-1">
-          <a
-            v-if="step.status === 'complete'"
-            class="group pl-4 py-2 flex flex-col border-l-4 border-indigo-600 hover:border-indigo-800 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
-          >
-            <span
-              class="text-xs text-indigo-600 font-semibold tracking-wide uppercase group-hover:text-indigo-800"
-              >{{ step.id }}</span
-            >
-            <span class="text-sm font-medium">{{ step.name }}</span>
-          </a>
-          <a
-            v-else-if="step.status === 'current'"
-            class="pl-4 py-2 flex flex-col border-l-4 border-indigo-600 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
-            aria-current="step"
-          >
-            <span
-              class="text-xs text-indigo-600 font-semibold tracking-wide uppercase"
-              >{{ step.id }}</span
-            >
-            <span class="text-sm font-medium">{{ step.name }}</span>
-          </a>
-          <a
-            v-else
-            class="group pl-4 py-2 flex flex-col border-l-4 border-gray-200 hover:border-gray-300 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
-          >
-            <span
-              class="text-xs text-gray-500 font-semibold tracking-wide uppercase group-hover:text-gray-700"
-              >{{ step.id }}</span
-            >
-            <span class="text-sm font-medium">{{ step.name }}</span>
-          </a>
-        </li>
-      </ol>
-    </nav>
     <FormulateForm>
-      <forms-layout title="Antrag erstellen">
+      <forms-layout title="Antrag erstellen" :steps="steps">
         <div v-show="currentStep === 1" class="space-y-6">
           <FormSection title="Probleme">
             <FormulateInput label="Projekttitel" type="text" />
@@ -147,18 +110,21 @@ export default defineComponent({
       if (currentStep.value === 3) {
         router.push('/antraege/erster')
       }
-      steps.value.find((step) => step.id === currentStep.value).status =
-        'complete'
+      const currStep = steps.value.find((step) => step.id === currentStep.value)
+      if (currStep) currStep.status = 'complete'
+
       currentStep.value++
-      steps.value.find((step) => step.id === currentStep.value).status =
-        'current'
+
+      const nextStep = steps.value.find((step) => step.id === currentStep.value)
+      if (nextStep) nextStep.status = 'current'
     }
     function prevStep() {
-      steps.value.find((step) => step.id === currentStep.value).status =
-        'incomplete'
+      const currStep = steps.value.find((step) => step.id === currentStep.value)
+      if (currStep) currStep.status = 'incomplete'
       currentStep.value--
-      steps.value.find((step) => step.id === currentStep.value).status =
-        'current'
+
+      const prevStep = steps.value.find((step) => step.id === currentStep.value)
+      if (prevStep) prevStep.status = 'current'
     }
     return { steps, currentStep, nextStep, prevStep }
   },
