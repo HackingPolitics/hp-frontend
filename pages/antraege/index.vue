@@ -2,36 +2,16 @@
   <layouts-single-view title="Meine Anträge">
     <p class="text-white font-medium mb-2">Zuletzt besucht</p>
     <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <application-card>
-        <template content="">
-          <div class="flex items-center space-x-3">
-            <h3 class="text-gray-900 text-sm font-medium truncate">
-              'Strategie'
-            </h3>
-          </div>
-          <p class="mt-1 text-gray-500 text-sm truncate">'Dresden'</p>
-        </template>
-      </application-card>
-      <application-card>
-        <template>
-          <div class="flex items-center space-x-3">
-            <h3 class="text-gray-900 text-sm font-medium truncate">
-              'Argumente und Gegenargumente'
-            </h3>
-          </div>
-          <p class="mt-1 text-gray-500 text-sm truncate">'Dresden'</p>
-        </template>
-      </application-card>
-      <application-card>
-        <template>
-          <div class="flex items-center space-x-3">
-            <h3 class="text-gray-900 text-sm font-medium truncate">
-              'Strategie'
-            </h3>
-          </div>
-          <p class="mt-1 text-gray-500 text-sm truncate">'Dresden'</p>
-        </template>
-      </application-card>
+      <application-card
+        title="Strategie"
+        subtitle="Expressbuslinien zwischen Pieschen und Weißig"
+        item-id="erster"
+      />
+      <application-card
+        title="Argumente und Gegenargumente"
+        subtitle="Expressbuslinien zwischen Pieschen und Weißig"
+      />
+      <application-card title="Strategie" subtitle="Dresden" />
     </ul>
 
     <div class="flex mt-4">
@@ -137,7 +117,10 @@
 </template>
 
 <script>
-export default {
+import { defineComponent, ref } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'MeineAntraegePage',
-}
+  setup() {},
+})
 </script>

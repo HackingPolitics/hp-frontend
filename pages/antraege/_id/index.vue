@@ -1,21 +1,23 @@
 <template>
   <layouts-single-view>
     <application-header></application-header>
-    <div class="p-6 space-y-16">
+    <div class="-mt-6 space-y-16">
       <div>
-        <div class="pb-5 border-b border-gray-200 mb-8">
+        <div class="pb-5 border-b border-gray-200 mb-8 bg-white p-4 rounded">
           <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
             <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
               Antragskonzept
             </h3>
-            <p class="ml-2 mt-1 text-sm text-gray-500 truncate">10% Klarheit</p>
+            <div class="flex ml-4">
+              <progress-bar progress="10"></progress-bar>
+            </div>
           </div>
         </div>
-        <div class="grid sm:grid-cols-3 gap-8">
+        <div class="grid sm:grid-cols-3 gap-8 pt-4">
           <div
             v-for="(applicationStep, index) in applicationSteps"
             :key="index"
-            class="flex flex-col justify-between p-4 h-40 bg-gray-100"
+            class="flex flex-col justify-between p-4 h-40 bg-gray-200"
           >
             <NuxtLink
               :to="{ name: applicationStep.href, params: { id: projectId } }"
@@ -58,8 +60,10 @@
 <script lang="ts">
 import { defineComponent, useRoute } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
+import ProgressBar from '~/components/ProgressBar.vue'
 export default defineComponent({
   name: 'MeineAntraegePage',
+  components: { ProgressBar },
   setup() {
     const route = useRoute()
     const projectId = ref(route.value.params.id)
