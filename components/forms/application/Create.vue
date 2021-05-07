@@ -91,7 +91,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
-import FormSection from '@/components/forms/Section'
+import FormSection from '@/components/forms/Section.vue'
 
 export default defineComponent({
   name: 'Create',
