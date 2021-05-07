@@ -30,7 +30,7 @@
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/composition-api": "^0.22.4",
     "@tailwindcss/forms": "^0.2.1",
-    "core-js": "^3.8.3",
+    "core-js": "^3.12.0",
     "node-sass": "^5.0.0",
     "nuxt": "^2.14.12",
     "nuxt-socket-io": "^1.1.14",
