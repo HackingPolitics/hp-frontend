@@ -3,19 +3,19 @@
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
       <aside class="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
         <nav class="space-y-1">
-          <!-- Current: "bg-gray-50 text-yellow-700 hover:text-yellow-700 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
+          <!-- Current: "bg-gray-50 text-purple-700 hover:text-purple-700 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
           <a
             href="#"
-            class="bg-gray-50 text-yellow-700 hover:text-yellow-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+            class="bg-gray-50 text-purple-700 hover:text-purple-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
             aria-current="page"
           >
             <!--
           Heroicon name: outline/user-circle
 
-          Current: "text-yellow-500 group-hover:text-yellow-500", Default: "text-gray-400 group-hover:text-gray-500"
+          Current: "text-purple-500 group-hover:text-purple-500", Default: "text-gray-400 group-hover:text-gray-500"
         -->
             <svg
-              class="text-yellow-500 group-hover:text-yellow-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+              class="text-purple-500 group-hover:text-purple-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -159,7 +159,7 @@
                       type="text"
                       name="username"
                       autocomplete="username"
-                      class="focus:ring-yellow-500 focus:border-yellow-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                      class="focus:ring-purple-500 focus:border-purple-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                     />
                   </div>
                 </div>
@@ -176,7 +176,7 @@
                       id="about"
                       name="about"
                       rows="3"
-                      class="shadow-sm focus:ring-yellow-500 focus:border-yellow-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                      class="shadow-sm focus:ring-purple-500 focus:border-purple-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                       placeholder="you@example.com"
                     ></textarea>
                   </div>
@@ -205,7 +205,7 @@
                     </span>
                     <button
                       type="button"
-                      class="ml-5 bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                      class="ml-5 bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                     >
                       Change
                     </button>
@@ -237,7 +237,7 @@
                       <div class="flex text-sm text-gray-600">
                         <label
                           for="file-upload"
-                          class="relative cursor-pointer bg-white rounded-md font-medium text-yellow-600 hover:text-yellow-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-yellow-500"
+                          class="relative cursor-pointer bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-purple-500"
                         >
                           <span>Upload a file</span>
                           <input
@@ -260,7 +260,7 @@
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button
                 type="submit"
-                class="bg-yellow-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                class="bg-purple-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
               >
                 Save
               </button>
@@ -292,7 +292,7 @@
                     type="text"
                     name="first_name"
                     autocomplete="given-name"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
 
@@ -307,7 +307,7 @@
                     type="text"
                     name="last_name"
                     autocomplete="family-name"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
 
@@ -322,7 +322,7 @@
                     type="text"
                     name="email_address"
                     autocomplete="email"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
 
@@ -336,7 +336,7 @@
                     id="country"
                     name="country"
                     autocomplete="country"
-                    class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   >
                     <option>United States</option>
                     <option>Canada</option>
@@ -355,7 +355,7 @@
                     type="text"
                     name="street_address"
                     autocomplete="street-address"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
 
@@ -369,7 +369,7 @@
                     id="city"
                     type="text"
                     name="city"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
 
@@ -383,7 +383,7 @@
                     id="state"
                     type="text"
                     name="state"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
 
@@ -398,7 +398,7 @@
                     type="text"
                     name="postal_code"
                     autocomplete="postal-code"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -406,7 +406,7 @@
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button
                 type="submit"
-                class="bg-yellow-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                class="bg-purple-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
               >
                 Save
               </button>
@@ -438,7 +438,7 @@
                         id="comments"
                         name="comments"
                         type="checkbox"
-                        class="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-300 rounded"
+                        class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded"
                       />
                     </div>
                     <div class="ml-3 text-sm">
@@ -457,7 +457,7 @@
                           id="candidates"
                           name="candidates"
                           type="checkbox"
-                          class="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-300 rounded"
+                          class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded"
                         />
                       </div>
                       <div class="ml-3 text-sm">
@@ -479,7 +479,7 @@
                           id="offers"
                           name="offers"
                           type="checkbox"
-                          class="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-300 rounded"
+                          class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded"
                         />
                       </div>
                       <div class="ml-3 text-sm">
@@ -508,7 +508,7 @@
                       id="push_everything"
                       name="push_notifications"
                       type="radio"
-                      class="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-300"
+                      class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300"
                     />
                     <label for="push_everything" class="ml-3">
                       <span class="block text-sm font-medium text-gray-700"
@@ -521,7 +521,7 @@
                       id="push_email"
                       name="push_notifications"
                       type="radio"
-                      class="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-300"
+                      class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300"
                     />
                     <label for="push_email" class="ml-3">
                       <span class="block text-sm font-medium text-gray-700"
@@ -534,7 +534,7 @@
                       id="push_nothing"
                       name="push_notifications"
                       type="radio"
-                      class="focus:ring-yellow-500 h-4 w-4 text-yellow-600 border-gray-300"
+                      class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300"
                     />
                     <label for="push_nothing" class="ml-3">
                       <span class="block text-sm font-medium text-gray-700"
@@ -548,7 +548,7 @@
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button
                 type="submit"
-                class="bg-yellow-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-600"
+                class="bg-purple-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-600"
               >
                 Save
               </button>
