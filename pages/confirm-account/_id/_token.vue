@@ -20,7 +20,7 @@
             >
               <!-- Heroicon name: outline/check -->
               <svg
-                class="h-6 w-6 text-yellow-400"
+                class="h-6 w-6 text-purple-400"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -51,7 +51,7 @@
             <div class="mt-5 sm:mt-6">
               <nuxt-link
                 to="/login"
-                class="transition duration-150 inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-400 text-base font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:text-sm"
+                class="transition duration-150 inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-400 text-base font-medium text-black hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
               >
                 Zum Login
               </nuxt-link>
@@ -101,7 +101,7 @@
       <!-- <div v-if="!error && !loading">
         <nuxt-link
             to="/login"
-            class="transition duration-150 inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-400 text-base font-medium text-black hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:text-sm"
+            class="transition duration-150 inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-400 text-base font-medium text-black hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
           >
             Zum Login
           </nuxt-link>

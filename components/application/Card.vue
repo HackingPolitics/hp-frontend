@@ -2,7 +2,7 @@
   <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
     <nuxt-link :to="{ name: routeTo, params: { id: itemId } }">
       <div class="w-full flex items-center justify-between p-6 space-x-6">
-        <div v-if="!hasContent" class="flex-1 truncate">
+        <div class="flex-1 truncate">
           <div class="flex items-center space-x-3">
             <h3 class="text-gray-900 text-sm font-medium truncate">
               {{ title }}
@@ -23,17 +23,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ApplicationCard',
   props: {
     title: {
-      type: Object,
+      type: String,
       default: null,
     },
     subtitle: {
-      type: Object,
+      type: String,
       default: null,
     },
     routeTo: {
@@ -42,14 +42,8 @@ export default defineComponent({
     },
     itemId: {
       type: String,
-      default: '',
+      default: '12',
     },
-  },
-  setup(props, context) {
-    const hasContent = computed(() => {
-      return !!context.slots.content
-    })
-    return { hasContent }
   },
 })
 </script>

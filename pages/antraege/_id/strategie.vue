@@ -10,7 +10,7 @@
 import { defineComponent, useRoute } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'ApplicationTopic',
+  name: 'ApplicationStrategy',
   setup() {
     const route = useRoute()
     console.log(route.value.params.id)

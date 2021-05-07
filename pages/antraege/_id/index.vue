@@ -19,7 +19,7 @@
             :key="index"
             class="flex flex-col justify-between p-4 h-40 bg-gray-200"
           >
-            <NuxtLink
+            <nuxt-link
               :to="{ name: applicationStep.href, params: { id: projectId } }"
             >
               <div>
@@ -41,7 +41,7 @@
                 </span>
                 gerade aktiv
               </div>
-            </NuxtLink>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -58,12 +58,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useRoute } from '@nuxtjs/composition-api'
-import { ref } from '@vue/composition-api'
-import ProgressBar from '~/components/ProgressBar.vue'
+import { defineComponent, useRoute, ref } from '@nuxtjs/composition-api'
+
 export default defineComponent({
   name: 'MeineAntraegePage',
-  components: { ProgressBar },
+
   setup() {
     const route = useRoute()
     const projectId = ref(route.value.params.id)
@@ -82,6 +81,7 @@ export default defineComponent({
           current: 0,
           total: 2,
         },
+        href: 'antraege-id-problem',
       },
       {
         title: 'Ratsmehrheiten und Fraktionsinteressen',
@@ -97,7 +97,7 @@ export default defineComponent({
           current: 0,
           total: 2,
         },
-        href: 'antraege-id-argument',
+        href: 'antraege-id-argumente',
       },
       {
         title: 'Strategie',
@@ -105,6 +105,7 @@ export default defineComponent({
           current: 0,
           total: 6,
         },
+        href: 'antraege-id-strategie',
       },
     ])
     return { applicationSteps, projectId }

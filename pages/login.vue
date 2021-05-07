@@ -12,7 +12,7 @@
         Oder
         <nuxt-link
           to="/registrieren"
-          class="font-medium text-yellow-400 hover:text-yellow-500"
+          class="font-medium text-purple-400 hover:text-purple-500"
         >
           einen neuen Account anlegen
         </nuxt-link>
@@ -52,7 +52,7 @@
             <div class="text-sm">
               <nuxt-link
                 to="/passwort-vergessen"
-                class="font-medium text-yellow-400 hover:text-yellow-500"
+                class="font-medium text-purple-400 hover:text-purple-500"
               >
                 Passwort vergessen
               </nuxt-link>

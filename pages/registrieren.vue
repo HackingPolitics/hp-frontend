@@ -17,7 +17,7 @@
             Oder
             <nuxt-link
               to="/login"
-              class="font-medium text-yellow-400 hover:text-yellow-500"
+              class="font-medium text-purple-400 hover:text-purple-500"
             >
               mit bereits vorhandenem Account einloggen
             </nuxt-link>
@@ -106,7 +106,7 @@
           >
             <!-- Heroicon name: outline/check -->
             <svg
-              class="h-6 w-6 text-yellow-400"
+              class="h-6 w-6 text-purple-400"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

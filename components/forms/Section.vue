@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'FormLayout',
@@ -27,7 +27,7 @@ export default defineComponent({
     title: { type: String, default: '' },
     subtitle: { type: String, default: '' },
   },
-  setup(props, context) {
+  setup(_, context) {
     const hasHeaderSlot = computed(() => {
       return !!context.slots.header
     })

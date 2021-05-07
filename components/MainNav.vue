@@ -7,19 +7,31 @@
             <logo></logo>
           </div>
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-            <a
-              href="#"
-              class="rounded-md py-2 px-3 font-medium text-white hover:bg-yellow-400"
+            <nuxt-link
+              to="/"
+              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-400"
             >
               Übersicht
-            </a>
+            </nuxt-link>
 
-            <a
-              href="#"
-              class="rounded-md py-2 px-3 font-medium text-white hover:bg-yellow-500"
+            <nuxt-link
+              to="/faq"
+              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
             >
               FAQ
-            </a>
+            </nuxt-link>
+
+            <nuxt-link
+              to="/collaboration"
+              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
+              >Collaboration</nuxt-link
+            >
+
+            <nuxt-link
+              to="/collaboration-2"
+              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
+              >Collaboration 2</nuxt-link
+            >
           </div>
         </div>
 
@@ -27,7 +39,7 @@
           <!-- Mobile menu button -->
           <button
             type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-white hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            class="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-white hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
             @click="toggleMobileDropdown"
@@ -73,7 +85,7 @@
             </svg>
           </button>
         </div>
-        <div class="hidden lg:ml-4 lg:flex lg:items-center">
+        <div v-if="user" class="hidden lg:ml-4 lg:flex lg:items-center">
           <!-- Profile dropdown -->
           <div class="ml-4 relative flex-shrink-0">
             <div>
@@ -120,7 +132,7 @@
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
-                  >Your Profile</a
+                  >Profil</a
                 >
 
                 <a
@@ -129,7 +141,7 @@
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
-                  >Settings</a
+                  >Einstellungen</a
                 >
 
                 <a
@@ -138,11 +150,19 @@
                   class="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabindex="-1"
-                  >Sign out</a
+                  >Ausloggen</a
                 >
               </div>
             </transition>
           </div>
+        </div>
+        <div v-else class="flex items-center">
+          <nuxt-link
+            to="/login"
+            class="items-center px-4 py-2 border border-transparent text-base shadow font-medium rounded-md text-purple-500 bg-white hover:bg-gray-50"
+          >
+            Login
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -215,19 +235,19 @@
           <a
             href="#"
             class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-            >Your Profile</a
+            >Profil</a
           >
 
           <a
             href="#"
             class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-            >Settings</a
+            >Einstellungen</a
           >
 
           <a
             href="#"
             class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-            >Sign out</a
+            >Ausloggen</a
           >
         </div>
       </div>
@@ -236,11 +256,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useStore,
+  computed,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'MainNav',
   setup() {
+    const store = useStore<any>()
+    const user = computed(() => {
+      return store.state.auth.user
+    })
     const isDropdownOpen = ref(false)
 
     const toggleDropdown = (): void => {
@@ -269,6 +298,7 @@ export default defineComponent({
       isMobileDropdownOpen,
       toggleMobileDropdown,
       closeMobileDropdown,
+      user,
     }
   },
 })

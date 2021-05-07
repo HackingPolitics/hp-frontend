@@ -23,7 +23,6 @@
           <button
             type="submit"
             class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-light-blue-500 hover:bg-light-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
-            @click="lock"
           >
             Speichern
           </button>
@@ -34,7 +33,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'Thema',
-}
+})
 </script>
