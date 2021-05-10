@@ -17,7 +17,7 @@ export default {
           return 'shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 rounded-md w-full'
       }
     },
-    label: 'block text-sm font-medium text-gray-700 mb-1',
+    label: 'block text-sm font-medium text-gray-700 mb-4',
     help: 'mt-2 text-sm text-gray-500',
     error: 'mt-2 text-sm text-red-600',
     wrapper: 'block',

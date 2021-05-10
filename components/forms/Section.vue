@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 divide-y divide-y-reverse divide-gray-200">
+  <div class="mt-10 mb-6">
     <div>
       <slot name="header"></slot>
       <h3
@@ -22,12 +22,12 @@
 import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'FormLayout',
+  name: 'FormSection',
   props: {
     title: { type: String, default: '' },
     subtitle: { type: String, default: '' },
   },
-  setup(_, context) {
+  setup(props_, context) {
     const hasHeaderSlot = computed(() => {
       return !!context.slots.header
     })

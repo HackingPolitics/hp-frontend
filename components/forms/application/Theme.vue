@@ -1,10 +1,11 @@
 <template>
   <FormulateForm>
     <forms-layout title="Thema">
-      <div class="space-y-6">
-        <FormulateInput type="textarea" rows="3" label="Was ist das Thema">
-        </FormulateInput>
-
+      <div class="space-y-4">
+        <forms-section>
+          <FormulateInput type="textarea" rows="3" label="Was ist das Thema">
+          </FormulateInput>
+        </forms-section>
         <FormulateInput
           type="select"
           label="In welche Kategorie passt euer Thema"
@@ -36,6 +37,6 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'Thema',
+  name: 'ApplicationFormTheme',
 })
 </script>

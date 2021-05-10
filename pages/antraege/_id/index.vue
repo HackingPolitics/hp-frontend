@@ -51,7 +51,11 @@
             Antrag schreiben
           </h3>
         </div>
-        <application-list></application-list>
+        <nuxt-link
+          :to="{ name: 'antraege-id-schreiben', params: { id: projectId } }"
+        >
+          <application-list></application-list>
+        </nuxt-link>
       </div>
     </div>
   </layouts-single-view>

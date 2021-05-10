@@ -1,8 +1,11 @@
 <template>
   <div>
-    <main-nav></main-nav>
-    <breadcrumps-bar></breadcrumps-bar>
-    <forms-application-thema></forms-application-thema>
+    <layouts-single-view title="Neuen Antrag erstellen">
+      <application-header></application-header>
+      <forms-application-theme
+        class="w-full bg-white rounded"
+      ></forms-application-theme>
+    </layouts-single-view>
   </div>
 </template>
 

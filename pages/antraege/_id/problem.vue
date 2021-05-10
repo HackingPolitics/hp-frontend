@@ -2,7 +2,9 @@
   <div>
     <main-nav></main-nav>
     <breadcrumps-bar></breadcrumps-bar>
-    <forms-application-probleme></forms-application-probleme>
+    <forms-application-probleme
+      class="w-full bg-white rounded"
+    ></forms-application-probleme>
   </div>
 </template>
 
