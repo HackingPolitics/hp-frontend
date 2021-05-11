@@ -31,6 +31,8 @@
               v-model="credentials"
               name="login"
               class="space-y-6"
+              :form-errors="formErrors"
+              :errors="inputErrors"
               @submit="createAccount"
             >
               <FormulateInput
@@ -156,6 +158,8 @@ export default defineComponent({
     const credentials = ref({
       validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
     })
+    const formErrors = ref([])
+    const inputErrors = ref({})
     const store = useStore()
     const formSent = ref(false)
 
@@ -168,6 +172,8 @@ export default defineComponent({
       credentials,
       createAccount,
       formSent,
+      inputErrors,
+      formErrors,
     }
   },
   head: {},

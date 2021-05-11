@@ -1,5 +1,9 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { getStoredAuthToken, storeAuthToken } from '@/utils/authToken'
+import {
+  authTokenName,
+  getStoredAuthToken,
+  storeAuthToken,
+} from '@/utils/authToken'
 import { IUser } from '../types/apiSchema'
 
 export interface AuthState {
@@ -59,8 +63,8 @@ export const actions: ActionTree<RootState, RootState> = {
       //   storeAuthToken(response.access_token)
       //   this.$axios.setToken(response.access_token, 'Bearer')
       //   this.$router.push('/')
-
       commit('SET_LOADING_FLAG', false)
+      return response
     } catch (error) {
       commit('SET_ERRORS', error.response?.data?.errorDetails?.errorMessage)
       commit('SET_LOADING_FLAG', false)
@@ -70,7 +74,7 @@ export const actions: ActionTree<RootState, RootState> = {
 
   // logout
   logout({ commit }) {
-    localStorage.removeItem('auth_token')
+    localStorage.removeItem(authTokenName)
     commit('SET_USER', null)
     this.$router.push('/login')
   },

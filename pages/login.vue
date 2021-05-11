@@ -26,14 +26,19 @@
           v-model="credentials"
           name="login"
           class="space-y-6"
+          :form-errors="formErrors"
+          :errors="inputErrors"
           @submit="handleLogin"
         >
           <FormulateInput
             label="E-Mail-Adresse"
-            placeholder="E-Mail-Adresse eingeben"
+            placeholder="Username oder E-Mail eingeben"
             name="username"
             type="email"
-            validation="required|email"
+            validation="required"
+            :validation-messages="{
+              required: 'Username oder E-Mail eingeben',
+            }"
           />
 
           <div class="space-y-1">
@@ -43,6 +48,9 @@
               name="password"
               type="password"
               validation="required"
+              :validation-messages="{
+                required: 'Passwort prüfen',
+              }"
             />
           </div>
 
@@ -74,6 +82,7 @@
 <script lang="ts">
 import {
   defineComponent,
+  Ref,
   ref,
   useMeta,
   useStore,
@@ -83,13 +92,32 @@ export default defineComponent({
   name: 'LoginPage',
   layout: 'auth',
   setup() {
+    const formErrors: Ref<string[]> = ref([])
+    const inputErrors = ref({})
     const credentials = ref(null)
     const accountIsActivated = ref(false)
     const errorOnActivation = ref(false)
     const store = useStore()
 
-    const handleLogin = () => {
-      store.dispatch('auth/login', credentials.value)
+    const handleLogin = async () => {
+      const response = await store.dispatch('auth/login', credentials.value)
+      if (response && response.response && response.response.status) {
+        switch (response.response.status) {
+          case 422:
+            inputErrors.value = response.response.data.errors // assign field errors
+            formErrors.value.push(response.response.data.message)
+            return
+          case 401:
+            if (response.response.data.message === 'Invalid credentials') {
+              formErrors.value = ['Logindaten überprüfen']
+              return
+            }
+            inputErrors.value = response.response.data.errors // assign field errors
+            formErrors.value.push(response.response.data.message)
+            return
+        }
+      }
+      formErrors.value = ['Unbekannter Fehler aufgetreten.']
     }
 
     useMeta({ title: 'Login | HackingPolitics' })
@@ -98,6 +126,8 @@ export default defineComponent({
       handleLogin,
       accountIsActivated,
       errorOnActivation,
+      inputErrors,
+      formErrors,
     }
   },
   head: {},
