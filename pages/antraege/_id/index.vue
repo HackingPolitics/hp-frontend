@@ -46,10 +46,17 @@
         </div>
       </div>
       <div class="pb-5 border-b border-gray-200 mb-8">
-        <div class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline">
-          <h3 class="ml-2 mt-2 text-xl leading-6 font-medium text-gray-900">
+        <div
+          class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline justify-between"
+        >
+          <h3 class="ml-2 text-xl leading-6 font-medium text-lg text-gray-900">
             Antrag schreiben
           </h3>
+
+          <button class="inline-flex items-center">
+            <solid-eye-icon class="w-7 h-7 pr-2"></solid-eye-icon>
+            <span class="font-medium text-lg">PDF-Vorschau</span>
+          </button>
         </div>
         <nuxt-link
           :to="{ name: 'antraege-id-schreiben', params: { id: projectId } }"

@@ -1,10 +1,13 @@
 <template>
   <FormulateForm>
-    <forms-layout title="Antrag erstellen" :steps="steps">
+    <forms-layout
+      title="Antrag erstellen"
+      :steps="steps"
+      no-concept-sidebar
+      no-floating-sidebar
+    >
       <div v-show="currentStep === 1" class="space-y-6">
-        <FormSection title="Probleme">
-          <FormulateInput label="Projekttitel" type="text" />
-        </FormSection>
+        <FormulateInput label="Projekttitel" type="text" />
         <FormulateInput
           type="image"
           name="headshot"

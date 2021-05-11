@@ -1,4 +1,5 @@
 import { de } from '@braid/vue-formulate-i18n'
+import GroupRemoveButton from '~/components/GroupRemoveButton'
 
 export default {
   plugins: [de],
@@ -23,5 +24,10 @@ export default {
     wrapper: 'block',
     formError: 'text-sm text-red-600',
     formErrors: 'text-sm text-red-600',
+    groupRepeatable: 'flex items-center',
+    groupRepeatableRemove: 'ml-2',
+  },
+  slotComponents: {
+    remove: 'GroupRemoveButton',
   },
 }

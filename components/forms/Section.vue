@@ -1,10 +1,10 @@
 <template>
-  <div class="mt-10 mb-6">
+  <div class="mt-10 mb-6 bg-white pt-4 pb-2 px-4 rounded">
     <div>
       <slot name="header"></slot>
       <h3
         v-if="!hasHeaderSlot"
-        class="text-lg leading-6 font-medium text-gray-900"
+        class="text-lg leading-6  text-gray-900"
       >
         {{ title }}
       </h3>

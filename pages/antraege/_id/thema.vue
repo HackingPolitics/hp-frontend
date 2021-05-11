@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <layouts-single-view title="Neuen Antrag erstellen">
+    <layouts-single-view>
       <application-header></application-header>
       <forms-application-theme
-        class="w-full bg-white rounded"
       ></forms-application-theme>
     </layouts-single-view>
-  </div>
 </template>
 
 <script>

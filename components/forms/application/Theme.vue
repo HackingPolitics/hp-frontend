@@ -1,17 +1,27 @@
 <template>
-  <FormulateForm>
+  <FormulateForm v-model="formData">
     <forms-layout title="Thema">
       <div class="space-y-4">
-        <forms-section>
-          <FormulateInput type="textarea" rows="3" label="Was ist das Thema">
+        <forms-section
+          title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
+          subtitle="Help"
+        >
+          <FormulateInput type="textarea" rows="5" name="theme_description">
           </FormulateInput>
         </forms-section>
-        <FormulateInput
-          type="select"
-          label="In welche Kategorie passt euer Thema"
+
+        <forms-section
+          title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
+          subtitle="Help"
         >
-        </FormulateInput>
-        <FormulateInput type="select"> </FormulateInput>
+          <FormulateInput
+            type="select"
+            name="theme_category"
+            label="In welche Kategorie passt euer Thema"
+          >
+          </FormulateInput>
+          <FormulateInput type="select"> </FormulateInput>
+        </forms-section>
       </div>
       <template #actions>
         <div class="flex justify-end">
@@ -33,10 +43,14 @@
   </FormulateForm>
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ApplicationFormTheme',
+  setup() {
+    const formData = ref({})
+    return { formData }
+  },
 })
 </script>

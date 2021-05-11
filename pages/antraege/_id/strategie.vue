@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <main-nav></main-nav>
-    <breadcrumps-bar></breadcrumps-bar>
-    <forms-application-thema></forms-application-thema>
-  </div>
+  <layouts-single-view>
+    <application-header></application-header>
+    <forms-application-theme></forms-application-theme>
+  </layouts-single-view>
 </template>
 
 <script>

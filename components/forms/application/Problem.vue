@@ -9,6 +9,7 @@
             name="problems"
             label="Welche Probleme hast du beobachtet und möchtest es anlegen"
             add-label="+ Problem hinzufügen"
+            remove-position="after"
             remove-label="Entfernen"
           >
             <FormulateInput name="problem" type="text" />
@@ -23,6 +24,7 @@
             :repeatable="true"
             name="problems"
             label="Der Stadtrat beauftrag den Oberbügermeister"
+            remove-position="after"
             add-label="+ Maßnahme hinzufügen"
           >
             <FormulateInput name="problem" type="text" />
