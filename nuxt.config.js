@@ -41,6 +41,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@braid/vue-formulate/nuxt',
     '@nuxtjs/composition-api',
+    '@nuxtjs/netlify-files',
   ],
 
   generate: {
