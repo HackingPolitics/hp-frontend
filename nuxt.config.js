@@ -1,6 +1,4 @@
-import { defineNuxtConfig } from '@nuxtjs/composition-api'
-
-export default defineNuxtConfig({
+export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -40,7 +38,7 @@ export default defineNuxtConfig({
     '@nuxtjs/stylelint-module',
     '@nuxtjs/tailwindcss',
     '@braid/vue-formulate/nuxt',
-    '@nuxtjs/composition-api',
+    '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
   ],
 
@@ -74,4 +72,4 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-})
+}
