@@ -114,10 +114,8 @@ export default defineComponent({
             }
             inputErrors.value = response.response.data.errors // assign field errors
             formErrors.value.push(response.response.data.message)
-            return
         }
       }
-      formErrors.value = ['Unbekannter Fehler aufgetreten.']
     }
 
     useMeta({ title: 'Login | HackingPolitics' })
