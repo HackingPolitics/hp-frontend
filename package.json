@@ -25,7 +25,7 @@
   "dependencies": {
     "@braid/vue-formulate": "^2.5.2",
     "@braid/vue-formulate-i18n": "^1.16.0",
-    "@headlessui/vue": "^1.0.0",
+    "@headlessui/vue": "^1.2.0",
     "@heroicons/vue": "^1.0.1",
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/composition-api": "^0.22.4",
