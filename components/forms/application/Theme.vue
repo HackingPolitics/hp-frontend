@@ -1,33 +1,27 @@
 <template>
   <FormulateForm v-model="formData">
-    <forms-layout title="Probleme Handlungsfelder">
-      <div class="space-y-6">
-        <FormSection title="Probleme">
-          <FormulateInput
-            type="group"
-            :repeatable="true"
-            name="problems"
-            label="Welche Probleme hast du beobachtet und möchtest es anlegen"
-            add-label="+ Problem hinzufügen"
-            remove-label="Entfernen"
-          >
-            <FormulateInput name="problem" type="text" />
+    <forms-layout title="Thema">
+      <div class="space-y-4">
+        <forms-section
+          title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
+          subtitle="Help"
+        >
+          <FormulateInput type="textarea" rows="5" name="theme_description">
           </FormulateInput>
-        </FormSection>
-        <FormSection
-          title="Handlungsauftrag"
-          subtitle="Was sollte die Stadtverwaltung tun, um das Problem anzugehen"
+        </forms-section>
+
+        <forms-section
+          title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
+          subtitle="Help"
         >
           <FormulateInput
-            type="group"
-            :repeatable="true"
-            name="problems"
-            label="Der Stadtrat beauftrag den Oberbügermeister"
-            add-label="+ Maßnahme hinzufügen"
+            type="select"
+            name="theme_category"
+            label="In welche Kategorie passt euer Thema"
           >
-            <FormulateInput name="problem" type="text" />
           </FormulateInput>
-        </FormSection>
+          <FormulateInput type="select"> </FormulateInput>
+        </forms-section>
       </div>
       <template #actions>
         <div class="flex justify-end">
@@ -49,17 +43,14 @@
   </FormulateForm>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'Problem',
+  name: 'ApplicationFormTheme',
   setup() {
-    const formData = ref(null)
-
-    return {
-      formData,
-    }
+    const formData = ref({})
+    return { formData }
   },
 })
 </script>

@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: 'ApplicationProblem',
+  name: 'politik',
 }
 </script>

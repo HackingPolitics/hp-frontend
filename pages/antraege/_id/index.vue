@@ -17,17 +17,25 @@
           <div
             v-for="(applicationStep, index) in applicationSteps"
             :key="index"
-            class="flex flex-col justify-between p-4 h-40 bg-gray-200"
+            class="p-4 h-40 bg-gray-200 flex"
           >
             <nuxt-link
               :to="{ name: applicationStep.href, params: { id: projectId } }"
+              class="flex-col justify-between flex"
             >
-              <div>
-                <div class="text-sm text-gray-400">
-                  {{ applicationStep.step.current }}/{{
-                    applicationStep.step.total
-                  }}
-                  erledigt
+              <div class="flex-col">
+                <div class="inline-flex mb-2 items-center">
+                  <div
+                    class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
+                  >
+                    {{ index + 1 }}
+                  </div>
+                  <span class="text-sm text-gray-400">
+                    {{ applicationStep.step.current }}/{{
+                      applicationStep.step.total
+                    }}
+                    erledigt
+                  </span>
                 </div>
                 <h3 class="text-xl">{{ applicationStep.title }}</h3>
               </div>
@@ -46,12 +54,23 @@
         </div>
       </div>
       <div class="pb-5 border-b border-gray-200 mb-8">
-        <div class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline">
-          <h3 class="ml-2 mt-2 text-xl leading-6 font-medium text-gray-900">
+        <div
+          class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline justify-between"
+        >
+          <h3 class="ml-2 text-xl leading-6 font-medium text-lg text-gray-900">
             Antrag schreiben
           </h3>
+
+          <button class="inline-flex items-center">
+            <solid-eye-icon class="w-7 h-7 pr-2"></solid-eye-icon>
+            <span class="font-medium text-lg">PDF-Vorschau</span>
+          </button>
         </div>
-        <application-list></application-list>
+        <nuxt-link
+          :to="{ name: 'antraege-id-schreiben', params: { id: projectId } }"
+        >
+          <application-list></application-list>
+        </nuxt-link>
       </div>
     </div>
   </layouts-single-view>

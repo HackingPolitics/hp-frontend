@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative bg-purple-800 pb-56 overflow-hidden">
+    <div class="relative bg-purple-800 pb-44 overflow-hidden">
       <!-- Menu open: "bg-light-blue-900", Menu closed: "bg-transparent" -->
       <main-nav></main-nav>
       <!-- Menu open: "bottom-0", Menu closed: "inset-y-0" -->
@@ -36,7 +36,7 @@
       </header>
     </div>
 
-    <main class="relative 2xl:-mt-56">
+    <main class="relative 2xl:-mt-44">
       <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
         <slot />
       </div>

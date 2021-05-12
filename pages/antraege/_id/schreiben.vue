@@ -1,12 +1,12 @@
 <template>
   <layouts-single-view>
     <application-header></application-header>
-    <forms-application-problem></forms-application-problem>
+    <forms-application-writing></forms-application-writing>
   </layouts-single-view>
 </template>
 
 <script>
 export default {
-  name: 'ApplicationProblem',
+  name: 'ApplicationWriting',
 }
 </script>
