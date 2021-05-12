@@ -105,7 +105,7 @@ export default defineComponent({
           current: 0,
           total: 6,
         },
-        href: 'antraege-id-strategie',
+         href: 'antraege-id-strategie',
       },
     ])
     return { applicationSteps, projectId }

@@ -26,12 +26,6 @@
               class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
               >Collaboration</nuxt-link
             >
-
-            <nuxt-link
-              to="/collaboration-2"
-              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
-              >Collaboration 2</nuxt-link
-            >
           </div>
         </div>
 

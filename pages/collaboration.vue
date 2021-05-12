@@ -18,28 +18,19 @@
         <div class="space-y-6">
           <div>
             <h1 class="text-lg leading-6 font-medium text-gray-900">
-              Project Settings
+              Collaboration Test
             </h1>
             <p class="mt-1 text-sm text-gray-500">
-              Let’s get started by filling in the information below to create
-              your new project.
+              Formfelder mit Websocket bearbeiten und sperren.
             </p>
           </div>
-
-          <button
-            type="submit"
-            class="inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-light-blue-500 hover:bg-light-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
-            @click="lock"
-          >
-            Join Group
-          </button>
 
           <div>
             <label
               for="project_name"
               class="block text-sm font-medium text-gray-700"
             >
-              Projekttitel
+              Thema
             </label>
 
             <div class="mt-1">
@@ -61,7 +52,7 @@
               for="description"
               class="block text-sm font-medium text-gray-700"
             >
-              Projektbeschreibung
+              Beschreibung
             </label>
             <div class="mt-1">
               <textarea
@@ -289,15 +280,9 @@
             <button
               type="button"
               class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
+              @click="leaveGroup"
             >
               Cancel
-            </button>
-            <button
-              type="submit"
-              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-light-blue-500 hover:bg-light-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
-              @click="lock"
-            >
-              Create this project
             </button>
           </div>
         </div>
@@ -314,6 +299,7 @@ import {
   ref,
   Ref,
 } from '@nuxtjs/composition-api'
+import { getStoredAuthToken } from '~/utils/authToken'
 
 interface Field {
   fieldID: string
@@ -324,9 +310,8 @@ interface Field {
 
 export default defineComponent({
   name: 'CollaborationPage',
+  middleware: 'isLoggedin',
   setup() {
-    const testSocket = ref({})
-
     const title = ref('Project Nero')
     const description = ref('Project Nero')
     // Here, we want Nuxt context instead.
@@ -340,19 +325,24 @@ export default defineComponent({
     // And finally, we can get the socket like before:
     // (instead of "this", it's "ctx" because that's the
     // context here)
+    const token = getStoredAuthToken()
     const socket = ctx.$nuxtSocket({
       reconnection: false,
       auth: {
-        token:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTU3OTgxMzEsImV4cCI6MTY0NzMzNDEzMSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIm5hbWUiOiJQTSIsInVzZXJJRCI6IjIiLCJncm91cElEIjoiMSJ9.GfojrcZ3J9kZwic0BP8J27Gx8NbWtn0TNKtkSktN9hU',
+        token,
       },
     })
 
-    const lock = () => {
-      socket.emit('joinGroup', 'test')
-    }
-
+    // const lock = () => {
+    //   console.log('test')
+    //   socket.emit('joinGroup', 'test')
+    // }
+    console.log(socket)
     socket.emit('joinGroup', 'test')
+
+    const leaveGroup = () => {
+      socket.emit('leaveGroup', 'test')
+    }
 
     const users = ref([])
     socket.on('updateUsers', (data: any) => {
@@ -392,8 +382,6 @@ export default defineComponent({
     })
 
     return {
-      lock,
-      testSocket,
       title,
       blurEvent,
       clickEvent,
@@ -401,6 +389,7 @@ export default defineComponent({
       users,
       lockedFields,
       description,
+      leaveGroup,
     }
   },
 })
