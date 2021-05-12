@@ -71,12 +71,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
+import { defineComponent, ref, computed, Ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ApplicationFormWriting',
   setup() {
-    const enabledInputs = ref([])
+    const enabledInputs: Ref<string[]> = ref([])
     function enableInput(name: string): void {
       enabledInputs.value.push(name)
     }

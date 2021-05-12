@@ -92,13 +92,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
-import FormSection from '@/components/forms/Section'
 
 export default defineComponent({
   name: 'Create',
-  components: {
-    FormSection,
-  },
   setup() {
     const router = useRouter()
     const currentStep = ref(1)

@@ -50,14 +50,10 @@
 </template>
 
 <script>
-import FormSection from '@/components/forms/Section'
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'Problem',
-  components: {
-    FormSection,
-  },
   setup() {
     const formData = ref(null)
 

@@ -2,10 +2,7 @@
   <div class="mt-10 mb-6 bg-white pt-4 pb-2 px-4 rounded">
     <div>
       <slot name="header"></slot>
-      <h3
-        v-if="!hasHeaderSlot"
-        class="text-lg leading-6  text-gray-900"
-      >
+      <h3 v-if="!hasHeaderSlot" class="text-lg leading-6 text-gray-900">
         {{ title }}
       </h3>
       <p class="max-w-2xl text-sm text-gray-500">
@@ -18,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed } from '@nuxtjs/composition-api'
 
 export default defineComponent({
@@ -27,7 +24,7 @@ export default defineComponent({
     title: { type: String, default: '' },
     subtitle: { type: String, default: '' },
   },
-  setup(props, context) {
+  setup(_, context) {
     const hasHeaderSlot = computed(() => {
       return !!context.slots.header
     })
