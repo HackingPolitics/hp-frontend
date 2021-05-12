@@ -27,7 +27,7 @@ export default defineComponent({
     title: { type: String, default: '' },
     subtitle: { type: String, default: '' },
   },
-  setup(props_, context) {
+  setup(props, context) {
     const hasHeaderSlot = computed(() => {
       return !!context.slots.header
     })

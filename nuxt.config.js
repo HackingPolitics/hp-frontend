@@ -1,6 +1,4 @@
-import { defineNuxtConfig } from '@nuxtjs/composition-api'
-
-export default defineNuxtConfig({
+export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -43,6 +41,8 @@ export default defineNuxtConfig({
     '@nuxtjs/composition-api',
     '@nuxt-hero-icons/solid/nuxt',
     '@nuxt-hero-icons/outline/nuxt',
+    '@nuxtjs/composition-api/module',
+    '@nuxtjs/netlify-files',
   ],
 
   generate: {
@@ -75,4 +75,4 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-})
+}

@@ -119,7 +119,7 @@
             >
               <div
                 v-if="isDropdownOpen"
-                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
@@ -144,14 +144,15 @@
                   >Einstellungen</a
                 >
 
-                <a
+                <div
                   id="user-menu-item-2"
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
+                  class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                   role="menuitem"
                   tabindex="-1"
-                  >Ausloggen</a
+                  @click="$store.dispatch('auth/logout')"
                 >
+                  Ausloggen
+                </div>
               </div>
             </transition>
           </div>
@@ -244,11 +245,12 @@
             >Einstellungen</a
           >
 
-          <a
-            href="#"
+          <div
             class="block rounded-md py-2 px-3 text-base font-medium text-light-blue-200 hover:text-white hover:bg-light-blue-400"
-            >Ausloggen</a
+            @click="$store.dispatch('auth/logout')"
           >
+            Ausloggen
+          </div>
         </div>
       </div>
     </div>

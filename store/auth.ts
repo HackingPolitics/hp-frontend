@@ -1,5 +1,12 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { getStoredAuthToken, storeAuthToken } from '@/utils/authToken'
+import {
+  authTokenName,
+  getStoredAuthToken,
+  refreshTokenName,
+  storeAuthToken,
+  storeRefreshToken,
+} from '@/utils/authToken'
+import jwtDecode, { JwtPayload } from 'jwt-decode'
 import { IUser } from '../types/apiSchema'
 
 export interface AuthState {
@@ -48,19 +55,37 @@ export interface LoginCredentials {
   password: string
 }
 
+interface JwtPayloadWithUser extends JwtPayload {
+  id: string
+  username: string
+  roles: string[]
+}
+
 export const actions: ActionTree<RootState, RootState> = {
   // login
   async login({ commit }, loginData: LoginCredentials) {
     commit('SET_ERRORS', false)
     commit('SET_LOADING_FLAG', true)
     try {
+      // fetch token
       const response = await this.$api.auth.requestAuthToken(loginData)
-      commit('SET_USER', response.user)
-      //   storeAuthToken(response.access_token)
-      //   this.$axios.setToken(response.access_token, 'Bearer')
-      //   this.$router.push('/')
 
+      // decode token
+      const token: string = response.data.token
+      const decoded = jwtDecode<JwtPayloadWithUser>(token)
+
+      // store token
+      storeAuthToken(response.data.token)
+      storeRefreshToken(response.data.refresh_token)
+      this.$axios.setToken(response.data.token, 'Bearer')
+
+      // fetch user data
+      const user = await this.$api.user.getUser(decoded.id)
+      commit('SET_USER', user.data)
+
+      this.$router.push('/')
       commit('SET_LOADING_FLAG', false)
+      return response
     } catch (error) {
       commit('SET_ERRORS', error.response?.data?.errorDetails?.errorMessage)
       commit('SET_LOADING_FLAG', false)
@@ -70,9 +95,10 @@ export const actions: ActionTree<RootState, RootState> = {
 
   // logout
   logout({ commit }) {
-    localStorage.removeItem('auth_token')
+    localStorage.removeItem(authTokenName)
+    localStorage.removeItem(refreshTokenName)
     commit('SET_USER', null)
-    this.$router.push('/login')
+    // this.$router.push('/login')
   },
 
   // request password reset

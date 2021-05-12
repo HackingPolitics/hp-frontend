@@ -130,11 +130,9 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Chip from '@/components/Chip'
 
 export default defineComponent({
   name: 'MeineAntraegePage',
-  components: { Chip },
   setup() {},
 })
 </script>

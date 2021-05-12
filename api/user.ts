@@ -1,31 +1,30 @@
-import { AxiosInstance, AxiosResponse } from 'axios'
+import { AxiosInstance } from 'axios'
+import { IUser, IHydraCollection } from '../types/apiSchema'
 
 export default (axios: AxiosInstance) => ({
-  forgotPassword(email: string) {
-    return axios.post('/auth/password/forgot', { email })
+  getUser(id: number): Promise<IUser> {
+    return axios.get(`/users/${id}`) as Promise<IUser>
   },
 
-  login(email: string, password: string) {
-    return axios.post('/auth/login', { email, password })
+  getUsers(query: any = {}): Promise<IHydraCollection<IUser>> {
+    return axios.get('/users', query) as Promise<IHydraCollection<IUser>>
   },
 
-  logout() {
-    return axios.get('/auth/logout')
+  //   getUserByUsername(username: string): Promise<IUser> {
+  //     return getUsers({ username }).then((users) => users['hydra:member'].shift())
+  //   },
+
+  createUser(user: IUser): Promise<IUser> {
+    return axios.post('/users', user) as Promise<IUser>
   },
 
-  register(payload: AxiosResponse) {
-    return axios.post('/auth/register', payload)
+  updateUser(user: IUser): Promise<IUser> {
+    const id = user.id
+    return axios.put(`/users/${id}`, user) as Promise<IUser>
   },
 
-  resetPassword(
-    password: string,
-    passwordConfirmation: string,
-    resetToken: string
-  ) {
-    return axios.post('/auth/password/reset', {
-      password,
-      password_confirmation: passwordConfirmation,
-      token: resetToken,
-    })
+  deleteUser(user: IUser): Promise<void> {
+    const id = user.id
+    return axios.delete(`/users/${id}`) as Promise<void>
   },
 })
