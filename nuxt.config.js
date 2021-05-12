@@ -38,7 +38,6 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/tailwindcss',
     '@braid/vue-formulate/nuxt',
-    '@nuxtjs/composition-api',
     '@nuxt-hero-icons/solid/nuxt',
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
