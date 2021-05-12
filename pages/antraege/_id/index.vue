@@ -17,17 +17,25 @@
           <div
             v-for="(applicationStep, index) in applicationSteps"
             :key="index"
-            class="flex flex-col justify-between p-4 h-40 bg-gray-200"
+            class="p-4 h-40 bg-gray-200 flex"
           >
             <nuxt-link
               :to="{ name: applicationStep.href, params: { id: projectId } }"
+              class="flex-col justify-between flex"
             >
-              <div>
-                <div class="text-sm text-gray-400">
-                  {{ applicationStep.step.current }}/{{
-                    applicationStep.step.total
-                  }}
-                  erledigt
+              <div class="flex-col">
+                <div class="inline-flex mb-2 items-center">
+                  <div
+                    class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
+                  >
+                    {{ index + 1 }}
+                  </div>
+                  <span class="text-sm text-gray-400">
+                    {{ applicationStep.step.current }}/{{
+                      applicationStep.step.total
+                    }}
+                    erledigt
+                  </span>
                 </div>
                 <h3 class="text-xl">{{ applicationStep.title }}</h3>
               </div>
