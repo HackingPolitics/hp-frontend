@@ -5,6 +5,7 @@ const bgColors: string[] = [
   'bg-blue-400',
   'bg-indigo-400',
   'bg-pink-400',
+  'bg-yellow-400',
 ]
 
 export const getRandomBgColor = (): string => {
