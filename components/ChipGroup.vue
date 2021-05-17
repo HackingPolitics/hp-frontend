@@ -1,0 +1,59 @@
+<template>
+  <div
+    :class="`formulate-input-element formulate-input-element--${context.type}`"
+    :data-type="context.type"
+  >
+    <button
+      v-for="(option, index) in context.options"
+      :key="index"
+      v-bind="context.attributes"
+      class="focus:outline-none"
+      @click="setValue(option.value)"
+    >
+      <chip :chip-class="checkIsActive(option.value)" class="mr-2">{{
+        option.label
+      }}</chip>
+    </button>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  name: 'ChipGroup',
+  props: {
+    context: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
+    const selectedValues = ref([])
+
+    function setValue(value): void {
+      if (selectedValues.value.find((v) => v === value)) {
+        selectedValues.value.splice(selectedValues.value.indexOf(value), 1)
+      } else if (
+        !props.context.limit ||
+        selectedValues.value.length < props.context.limit
+      ) {
+        selectedValues.value.push(value)
+      }
+      props.context.model = selectedValues
+    }
+    function checkIsActive(value: any): string {
+      return selectedValues.value.find((v) => {
+        return v === value
+      })
+        ? 'bg-purple-200'
+        : 'bg-gray-200'
+    }
+
+    return {
+      setValue,
+      checkIsActive,
+    }
+  },
+})
+</script>

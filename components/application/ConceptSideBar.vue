@@ -6,7 +6,17 @@
           <nuxt-link
             :to="{ name: concept.link, params: { id: projectId } }"
             href="#"
-            class="border-l-4 hover :border-purple-500 pb-4 flex w-52 text-gray-500 hover:text-purple-500"
+            class="
+              border-l-4
+              hover
+              :border-purple-500
+              pb-4
+              flex
+              w-52
+              h-16
+              text-gray-500
+              hover:text-purple-500
+            "
             :class="isActive(concept.link)"
           >
             <span class="ml-3 font-medium group-hover:text-gray-900">{{

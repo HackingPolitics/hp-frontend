@@ -4,14 +4,26 @@
     <div class="bg-white p-6">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="sm:flex sm:space-x-5">
-          <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-            <p class="text-xl font-bold text-gray-900 sm:text-2xl">
+          <div class="text-center sm:mt-0 sm:pt-1 sm:text-left">
+            <h3 class="text-xl font-bold text-gray-900 sm:text-2xl pb-2">
               Expresslinie
-            </p>
-            <p class="text-sm font-medium text-gray-600">Dresden</p>
+            </h3>
+            <div class="inline-flex items-center">
+              <p class="text-sm font-medium text-gray-600">Dresden</p>
+              <outline-location-marker-icon
+                class="w-5 h-5 ml-1 mr-4"
+              ></outline-location-marker-icon>
+              <chip class="mr-2">Infrastruktur</chip>
+              <chip>Mobilität</chip>
+            </div>
           </div>
         </div>
-        <avatar-group :avatars="avatars"> </avatar-group>
+        <div class="flex flex-col justify-center">
+          <span class="pb-2 text-teal-500 text-center">
+            {{ avatars.length }} Mitglieder</span
+          >
+          <avatar-group :avatars="avatars"> </avatar-group>
+        </div>
       </div>
     </div>
   </div>

@@ -14,7 +14,14 @@
           <a
             v-if="step.status === 'complete'"
             :href="step.href"
-            class="block w-2.5 h-2.5 bg-indigo-600 rounded-full hover:bg-indigo-900"
+            class="
+              block
+              w-2.5
+              h-2.5
+              bg-indigo-600
+              rounded-full
+              hover:bg-indigo-900
+            "
           >
             <span class="sr-only">{{ step.name }}</span>
           </a>
@@ -43,11 +50,14 @@
         </li>
       </ol>
     </nav>
-    <div class="flex">
+    <div class="flex mt-8">
       <application-concept-side-bar
         v-if="!noConceptSidebar"
       ></application-concept-side-bar>
-      <main class="mx-auto max-auto py-12 px-4 lg:pb-16 relative flex-1 mx-16">
+      <div class="py-12">
+        <slot name="left-side"></slot>
+      </div>
+      <main class="mx-auto max-auto py-12 px-4 lg:pb-16 relative flex-1 mx-10">
         <!--        <button class="absolute -left-44" @click="goBack()">
           <outline-chevron-left-icon
             class="w-10 h-10"
@@ -62,30 +72,84 @@
           <div v-if="!hasActionSlots && !noActions" class="flex justify-end">
             <button
               type="button"
-              class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
+              class="
+                bg-white
+                py-2
+                px-4
+                border border-gray-300
+                rounded-md
+                shadow-sm
+                text-sm
+                font-medium
+                text-gray-700
+                hover:bg-gray-50
+                focus:outline-none
+                focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500
+              "
             >
               Zurück
             </button>
             <button
               type="submit"
-              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-light-blue-500 hover:bg-light-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
+              class="
+                ml-3
+                inline-flex
+                justify-center
+                py-2
+                px-4
+                border border-transparent
+                rounded-md
+                shadow-sm
+                text-sm
+                font-medium
+                text-white
+                bg-light-blue-500
+                hover:bg-light-blue-600
+                focus:outline-none
+                focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500
+              "
             >
               Speichern
             </button>
           </div>
           <div
-            class="absolute -right-24 bottom-16 flex-col"
             v-if="!noFloatingSidebar"
+            class="absolute -right-24 bottom-16 flex-col"
           >
             <button
               type="button"
-              class="flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-4"
+              class="
+                flex
+                items-center
+                p-1
+                border border-transparent
+                rounded-full
+                shadow-sm
+                text-white
+                bg-indigo-600
+                hover:bg-indigo-700
+                focus:outline-none
+                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                mb-4
+              "
             >
               <outline-chat-icon class="w-7 h-7" />
             </button>
             <button
               type="button"
-              class="flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="
+                flex
+                items-center
+                p-1
+                border border-transparent
+                rounded-full
+                shadow-sm
+                text-white
+                bg-indigo-600
+                hover:bg-indigo-700
+                focus:outline-none
+                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+              "
             >
               <!-- Heroicon name: outline/plus -->
               <outline-question-mark-circle-icon class="w-7 h-7" />

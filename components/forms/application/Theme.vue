@@ -2,43 +2,34 @@
   <FormulateForm v-model="formData">
     <forms-layout title="Thema">
       <div class="space-y-4">
-        <forms-section
+        <forms-form-section
           title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
-          subtitle="Help"
+          subtitle="Schreiben Sie etwas zu dem Projekt auf"
         >
           <FormulateInput type="textarea" rows="5" name="theme_description">
           </FormulateInput>
-        </forms-section>
+        </forms-form-section>
 
-        <forms-section
-          title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
-          subtitle="Help"
+        <forms-form-section
+          title="In welche Thema passt euer Thema"
+          subtitle="Wähle bis zu 2 Möglichkeiten aus"
         >
           <FormulateInput
-            type="select"
-            name="theme_category"
-            label="In welche Kategorie passt euer Thema"
-          >
-          </FormulateInput>
-          <FormulateInput type="select"> </FormulateInput>
-        </forms-section>
+            aria-label="In welche Thema passt euer Thema"
+            type="chipGroup"
+            name="category"
+            limit="2"
+            :options="[
+              { label: 'Bildung und Soziales', value: 'education_social' },
+              { label: 'Mobilität', value: 'mobility' },
+              { label: 'Umwelt', value: 'environment' },
+              { label: 'Infrastruktur', value: 'infrastructure' },
+              { label: 'Freizeit', value: 'leisure' },
+              { label: 'Kunst und Kultur', value: 'art_culture' },
+            ]"
+          />
+        </forms-form-section>
       </div>
-      <template #actions>
-        <div class="flex justify-end">
-          <button
-            type="button"
-            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
-          >
-            Zurück
-          </button>
-          <button
-            type="submit"
-            class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-light-blue-500 hover:bg-light-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
-          >
-            Speichern
-          </button>
-        </div>
-      </template>
     </forms-layout>
   </FormulateForm>
 </template>

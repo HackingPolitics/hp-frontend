@@ -1,11 +1,17 @@
 import { de } from '@braid/vue-formulate-i18n'
 import GroupRemoveButton from '~/components/GroupRemoveButton'
+import ChipGroup from '~/components/ChipGroup'
 
 export default {
   plugins: [de],
   locale: 'de',
   classes: {
-    outer: 'mb-4',
+    outer(context) {
+      switch (context.classification) {
+        default:
+          return 'mb-4 flex-1'
+      }
+    },
     input(context) {
       switch (context.classification) {
         case 'button':
@@ -13,6 +19,8 @@ export default {
         case 'input':
           return 'shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 rounded-md w-full'
         case 'box':
+          return
+        case 'chip':
           return
         default:
           return 'shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 rounded-md w-full'
@@ -29,5 +37,11 @@ export default {
   },
   slotComponents: {
     remove: 'GroupRemoveButton',
+  },
+  library: {
+    chipGroup: {
+      classification: 'chip',
+      component: 'ChipGroup',
+    },
   },
 }

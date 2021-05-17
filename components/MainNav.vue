@@ -1,6 +1,6 @@
 <template>
   <nav class="bg-purple-500" aria-label="Global">
-    <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+    <div class="max-w-screen-xl mx-auto mx-auto px-2 sm:px-4 lg:px-8">
       <div class="flex justify-between h-20">
         <div class="flex items-center px-2 lg:px-0">
           <div class="flex-shrink-0 flex items-center">

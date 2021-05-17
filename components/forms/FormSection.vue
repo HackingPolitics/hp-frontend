@@ -1,15 +1,15 @@
 <template>
-  <div class="mt-10 mb-6 bg-white pt-4 pb-2 px-4 rounded">
+  <div class="mt-10 mb-6 bg-white pt-6 pb-2 px-4 rounded">
     <div>
       <slot name="header"></slot>
       <h3 v-if="!hasHeaderSlot" class="text-lg leading-6 text-gray-900">
         {{ title }}
       </h3>
-      <p class="max-w-2xl text-sm text-gray-500">
+      <p class="max-w-2xl text-sm text-gray-500 mt-1">
         {{ subtitle }}
       </p>
     </div>
-    <div class="mt-4">
+    <div class="pt-6">
       <slot></slot>
     </div>
   </div>
