@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, Ref, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ChipGroup',
@@ -29,9 +29,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const selectedValues = ref([])
+    const selectedValues: Ref<string[]> = ref([])
 
-    function setValue(value): void {
+    const setValue = (value: string): void => {
       if (selectedValues.value.find((v) => v === value)) {
         selectedValues.value.splice(selectedValues.value.indexOf(value), 1)
       } else if (
@@ -40,8 +40,10 @@ export default defineComponent({
       ) {
         selectedValues.value.push(value)
       }
+      // eslint-disable-next-line
       props.context.model = selectedValues
     }
+
     function checkIsActive(value: any): string {
       return selectedValues.value.find((v) => {
         return v === value

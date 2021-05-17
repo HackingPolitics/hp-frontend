@@ -11,7 +11,7 @@
           leave-class="transform translate-x-0"
           leave-to-class="transform -translate-x-10 translate-y-0"
         >
-          <div class="flex justify-center" v-if="!sidebarOpen">
+          <div v-if="!sidebarOpen" class="flex justify-center">
             <button
               class="focus:outline-none"
               @click="sidebarOpen = !sidebarOpen"
@@ -21,14 +21,7 @@
           </div>
           <ul v-else class="w-96 mt-4">
             <li
-              class="
-                col-span-2
-                flex flex-col
-                bg-white
-                rounded-lg
-                shadow
-                divide-y divide-gray-200
-              "
+              class="col-span-2 flex flex-col bg-white rounded-lg shadow divide-y divide-gray-200"
             >
               <div class="flex-1 flex flex-col pb-2">
                 <div class="flex justify-around py-4 bg-purple-600 p-4">
@@ -45,13 +38,7 @@
                       Copy Paste</span
                     >
                     <button
-                      class="
-                        focus:outline-none
-                        absolute
-                        right-0
-                        top-0
-                        text-white
-                      "
+                      class="focus:outline-none absolute right-0 top-0 text-white"
                       @click="sidebarOpen = !sidebarOpen"
                     >
                       <outline-x-icon class="w-5 h-5"></outline-x-icon>
@@ -60,25 +47,12 @@
                 </div>
 
                 <dl
-                  class="
-                    flex-grow flex flex-col
-                    justify-between
-                    divide-y divide-gray-200
-                  "
+                  class="flex-grow flex flex-col justify-between divide-y divide-gray-200"
                 >
                   <dt class="sr-only">Title</dt>
                   <dd class="p-4 flex">
                     <div
-                      class="
-                        rounded-full
-                        border border-black
-                        flex
-                        w-6
-                        h-6
-                        items-center
-                        justify-center
-                        mr-3
-                      "
+                      class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
                     >
                       1
                     </div>
@@ -92,16 +66,7 @@
                   <dt class="sr-only">Probleme Handlungsfelder</dt>
                   <dd class="p-4 flex">
                     <div
-                      class="
-                        rounded-full
-                        border border-black
-                        flex
-                        w-6
-                        h-6
-                        items-center
-                        justify-center
-                        mr-3
-                      "
+                      class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
                     >
                       2
                     </div>
@@ -115,16 +80,7 @@
                   <dt class="sr-only">Probleme Handlungsfelder</dt>
                   <dd class="p-4 flex">
                     <div
-                      class="
-                        rounded-full
-                        border border-black
-                        flex
-                        w-6
-                        h-6
-                        items-center
-                        justify-center
-                        mr-3
-                      "
+                      class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
                     >
                       3
                     </div>
@@ -140,16 +96,7 @@
                   <dt class="sr-only">Argumente und Gegenargumente</dt>
                   <dd class="p-4 flex">
                     <div
-                      class="
-                        rounded-full
-                        border border-black
-                        flex
-                        w-6
-                        h-6
-                        items-center
-                        justify-center
-                        mr-3
-                      "
+                      class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
                     >
                       4
                     </div>
@@ -165,16 +112,7 @@
                   <dt class="sr-only">Strategie</dt>
                   <dd class="p-4 flex">
                     <div
-                      class="
-                        rounded-full
-                        border border-black
-                        flex
-                        w-6
-                        h-6
-                        items-center
-                        justify-center
-                        mr-3
-                      "
+                      class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
                     >
                       5
                     </div>
@@ -247,13 +185,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, Ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, Ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ApplicationFormWriting',
   setup() {
-    const sidebarOpen = ref(false)
-    const enabledInputs = ref([])
+    const sidebarOpen: Ref<boolean> = ref(false)
+    const enabledInputs: Ref<string[]> = ref([])
     function enableInput(name: string): void {
       enabledInputs.value.push(name)
     }
