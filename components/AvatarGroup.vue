@@ -12,10 +12,7 @@
       <span
         v-else-if="avatar.name"
         class="inline-flex items-center justify-center h-8 w-8 rounded-full"
-        :style="{
-          backgroundColor:
-            '#' + Math.floor(Math.random() * 16777215).toString(16),
-        }"
+        :class="getRandomBgColor()"
       >
         <span class="text-xs font-medium leading-none text-white">{{
           avatar.name.charAt(0).toUpperCase()
@@ -24,10 +21,7 @@
       <span
         v-else
         class="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100"
-        :style="{
-          backgroundColor:
-            '#' + Math.floor(Math.random() * 16777215).toString(16),
-        }"
+        :class="getRandomBgColor()"
       >
         <svg
           class="h-full w-full text-gray-300"
@@ -43,8 +37,11 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+import { getRandomBgColor } from '~/utils/randomColors'
+
+export default defineComponent({
   name: 'AvatarGroup',
   props: {
     avatars: {
@@ -52,5 +49,10 @@ export default {
       default: () => [],
     },
   },
-}
+  setup() {
+    return {
+      getRandomBgColor,
+    }
+  },
+})
 </script>

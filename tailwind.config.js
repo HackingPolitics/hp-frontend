@@ -12,6 +12,7 @@ module.exports = {
       'plugins/**/*.js',
       'nuxt.config.js',
       'formulate.config.js',
+      'utils/*.ts',
     ],
   },
   darkMode: false, // or 'media' or 'class'

@@ -70,7 +70,7 @@
         </li>
       </ul>
       <div class="w-full grid grid-cols-4 gap-4">
-        <div class="col-span-2" v-for="item in 4">
+        <div v-for="item in 4" class="col-span-2">
           <ul>
             <li
               class="flex flex-col bg-white rounded-lg shadow divide-y divide-gray-200"
@@ -112,7 +112,7 @@
                         <span
                           class="relative w-0 flex-1 inline-flex items-center justify-end py-4 pr-4 text-sm text-gray-400 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
                         >
-                          gerstern,14 Uhr
+                          gestern,14 Uhr
                           <!-- Heroicon name: solid/phone -->
                         </span>
                       </div>

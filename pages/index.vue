@@ -17,15 +17,7 @@
     <div class="flex mt-4">
       <ul class="grid grid-cols-2 gap-3 w-1/3 mr-8 h-64">
         <li
-          class="
-            col-span-2
-            flex flex-col
-            text-center
-            bg-white
-            rounded-lg
-            shadow
-            divide-y divide-gray-200
-          "
+          class="col-span-2 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200"
         >
           <div class="flex-1 flex flex-col p-8">
             <img
@@ -42,14 +34,7 @@
               <dt class="sr-only">Role</dt>
               <dd class="mt-3">
                 <span
-                  class="
-                    px-2
-                    py-1
-                    text-green-800 text-xs
-                    font-medium
-                    bg-green-100
-                    rounded-full
-                  "
+                  class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full"
                   >Profil bearbeiten</span
                 >
               </dd>
@@ -59,41 +44,14 @@
             <div class="-mt-px flex-col divide-y divide-gray-200">
               <div class="flex-1 flex">
                 <span
-                  class="
-                    relative
-                    -mr-px
-                    w-0
-                    flex-1
-                    inline-flex
-                    items-center
-                    justify-center
-                    py-4
-                    text-sm text-gray-700
-                    font-medium
-                    border border-transparent
-                    rounded-bl-lg
-                    hover:text-gray-500
-                  "
+                  class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
                 >
                   <span class="font-bold mr-2">3</span> Anträge
                 </span>
               </div>
               <div class="-ml-px flex-1 flex">
                 <span
-                  class="
-                    relative
-                    w-0
-                    flex-1
-                    inline-flex
-                    items-center
-                    justify-center
-                    py-4
-                    text-sm text-gray-400
-                    font-medium
-                    border border-transparent
-                    rounded-br-lg
-                    hover:text-gray-500
-                  "
+                  class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-400 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
                 >
                   registriert seit 26.04.2021
                   <!-- Heroicon name: solid/phone -->
@@ -119,13 +77,7 @@
         >
           <ul>
             <li
-              class="
-                flex flex-col
-                bg-white
-                rounded-lg
-                shadow
-                divide-y divide-gray-200
-              "
+              class="flex flex-col bg-white rounded-lg shadow divide-y divide-gray-200"
             >
               <div class="flex-1 flex flex-col">
                 <nuxt-link class="flex-1 flex flex-col" to="/antraege/12">
@@ -156,23 +108,9 @@
                       </div>
                       <div class="-ml-px flex-1 flex">
                         <span
-                          class="
-                            relative
-                            w-0
-                            flex-1
-                            inline-flex
-                            items-center
-                            justify-end
-                            py-4
-                            pr-4
-                            text-sm text-gray-400
-                            font-medium
-                            border border-transparent
-                            rounded-br-lg
-                            hover:text-gray-500
-                          "
+                          class="relative w-0 flex-1 inline-flex items-center justify-end py-4 pr-4 text-sm text-gray-400 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
                         >
-                          gerstern, 14:56 Uhr
+                          gestern, 14:56 Uhr
                           <!-- Heroicon name: solid/phone -->
                         </span>
                       </div>

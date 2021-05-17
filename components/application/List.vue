@@ -15,7 +15,7 @@
                   <div class="flex items-center text-sm text-gray-500">
                     <!-- Heroicon name: solid/calendar -->
                     <p>
-                      Gerstern
+                      Gestern
                       <time datetime="2020-01-07">January 7, 2020</time>
                       , von Pauline
                     </p>
