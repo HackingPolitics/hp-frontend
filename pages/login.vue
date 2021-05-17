@@ -31,10 +31,10 @@
           @submit="handleLogin"
         >
           <FormulateInput
-            label="E-Mail-Adresse"
+            label="Username oder E-Mail"
             placeholder="Username oder E-Mail eingeben"
             name="username"
-            type="email"
+            type="text"
             validation="required"
             :validation-messages="{
               required: 'Username oder E-Mail eingeben',
