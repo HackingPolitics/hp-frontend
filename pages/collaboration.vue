@@ -129,6 +129,7 @@ import {
   ref,
   Ref,
 } from '@nuxtjs/composition-api'
+import type { NuxtSocket } from 'nuxt-socket-io'
 import { getStoredAuthToken } from '~/utils/authToken'
 import { getRandomBgColor } from '~/utils/randomColors'
 
@@ -139,6 +140,11 @@ interface Field {
   lockedByUsername: string
 }
 
+interface User {
+  id: string
+  username: string
+}
+
 export default defineComponent({
   name: 'CollaborationPage',
   middleware: 'isLoggedin',
@@ -147,19 +153,11 @@ export default defineComponent({
     const description: Ref<string> = ref('Project Nero')
     const hasJoined: Ref<boolean> = ref(false)
 
-    // Here, we want Nuxt context instead.
     const ctx: any = useContext()
-
-    // Setup context:
-    // For example, nuxt-socket-io has a built-in
-    // teardown feature which will need the onUnmounted hook
     ctx.onUnmounted = onUnmounted
 
-    // And finally, we can get the socket like before:
-    // (instead of "this", it's "ctx" because that's the
-    // context here)
     const token = getStoredAuthToken()
-    const socket = ctx.$nuxtSocket({
+    const socket: NuxtSocket = ctx.$nuxtSocket({
       reconnection: false,
       auth: {
         token,
@@ -169,7 +167,7 @@ export default defineComponent({
     socket.emit('joinGroup', 'test', (data: any) => {
       if (data.status === 'ok') {
         hasJoined.value = true
-        socket.emit('getDocument', (data: any) => {
+        socket.emit('getDocument', 'test', (data: any) => {
           console.log('getDocument', data)
         })
 
@@ -183,10 +181,9 @@ export default defineComponent({
       socket.emit('leaveGroup', 'test')
     }
 
-    const users = ref([])
+    const users: Ref<User[]> = ref([])
     socket.on('updateUsers', (data: any) => {
       users.value = data
-      console.log('updateUsers', data)
     })
 
     // Locked Fields
@@ -209,15 +206,15 @@ export default defineComponent({
       }
     })
 
-    const blurEvent = (field: string, ref: Ref) => {
+    const blurEvent = (field: string, ref: Ref): void => {
       socket.emit('unlockField', { fieldID: field, fieldValue: ref })
     }
 
-    const clickEvent = (field: string, ref: Ref) => {
+    const clickEvent = (field: string, ref: Ref): void => {
       socket.emit('lockField', { fieldID: field, fieldValue: ref })
     }
 
-    const changeEvent = (field: string, ref: Ref) => {
+    const changeEvent = (field: string, ref: Ref): void => {
       socket.emit('updateField', { fieldID: field, fieldValue: ref })
     }
 
@@ -225,7 +222,7 @@ export default defineComponent({
       socket.emit('leaveGroup', 'test')
     })
 
-    const checkIfLocked = (field: any): boolean => {
+    const checkIfLocked = (field: string): boolean => {
       if (lockedFields) {
         const check = lockedFields.value.find(
           (el: Field) => el.fieldID === field
