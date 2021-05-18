@@ -1,13 +1,13 @@
 <template>
   <FormulateForm v-model="formData">
-    <forms-layout title="Probleme Handlungsfelder">
+    <forms-layout title="Probleme und Handlungsfelder">
       <div class="space-y-6">
         <forms-form-section title="Probleme">
           <FormulateInput
             type="group"
             :repeatable="true"
             name="problems"
-            label="Welche Probleme hast du beobachtet und möchtest es anlegen"
+            label="Welche Probleme hast du beobachtet und möchtest du anlegen?"
             add-label="+ Problem hinzufügen"
             remove-position="after"
           >
@@ -21,7 +21,7 @@
           <FormulateInput
             type="group"
             :repeatable="true"
-            name="problems"
+            name="callForAction"
             label="Der Stadtrat beauftrag den Oberbügermeister"
             remove-position="after"
             add-label="+ Maßnahme hinzufügen"

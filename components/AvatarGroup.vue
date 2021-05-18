@@ -38,14 +38,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { getRandomBgColor } from '~/utils/randomColors'
+
+interface User {
+  imageUrl: string
+  name: string
+}
 
 export default defineComponent({
   name: 'AvatarGroup',
   props: {
     avatars: {
-      type: Array,
+      type: Array as PropType<User[]>,
       default: () => [],
     },
   },

@@ -31,7 +31,7 @@
       </div>-->
     </div>
 
-    <main class="relative 2xl:-mt-44">
+    <main class="relative -mt-44">
       <header class="relative py-10">
         <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 class="text-4xl font-bold text-white">{{ title }}</h1>

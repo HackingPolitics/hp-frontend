@@ -63,7 +63,7 @@
                       ></outline-chevron-right-icon>
                     </div>
                   </dd>
-                  <dt class="sr-only">Probleme Handlungsfelder</dt>
+                  <dt class="sr-only">Probleme und Handlungsfelder</dt>
                   <dd class="p-4 flex">
                     <div
                       class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
@@ -71,13 +71,15 @@
                       2
                     </div>
                     <div class="flex flex-1 justify-between items-center">
-                      <span class="text-black">Probleme Handlungsfelder</span>
+                      <span class="text-black"
+                        >Probleme und Handlungsfelder</span
+                      >
                       <outline-chevron-right-icon
                         class="w-5 h-5 ml-4"
                       ></outline-chevron-right-icon>
                     </div>
                   </dd>
-                  <dt class="sr-only">Probleme Handlungsfelder</dt>
+                  <dt class="sr-only">Probleme und Handlungsfelder</dt>
                   <dd class="p-4 flex">
                     <div
                       class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"

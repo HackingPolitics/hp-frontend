@@ -26,16 +26,7 @@
               <div class="flex-col">
                 <div class="inline-flex mb-2 items-center">
                   <div
-                    class="
-                      rounded-full
-                      border border-black
-                      flex
-                      w-6
-                      h-6
-                      items-center
-                      justify-center
-                      mr-3
-                    "
+                    class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
                   >
                     {{ index + 1 }}
                   </div>
@@ -50,15 +41,7 @@
               </div>
               <div class="text-gray-500 text-sm">
                 <span
-                  class="
-                    inline-flex
-                    items-center
-                    justify-center
-                    h-8
-                    w-8
-                    rounded-full
-                    bg-gray-500
-                  "
+                  class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500"
                 >
                   <span class="text-sm font-medium leading-none text-white"
                     >TW</span
@@ -112,7 +95,7 @@ export default defineComponent({
         href: 'antraege-id-thema',
       },
       {
-        title: 'Probleme Handlungsfelder',
+        title: 'Probleme und Handlungsfelder',
         step: {
           current: 0,
           total: 2,
@@ -141,7 +124,7 @@ export default defineComponent({
           current: 0,
           total: 6,
         },
-         href: 'antraege-id-strategie',
+        href: 'antraege-id-strategie',
       },
     ])
     return { applicationSteps, projectId }

@@ -9,15 +9,17 @@
             >
               <div class="truncate">
                 <div class="flex">
-                  <p class="flex-shrink-0 text-lg font-medium">Dokumenttiel</p>
+                  <p class="flex-shrink-0 text-lg font-medium">
+                    Dokumententitel
+                  </p>
                 </div>
                 <div class="mt-2 flex">
                   <div class="flex items-center text-sm text-gray-500">
                     <!-- Heroicon name: solid/calendar -->
                     <p>
                       Gestern
-                      <time datetime="2020-01-07">January 7, 2020</time>
-                      , von Pauline
+                      <time datetime="2020-01-07">3. Mai 2021</time>, von
+                      Pauline
                     </p>
                   </div>
                 </div>
