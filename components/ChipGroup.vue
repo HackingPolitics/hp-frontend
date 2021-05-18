@@ -10,7 +10,7 @@
       class="focus:outline-none"
       @click="setValue(option.value)"
     >
-      <chip :chip-class="checkIsActive(option.value)" class="mr-2">{{
+      <chip :chip-class="setActiveClass(option.value)" class="mr-2 mb-4">{{
         option.label
       }}</chip>
     </button>
@@ -44,7 +44,7 @@ export default defineComponent({
       props.context.model = selectedValues
     }
 
-    function checkIsActive(value: any): string {
+    function setActiveClass(value: any): string {
       return selectedValues.value.find((v) => {
         return v === value
       })
@@ -54,7 +54,7 @@ export default defineComponent({
 
     return {
       setValue,
-      checkIsActive,
+      setActiveClass,
     }
   },
 })

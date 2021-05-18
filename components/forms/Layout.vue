@@ -54,10 +54,10 @@
       <application-concept-side-bar
         v-if="!noConceptSidebar"
       ></application-concept-side-bar>
-      <div class="py-12">
+      <div>
         <slot name="left-side"></slot>
       </div>
-      <main class="mx-auto max-auto py-12 px-4 lg:pb-16 relative flex-1 mx-10">
+      <main class="mx-auto max-auto px-4 lg:pb-12 relative flex-1 mx-10">
         <!--        <button class="absolute -left-44" @click="goBack()">
           <outline-chevron-left-icon
             class="w-10 h-10"
@@ -190,6 +190,10 @@ export default defineComponent({
     id: {
       type: Number,
       default: null,
+    },
+    currentStep: {
+      type: Number,
+      default: 1,
     },
   },
   setup(props, context) {
