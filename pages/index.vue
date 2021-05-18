@@ -1,32 +1,20 @@
 <template>
   <layouts-single-view title="Meine Anträge">
-    <p class="text-white font-medium mb-2">Zuletzt besucht</p>
-    <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <application-card
-        title="Strategie"
-        subtitle="Expressbuslinien zwischen Pieschen und Weißig"
-        item-id="erster"
-      />
-      <application-card
-        title="Argumente und Gegenargumente"
-        subtitle="Expressbuslinien zwischen Pieschen und Weißig"
-      />
-      <application-card title="Strategie" subtitle="Dresden" />
-    </ul>
-
-    <div class="flex mt-4">
-      <ul class="grid grid-cols-2 gap-3 w-1/3 mr-8 h-64">
+    <div class="sm:flex mt-4">
+      <ul
+        class="sm:grid sm:grid-cols-2 gap-3 sm:w-1/3 sm:mr-8 sm:h-64 mb-4 sm:mb-0"
+      >
         <li
-          class="col-span-2 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200"
+          class="col-span-2 flex sm:flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200"
         >
-          <div class="flex-1 flex flex-col p-8">
+          <div class="flex-1 flex flex-col p-2 sm:p-8">
             <img
-              class="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-full"
+              class="w-16 h-16 sm:w-32 sm:h-32 flex-shrink-0 mx-auto bg-black rounded-full"
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
               alt=""
             />
-            <h3 class="mt-6 text-gray-900 text-sm font-medium">
-              Willkommen Zurück
+            <h3 class="mt-2 sm:mt-6 text-gray-900 text-sm font-medium">
+              Willkommen
             </h3>
             <dl class="mt-1 flex-grow flex flex-col justify-between">
               <dt class="sr-only">Title</dt>
@@ -69,7 +57,7 @@
           </div>
         </li>
       </ul>
-      <div class="w-full grid grid-cols-4 gap-4">
+      <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div
           v-for="(item, index) in sampleApplication"
           :key="index"
