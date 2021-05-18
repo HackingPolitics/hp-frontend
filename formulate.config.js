@@ -10,6 +10,8 @@ export default {
       switch (context.classification) {
         case 'box':
           return 'mb-4'
+        case 'file':
+          return ''
         default:
           return 'mb-8 flex-1'
       }
