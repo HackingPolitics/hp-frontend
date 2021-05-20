@@ -2,10 +2,10 @@
   <FormulateForm
     v-slot="{ hasErrors }"
     v-model="formData"
-    @submit="createProject"
+    @submit="createProject()"
   >
     <forms-layout
-      title="Antrag erstellen"
+      :title="currentStep !== 4 ? 'Antrag erstellen' : ''"
       :steps="steps"
       no-concept-sidebar
       no-floating-sidebar
@@ -13,7 +13,7 @@
       <div class="space-y-6">
         <div class="py-5 sm:rounded-lg">
           <div class="md:grid md:grid-cols-3 md:gap-6">
-            <div class="md:col-span-1">
+            <div v-if="currentStep < 4" class="md:col-span-1">
               <h3 class="text-lg font-medium leading-6 text-gray-900">
                 {{
                   currentStep === 2
@@ -105,6 +105,20 @@
                   type="textarea"
                   name="topic"
                 />
+                <div class="flex justify-between w-full">
+                  <FormulateInput
+                    label="Was treibt euch an?"
+                    type="text"
+                    name="motivation"
+                    wrapper-class="w-4/5"
+                  />
+                  <FormulateInput
+                    label="Welche Fähigkeiten habt ihr?"
+                    type="text"
+                    name="skills"
+                    wrapper-class="w-4/5"
+                  />
+                </div>
                 <FormulateInput
                   aria-label="In welche Thema passt euer Thema"
                   type="chipGroup"
@@ -157,12 +171,91 @@
               </div>
             </div>
           </div>
+          <div
+            v-show="currentStep === 4"
+            class="flex flex-col justify-center space-x-4"
+          >
+            <div
+              class="
+                mx-auto
+                flex
+                items-center
+                justify-center
+                h-12
+                w-12
+                rounded-full
+                bg-purple-500
+              "
+            >
+              <outline-check-icon
+                class="h-6 w-6 text-white"
+              ></outline-check-icon>
+              <!-- Heroicon name: outline/check -->
+            </div>
+            <div class="mt-3 text-center sm:mt-5">
+              <h3
+                id="modal-title"
+                class="text-lg leading-6 font-medium text-gray-900"
+              >
+                Fast Geschafft!
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Logge dich ein oder registriere dich um loszustarten
+                </p>
+              </div>
+            </div>
+            <div class="inline-flex justify-center items-baseline mt-8">
+              <div class="flex items-center mr-4">
+                <nuxt-link
+                  to="/registrieren"
+                  class="
+                    items-center
+                    px-4
+                    py-2
+                    w-32
+                    text-center
+                    border border-transparent
+                    text-base
+                    font-medium
+                    rounded-md
+                    text-white
+                    bg-purple-500
+                    hover:bg-purple-300
+                  "
+                >
+                  Registrieren
+                </nuxt-link>
+              </div>
+              <div class="flex items-center">
+                <nuxt-link
+                  to="/login"
+                  class="
+                    items-center
+                    px-4
+                    py-2
+                    w-32
+                    text-center
+                    border border-transparent
+                    text-base
+                    font-medium
+                    rounded-md
+                    text-white
+                    bg-purple-500
+                    hover:bg-purple-300
+                  "
+                >
+                  Login
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <template #actions>
         <div class="flex justify-end space-x-4">
           <FormulateInput
-            v-show="currentStep > 1"
+            v-show="currentStep > 1 && currentStep < 4"
             type="button"
             @click="prevStep()"
           >
@@ -170,14 +263,19 @@
           </FormulateInput>
           <FormulateInput
             v-if="currentStep < 3"
+            :disable-errors="hasErrors"
             :disabled="hasErrors"
             type="button"
-            @click="nextStep()"
+            @click.prevent="nextStep()"
           >
             Weiter
           </FormulateInput>
 
-          <FormulateInput v-else type="submit" wrapper-class="w-40">
+          <FormulateInput
+            v-if="currentStep === 3"
+            type="submit"
+            wrapper-class="w-40"
+          >
             Projekt anlegen
           </FormulateInput>
         </div>
@@ -190,6 +288,7 @@
 import {
   defineComponent,
   ref,
+  computed,
   useRouter,
   useStore,
 } from '@nuxtjs/composition-api'
@@ -200,6 +299,7 @@ export default defineComponent({
     const formData = ref({})
     const router = useRouter()
     const currentStep = ref(1)
+    const parliaments = ref()
     const steps = ref([
       { id: 1, name: 'Projekttitel', status: 'current' },
       { id: 2, name: 'Projektthema', status: 'incomplete' },
@@ -207,7 +307,9 @@ export default defineComponent({
     ])
     const store = useStore()
 
-    function nextStep() {
+    const isLoggedIn = computed(() => store.getters['auth/isLoggedIn'])
+
+    const nextStep = () => {
       if (currentStep.value === 3) {
         router.push('/antraege/erster')
       }
@@ -219,7 +321,8 @@ export default defineComponent({
       const nextStep = steps.value.find((step) => step.id === currentStep.value)
       if (nextStep) nextStep.status = 'current'
     }
-    function prevStep() {
+
+    const prevStep = () => {
       const currStep = steps.value.find((step) => step.id === currentStep.value)
       if (currStep) currStep.status = 'incomplete'
       currentStep.value--
@@ -227,13 +330,28 @@ export default defineComponent({
       const prevStep = steps.value.find((step) => step.id === currentStep.value)
       if (prevStep) prevStep.status = 'current'
     }
+
     const createProject = async () => {
-      formData.value.parliament = {}
-      formData.value.motivation = 'my motivation'
-      formData.value.skills = 'my project skills'
-      return await store.dispatch('projects/createProject', formData.value)
+      if (isLoggedIn.value) {
+        return await store.dispatch('projects/createProject', formData.value)
+      } else {
+        store.commit('projects/SET_CREATED_PROJECT', [formData.value])
+        currentStep.value = 4
+      }
     }
-    return { formData, steps, currentStep, nextStep, prevStep, createProject }
+    return {
+      formData,
+      steps,
+      currentStep,
+      nextStep,
+      prevStep,
+      createProject,
+      parliaments,
+      isLoggedIn,
+    }
+  },
+  async fetch() {
+    this.parliaments = await this.$axios.get('/parliaments')
   },
 })
 </script>
