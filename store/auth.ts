@@ -63,7 +63,7 @@ interface JwtPayloadWithUser extends JwtPayload {
 
 export const actions: ActionTree<RootState, RootState> = {
   // login
-  async login({ commit }, loginData: LoginCredentials) {
+  async login({ rootState, commit, dispatch }, loginData: LoginCredentials) {
     commit('SET_ERRORS', false)
     commit('SET_LOADING_FLAG', true)
     try {
@@ -82,6 +82,19 @@ export const actions: ActionTree<RootState, RootState> = {
       // fetch user data
       const user = await this.$api.user.getUser(decoded.id)
       commit('SET_USER', user.data)
+
+      // @ts-ignore
+      const createdProject = rootState.projects.createdProjects
+
+      if (createdProject !== null) {
+        try {
+          await dispatch('projects/createProject', createdProject, {
+            root: true,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      }
 
       this.$router.push('/')
       commit('SET_LOADING_FLAG', false)

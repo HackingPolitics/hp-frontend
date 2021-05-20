@@ -27,6 +27,10 @@ export interface INumericIdentifierModel extends IModel {
   id?: number
 }
 
+export interface IParliament extends IModel {}
+
+export interface ICategory extends IModel {}
+
 export interface IHydraCollection<T extends IModel> {
   'hydra:firstPage'?: number
   'hydra:itemsPerPage'?: number
@@ -55,10 +59,6 @@ export interface IUser extends INumericIdentifierModel {
   roles?: UserRole[]
   username?: string
   validated?: boolean
-}
-
-export interface IRegistration extends IUser {
-  validationUrl: string
 }
 
 export interface IEmailChange {
@@ -98,23 +98,24 @@ export interface IUserStatistics {
   notValidated: number
 }
 
-export interface ICategory extends IModel {}
-
-export interface IParliament extends IModel {}
-
 export interface IProject extends IModel {
   categories?: ICategory[]
   '@context'?: string
   '@id'?: string
   '@type'?: string
-  description: string
-  impact: string
+  description?: string
+  impact?: string
   parliament?: IParliament
-  slug: string
-  state: string
-  title: string
-  topic: string
-  updatedAt: Date | string
-  createdBy: IUser
-  createdAt: Date | string
+  slug?: string
+  state?: string
+  title?: string
+  topic?: string
+  updatedAt?: Date | string
+  createdBy?: IUser
+  createdAt?: Date | string
+}
+
+export interface IRegistration extends IUser {
+  validationUrl: string
+  createdProjects?: IProject[]
 }
