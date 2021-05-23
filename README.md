@@ -1,7 +1,7 @@
 # Hacking Politics Frontend
 
 <div style="text-align:center">
-<a href="hhttps://zukunftsstadt.de/hacking-politics"><img src="./hp-teaser.jpg" style="display:block; margin:auto; width:100%; max-width:100%"/></a>
+<a href="https://zukunftsstadt.de/hacking-politics"><img src="./hp-teaser.jpg" style="display:block; margin:auto; width:100%; max-width:100%"/></a>
 </div>
 
 By
