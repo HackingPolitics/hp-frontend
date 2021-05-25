@@ -27,7 +27,22 @@ export interface INumericIdentifierModel extends IModel {
   id?: number
 }
 
-export interface IParliament extends IModel {}
+export interface IParliament extends IModel {
+  factions?: []
+  federalState?: string
+  headOfAdministration?: string
+  headOfAdministrationTitle?: string
+  id?: number
+  location?: string
+  slug?: string
+  title?: 'string'
+  updatedAt?: Date | string
+  updatedBy?: Date | string
+  url?: string
+  validatedAt?: Date | string
+  wikipediaUrl?: string
+  zipArea?: string
+}
 
 export interface ICategory extends IModel {}
 

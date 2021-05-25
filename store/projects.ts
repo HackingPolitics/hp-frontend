@@ -31,6 +31,7 @@ export const actions: ActionTree<RootState, RootState> = {
     try {
       const response = await this.$api.projects.createProject(credentials)
       commit('SET_PROJECT', response)
+      commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {
       // this.error = e.response.data.message

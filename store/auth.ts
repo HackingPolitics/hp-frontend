@@ -90,6 +90,8 @@ export const actions: ActionTree<RootState, RootState> = {
         try {
           await dispatch('projects/createProject', createdProject, {
             root: true,
+          }).then((res) => {
+            this.$router.push({ name: 'antraege', params: { id: res.id } })
           })
         } catch (error) {
           console.log(error)

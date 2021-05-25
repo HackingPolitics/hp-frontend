@@ -8,7 +8,7 @@
       :key="index"
       v-bind="context.attributes"
       class="focus:outline-none"
-      @click="setValue(option.value)"
+      @click.prevent="setValue(option.value)"
     >
       <chip :chip-class="setActiveClass(option.value)" class="mr-2 mb-4">{{
         option.label

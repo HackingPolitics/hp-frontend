@@ -58,7 +58,7 @@ export default {
   ],
 
   axios: {
-    baseUrl: 'https://api-dev.hpo.vrok.de/',
+    baseUrl: 'https://api-stage.hpo.vrok.de/',
   },
 
   io: {

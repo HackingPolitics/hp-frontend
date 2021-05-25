@@ -24,7 +24,7 @@
                 }}
               </h3>
               <p class="mt-1 text-sm text-gray-500">
-                Du hast auch später die Möglichkeit, diesen Teil auszufüllen
+                Alle nicht benötigten Federn kannst du auch später auszufüllen
               </p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -101,24 +101,33 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
-                  label="Was ist das Thema mit dem sich euer Antrag befasst?"
+                  label="Wie würdet ihr euer Projekt beschreiben?"
                   type="textarea"
-                  name="topic"
+                  name="description"
+                  :validation="currentStep === 2 ? 'required' : ''"
                 />
                 <div class="flex justify-between w-full">
                   <FormulateInput
                     label="Was treibt euch an?"
                     type="text"
                     name="motivation"
+                    :validation="currentStep === 2 ? 'required' : ''"
                     wrapper-class="w-4/5"
                   />
                   <FormulateInput
                     label="Welche Fähigkeiten habt ihr?"
                     type="text"
                     name="skills"
+                    :validation="currentStep === 2 ? 'required' : ''"
                     wrapper-class="w-4/5"
                   />
                 </div>
+                <FormulateInput
+                  label="Was ist das Thema mit dem sich euer Antrag befasst?"
+                  type="textarea"
+                  name="topic"
+                  :validation="currentStep === 2 ? 'required' : ''"
+                />
                 <FormulateInput
                   aria-label="In welche Thema passt euer Thema"
                   type="chipGroup"
@@ -143,13 +152,20 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
+                  label="Der Titel des Parliaments"
+                  type="select"
+                  name="parliament"
+                  :options="parliamentsOptions"
+                  :validation="currentStep === 3 ? 'required' : ''"
+                />
+                <FormulateInput
                   label="Der Name deine Stadt oder Gemeinde"
                   type="text"
                 />
                 <FormulateInput
                   label="Um welche Politische Ebene handelt es sich?"
                   type="radio"
-                  name="parliament"
+                  name="politic_ground"
                   :options="{
                     city: 'Stadt',
                     village: 'Dorf',
@@ -293,13 +309,15 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 
+import { IParliament } from '~/types/apiSchema'
+
 export default defineComponent({
   name: 'Create',
   setup() {
     const formData = ref({})
     const router = useRouter()
     const currentStep = ref(1)
-    const parliaments = ref()
+    const parliaments = ref<IParliament[]>([])
     const steps = ref([
       { id: 1, name: 'Projekttitel', status: 'current' },
       { id: 2, name: 'Projektthema', status: 'incomplete' },
@@ -308,6 +326,11 @@ export default defineComponent({
     const store = useStore()
 
     const isLoggedIn = computed(() => store.getters['auth/isLoggedIn'])
+    const parliamentsOptions = computed(() =>
+      parliaments.value.map((parliament) => {
+        return { value: parliament['@id'], label: parliament.title }
+      })
+    )
 
     const nextStep = () => {
       if (currentStep.value === 3) {
@@ -333,9 +356,14 @@ export default defineComponent({
 
     const createProject = async () => {
       if (isLoggedIn.value) {
-        return await store.dispatch('projects/createProject', formData.value)
+        router.push({ path: `/antraege/${res.data.id}` })
+        await store
+          .dispatch('projects/createProject', formData.value)
+          .then((res) => {
+            router.push({ path: `/antraege/${res.data.id}` })
+          })
       } else {
-        store.commit('projects/SET_CREATED_PROJECT', [formData.value])
+        store.commit('projects/SET_CREATED_PROJECT', formData.value)
         currentStep.value = 4
       }
     }
@@ -347,11 +375,13 @@ export default defineComponent({
       prevStep,
       createProject,
       parliaments,
+      parliamentsOptions,
       isLoggedIn,
     }
   },
   async fetch() {
-    this.parliaments = await this.$axios.get('/parliaments')
+    const response = await this.$axios.get('/parliaments')
+    this.parliaments = response.data['hydra:member']
   },
 })
 </script>
