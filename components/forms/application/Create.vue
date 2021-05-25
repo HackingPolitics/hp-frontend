@@ -111,14 +111,14 @@
                     label="Was treibt euch an?"
                     type="text"
                     name="motivation"
-                    :validation="currentStep === 2 ? 'required' : ''"
+                    :validation="currentStep === 2 ? 'required|min:9,length' : ''"
                     wrapper-class="w-4/5"
                   />
                   <FormulateInput
                     label="Welche Fähigkeiten habt ihr?"
                     type="text"
                     name="skills"
-                    :validation="currentStep === 2 ? 'required' : ''"
+                    :validation="currentStep === 2 ? 'required|min:9,length' : ''"
                     wrapper-class="w-4/5"
                   />
                 </div>
@@ -353,14 +353,12 @@ export default defineComponent({
       const prevStep = steps.value.find((step) => step.id === currentStep.value)
       if (prevStep) prevStep.status = 'current'
     }
-
     const createProject = async () => {
       if (isLoggedIn.value) {
-        router.push({ path: `/antraege/${res.data.id}` })
         await store
           .dispatch('projects/createProject', formData.value)
           .then((res) => {
-            router.push({ path: `/antraege/${res.data.id}` })
+            if (res?.data) router.push({ path: `/antraege/${res.data.id}` })
           })
       } else {
         store.commit('projects/SET_CREATED_PROJECT', formData.value)

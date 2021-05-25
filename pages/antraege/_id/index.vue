@@ -98,7 +98,6 @@ import { defineComponent, useRoute, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'MeineAntraegePage',
-
   setup() {
     const route = useRoute()
     const projectId = ref(route.value.params.id)
