@@ -161,7 +161,9 @@ import {
   useMeta,
   useStore,
 } from '@nuxtjs/composition-api'
-import { IRegistration } from '~/types/apiSchema'
+
+import { IProject, IRegistration } from '~/types/apiSchema'
+import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'RegisterPage',
@@ -169,17 +171,20 @@ export default defineComponent({
   setup() {
     const credentials = ref<IRegistration>({
       validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
+      createdProjects: null,
     })
     const formErrors = ref([])
     const inputErrors = ref({})
-    const store = useStore<any>()
+    const store = useStore<RootState>()
     const formSent = ref(false)
 
-    const createdProjects = computed(() => store.state.projects.createdProjects)
+    const createdProject = computed(() => store.state.projects.createdProject)
 
     const createAccount = async () => {
-      if (createdProjects) {
-        credentials.value.createdProjects = [createdProjects.value]
+      if (createdProject) {
+        const projects: IProject[] = []
+        projects.push(createdProject)
+        credentials.value.createdProjects = projects
       }
       formSent.value = await store.dispatch('auth/register', credentials.value)
       // TODO: handle form errors */
@@ -188,7 +193,7 @@ export default defineComponent({
     return {
       credentials,
       createAccount,
-      createdProjects,
+      createdProject,
       formSent,
       inputErrors,
       formErrors,

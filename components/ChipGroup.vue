@@ -44,7 +44,7 @@ export default defineComponent({
       props.context.model = selectedValues
     }
 
-    function setActiveClass(value: any): string {
+    function setActiveClass(value: string | number): string {
       return selectedValues.value.find((v) => {
         return v === value
       })

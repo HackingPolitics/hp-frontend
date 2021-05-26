@@ -94,15 +94,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useRoute, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRoute } from '@nuxtjs/composition-api'
+import { IProject } from '~/types/apiSchema'
+
+// only mockup interface for rendering and testing
+interface ApplicationStep {
+  title: string
+  step: {
+    current?: number
+    total: number
+  }
+  href: string
+}
 
 export default defineComponent({
   name: 'MeineAntraegePage',
   setup() {
     const route = useRoute()
-    const projectId = ref(route.value.params.id)
-    const project = ref({})
-    const applicationSteps = ref([
+    const projectId = ref<string>(route.value.params.id)
+    const project = ref<IProject>({})
+
+    // only mockup data for rendering and testing
+    const applicationSteps = ref<ApplicationStep[]>([
       {
         title: 'Thema',
         step: {
@@ -144,13 +157,13 @@ export default defineComponent({
         href: 'antraege-id-strategie',
       },
     ])
+
     return { applicationSteps, projectId, project }
   },
   async fetch() {
     const id = this.$nuxt.context?.params?.id
     try {
-      const response = await this.$axios.get('/projects/' + id)
-      this.project = response
+      this.project = await this.$axios.get('/projects/' + id)
     } catch (e) {
       console.log(e)
     }

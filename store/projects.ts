@@ -3,12 +3,12 @@ import { IProject } from '~/types/apiSchema'
 
 export interface ProjectsState {
   project: IProject | null
-  createdProjects: IProject[] | null
+  createdProject: IProject | null
 }
 
 const defaultProjectsState: ProjectsState = {
   project: null,
-  createdProjects: null,
+  createdProject: null,
 }
 
 export const state = () => ({
@@ -22,17 +22,16 @@ export const mutations: MutationTree<RootState> = {
     state.project = project
   },
   SET_CREATED_PROJECT(state, project) {
-    state.createdProjects = project
+    state.createdProject = project
   },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async createProject({ commit }, credentials) {
+  async createProject({ commit }, data) {
     try {
-      const response = await this.$api.projects.createProject(credentials)
+      const response = await this.$api.projects.createProject(data)
       // @ts-ignore
       this.$notify({ title: 'Projekt erstellt', duration: 10000 })
-      commit('SET_PROJECT', response)
       commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {

@@ -111,14 +111,18 @@
                     label="Was treibt euch an?"
                     type="text"
                     name="motivation"
-                    :validation="currentStep === 2 ? 'required|min:9,length' : ''"
+                    :validation="
+                      currentStep === 2 ? 'required|min:9,length' : ''
+                    "
                     wrapper-class="w-4/5"
                   />
                   <FormulateInput
                     label="Welche Fähigkeiten habt ihr?"
                     type="text"
                     name="skills"
-                    :validation="currentStep === 2 ? 'required|min:9,length' : ''"
+                    :validation="
+                      currentStep === 2 ? 'required|min:9,length' : ''
+                    "
                     wrapper-class="w-4/5"
                   />
                 </div>
