@@ -1,24 +1,39 @@
 import { Ref, ref } from '@nuxtjs/composition-api'
+import { translateErrorMessage } from '~/utils/translateErrorMessage'
+
+interface Violation {
+  code: string
+  message: string
+  propertyPath: string
+}
 
 export default function () {
   const formErrors: Ref<string[]> = ref([])
   const inputErrors = ref({})
 
   const handleStatusErrors = (response: any) => {
-    if (response && response.response && response.response.status)
+    if (response?.response?.status)
       switch (response.response.status) {
         case 422:
           inputErrors.value = response.response.data.errors // assign field errors
-          formErrors.value.push(response.response.data.message || response.response.data['hydra:description'])
+          handleFormErrors(response)
           return
         case 401:
-          if (response.response.data.message === 'Invalid credentials') {
-            formErrors.value = ['Logindaten überprüfen']
-            return
-          }
           inputErrors.value = response.response.data.errors // assign field errors
-          formErrors.value.push(response.response.data.message)
+          handleFormErrors(response)
       }
+  }
+
+  const handleFormErrors = (response: any) => {
+    if (response?.response?.data?.violations) {
+      response.response.data.violations.forEach((violation: Violation) => {
+        formErrors.value.push(translateErrorMessage(violation.message))
+      })
+    } else if (response?.response?.data?.message) {
+      formErrors.value.push(
+        translateErrorMessage(response.response.data.message)
+      )
+    }
   }
 
   return {
