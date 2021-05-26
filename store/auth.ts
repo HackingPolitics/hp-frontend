@@ -84,7 +84,7 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_USER', user.data)
 
       // @ts-ignore
-      const createdProject = rootState.projects.createdProjects
+      const createdProject = rootState.projects.createdProject
 
       if (createdProject !== null) {
         try {

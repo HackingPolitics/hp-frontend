@@ -181,9 +181,9 @@ export default defineComponent({
     const createdProject = computed(() => store.state.projects.createdProject)
 
     const createAccount = async () => {
-      if (createdProject) {
+      if (createdProject.value) {
         const projects: IProject[] = []
-        projects.push(createdProject)
+        projects.push(createdProject.value)
         credentials.value.createdProjects = projects
       }
       formSent.value = await store.dispatch('auth/register', credentials.value)
