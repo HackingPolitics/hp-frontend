@@ -39,7 +39,19 @@
                 label="Username"
                 placeholder="Username eingeben"
                 name="username"
-                validation="required"
+                :validation="[
+                  ['required'],
+                  ['max', '9'],
+                  ['min', '2'],
+                  [
+                    'matches',
+                    /^([a-zA-Z]+[a-zA-Z0-9._-]*[a-zA-Z][a-zA-Z0-9._-]*)$/,
+                  ],
+                ]"
+                :validation-messages="{
+                  matches:
+                    'Benutzernamen müssen mit einem Buchstaben beginnen; dürfen nur Buchstaben, Ziffern, Punkte, Bindestriche und Unterstriche enthalten.',
+                }"
               />
               <FormulateInput
                 label="Vorname"
@@ -164,17 +176,17 @@ import {
 
 import { IProject, IRegistration } from '~/types/apiSchema'
 import { RootState } from '~/store'
+import formErrorsHandling from '~/composables/formErrorsHandling'
 
 export default defineComponent({
   name: 'RegisterPage',
   layout: 'auth',
   setup() {
+    const { formErrors, inputErrors, handleStatusErrors } = formErrorsHandling()
+
     const credentials = ref<IRegistration>({
       validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
-      createdProjects: null,
     })
-    const formErrors = ref([])
-    const inputErrors = ref({})
     const store = useStore<RootState>()
     const formSent = ref(false)
 
@@ -186,8 +198,8 @@ export default defineComponent({
         projects.push(createdProject.value)
         credentials.value.createdProjects = projects
       }
-      formSent.value = await store.dispatch('auth/register', credentials.value)
-      // TODO: handle form errors */
+      const response = await store.dispatch('auth/register', credentials.value)
+      handleStatusErrors(response)
     }
     useMeta({ title: 'Account anlegen | HackingPolitics' })
     return {

@@ -88,12 +88,14 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 
+import formErrorsHandling from '~/composables/formErrorsHandling'
+
 export default defineComponent({
   name: 'LoginPage',
   layout: 'auth',
   setup() {
-    const formErrors: Ref<string[]> = ref([])
-    const inputErrors = ref({})
+    const { formErrors, inputErrors, handleStatusErrors } = formErrorsHandling()
+
     const credentials = ref(null)
     const accountIsActivated = ref(false)
     const errorOnActivation = ref(false)
@@ -101,21 +103,7 @@ export default defineComponent({
 
     const handleLogin = async () => {
       const response = await store.dispatch('auth/login', credentials.value)
-      if (response && response.response && response.response.status) {
-        switch (response.response.status) {
-          case 422:
-            inputErrors.value = response.response.data.errors // assign field errors
-            formErrors.value.push(response.response.data.message)
-            return
-          case 401:
-            if (response.response.data.message === 'Invalid credentials') {
-              formErrors.value = ['Logindaten überprüfen']
-              return
-            }
-            inputErrors.value = response.response.data.errors // assign field errors
-            formErrors.value.push(response.response.data.message)
-        }
-      }
+      handleStatusErrors(response)
     }
 
     useMeta({ title: 'Login | HackingPolitics' })

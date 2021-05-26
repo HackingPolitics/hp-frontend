@@ -132,5 +132,5 @@ export interface IProject extends IModel {
 
 export interface IRegistration extends IUser {
   validationUrl: string
-  createdProjects?: IProject[] | null
+  createdProjects?: IProject[]
 }
