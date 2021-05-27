@@ -26,7 +26,16 @@
               <div class="flex-col">
                 <div class="inline-flex mb-2 items-center">
                   <div
-                    class="rounded-full border border-black flex w-6 h-6 items-center justify-center mr-3"
+                    class="
+                      rounded-full
+                      border border-black
+                      flex
+                      w-6
+                      h-6
+                      items-center
+                      justify-center
+                      mr-3
+                    "
                   >
                     {{ index + 1 }}
                   </div>
@@ -41,7 +50,15 @@
               </div>
               <div class="text-gray-500 text-sm">
                 <span
-                  class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500"
+                  class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    h-8
+                    w-8
+                    rounded-full
+                    bg-gray-500
+                  "
                 >
                   <span class="text-sm font-medium leading-none text-white"
                     >TW</span
@@ -77,15 +94,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useRoute, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRoute } from '@nuxtjs/composition-api'
+import { IProject } from '~/types/apiSchema'
+
+// only mockup interface for rendering and testing
+interface ApplicationStep {
+  title: string
+  step: {
+    current?: number
+    total: number
+  }
+  href: string
+}
 
 export default defineComponent({
   name: 'MeineAntraegePage',
-
   setup() {
     const route = useRoute()
-    const projectId = ref(route.value.params.id)
-    const applicationSteps = ref([
+    const projectId = ref<string>(route.value.params.id)
+    const project = ref<IProject>({})
+
+    // only mockup data for rendering and testing
+    const applicationSteps = ref<ApplicationStep[]>([
       {
         title: 'Thema',
         step: {
@@ -127,7 +157,16 @@ export default defineComponent({
         href: 'antraege-id-strategie',
       },
     ])
-    return { applicationSteps, projectId }
+
+    return { applicationSteps, projectId, project }
+  },
+  async fetch() {
+    const id = this.$nuxt.context?.params?.id
+    try {
+      this.project = await this.$axios.get('/projects/' + id)
+    } catch (e) {
+      console.log(e)
+    }
   },
 })
 </script>

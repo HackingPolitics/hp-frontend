@@ -23,7 +23,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/click-outside.js', '~/plugins/api.ts'],
+  plugins: [
+    '~/plugins/click-outside.js',
+    '~/plugins/api.ts',
+    '~/plugins/notifications.js',
+  ],
 
   env: {
     version: require('./package.json').version,
@@ -58,7 +62,7 @@ export default {
   ],
 
   axios: {
-    baseUrl: 'https://api-dev.hpo.vrok.de/',
+    baseUrl: 'https://api-stage.hpo.vrok.de/',
   },
 
   io: {

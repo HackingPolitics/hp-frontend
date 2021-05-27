@@ -104,7 +104,16 @@
       <div v-else key="success-notice">
         <div class="my-8">
           <div
-            class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-black"
+            class="
+              mx-auto
+              flex
+              items-center
+              justify-center
+              h-12
+              w-12
+              rounded-full
+              bg-black
+            "
           >
             <!-- Heroicon name: outline/check -->
             <svg
@@ -147,30 +156,44 @@
 import {
   defineComponent,
   ref,
+  computed,
+  ComputedRef,
   useMeta,
   useStore,
 } from '@nuxtjs/composition-api'
+
+import { IProject, IRegistration } from '~/types/apiSchema'
+import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'RegisterPage',
   layout: 'auth',
   setup() {
-    const credentials = ref({
+    const credentials = ref<IRegistration>({
       validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
+      createdProjects: null,
     })
     const formErrors = ref([])
     const inputErrors = ref({})
-    const store = useStore()
+    const store = useStore<RootState>()
     const formSent = ref(false)
 
+    const createdProject = computed(() => store.state.projects.createdProject)
+
     const createAccount = async () => {
+      if (createdProject.value) {
+        const projects: IProject[] = []
+        projects.push(createdProject.value)
+        credentials.value.createdProjects = projects
+      }
       formSent.value = await store.dispatch('auth/register', credentials.value)
-      // TODO: handle form errors
+      // TODO: handle form errors */
     }
     useMeta({ title: 'Account anlegen | HackingPolitics' })
     return {
       credentials,
       createAccount,
+      createdProject,
       formSent,
       inputErrors,
       formErrors,

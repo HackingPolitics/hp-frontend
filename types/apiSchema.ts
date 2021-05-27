@@ -18,6 +18,8 @@ export enum UserRole {
 export interface IModel {
   [prop: string]: any
   '@id'?: string
+  '@context'?: string
+  '@type'?: string
   loadedWithRoles?: UserRole[]
 }
 
@@ -25,10 +27,26 @@ export interface INumericIdentifierModel extends IModel {
   id?: number
 }
 
+export interface IParliament extends IModel {
+  factions?: []
+  federalState?: string
+  headOfAdministration?: string
+  headOfAdministrationTitle?: string
+  id?: number
+  location?: string
+  slug?: string
+  title?: 'string'
+  updatedAt?: Date | string
+  updatedBy?: Date | string
+  url?: string
+  validatedAt?: Date | string
+  wikipediaUrl?: string
+  zipArea?: string
+}
+
+export interface ICategory extends IModel {}
+
 export interface IHydraCollection<T extends IModel> {
-  '@context'?: string
-  '@id'?: string
-  '@type'?: string
   'hydra:firstPage'?: number
   'hydra:itemsPerPage'?: number
   'hydra:lastPage'?: number
@@ -56,10 +74,6 @@ export interface IUser extends INumericIdentifierModel {
   roles?: UserRole[]
   username?: string
   validated?: boolean
-}
-
-export interface IRegistration extends IUser {
-  validationUrl: string
 }
 
 export interface IEmailChange {
@@ -97,4 +111,26 @@ export interface IUserStatistics {
   newlyRegistered: number
   notActive: number
   notValidated: number
+}
+
+export interface IProject extends IModel {
+  categories?: ICategory[]
+  '@context'?: string
+  '@id'?: string
+  '@type'?: string
+  description?: string
+  impact?: string
+  parliament?: IParliament
+  slug?: string
+  state?: string
+  title?: string
+  topic?: string
+  updatedAt?: Date | string
+  createdBy?: IUser
+  createdAt?: Date | string
+}
+
+export interface IRegistration extends IUser {
+  validationUrl: string
+  createdProjects?: IProject[] | null
 }
