@@ -289,14 +289,19 @@ export default defineComponent({
     return { projects, user }
   },
   async fetch() {
-    if (this.$store.state.auth.user) {
+    if (this.$store.state.auth.user)
       try {
-        const response = await this.$axios.get('/projects')
+        const createdProjectsIds: number[] =
+          this.$store.state.auth.user.createdProjects.map(
+            (project) => project.id
+          )
+        const response = await this.$axios.get('/projects', {
+          params: { id: createdProjectsIds },
+        })
         this.projects = response.data['hydra:member']
       } catch (e) {
         console.log(e)
       }
-    }
   },
 })
 </script>
