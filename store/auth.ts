@@ -156,7 +156,7 @@ export const actions: ActionTree<RootState, RootState> = {
       return response
     } catch (e) {
       // this.error = e.response.data.message
-      console.log(e)
+      return e
     }
   },
 

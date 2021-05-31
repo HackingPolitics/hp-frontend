@@ -22,6 +22,11 @@ html {
   }
 }
 
+.required::after {
+  content: ' *';
+  @apply text-purple-700;
+}
+
 *,
 *::before,
 *::after {
