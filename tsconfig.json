@@ -25,6 +25,7 @@
     },
     "types": [
       "@nuxt/types",
+      "@nuxtjs/moment",
       "@nuxtjs/axios",
       "@types/node",
       "nuxt-i18n"

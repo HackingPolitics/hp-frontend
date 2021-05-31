@@ -46,6 +46,7 @@ export default {
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
+    '@nuxtjs/moment',
   ],
 
   generate: {
@@ -75,6 +76,11 @@ export default {
 
   tailwindcss: {
     jit: true,
+  },
+
+  moment: {
+    defaultLocale: 'de',
+    locales: ['de'],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

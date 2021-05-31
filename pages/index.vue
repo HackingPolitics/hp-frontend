@@ -119,7 +119,7 @@
       </ul>
       <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div
-          v-for="(item, index) in sampleApplication"
+          v-for="(project, index) in projects"
           :key="index"
           class="col-span-2"
         >
@@ -133,23 +133,43 @@
                 divide-y divide-gray-200
               "
             >
-              <div class="flex-1 flex flex-col">
-                <nuxt-link class="flex-1 flex flex-col" to="/antraege/12">
+              <div class="flex-1">
+                <nuxt-link
+                  class="flex-1 flex flex-col"
+                  :to="{ name: 'antraege-id', params: { id: project.id } }"
+                >
                   <img
+                    v-if="project.imageUrl"
                     class="h-48 object-cover rounded-tl rounded-tr"
-                    :src="item.imageUrl"
-                    alt=""
+                    :src="project.imageUrl"
                   />
+                  <div
+                    v-else
+                    class="
+                      h-48
+                      w-full
+                      flex
+                      items-center
+                      justify-center
+                      rounded-tl rounded-tr
+                      bg-gray-300
+                      text-center
+                    "
+                  >
+                    <span class="font-semibold text-xl text-gray-700"
+                      >Kein Bild vorhanden</span
+                    >
+                  </div>
                   <div class="px-4 pt-2 pb-4">
                     <div class="mt-4">
                       <chip
-                        v-for="(category, categoryIndex) in item.categories"
+                        v-for="(category, categoryIndex) in project.categories"
                         :key="categoryIndex"
                         class="mr-2"
                         >{{ category }}</chip
                       >
-                      <h3 class="text-gray-900 text-lg mt-4 font-medium">
-                        {{ item.title }}
+                      <h3 class="text-gray-900 text-xl mt-4 font-medium">
+                        {{ project.title }}
                       </h3>
                     </div>
                   </div>
@@ -157,7 +177,7 @@
                     <div class="-mt-px flex justify-between">
                       <div class="flex-1 flex p-4">
                         <avatar-group
-                          :avatars="item.participants"
+                          :avatars="project.memberships"
                         ></avatar-group>
                       </div>
                       <div class="-ml-px flex-1 flex">
@@ -178,7 +198,11 @@
                             hover:text-gray-500
                           "
                         >
-                          gestern, 14:56 Uhr
+                          {{
+                            $moment(project.updatedAt)
+                              .subtract(1, 'days')
+                              .calendar()
+                          }}
                           <!-- Heroicon name: solid/phone -->
                         </span>
                       </div>
@@ -195,37 +219,29 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { IProject } from '~/types/apiSchema'
+
+export default defineComponent({
+  name: 'ApplicationsPage',
+  setup() {
+    const projects = ref<IProject[]>([])
+
+    return { projects }
+  },
   data() {
     return {
-      sampleApplication: [
-        {
-          title: 'Expressbuslinien zwischen Pieschen und Weißig',
-          imageUrl:
-            'https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-          categories: ['Mobilität', 'Infrastruktur'],
-          participants: [
-            { name: 'Torsten' },
-            { name: 'Gunther' },
-            { name: 'Anna' },
-          ],
-        },
-        {
-          title: 'Goldene Hausnummer',
-          imageUrl:
-            'https://images.unsplash.com/photo-1494949649109-ecfc3b8c35df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80',
-          categories: ['Bildung'],
-          participants: [{ name: 'Torsten' }, { name: 'Anna' }],
-        },
-        {
-          title: 'Mekong säubern',
-          imageUrl:
-            'https://images.unsplash.com/photo-1601991132561-2f3443b31fb6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80',
-          categories: ['Umwelt', 'Mobilität', 'Kunst'],
-          participants: [{ name: 'Frederika' }, { name: 'Anna' }],
-        },
-      ],
+      defaultImg:
+        'https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
     }
   },
-}
+  async fetch() {
+    try {
+      const response = await this.$axios.get('/projects')
+      this.projects = response.data['hydra:member']
+    } catch (e) {
+      console.log(e)
+    }
+  },
+})
 </script>
