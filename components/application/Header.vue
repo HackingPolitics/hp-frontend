@@ -6,7 +6,7 @@
         <div class="sm:flex sm:space-x-5">
           <div class="text-center sm:mt-0 sm:pt-1 sm:text-left">
             <h3 class="text-xl font-bold text-gray-900 sm:text-2xl pb-2">
-              Expresslinie
+              {{ application.title }}
             </h3>
             <div class="inline-flex items-center">
               <p class="text-sm font-medium text-gray-600">Dresden</p>
@@ -30,8 +30,16 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'ApplicationHeader',
+  props: {
+    application: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       avatars: [
@@ -54,5 +62,5 @@ export default {
       ],
     }
   },
-}
+})
 </script>

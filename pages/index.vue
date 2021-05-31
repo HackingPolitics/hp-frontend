@@ -229,12 +229,6 @@ export default defineComponent({
 
     return { projects }
   },
-  data() {
-    return {
-      defaultImg:
-        'https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    }
-  },
   async fetch() {
     try {
       const response = await this.$axios.get('/projects')
