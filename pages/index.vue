@@ -2,7 +2,6 @@
   <layouts-single-view title="Meine Anträge">
     <div class="sm:flex mt-4">
       <ul
-        v-if="user"
         class="
           sm:grid sm:grid-cols-2
           gap-3
@@ -14,6 +13,7 @@
         "
       >
         <li
+          v-if="user"
           class="
             col-span-2
             flex
@@ -153,6 +153,25 @@
             </div>
           </div>
         </li>
+        <li
+          v-else
+          class="
+            col-span-2
+            flex
+            sm:flex-col
+            justify-center
+            text-center
+            bg-white
+            rounded-lg
+            shadow
+          "
+        >
+          <nuxt-link to="antraege/erstellen">
+            <chip chip-class="text-green-800"
+              ><outline-plus-icon class="w-5 h-5" /> Antrag hinzufügen</chip
+            >
+          </nuxt-link>
+        </li>
       </ul>
       <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div
@@ -270,11 +289,13 @@ export default defineComponent({
     return { projects, user }
   },
   async fetch() {
-    try {
-      const response = await this.$axios.get('/projects')
-      this.projects = response.data['hydra:member']
-    } catch (e) {
-      console.log(e)
+    if (this.$store.state.auth.user) {
+      try {
+        const response = await this.$axios.get('/projects')
+        this.projects = response.data['hydra:member']
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
 })

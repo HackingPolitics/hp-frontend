@@ -121,7 +121,7 @@
                     type="text"
                     name="skills"
                     :validation="
-                      currentStep === 2 ? 'required|min:9,length' : ''
+                      currentStep === 2 ? 'required|min:12,length' : ''
                     "
                     wrapper-class="w-4/5"
                   />
@@ -158,8 +158,8 @@
                 <FormulateInput
                   label="Der Titel des Parliaments"
                   type="select"
-                  name="parliament"
-                  :options="parliamentsOptions"
+                  name="council"
+                  :options="councilOptions"
                   :validation="currentStep === 3 ? 'required' : ''"
                 />
                 <FormulateInput
@@ -321,7 +321,7 @@ export default defineComponent({
     const formData = ref({})
     const router = useRouter()
     const currentStep = ref(1)
-    const parliaments = ref<IParliament[]>([])
+    const councils = ref<IParliament[]>([])
     const categories = ref<[]>([])
     const steps = ref([
       { id: 1, name: 'Projekttitel', status: 'current' },
@@ -331,8 +331,8 @@ export default defineComponent({
     const store = useStore()
 
     const isLoggedIn = computed(() => store.getters['auth/isLoggedIn'])
-    const parliamentsOptions = computed(() =>
-      parliaments.value.map((parliament) => {
+    const councilOptions = computed(() =>
+      councils.value.map((parliament) => {
         return { value: parliament['@id'], label: parliament.title }
       })
     )
@@ -377,18 +377,19 @@ export default defineComponent({
       nextStep,
       prevStep,
       createProject,
-      parliaments,
-      parliamentsOptions,
+      councils,
+      councilOptions,
       categories,
       isLoggedIn,
     }
   },
   async fetch() {
-    const parliamentResponse = await this.$axios.get('/parliaments')
-    this.parliaments = parliamentResponse.data['hydra:member']
-
-    const categoriesResponse = await this.$axios.get('/categories')
-    this.categories = categoriesResponse.data['hydra:member']
+    await this.$axios.get('/councils').then((res) => {
+      this.councils = res.data['hydra:member']
+    })
+    await this.$axios.get('/categories').then((res) => {
+      this.categories = res.data['hydra:member']
+    })
   },
 })
 </script>
