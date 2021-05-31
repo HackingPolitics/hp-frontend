@@ -43,12 +43,21 @@ export default {
       }
     },
     label(context) {
+      let validationClass = ''
+      if (context?.validation && typeof context.validation === 'string') {
+        switch (true) {
+          case context.validation.includes('required'):
+            validationClass = 'required'
+            break
+        }
+      }
       switch (context.classification) {
         case 'box':
-          return 'block text-sm font-medium text-gray-900  ml-2'
-
+          return (
+            'block text-sm font-medium text-gray-900 ml-2 ' + validationClass
+          )
         default:
-          return 'block font-medium text-gray-700 mb-3'
+          return 'block font-medium text-gray-700 mb-3 ' + validationClass
       }
     },
     help: 'mt-2 text-sm text-gray-500',

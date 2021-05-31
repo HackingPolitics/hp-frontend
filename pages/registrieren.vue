@@ -27,7 +27,7 @@
         <div class="mt-8">
           <div class="mt-6">
             <FormulateForm
-              v-slot="{ isLoading }"
+              v-slot="{ isLoading, hasErrors }"
               v-model="credentials"
               name="login"
               class="space-y-6"
@@ -36,21 +36,36 @@
               @submit="createAccount"
             >
               <FormulateInput
-                label="Username"
+                label="Benutzername"
                 placeholder="Username eingeben"
                 name="username"
-                validation="required"
+                validation-name="Benutzername"
+                :validation="[
+                  ['required'],
+                  ['max', '9'],
+                  ['min', '2'],
+                  [
+                    'matches',
+                    /^([a-zA-Z]+[a-zA-Z0-9._-]*[a-zA-Z][a-zA-Z0-9._-]*)$/,
+                  ],
+                ]"
+                :validation-messages="{
+                  matches:
+                    'Benutzernamen müssen mit einem Buchstaben beginnen; dürfen nur Buchstaben, Ziffern, Punkte, Bindestriche und Unterstriche enthalten.',
+                }"
               />
               <FormulateInput
                 label="Vorname"
                 placeholder="Vorname eingeben"
                 name="firstname"
+                validation-name="Vorname"
                 validation="required"
               />
               <FormulateInput
                 label="Nachname"
                 placeholder="Nachname eingeben"
                 name="lastname"
+                validation-name="Nachname"
                 validation="required"
               />
               <FormulateInput
@@ -67,6 +82,7 @@
                 name="password"
                 type="password"
                 help="Passwort soll mindestens einen Klein- und Großbuchstabe, eine Zahl und ein Zeichen enthalten."
+                validation-name="Passwort"
                 :validation="[
                   ['required'],
                   ['min', 4, 'length'],
@@ -86,12 +102,14 @@
                 placeholder="Passwort wiederholen"
                 name="password_confirm"
                 type="password"
+                validation-name="Passwort"
                 validation="required|confirm"
               />
 
               <div>
                 <FormulateInput
                   type="submit"
+                  :disable-errors="hasErrors"
                   :label="
                     isLoading ? 'Account wird erstellt...' : 'Account erstellen'
                   "
@@ -164,17 +182,17 @@ import {
 
 import { IProject, IRegistration } from '~/types/apiSchema'
 import { RootState } from '~/store'
+import formErrorsHandling from '~/composables/formErrorsHandling'
 
 export default defineComponent({
   name: 'RegisterPage',
   layout: 'auth',
   setup() {
+    const { formErrors, inputErrors, handleStatusErrors } = formErrorsHandling()
+
     const credentials = ref<IRegistration>({
       validationUrl: `${window.location.origin}/confirm-account/{{id}}/{{token}}`,
-      createdProjects: null,
     })
-    const formErrors = ref([])
-    const inputErrors = ref({})
     const store = useStore<RootState>()
     const formSent = ref(false)
 
@@ -186,8 +204,8 @@ export default defineComponent({
         projects.push(createdProject.value)
         credentials.value.createdProjects = projects
       }
-      formSent.value = await store.dispatch('auth/register', credentials.value)
-      // TODO: handle form errors */
+      const response = await store.dispatch('auth/register', credentials.value)
+      handleStatusErrors(response)
     }
     useMeta({ title: 'Account anlegen | HackingPolitics' })
     return {
