@@ -322,6 +322,7 @@ export default defineComponent({
     const router = useRouter()
     const currentStep = ref(1)
     const parliaments = ref<IParliament[]>([])
+    const categories = ref<[]>([])
     const steps = ref([
       { id: 1, name: 'Projekttitel', status: 'current' },
       { id: 2, name: 'Projektthema', status: 'incomplete' },
@@ -378,12 +379,16 @@ export default defineComponent({
       createProject,
       parliaments,
       parliamentsOptions,
+      categories,
       isLoggedIn,
     }
   },
   async fetch() {
-    const response = await this.$axios.get('/parliaments')
-    this.parliaments = response.data['hydra:member']
+    const parliamentResponse = await this.$axios.get('/parliaments')
+    this.parliaments = parliamentResponse.data['hydra:member']
+
+    const categoriesResponse = await this.$axios.get('/categories')
+    this.categories = categoriesResponse.data['hydra:member']
   },
 })
 </script>

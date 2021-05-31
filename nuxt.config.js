@@ -46,7 +46,7 @@ export default {
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
-    '@nuxtjs/moment',
+    '@nuxtjs/date-fns',
   ],
 
   generate: {
@@ -78,11 +78,11 @@ export default {
     jit: true,
   },
 
-  moment: {
+  dateFns: {
     defaultLocale: 'de',
     locales: ['de'],
+    format: 'dd.MM.yyyy',
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }
