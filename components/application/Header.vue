@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="rounded-lg bg-white overflow-hidden shadow mb-16"
-  >
+  <div class="rounded-lg bg-white overflow-hidden shadow mb-16">
     <h2 id="profile-overview-title" class="sr-only">Profile Overview</h2>
     <div class="bg-white p-6">
       <div class="sm:flex sm:items-center sm:justify-between">
@@ -10,6 +8,8 @@
             <h3 class="text-xl font-bold text-gray-900 sm:text-2xl pb-2">
               {{ application && application.title }}
             </h3>
+            <FormulateInput v-if="editable" name="title" type="text">
+            </FormulateInput>
             <div class="inline-flex items-center">
               <p class="text-sm font-medium text-gray-600">Dresden</p>
               <outline-location-marker-icon
@@ -40,6 +40,12 @@ import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'ApplicationHeader',
+  props: {
+    editable: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     const store = useStore()
     const application = computed(() => store.state.projects.project)

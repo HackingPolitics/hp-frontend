@@ -12,19 +12,20 @@ export default {
           return 'mb-4'
         case 'file':
           return ''
-        default:
+        case 'text':
           return 'mb-8 flex-1'
+        default:
+          return 'mb-8'
       }
     },
     input(context) {
       switch (context.classification) {
         case 'button':
           if (context.disableErrors) {
-            return 'w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400'
-          } else
-            return 'w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-400 hover:bg-purple-500 focus:outline-none focus:border-purple-600 focus:shadow-outline-purple active:bg-purple-600 transition duration-150 ease-in-out'
+            return 'w-full form-button-disabled'
+          } else return 'w-full form-button'
         case 'input':
-          return 'shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 rounded-md w-full'
+          return ' w-full form-input'
         case 'box':
           return
         case 'chip':
@@ -37,7 +38,6 @@ export default {
       switch (context.classification) {
         case 'box':
           return 'inline-flex items-baseline'
-
         default:
           return 'block'
       }

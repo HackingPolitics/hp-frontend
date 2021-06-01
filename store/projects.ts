@@ -51,4 +51,8 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
+  async fetchProject({ commit }, id) {
+    const response = await this.$api.projects.getProject(id)
+    commit('SET_PROJECT', response.data)
+  },
 }

@@ -2,37 +2,26 @@
   <FormulateForm v-model="formData">
     <forms-layout title="Thema" no-actions>
       <div class="space-y-4">
-        <forms-form-section
-          title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
-          subtitle="Schreiben Sie etwas zu dem Projekt auf"
-        >
+        <forms-form-section title="Was spricht gegehn dein Konzept?">
           <FormulateInput
             type="textarea"
-            rows="5"
-            name="topic"
+            rows="10"
+            name="arguments"
             @focusout="sendForm()"
           >
           </FormulateInput>
         </forms-form-section>
 
         <forms-form-section
-          title="In welche Thema passt euer Thema"
-          subtitle="Wähle bis zu 2 Möglichkeiten aus"
+          title="Warum lohnt es sich trotzdem, das Konzept umzusetzen?"
         >
           <FormulateInput
-            aria-label="In welche Thema passt euer Thema"
-            type="chipGroup"
-            name="category"
-            limit="2"
-            :options="[
-              { label: 'Bildung und Soziales', value: 'education_social' },
-              { label: 'Mobilität', value: 'mobility' },
-              { label: 'Umwelt', value: 'environment' },
-              { label: 'Infrastruktur', value: 'infrastructure' },
-              { label: 'Freizeit', value: 'leisure' },
-              { label: 'Kunst und Kultur', value: 'art_culture' },
-            ]"
-          />
+            type="textarea"
+            rows="10"
+            name="topic"
+            @focusout="sendForm()"
+          >
+          </FormulateInput>
         </forms-form-section>
       </div>
     </forms-layout>
@@ -57,7 +46,7 @@ interface TopicForm {
 }
 
 export default defineComponent({
-  name: 'ApplicationFormTheme',
+  name: 'Arguments',
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const store = useStore<RootState>()

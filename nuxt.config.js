@@ -26,6 +26,7 @@ export default {
   plugins: [
     '~/plugins/click-outside.js',
     '~/plugins/api.ts',
+    '~/plugins/lodash.js',
     '~/plugins/notifications.js',
   ],
 

@@ -113,6 +113,11 @@ export interface IUserStatistics {
   notValidated: number
 }
 
+export interface IProblem extends IModel {
+  description?: string
+  project?: string
+}
+
 export interface IProject extends IModel {
   categories?: ICategory[]
   '@context'?: string
@@ -125,6 +130,7 @@ export interface IProject extends IModel {
   state?: string
   title?: string
   topic?: string
+  problems?: IProblem[]
   updatedAt?: Date | string
   createdBy?: IUser
   createdAt?: Date | string
