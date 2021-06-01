@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="application"
     class="rounded-lg bg-white overflow-hidden shadow mb-16"
   >
     <h2 id="profile-overview-title" class="sr-only">Profile Overview</h2>
@@ -9,7 +8,7 @@
         <div class="sm:flex sm:space-x-5">
           <div class="text-center sm:mt-0 sm:pt-1 sm:text-left">
             <h3 class="text-xl font-bold text-gray-900 sm:text-2xl pb-2">
-              {{ application.title }}
+              {{ application && application.title }}
             </h3>
             <div class="inline-flex items-center">
               <p class="text-sm font-medium text-gray-600">Dresden</p>
@@ -22,7 +21,7 @@
           </div>
         </div>
         <div
-          v-if="application.memberships"
+          v-if="application && application.memberships"
           class="flex flex-col justify-center"
         >
           <span class="pb-2 text-teal-500 text-center">

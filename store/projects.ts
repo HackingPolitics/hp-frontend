@@ -39,4 +39,16 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
+  async updateProject({ commit }, [id, data]) {
+    try {
+      const response = await this.$api.projects.updateProject(id, data)
+      // @ts-ignore
+      this.$notify({ title: 'Änderungen gespeichert', duration: 500 })
+      commit('SET_PROJECT', response.data)
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
+    }
+  },
 }

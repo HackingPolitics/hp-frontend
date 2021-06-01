@@ -165,7 +165,7 @@ export default defineComponent({
     try {
       const response = await this.$axios.get('/projects/' + id)
       this.project = response.data
-      await this.$store.commit('projects/SET_PROJECT', response.data)
+      this.$store.commit('projects/SET_PROJECT', response.data)
     } catch (e) {
       console.log(e)
     }

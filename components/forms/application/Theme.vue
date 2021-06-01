@@ -1,12 +1,17 @@
 <template>
   <FormulateForm v-model="formData">
-    <forms-layout title="Thema">
+    <forms-layout title="Thema" no-actions>
       <div class="space-y-4">
         <forms-form-section
           title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
           subtitle="Schreiben Sie etwas zu dem Projekt auf"
         >
-          <FormulateInput type="textarea" rows="5" name="theme_description">
+          <FormulateInput
+            type="textarea"
+            rows="5"
+            name="topic"
+            @focusout="sendForm()"
+          >
           </FormulateInput>
         </forms-form-section>
 
@@ -35,13 +40,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useStore,
+  ref,
+  onMounted,
+  useContext,
+  computed,
+  ComputedRef,
+} from '@nuxtjs/composition-api'
+import { RootState } from '~/store'
+import { IProject } from '~/types/apiSchema'
+
+interface TopicForm {
+  topic?: string
+}
 
 export default defineComponent({
   name: 'ApplicationFormTheme',
   setup() {
-    const formData = ref({})
-    return { formData }
+    const formData = ref<TopicForm>({ topic: '' })
+    const store = useStore<RootState>()
+    const project: ComputedRef<IProject | null> = computed(
+      (): IProject | null => store.state.projects.project
+    )
+    onMounted(() => {
+      formData.value.topic = project.value?.topic
+    })
+    const sendForm = () => {
+      store.dispatch('projects/updateProject', [
+        project.value?.id,
+        formData.value,
+      ])
+    }
+    return { formData, sendForm }
   },
 })
 </script>

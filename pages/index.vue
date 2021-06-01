@@ -293,7 +293,7 @@ export default defineComponent({
       try {
         const createdProjectsIds: number[] =
           this.$store.state.auth.user.createdProjects.map(
-            (project) => project.id
+            (project: { id: number }) => project.id
           )
         const response = await this.$axios.get('/projects', {
           params: { id: createdProjectsIds },
