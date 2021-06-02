@@ -196,7 +196,7 @@ export default defineComponent({
       default: 1,
     },
   },
-  setup(props, context) {
+  setup(_, context) {
     const router = useRouter()
     const hasActionSlots = computed(() => {
       return !!context.slots.actions

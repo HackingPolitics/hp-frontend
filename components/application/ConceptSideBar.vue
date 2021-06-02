@@ -47,7 +47,7 @@ export default defineComponent({
       { text: '2. Probleme und Handlungsfelder', link: 'antraege-id-problem' },
       {
         text: '3. Ratsmehrheiten und Fraktionsinteressen',
-        link: 'antraege-id-interessen',
+        link: 'antraege-id-fraktion-interessen',
       },
       {
         text: '4. Argumente und Gegenargumente',

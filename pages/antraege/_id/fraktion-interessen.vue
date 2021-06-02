@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: 'politik',
+  name: 'FractionInterest',
 }
 </script>

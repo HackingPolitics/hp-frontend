@@ -57,7 +57,7 @@ export default {
             'block text-sm font-medium text-gray-900 ml-2 ' + validationClass
           )
         default:
-          return 'block font-medium text-gray-700 mb-3 ' + validationClass
+          return 'block font-medium text-gray-700 ' + validationClass
       }
     },
     help: 'mt-2 text-sm text-gray-500',
