@@ -1,6 +1,6 @@
 <template>
   <layouts-single-view>
-    <application-header></application-header>
+    <application-header editable></application-header>
     <forms-application-strategy></forms-application-strategy>
   </layouts-single-view>
 </template>

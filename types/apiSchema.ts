@@ -44,7 +44,9 @@ export interface IParliament extends IModel {
   zipArea?: string
 }
 
-export interface ICategory extends IModel {}
+export interface ICategory extends IModel {
+  name: string
+}
 
 export interface IHydraCollection<T extends IModel> {
   'hydra:firstPage'?: number
