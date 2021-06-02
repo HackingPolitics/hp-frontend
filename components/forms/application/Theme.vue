@@ -45,10 +45,10 @@ import {
   useStore,
   ref,
   onMounted,
-  useContext,
   computed,
   ComputedRef,
 } from '@nuxtjs/composition-api'
+import { isEqual } from 'lodash'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
@@ -61,7 +61,6 @@ export default defineComponent({
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const store = useStore<RootState>()
-    const context = useContext()
     const project: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.project
     )
@@ -69,7 +68,7 @@ export default defineComponent({
       formData.value.topic = project.value?.topic
     })
     const sendForm = () => {
-      if (!context.$_.isEqual(project.value?.topic, formData.value?.topic)) {
+      if (!isEqual(project.value?.topic, formData.value?.topic)) {
         store.dispatch('projects/updateProject', [
           project.value?.id,
           formData.value,

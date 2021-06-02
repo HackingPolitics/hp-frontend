@@ -15,25 +15,29 @@
               :value="problem.description"
               name="description"
               type="text"
+              input-class="w-full form-input"
               @focusout="updateProblem($event.target.value, problem.id)"
             />
             <FormulateInput
               input-class="ml-4 form-button"
               type="button"
               @click="deleteProblem(problem.id)"
-              ><outline-x-icon class="h-4 w-4"
+              ><outline-trash-icon class="h-4 w-4"
             /></FormulateInput>
           </div>
-          <div class="inline-flex w-full justify-between">
-            <FormulateInput v-model="problemCreateDesc" type="text" />
-            <FormulateInput
-              input-class="ml-4 form-button"
-              type="button"
-              @click="createProblem"
-              >Hinzufügen</FormulateInput
-            >
-          </div>
-
+          <FormulateForm v-model="createProblemForm" @submit="createProblem()">
+            <div class="inline-flex w-full justify-between">
+              <FormulateInput
+                type="text"
+                name="description"
+                validation="required"
+                validation-name="Problembeschreibung"
+              />
+              <FormulateInput input-class="ml-4 form-button" type="submit"
+                >+ Hinzufügen</FormulateInput
+              >
+            </div>
+          </FormulateForm>
           <!--          <FormulateInput
             type="group"
             :repeatable="true"
@@ -89,7 +93,7 @@ export default defineComponent({
   name: 'Problem',
   setup() {
     const problems = ref<IProblem[]>([])
-    const problemCreateDesc = ref<string>('')
+    const createProblemForm = ref<ProblemForm>({})
 
     const store = useStore<RootState>()
     const context = useContext()
@@ -100,17 +104,19 @@ export default defineComponent({
       if (project.value?.problems)
         problems.value = context.$_.cloneDeep(project.value.problems)
     })
-    watch(project, (currentValue, oldValue) => {
+
+    watch(project, (currentValue) => {
       problems.value = context.$_.cloneDeep(currentValue?.problems || [])
     })
+
     const createProblem = async () => {
-      const payload = {
-        description: problemCreateDesc.value,
+      const payload: ProblemForm = {
+        description: createProblemForm.value.description,
         project: project.value['@id'],
       }
       await context.$axios.post('/problems', payload).then(() => {
         store.dispatch('projects/fetchProject', project.value.id)
-        problemCreateDesc.value = ''
+        createProblemForm.value = {}
       })
     }
     const deleteProblem = async (id: number | string) => {
@@ -130,7 +136,7 @@ export default defineComponent({
 
     return {
       problems,
-      problemCreateDesc,
+      createProblemForm,
       project,
       deleteProblem,
       createProblem,
