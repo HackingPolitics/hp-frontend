@@ -86,7 +86,7 @@ export default defineComponent({
     const store = useStore<RootState>()
     const context = useContext()
     const project: ComputedRef<IProject | null> = computed(
-      (): null => store.state.projects.project
+      () => store.state.projects.project
     )
 
     onMounted(() => {
@@ -97,52 +97,50 @@ export default defineComponent({
     })
 
     watch(project, (currentValue) => {
-      argumentations.value = cloneDeep(
-        currentValue?.arguments || []
-      )
-      console.log()
+      argumentations.value = cloneDeep(currentValue?.arguments || [])
       counterArgumentations.value = cloneDeep(
         currentValue?.counterArguments || []
       )
     })
 
-    const editArgumentation = async (
-      desc: string,
-      id?: string | number
-    ): void => {
-      const payload: ArgumentParams = {
-        description: desc,
-        project: project.value['@id'],
-      }
-      if (project.value?.arguments?.length === 0)
-        await context.$axios.post('/arguments', payload).then(() => {
-          store.dispatch('projects/fetchProject', project.value.id)
-        })
-      else if (project.value?.arguments) {
-        await context.$axios.put('/arguments/' + id, payload).then(() => {
-          store.dispatch('projects/fetchProject', project.value.id)
-        })
+    const editArgumentation = async (desc: string, id?: string | number) => {
+      if (project.value && typeof project.value['@id'] === 'string') {
+        const payload: ArgumentParams = {
+          description: desc,
+          project: project.value['@id'],
+        }
+        if (project.value?.arguments?.length === 0)
+          await context.$axios.post('/arguments', payload).then(() => {
+            store.dispatch('projects/fetchProject', project.value?.id)
+          })
+        else if (project.value?.arguments) {
+          await context.$axios.put('/arguments/' + id, payload).then(() => {
+            store.dispatch('projects/fetchProject', project.value?.id)
+          })
+        }
       }
     }
 
     const editCounterArgumentation = async (
       desc: string,
       id?: string | number
-    ): void => {
-      const payload: ArgumentParams = {
-        description: desc,
-        project: project.value['@id'],
-      }
-      if (project.value?.counterArguments?.length === 0)
-        await context.$axios.post('/counter_arguments', payload).then(() => {
-          store.dispatch('projects/fetchProject', project.value.id)
-        })
-      else if (project.value?.counterArguments) {
-        await context.$axios
-          .put('/counter_arguments/' + id, payload)
-          .then(() => {
-            store.dispatch('projects/fetchProject', project.value.id)
+    ) => {
+      if (project.value && typeof project.value['@id'] === 'string') {
+        const payload: ArgumentParams = {
+          description: desc,
+          project: project.value['@id'],
+        }
+        if (project.value?.counterArguments?.length === 0)
+          await context.$axios.post('/counter_arguments', payload).then(() => {
+            store.dispatch('projects/fetchProject', project.value?.id)
           })
+        else if (project.value?.counterArguments) {
+          await context.$axios
+            .put('/counter_arguments/' + id, payload)
+            .then(() => {
+              store.dispatch('projects/fetchProject', project.value?.id)
+            })
+        }
       }
     }
 

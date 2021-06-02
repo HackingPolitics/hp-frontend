@@ -4,7 +4,8 @@
       <div class="space-y-4">
         <forms-form-section v-for="partner in partners" :key="partner.id">
           <h3 class="text-lg leading-6 text-gray-900 mb-8">
-            Möglicher Strategischer Partner: <span class="font-semibold">{{ partner.name }}</span>
+            Möglicher Strategischer Partner:
+            <span class="font-semibold">{{ partner.name }}</span>
           </h3>
           <FormulateForm
             v-model="partnerFormData[partner.id]"
@@ -124,7 +125,10 @@ interface CreatePartnerForm {
   contactPhone?: string
   name: string
   teamContact?: string
-  project?: string
+}
+
+interface PartnerArguments extends CreatePartnerForm {
+  project: string
 }
 
 interface PartnerForm {
@@ -135,7 +139,7 @@ export default defineComponent({
   name: 'Strategy',
   setup() {
     const partnerFormData = ref<PartnerForm>({})
-    const createPartnerFormData = ref<CreatePartnerForm>({})
+    const createPartnerFormData = ref<CreatePartnerForm>({ name: '' })
     const partners = ref([])
     const context = useContext()
     const store = useStore<RootState>()
@@ -153,29 +157,27 @@ export default defineComponent({
       partners.value = cloneDeep(currentValue?.partners || [])
     })
 
-    const memberSelection = computed(() => {
-      return project.value.memmberships
-    })
-
     const createPartner = async () => {
-      const payload: CreatePartnerForm = {
-        ...createPartnerFormData.value,
-        project: project.value['@id'],
-      }
-      await context.$axios.post('/partners', payload).then(() => {
-        store.dispatch('projects/fetchProject', project.value.id)
-        createPartnerFormData.value = {}
-        context.$notify({
-          title: 'Partner erstellt',
-          duration: 300,
-          type: 'success',
+      if (project.value && typeof project.value['@id'] === 'string') {
+        const payload: PartnerArguments = {
+          ...createPartnerFormData.value,
+          project: project.value['@id'],
+        }
+        await context.$axios.post('/partners', payload).then(() => {
+          store.dispatch('projects/fetchProject', project.value?.id)
+          createPartnerFormData.value = { name: '' }
+          context.$notify({
+            title: 'Partner erstellt',
+            duration: 300,
+            type: 'success',
+          })
         })
-      })
+      }
     }
 
     const deletePartner = async (id: string | number) => {
       await context.$axios.delete('/partners/' + id).then(() => {
-        store.dispatch('projects/fetchProject', project.value.id)
+        store.dispatch('projects/fetchProject', project.value?.id)
         context.$notify({
           title: 'Partner gelöscht',
           duration: 300,
@@ -185,18 +187,20 @@ export default defineComponent({
     }
 
     const updatePartner = async (id: string | number) => {
-      const payload: CreatePartnerForm = {
-        ...partnerFormData.value[id],
-        project: project.value['@id'],
-      }
-      await context.$axios.put('/partners/' + id, payload).then(() => {
-        store.dispatch('projects/fetchProject', project.value.id)
-        context.$notify({
-          title: 'Partner aktualisiert',
-          duration: 300,
-          type: 'success',
+      if (project.value && typeof project.value['@id'] === 'string') {
+        const payload: PartnerArguments = {
+          ...partnerFormData.value[id],
+          project: project.value['@id'],
+        }
+        await context.$axios.put('/partners/' + id, payload).then(() => {
+          store.dispatch('projects/fetchProject', project.value?.id)
+          context.$notify({
+            title: 'Partner aktualisiert',
+            duration: 300,
+            type: 'success',
+          })
         })
-      })
+      }
     }
     return {
       partnerFormData,

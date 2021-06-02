@@ -85,9 +85,12 @@ import {
 import { IProblem, IProject } from '~/types/apiSchema'
 import { RootState } from '~/store'
 
+import { cloneDeep } from 'lodash'
+
 interface ProblemForm {
   problems?: IProblem[]
-  description: string
+  description?: string
+  project?: string
 }
 export default defineComponent({
   name: 'Problem',
@@ -102,35 +105,37 @@ export default defineComponent({
     )
     onMounted(() => {
       if (project.value?.problems)
-        problems.value = context.$_.cloneDeep(project.value.problems)
+        problems.value = cloneDeep(project.value.problems)
     })
 
     watch(project, (currentValue) => {
-      problems.value = context.$_.cloneDeep(currentValue?.problems || [])
+      problems.value = cloneDeep(currentValue?.problems || [])
     })
 
     const createProblem = async () => {
-      const payload: ProblemForm = {
-        description: createProblemForm.value.description,
-        project: project.value['@id'],
+      if (project.value) {
+        const payload: ProblemForm = {
+          description: createProblemForm.value.description,
+          project: project.value['@id'],
+        }
+        await context.$axios.post('/problems', payload).then(() => {
+          store.dispatch('projects/fetchProject', project.value?.id)
+          createProblemForm.value = {}
+        })
       }
-      await context.$axios.post('/problems', payload).then(() => {
-        store.dispatch('projects/fetchProject', project.value.id)
-        createProblemForm.value = {}
-      })
     }
     const deleteProblem = async (id: number | string) => {
       await context.$axios.delete('/problems/' + id).then(() => {
-        store.dispatch('projects/fetchProject', project.value.id)
+        store.dispatch('projects/fetchProject', project.value?.id)
       })
     }
 
-    const updateProblem = async (desc, id) => {
+    const updateProblem = async (desc: string, id: number | string) => {
       const payload = {
         description: desc,
       }
       await context.$axios.put('/problems/' + id, payload).then(() => {
-        store.dispatch('projects/fetchProject', project.value.id)
+        store.dispatch('projects/fetchProject', project.value?.id)
       })
     }
 
