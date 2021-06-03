@@ -73,7 +73,7 @@
     "lint-staged": "^11.0.0",
     "postcss": "^8.2.15",
     "prettier": "^2.3.0",
-    "sass": "^1.32.12",
+    "sass": "^1.34.1",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
