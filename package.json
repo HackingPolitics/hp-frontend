@@ -28,7 +28,7 @@
     "@heroicons/vue": "^1.0.1",
     "@nuxt-hero-icons/outline": "^1.0.1",
     "@nuxt-hero-icons/solid": "^1.0.1",
-    "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.23.4",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/jit": "^0.1.18",
