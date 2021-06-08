@@ -162,18 +162,19 @@ export default defineComponent({
     }
 
     const updateProblemPriority = async () => {
-      const allAsyncResults: Promise[] = []
+      const allAsyncResults: Promise<any>[] = []
 
       for (let index = 0; index < problems.value.length; index++) {
         const payload: IProblem = {
           priority: problems.value.length - (index + 1),
         }
-        const asyncResult = await context.$axios.put(
-          '/problems/' + problems.value[index].id,
-          {
+        const asyncResult: any = await context.$axios
+          .put('/problems/' + problems.value[index].id, {
             ...payload,
-          }
-        )
+          })
+          .then()
+          .catch()
+          .finally()
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {

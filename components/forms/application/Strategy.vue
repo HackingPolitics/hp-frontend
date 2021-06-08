@@ -153,7 +153,7 @@ export default defineComponent({
 
     const createPartner = async () => {
       if (project.value && typeof project.value['@id'] === 'string') {
-        const payload: PartnerArguments = {
+        const payload: IPartner = {
           ...createPartnerFormData.value,
           project: project.value['@id'],
         }
@@ -169,7 +169,7 @@ export default defineComponent({
 
     const updatePartner = async (id: string | number) => {
       if (project.value && typeof project.value['@id'] === 'string') {
-        const payload: PartnerArguwments = {
+        const payload: PartnerArguments = {
           ...partnerFormData.value[id],
           project: project.value['@id'],
         }

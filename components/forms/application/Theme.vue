@@ -53,8 +53,8 @@ export default defineComponent({
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const topic = ref<String | undefined>('')
-    const categories = ref<ICategory[] | undefined>([])
-    const categoryOptions = ref<{ label: string; value: string }>([])
+    const categories = ref<string[]>([])
+    const categoryOptions = ref<{ label: string; value: string }[]>([])
 
     const store = useStore<RootState>()
     const project: ComputedRef<IProject | null> = computed(
@@ -63,8 +63,9 @@ export default defineComponent({
 
     onBeforeMount(() => {
       topic.value = project.value?.topic
-      categories.value =
-        project.value?.categories?.map((category) => category['@id']) || []
+      project.value?.categories?.forEach((category) => {
+        if (category['@id']) categories.value.push(category['@id'])
+      })
     })
 
     const updateProject = () => {
@@ -85,7 +86,7 @@ export default defineComponent({
     await this.$axios.get('/categories').then((res) => {
       const data = res.data['hydra:member']
       this.categoryOptions = data
-        ? data.map((e) => {
+        ? data.map((e: ICategory) => {
             return {
               label: e.name,
               value: e['@id'],
