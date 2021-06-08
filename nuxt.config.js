@@ -28,6 +28,7 @@ export default {
     '~/plugins/api.ts',
     '~/plugins/lodash.js',
     '~/plugins/notifications.js',
+    '~/plugins/vue-draggable.js',
   ],
 
   env: {

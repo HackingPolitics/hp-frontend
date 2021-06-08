@@ -59,8 +59,8 @@ export default defineComponent({
   name: 'ApplicationFormTheme',
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
-    const topic = ref<String>('')
-    const categories = ref<ICategory[]>([])
+    const topic = ref<String | undefined>('')
+    const categories = ref<ICategory[] | undefined>([])
 
     const store = useStore<RootState>()
     const project: ComputedRef<IProject | null> = computed(

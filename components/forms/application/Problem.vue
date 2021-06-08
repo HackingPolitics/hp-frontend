@@ -6,25 +6,41 @@
           title="Welche Probleme hast du beobachtet und möchtest angeben?"
           subtitle="Gebe den Problemen eine Gewichtung indem du ihre Reihenfolge änderst."
         >
-          <div
-            v-for="problem in problems"
-            :key="problem.id"
-            class="inline-flex w-full justify-between"
+          <draggable
+            :list="problems"
+            :sort="true"
+            ghost-class="ghost"
+            @update="updateProblemPriority($event)"
           >
-            <FormulateInput
-              :value="problem.description"
-              name="description"
-              type="text"
-              input-class="w-full form-input"
-              @focusout="updateProblem($event.target.value, problem.id)"
-            />
-            <FormulateInput
-              input-class="ml-4 form-button"
-              type="button"
-              @click="deleteProblem(problem.id)"
-              ><outline-trash-icon class="h-4 w-4"
-            /></FormulateInput>
-          </div>
+            <transition-group type="transition" name="flip-list">
+              <div
+                v-for="problem in problems"
+                :key="problem.id"
+                class="inline-flex w-full justify-center cursor-move"
+              >
+                <FormulateInput
+                  :value="problem.description"
+                  name="description"
+                  type="text"
+                  input-class="w-full form-input"
+                  element-class="inline-flex w-full"
+                  @focusout="updateProblem($event.target.value, problem.id)"
+                >
+                  <template #prefix>
+                    <div>
+                      <outline-arrows-expand-icon class="h-10 w-10 pr-4" />
+                    </div>
+                  </template>
+                </FormulateInput>
+                <FormulateInput
+                  input-class="ml-4 form-button"
+                  type="button"
+                  @click="deleteProblem(problem.id)"
+                  ><outline-trash-icon class="h-5 w-5"
+                /></FormulateInput>
+              </div>
+            </transition-group>
+          </draggable>
           <FormulateForm v-model="createProblemForm" @submit="createProblem()">
             <div class="inline-flex w-full justify-between">
               <FormulateInput
@@ -100,16 +116,20 @@ export default defineComponent({
 
     const store = useStore<RootState>()
     const context = useContext()
+
     const project: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.project
     )
     onMounted(() => {
-      if (project.value?.problems)
+      if (project.value?.problems) {
         problems.value = cloneDeep(project.value.problems)
+        problems.value.sort((a, b) => b.priority - a.priority)
+      }
     })
 
     watch(project, (currentValue) => {
       problems.value = cloneDeep(currentValue?.problems || [])
+      problems.value.sort((a, b) => b.priority - a.priority)
     })
 
     const createProblem = async () => {
@@ -139,6 +159,26 @@ export default defineComponent({
       })
     }
 
+    const updateProblemPriority = async () => {
+      const allAsyncResults: Promise[] = []
+
+      for (let index = 0; index < problems.value.length; index++) {
+        const payload: IProblem = {
+          priority: problems.value.length - (index + 1),
+        }
+        const asyncResult = await context.$axios.put(
+          '/problems/' + problems.value[index].id,
+          {
+            ...payload,
+          }
+        )
+        allAsyncResults.push(asyncResult)
+      }
+      await Promise.all(allAsyncResults).then((res) => {
+        console.log(res)
+        store.dispatch('projects/fetchProject', project.value?.id)
+      })
+    }
     return {
       problems,
       createProblemForm,
@@ -146,7 +186,19 @@ export default defineComponent({
       deleteProblem,
       createProblem,
       updateProblem,
+      updateProblemPriority,
     }
   },
 })
 </script>
+
+<style scoped>
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+</style>
