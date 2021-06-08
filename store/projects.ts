@@ -31,7 +31,7 @@ export const actions: ActionTree<RootState, RootState> = {
     try {
       const response = await this.$api.projects.createProject(data)
       // @ts-ignore
-      this.$notify({ title: 'Projekt erstellt', duration: 10000 })
+      // this.$notify({ title: 'Projekt erstellt', duration: 10000 })
       commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {

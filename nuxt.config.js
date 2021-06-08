@@ -26,7 +26,7 @@ export default {
   plugins: [
     '~/plugins/click-outside.js',
     '~/plugins/api.ts',
-    '~/plugins/notifications.js',
+    // '~/plugins/notifications.js',
   ],
 
   env: {
@@ -46,7 +46,15 @@ export default {
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
+    'nuxt-vite',
   ],
+
+  vite: {
+    optimizeDeps: {
+      exclude: ['nuxt-i18n', 'vue-notification', 'plugins/notifications.js'],
+    },
+  },
+
 
   generate: {
     // choose to suit your project
@@ -71,10 +79,6 @@ export default {
         url: 'https://socket.hpo.vrok.de', // IO server lives here
       },
     ],
-  },
-
-  tailwindcss: {
-    jit: true,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
