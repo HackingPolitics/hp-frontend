@@ -55,6 +55,14 @@ export default {
     },
   },
 
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.js', dir: 'ltr' },
+      { code: 'de', iso: 'de-US', file: 'de.js', dir: 'ltr' },
+    ],
+    defaultLocale: 'de',
+    langDir: 'lang',
+  },
 
   generate: {
     // choose to suit your project
