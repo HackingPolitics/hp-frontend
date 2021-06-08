@@ -1,6 +1,6 @@
 <template>
   <layouts-single-view>
-    <application-header></application-header>
+    <application-header :application="project"></application-header>
     <div class="-mt-6 space-y-16">
       <div>
         <div class="pb-5 border-b border-gray-200 mb-8 bg-white p-4 rounded">
@@ -173,7 +173,9 @@ export default defineComponent({
   async fetch() {
     const id = this.$nuxt.context?.params?.id
     try {
-      this.project = await this.$axios.get('/projects/' + id)
+      const response = await this.$axios.get('/projects/' + id)
+      this.project = response.data
+      await this.$store.commit('projects/SET_PROJECT', response.data)
     } catch (e) {
       console.log(e)
     }

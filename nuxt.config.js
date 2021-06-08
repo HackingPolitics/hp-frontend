@@ -89,6 +89,12 @@ export default {
     ],
   },
 
+  dateFns: {
+    defaultLocale: 'de',
+    locales: ['de'],
+    format: 'dd.MM.yyyy',
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }

@@ -91,14 +91,17 @@ export const actions: ActionTree<RootState, RootState> = {
           await dispatch('projects/createProject', createdProject, {
             root: true,
           }).then((res) => {
-            this.$router.push({ name: 'antraege', params: { id: res.id } })
+            this.$router.push({
+              name: 'antraege-id',
+              params: { id: res.data.id.toString() },
+            })
           })
         } catch (error) {
           console.log(error)
         }
+      } else {
+        this.$router.push('/')
       }
-
-      this.$router.push('/')
       commit('SET_LOADING_FLAG', false)
       return response
     } catch (error) {
