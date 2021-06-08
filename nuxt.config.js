@@ -1,3 +1,5 @@
+import { deLocale } from 'date-fns/locale/de'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -26,7 +28,7 @@ export default {
   plugins: [
     '~/plugins/click-outside.js',
     '~/plugins/api.ts',
-    '~/plugins/notifications.js',
+    // '~/plugins/notifications.js',
   ],
 
   env: {
@@ -46,7 +48,29 @@ export default {
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
+    'nuxt-vite',
+    '@nuxtjs/date-fns',
   ],
+
+  vite: {
+    optimizeDeps: {
+      exclude: [
+        'nuxt-i18n',
+        'vue-notification',
+        'plugins/notifications.js',
+        '@nuxt/date-fns',
+      ],
+    },
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.js', dir: 'ltr' },
+      { code: 'de', iso: 'de-US', file: 'de.js', dir: 'ltr' },
+    ],
+    defaultLocale: 'de',
+    langDir: 'lang',
+  },
 
   generate: {
     // choose to suit your project
@@ -73,8 +97,10 @@ export default {
     ],
   },
 
-  tailwindcss: {
-    jit: true,
+  dateFns: {
+    defaultLocale: 'deLocale',
+    locales: ['deLocale'],
+    format: 'dd.MM.yyyy',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -43,8 +43,14 @@
         />
       </FormulateForm>
       <nuxt-link
-        to="/login"
-        class="mt-6 text-sm text-purple-400 max-w font-medium text-purple-400 hover:text-purple-500"
+        :to="localePath('/login')"
+        class="
+          mt-6
+          text-sm text-purple-400
+          max-w
+          font-medium
+          hover:text-purple-500
+        "
       >
         Zurück zum Login
       </nuxt-link>

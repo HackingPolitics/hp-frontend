@@ -6,7 +6,9 @@
       aria-label="Progress"
     >
       <p class="text-sm font-medium">
-        Step {{ steps.findIndex((step) => step.status === 'current') + 1 }} of
+        {{ $t('step') }}
+        {{ steps.findIndex((step) => step.status === 'current') + 1 }}
+        {{ $t('of') }}
         {{ steps.length }}
       </p>
       <ol class="ml-8 flex items-center space-x-5">
@@ -196,7 +198,7 @@ export default defineComponent({
       default: 1,
     },
   },
-  setup(props, context) {
+  setup(_, context) {
     const router = useRouter()
     const hasActionSlots = computed(() => {
       return !!context.slots.actions

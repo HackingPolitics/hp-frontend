@@ -5,7 +5,7 @@
     @submit="createProject()"
   >
     <forms-layout
-      :title="currentStep !== 4 ? 'Antrag erstellen' : ''"
+      :title="currentStep !== 4 ? $t('proposal.createProposal') : ''"
       :steps="steps"
       no-concept-sidebar
       no-floating-sidebar
@@ -20,11 +20,11 @@
                     ? 'Projektthema'
                     : currentStep === 3
                     ? 'Politik'
-                    : 'Projektitel'
+                    : $t('proposal.form.title.label')
                 }}
               </h3>
               <p class="mt-1 text-sm text-gray-500">
-                Alle nicht benötigten Federn kannst du auch später auszufüllen
+                {{ $t('proposal.form.title.help') }}
               </p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -33,8 +33,8 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
-                  label="Wie nennst du dein Projekt?"
-                  placeholder="Projektitel"
+                  :label="$t('proposal.form.title.label')"
+                  :placeholder="$t('proposal.form.title.name')"
                   type="text"
                   name="title"
                   validation="required"
@@ -121,7 +121,7 @@
                     type="text"
                     name="skills"
                     :validation="
-                      currentStep === 2 ? 'required|min:9,length' : ''
+                      currentStep === 2 ? 'required|min:12,length' : ''
                     "
                     wrapper-class="w-4/5"
                   />
@@ -158,8 +158,8 @@
                 <FormulateInput
                   label="Der Titel des Parliaments"
                   type="select"
-                  name="parliament"
-                  :options="parliamentsOptions"
+                  name="council"
+                  :options="councilOptions"
                   :validation="currentStep === 3 ? 'required' : ''"
                 />
                 <FormulateInput
@@ -228,7 +228,7 @@
             <div class="inline-flex justify-center items-baseline mt-8">
               <div class="flex items-center mr-4">
                 <nuxt-link
-                  to="/registrieren"
+                  :to="localePath('/registrieren')"
                   class="
                     items-center
                     px-4
@@ -249,7 +249,7 @@
               </div>
               <div class="flex items-center">
                 <nuxt-link
-                  to="/login"
+                  :to="localePath('/login')"
                   class="
                     items-center
                     px-4
@@ -311,6 +311,7 @@ import {
   computed,
   useRouter,
   useStore,
+  useContext,
 } from '@nuxtjs/composition-api'
 
 import { IParliament } from '~/types/apiSchema'
@@ -318,20 +319,27 @@ import { IParliament } from '~/types/apiSchema'
 export default defineComponent({
   name: 'Create',
   setup() {
+    const context = useContext()
+    console.log(context)
     const formData = ref({})
     const router = useRouter()
     const currentStep = ref(1)
-    const parliaments = ref<IParliament[]>([])
+    const councils = ref<IParliament[]>([])
+    const categories = ref<[]>([])
     const steps = ref([
-      { id: 1, name: 'Projekttitel', status: 'current' },
+      {
+        id: 1,
+        name: context.localePath('proposal.form.title.name'),
+        status: 'current',
+      },
       { id: 2, name: 'Projektthema', status: 'incomplete' },
       { id: 3, name: 'Politik', status: 'incomplete' },
     ])
     const store = useStore()
 
     const isLoggedIn = computed(() => store.getters['auth/isLoggedIn'])
-    const parliamentsOptions = computed(() =>
-      parliaments.value.map((parliament) => {
+    const councilOptions = computed(() =>
+      councils.value.map((parliament) => {
         return { value: parliament['@id'], label: parliament.title }
       })
     )
@@ -376,14 +384,19 @@ export default defineComponent({
       nextStep,
       prevStep,
       createProject,
-      parliaments,
-      parliamentsOptions,
+      councils,
+      councilOptions,
+      categories,
       isLoggedIn,
     }
   },
   async fetch() {
-    const response = await this.$axios.get('/parliaments')
-    this.parliaments = response.data['hydra:member']
+    await this.$axios.get('/councils').then((res) => {
+      this.councils = res.data['hydra:member']
+    })
+    await this.$axios.get('/categories').then((res) => {
+      this.categories = res.data['hydra:member']
+    })
   },
 })
 </script>

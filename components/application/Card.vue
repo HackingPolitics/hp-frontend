@@ -1,6 +1,6 @@
 <template>
   <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-    <nuxt-link :to="{ name: routeTo, params: { id: itemId } }">
+    <nuxt-link :to="localePath({ name: routeTo, params: { id: itemId } })">
       <div class="w-full flex items-center justify-between p-6 space-x-6">
         <div class="flex-1 truncate">
           <div class="flex items-center space-x-3">

@@ -15,6 +15,7 @@ module.exports = {
       'utils/*.ts',
     ],
   },
+  mode: 'jit',
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
