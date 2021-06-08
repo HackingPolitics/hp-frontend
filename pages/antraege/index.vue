@@ -1,25 +1,23 @@
 <template>
   <layouts-single-view :title="$t('proposal.myProposals')">
-    <p class="text-white font-medium mb-2">Zuletzt besucht</p>
-    <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <application-card
-        title="Strategie"
-        subtitle="Expressbuslinien zwischen Pieschen und Weißig"
-        item-id="erster"
-      />
-      <application-card
-        title="Argumente und Gegenargumente"
-        subtitle="Expressbuslinien zwischen Pieschen und Weißig"
-      />
-      <application-card title="Strategie" subtitle="Dresden" />
-    </ul>
-
-    <div class="flex mt-4">
-      <ul class="grid grid-cols-2 gap-3 w-1/3 mr-8 h-64">
+    <div class="sm:flex mt-4">
+      <ul
+        class="
+          sm:grid sm:grid-cols-2
+          gap-3
+          sm:w-1/3
+          sm:mr-8
+          sm:h-64
+          mb-4
+          sm:mb-0
+        "
+      >
         <li
+          v-if="user"
           class="
             col-span-2
-            flex flex-col
+            flex
+            sm:flex-col
             text-center
             bg-white
             rounded-lg
@@ -27,18 +25,60 @@
             divide-y divide-gray-200
           "
         >
-          <div class="flex-1 flex flex-col p-8">
+          <div class="flex-1 flex flex-col p-2 sm:p-8">
             <img
-              class="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-full"
+              v-if="user.image"
+              class="
+                w-16
+                h-16
+                sm:w-32
+                sm:h-32
+                flex-shrink-0
+                mx-auto
+                bg-black
+                rounded-full
+              "
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
               alt=""
             />
-            <h3 class="mt-6 text-gray-900 text-sm font-medium">
-              Willkommen Zurück
+            <span
+              v-else
+              class="
+                inline-block
+                h-16
+                w-16
+                sm:w-32
+                sm:h-32
+                rounded-full
+                overflow-hidden
+                mx-auto
+                bg-gray-100
+              "
+            >
+              <svg
+                class="h-full w-full text-gray-300"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+            </span>
+            <h3 class="mt-2 sm:mt-6 text-gray-900 text-sm font-medium">
+              Willkommen
             </h3>
             <dl class="mt-1 flex-grow flex flex-col justify-between">
               <dt class="sr-only">Title</dt>
-              <dd class="text-gray-500 text-sm">Lisa Reiser</dd>
+              <dd
+                v-if="user.firstname && user.lastname"
+                class="text-gray-500 text-sm"
+              >
+                {{ user.firstname + ' ' + user.lastname }}
+              </dd>
+              <dd v-else class="text-gray-500 text-sm">
+                {{ user.username }}
+              </dd>
               <dt class="sr-only">Role</dt>
               <dd class="mt-3">
                 <span
@@ -75,7 +115,10 @@
                     hover:text-gray-500
                   "
                 >
-                  <span class="font-bold mr-2">3</span> Anträge
+                  <span class="font-bold mr-2">{{
+                    user.createdProjects.length
+                  }}</span>
+                  Anträge
                 </span>
               </div>
               <div class="-ml-px flex-1 flex">
@@ -95,124 +138,91 @@
                     hover:text-gray-500
                   "
                 >
-                  registriert seit 26.04.2021
+                  registriert seit
+                  <!-- {{
+                      user.createdAt
+                        ? $dateFns.format(
+                            parseISO(user.createdAt),
+                            'dd.MM.yyyy',
+                            {
+                              locale: 'de',
+                            }
+                          )
+                        : null
+                    }} -->
                   <!-- Heroicon name: solid/phone -->
                 </span>
               </div>
               <div class="-ml-px flex-1 flex py-4 justify-center">
                 <nuxt-link :to="localePath('/antraege/erstellen')">
                   <chip chip-class="text-green-800"
-                    ><outline-plus-icon class="w-5 h-5" /> Antrag
-                    hinzufügen</chip
+                    ><outline-plus-icon class="w-5 h-5" />
+                    {{ $t('proposal.createProposal') }}</chip
                   >
                 </nuxt-link>
               </div>
             </div>
           </div>
         </li>
-      </ul>
-      <div class="w-full grid grid-cols-4 gap-4">
-        <div v-for="item in 4" class="col-span-2">
-          <ul>
-            <li
-              class="
-                flex flex-col
-                bg-white
-                rounded-lg
-                shadow
-                divide-y divide-gray-200
-              "
+        <li
+          v-else
+          class="
+            col-span-2
+            flex
+            sm:flex-col
+            justify-center
+            text-center
+            bg-white
+            rounded-lg
+            shadow
+          "
+        >
+          <nuxt-link :to="localePath('/antraege/erstellen')">
+            <chip chip-class="text-gray-600"
+              ><outline-plus-icon class="w-5 h-5 text-purple-500 block" />
+              {{ $t('proposal.createProposal') }}</chip
             >
-              <div class="flex-1 flex flex-col">
-                <nuxt-link class="flex-1 flex flex-col" to="/antraege/12">
-                  <img
-                    class="h-48 object-cover rounded-tl rounded-tr"
-                    src="https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                    alt=""
-                  />
-                  <div class="px-4 pt-2 pb-4">
-                    <div class="mt-4">
-                      <chip>Mobilität</chip>
-                      <h3 class="text-gray-900 text-lg mt-4 font-medium">
-                        Expressbuslinien zwischen Pieschen und Weißig
-                      </h3>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="-mt-px flex justify-between">
-                      <div class="flex-1 flex p-4">
-                        <div
-                          class="flex -space-x-2 relative z-0 overflow-hidden"
-                        >
-                          <img
-                            class="
-                              relative
-                              z-30
-                              inline-block
-                              h-8
-                              w-8
-                              rounded-full
-                              ring-2 ring-white
-                            "
-                            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                          />
-                          <img
-                            class="
-                              relative
-                              z-20
-                              inline-block
-                              h-8
-                              w-8
-                              rounded-full
-                              ring-2 ring-white
-                            "
-                            src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                      <div class="-ml-px flex-1 flex">
-                        <span
-                          class="
-                            relative
-                            w-0
-                            flex-1
-                            inline-flex
-                            items-center
-                            justify-end
-                            py-4
-                            pr-4
-                            text-sm text-gray-400
-                            font-medium
-                            border border-transparent
-                            rounded-br-lg
-                            hover:text-gray-500
-                          "
-                        >
-                          gestern,14 Uhr
-                          <!-- Heroicon name: solid/phone -->
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </nuxt-link>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+          </nuxt-link>
+        </li>
+      </ul>
+      <application-grid :projects="projects"></application-grid>
     </div>
   </layouts-single-view>
 </template>
 
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import {
+  defineComponent,
+  useStore,
+  computed,
+  ref,
+} from '@nuxtjs/composition-api'
+import { parseISO } from 'date-fns'
+import { RootState } from '~/store'
+import { IProject } from '~/types/apiSchema'
 
 export default defineComponent({
-  name: 'MeineAntraegePage',
+  name: 'ApplicationsPage',
   setup() {
-    return {}
+    const projects = ref<IProject[]>([])
+    const store = useStore<RootState>()
+    const user = computed(() => store.state.auth.user)
+    return { projects, user, parseISO }
+  },
+  async fetch() {
+    if (this.$store.state.auth.user)
+      try {
+        const createdProjectsIds: number[] =
+          this.$store.state.auth.user.createdProjects.map(
+            (project: IProject) => project.id
+          )
+        const response = await this.$axios.get('/projects', {
+          params: { id: createdProjectsIds },
+        })
+        this.projects = response.data['hydra:member']
+      } catch (e) {
+        console.log(e)
+      }
   },
 })
 </script>

@@ -175,7 +175,6 @@ import {
   defineComponent,
   ref,
   computed,
-  ComputedRef,
   useMeta,
   useStore,
 } from '@nuxtjs/composition-api'
