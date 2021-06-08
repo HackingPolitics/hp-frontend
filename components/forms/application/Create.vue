@@ -5,7 +5,7 @@
     @submit="createProject()"
   >
     <forms-layout
-      :title="currentStep !== 4 ? 'Antrag erstellen' : ''"
+      :title="currentStep !== 4 ? $t('proposal.createProposal') : ''"
       :steps="steps"
       no-concept-sidebar
       no-floating-sidebar
@@ -20,11 +20,11 @@
                     ? 'Projektthema'
                     : currentStep === 3
                     ? 'Politik'
-                    : 'Projektitel'
+                    : $t('proposal.form.title.label')
                 }}
               </h3>
               <p class="mt-1 text-sm text-gray-500">
-                Alle nicht benötigten Federn kannst du auch später auszufüllen
+                {{ $t('proposal.form.title.help') }}
               </p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -33,8 +33,8 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
-                  label="Wie nennst du dein Projekt?"
-                  placeholder="Projektitel"
+                  :label="$t('proposal.form.title.label')"
+                  :placeholder="$t('proposal.form.title.name')"
                   type="text"
                   name="title"
                   validation="required"
@@ -228,7 +228,7 @@
             <div class="inline-flex justify-center items-baseline mt-8">
               <div class="flex items-center mr-4">
                 <nuxt-link
-                  to="/registrieren"
+                  :to="localePath('/registrieren')"
                   class="
                     items-center
                     px-4
@@ -249,7 +249,7 @@
               </div>
               <div class="flex items-center">
                 <nuxt-link
-                  to="/login"
+                  :to="localePath('/login')"
                   class="
                     items-center
                     px-4
@@ -311,6 +311,7 @@ import {
   computed,
   useRouter,
   useStore,
+  useContext,
 } from '@nuxtjs/composition-api'
 
 import { IParliament } from '~/types/apiSchema'
@@ -318,13 +319,19 @@ import { IParliament } from '~/types/apiSchema'
 export default defineComponent({
   name: 'Create',
   setup() {
+    const context = useContext()
+    console.log(context)
     const formData = ref({})
     const router = useRouter()
     const currentStep = ref(1)
     const councils = ref<IParliament[]>([])
     const categories = ref<[]>([])
     const steps = ref([
-      { id: 1, name: 'Projekttitel', status: 'current' },
+      {
+        id: 1,
+        name: context.localePath('proposal.form.title.name'),
+        status: 'current',
+      },
       { id: 2, name: 'Projektthema', status: 'incomplete' },
       { id: 3, name: 'Politik', status: 'incomplete' },
     ])

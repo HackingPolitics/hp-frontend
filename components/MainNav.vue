@@ -1,31 +1,23 @@
 <template>
   <nav class="bg-purple-500" aria-label="Global">
-    <div class="max-w-screen-xl mx-auto mx-auto px-2 sm:px-4 lg:px-8">
+    <div class="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="flex justify-between h-20">
         <div class="flex items-center px-2 lg:px-0">
           <div class="flex-shrink-0 flex items-center">
             <logo></logo>
           </div>
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-            <nuxt-link
-              to="/"
-              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-400"
-            >
-              Übersicht
-            </nuxt-link>
+            <nav-link type="desktop" :to="localePath('/')">{{
+              $t('menu.overview')
+            }}</nav-link>
+            <nav-link type="desktop" :to="localePath('/faq')">{{
+              $t('menu.faq')
+            }}</nav-link>
+            <nav-link type="desktop" :to="localePath('/collaboration')">{{
+              $t('menu.collaboration')
+            }}</nav-link>
 
-            <nuxt-link
-              to="/faq"
-              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
-            >
-              FAQ
-            </nuxt-link>
-
-            <nuxt-link
-              to="/collaboration"
-              class="rounded-md py-2 px-3 font-medium text-white hover:bg-purple-500"
-              >Collaboration</nuxt-link
-            >
+            <language-switcher></language-switcher>
           </div>
         </div>
 
@@ -33,7 +25,18 @@
           <!-- Mobile menu button -->
           <button
             type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-white hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              p-2
+              rounded-md
+              text-black
+              hover:text-white
+              hover:bg-purple-500
+              focus:outline-none
+              focus:ring-2 focus:ring-inset focus:ring-white
+            "
             aria-controls="mobile-menu"
             aria-expanded="false"
             @click="toggleMobileDropdown"
@@ -86,7 +89,17 @@
               <button
                 id="user-menu-button"
                 type="button"
-                class="bg-purple-500 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-500 focus:ring-white"
+                class="
+                  bg-purple-500
+                  rounded-full
+                  flex
+                  text-sm
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-offset-purple-500
+                  focus:ring-white
+                "
                 aria-expanded="false"
                 aria-haspopup="true"
                 @click="toggleDropdown"
@@ -113,7 +126,20 @@
             >
               <div
                 v-if="isDropdownOpen"
-                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20"
+                class="
+                  origin-top-right
+                  absolute
+                  right-0
+                  mt-2
+                  w-48
+                  rounded-md
+                  shadow-lg
+                  py-1
+                  bg-white
+                  ring-1 ring-black ring-opacity-5
+                  focus:outline-none
+                  z-20
+                "
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
@@ -153,8 +179,20 @@
         </div>
         <div v-else class="flex items-center">
           <nuxt-link
-            to="/login"
-            class="items-center px-4 py-2 border border-transparent text-base shadow font-medium rounded-md text-purple-500 bg-white hover:bg-gray-50"
+            :to="localePath('/login')"
+            class="
+              items-center
+              px-4
+              py-2
+              border border-transparent
+              text-base
+              shadow
+              font-medium
+              rounded-md
+              text-purple-500
+              bg-white
+              hover:bg-gray-50
+            "
           >
             Login
           </nuxt-link>
@@ -173,25 +211,15 @@
     >
       <div v-if="isMobileDropdownOpen" id="mobile-menu" class="lg:hidden">
         <div class="pt-2 pb-3 px-2 space-y-1">
-          <nuxt-link
-            to="/"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-purple-400"
-          >
-            Übersicht
-          </nuxt-link>
-
-          <nuxt-link
-            to="/faq"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-purple-400"
-          >
-            FAQ
-          </nuxt-link>
-
-          <nuxt-link
-            to="/collaboration"
-            class="block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-purple-400"
-            >Collaboration</nuxt-link
-          >
+          <nav-link type="mobile" :to="localePath('/')">{{
+            $t('menu.overview')
+          }}</nav-link>
+          <nav-link type="mobile" :to="localePath('/faq')">{{
+            $t('menu.faq')
+          }}</nav-link>
+          <nav-link type="mobile" :to="localePath('/collaboration')">{{
+            $t('menu.collaboration')
+          }}</nav-link>
         </div>
         <div class="pt-4 pb-3 border-t border-purple-500">
           <div class="flex items-center px-4">
@@ -209,7 +237,20 @@
               </div>
             </div>
             <button
-              class="ml-auto flex-shrink-0 bg-purple-500 rounded-full p-1 text-purple-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-500 focus:ring-white"
+              class="
+                ml-auto
+                flex-shrink-0
+                bg-purple-500
+                rounded-full
+                p-1
+                text-purple-200
+                hover:text-white
+                focus:outline-none
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-offset-purple-500
+                focus:ring-white
+              "
             >
               <span class="sr-only">View notifications</span>
               <!-- Heroicon name: outline/bell -->
@@ -233,18 +274,48 @@
           <div class="mt-3 px-2">
             <a
               href="#"
-              class="block rounded-md py-2 px-3 text-base font-medium text-purple-200 hover:text-white hover:bg-purple-400"
+              class="
+                block
+                rounded-md
+                py-2
+                px-3
+                text-base
+                font-medium
+                text-purple-200
+                hover:text-white
+                hover:bg-purple-400
+              "
               >Profil</a
             >
 
             <a
               href="#"
-              class="block rounded-md py-2 px-3 text-base font-medium text-purple-200 hover:text-white hover:bg-purple-400"
+              class="
+                block
+                rounded-md
+                py-2
+                px-3
+                text-base
+                font-medium
+                text-purple-200
+                hover:text-white
+                hover:bg-purple-400
+              "
               >Einstellungen</a
             >
 
             <div
-              class="block rounded-md py-2 px-3 text-base font-medium text-purple-200 hover:text-white hover:bg-purple-400"
+              class="
+                block
+                rounded-md
+                py-2
+                px-3
+                text-base
+                font-medium
+                text-purple-200
+                hover:text-white
+                hover:bg-purple-400
+              "
               @click="$store.dispatch('auth/logout')"
             >
               Ausloggen
@@ -263,32 +334,29 @@ import {
   useStore,
   computed,
 } from '@nuxtjs/composition-api'
+import NavLink from './NavLink.vue'
+import LanguageSwitcher from './LanguageSwitcher.vue'
 
 export default defineComponent({
   name: 'MainNav',
+  components: { NavLink, LanguageSwitcher },
   setup() {
     const store = useStore<any>()
     const user = computed(() => {
       return store.state.auth.user
     })
     const isDropdownOpen = ref(false)
-
     const toggleDropdown = (): void => {
       isDropdownOpen.value = !isDropdownOpen.value
     }
-
     const closeDropdown = (): void => {
       isDropdownOpen.value = false
     }
-
     // Mobile Dropdown
-
     const isMobileDropdownOpen = ref(false)
-
     const toggleMobileDropdown = (): void => {
       isMobileDropdownOpen.value = !isMobileDropdownOpen.value
     }
-
     const closeMobileDropdown = (): void => {
       isDropdownOpen.value = false
     }

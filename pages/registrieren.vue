@@ -16,7 +16,7 @@
           <p class="mt-2 text-sm text-gray-600 max-w">
             Oder
             <nuxt-link
-              to="/login"
+              :to="localePath('/login')"
               class="font-medium text-purple-400 hover:text-purple-500"
             >
               mit bereits vorhandenem Account einloggen

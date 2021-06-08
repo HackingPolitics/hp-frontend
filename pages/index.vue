@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view title="Meine Anträge">
+  <layouts-single-view :title="$t('proposal.myProposals')">
     <div class="sm:flex mt-4">
       <ul
         class="
@@ -138,15 +138,26 @@
                     hover:text-gray-500
                   "
                 >
-                  registriert seit {{ $dateFns.format(user.createdAt) }}
+                  registriert seit
+                  <!-- {{
+                    user.createdAt
+                      ? $dateFns.format(
+                          parseISO(user.createdAt),
+                          'dd.MM.yyyy',
+                          {
+                            locale: 'de',
+                          }
+                        )
+                      : null
+                  }} -->
                   <!-- Heroicon name: solid/phone -->
                 </span>
               </div>
               <div class="-ml-px flex-1 flex py-4 justify-center">
-                <nuxt-link to="antraege/erstellen">
+                <nuxt-link :to="localePath('/antraege/erstellen')">
                   <chip chip-class="text-green-800"
-                    ><outline-plus-icon class="w-5 h-5" /> Antrag
-                    hinzufügen</chip
+                    ><outline-plus-icon class="w-5 h-5" />
+                    {{ $t('proposal.createProposal') }}</chip
                   >
                 </nuxt-link>
               </div>
@@ -166,9 +177,10 @@
             shadow
           "
         >
-          <nuxt-link to="antraege/erstellen">
-            <chip chip-class="text-green-800"
-              ><outline-plus-icon class="w-5 h-5" /> Antrag hinzufügen</chip
+          <nuxt-link :to="localePath('/antraege/erstellen')">
+            <chip chip-class="text-gray-600"
+              ><outline-plus-icon class="w-5 h-5 text-purple-500 block" />
+              {{ $t('proposal.createProposal') }}</chip
             >
           </nuxt-link>
         </li>
@@ -192,7 +204,12 @@
               <div class="flex-1">
                 <nuxt-link
                   class="flex-1 flex flex-col"
-                  :to="{ name: 'antraege-id', params: { id: project.id } }"
+                  :to="
+                    localePath({
+                      name: 'antraege-id',
+                      params: { id: project.id },
+                    })
+                  "
                 >
                   <img
                     v-if="project.imageUrl"
@@ -254,7 +271,17 @@
                             hover:text-gray-500
                           "
                         >
-                          {{ $dateFns.format(project.updatedAt) }}
+                          <!-- {{
+                            project.updatedAt
+                              ? $dateFns.format(
+                                  parseISO(project.updatedAt),
+                                  'dd.MM.yyyy',
+                                  {
+                                    locale: 'de',
+                                  }
+                                )
+                              : null
+                          }} -->
                           <!-- Heroicon name: solid/phone -->
                         </span>
                       </div>
@@ -277,6 +304,7 @@ import {
   computed,
   ref,
 } from '@nuxtjs/composition-api'
+import { parseISO } from 'date-fns'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
@@ -286,14 +314,14 @@ export default defineComponent({
     const projects = ref<IProject[]>([])
     const store = useStore<RootState>()
     const user = computed(() => store.state.auth.user)
-    return { projects, user }
+    return { projects, user, parseISO }
   },
   async fetch() {
     if (this.$store.state.auth.user)
       try {
         const createdProjectsIds: number[] =
           this.$store.state.auth.user.createdProjects.map(
-            (project) => project.id
+            (project: IProject) => project.id
           )
         const response = await this.$axios.get('/projects', {
           params: { id: createdProjectsIds },

@@ -65,7 +65,7 @@ export interface IHydraCollection<T extends IModel> {
 export interface IUser extends INumericIdentifierModel {
   '@id'?: string
   active?: boolean
-  createdAt?: Date | string
+  createdAt?: string
   deletedAt?: Date | string
   email?: string
   firstName?: string
@@ -125,7 +125,7 @@ export interface IProject extends IModel {
   state?: string
   title?: string
   topic?: string
-  updatedAt?: Date | string
+  updatedAt?: string
   createdBy?: IUser
   createdAt?: Date | string
 }

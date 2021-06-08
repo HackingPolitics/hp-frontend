@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view title="Meine Anträge">
+  <layouts-single-view :title="$t('proposal.myProposals')">
     <p class="text-white font-medium mb-2">Zuletzt besucht</p>
     <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <application-card
@@ -17,7 +17,15 @@
     <div class="flex mt-4">
       <ul class="grid grid-cols-2 gap-3 w-1/3 mr-8 h-64">
         <li
-          class="col-span-2 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200"
+          class="
+            col-span-2
+            flex flex-col
+            text-center
+            bg-white
+            rounded-lg
+            shadow
+            divide-y divide-gray-200
+          "
         >
           <div class="flex-1 flex flex-col p-8">
             <img
@@ -34,7 +42,14 @@
               <dt class="sr-only">Role</dt>
               <dd class="mt-3">
                 <span
-                  class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full"
+                  class="
+                    px-2
+                    py-1
+                    text-green-800 text-xs
+                    font-medium
+                    bg-green-100
+                    rounded-full
+                  "
                   >Profil bearbeiten</span
                 >
               </dd>
@@ -44,21 +59,48 @@
             <div class="-mt-px flex-col divide-y divide-gray-200">
               <div class="flex-1 flex">
                 <span
-                  class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
+                  class="
+                    relative
+                    -mr-px
+                    w-0
+                    flex-1
+                    inline-flex
+                    items-center
+                    justify-center
+                    py-4
+                    text-sm text-gray-700
+                    font-medium
+                    border border-transparent
+                    rounded-bl-lg
+                    hover:text-gray-500
+                  "
                 >
                   <span class="font-bold mr-2">3</span> Anträge
                 </span>
               </div>
               <div class="-ml-px flex-1 flex">
                 <span
-                  class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-400 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
+                  class="
+                    relative
+                    w-0
+                    flex-1
+                    inline-flex
+                    items-center
+                    justify-center
+                    py-4
+                    text-sm text-gray-400
+                    font-medium
+                    border border-transparent
+                    rounded-br-lg
+                    hover:text-gray-500
+                  "
                 >
                   registriert seit 26.04.2021
                   <!-- Heroicon name: solid/phone -->
                 </span>
               </div>
               <div class="-ml-px flex-1 flex py-4 justify-center">
-                <nuxt-link to="antraege/erstellen">
+                <nuxt-link :to="localePath('/antraege/erstellen')">
                   <chip chip-class="text-green-800"
                     ><outline-plus-icon class="w-5 h-5" /> Antrag
                     hinzufügen</chip
@@ -73,7 +115,13 @@
         <div v-for="item in 4" class="col-span-2">
           <ul>
             <li
-              class="flex flex-col bg-white rounded-lg shadow divide-y divide-gray-200"
+              class="
+                flex flex-col
+                bg-white
+                rounded-lg
+                shadow
+                divide-y divide-gray-200
+              "
             >
               <div class="flex-1 flex flex-col">
                 <nuxt-link class="flex-1 flex flex-col" to="/antraege/12">
@@ -97,12 +145,28 @@
                           class="flex -space-x-2 relative z-0 overflow-hidden"
                         >
                           <img
-                            class="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                            class="
+                              relative
+                              z-30
+                              inline-block
+                              h-8
+                              w-8
+                              rounded-full
+                              ring-2 ring-white
+                            "
                             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             alt=""
                           />
                           <img
-                            class="relative z-20 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                            class="
+                              relative
+                              z-20
+                              inline-block
+                              h-8
+                              w-8
+                              rounded-full
+                              ring-2 ring-white
+                            "
                             src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             alt=""
                           />
@@ -110,7 +174,21 @@
                       </div>
                       <div class="-ml-px flex-1 flex">
                         <span
-                          class="relative w-0 flex-1 inline-flex items-center justify-end py-4 pr-4 text-sm text-gray-400 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
+                          class="
+                            relative
+                            w-0
+                            flex-1
+                            inline-flex
+                            items-center
+                            justify-end
+                            py-4
+                            pr-4
+                            text-sm text-gray-400
+                            font-medium
+                            border border-transparent
+                            rounded-br-lg
+                            hover:text-gray-500
+                          "
                         >
                           gestern,14 Uhr
                           <!-- Heroicon name: solid/phone -->
@@ -129,10 +207,12 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'MeineAntraegePage',
-  setup() {},
+  setup() {
+    return {}
+  },
 })
 </script>

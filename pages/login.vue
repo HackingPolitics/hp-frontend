@@ -11,7 +11,7 @@
       <p class="mt-2 text-sm text-gray-600 max-w">
         Oder
         <nuxt-link
-          to="/registrieren"
+          :to="localePath('/registrieren')"
           class="font-medium text-purple-400 hover:text-purple-500"
         >
           einen neuen Account anlegen
@@ -59,7 +59,7 @@
 
             <div class="text-sm">
               <nuxt-link
-                to="/passwort-vergessen"
+                :to="localePath('/passwort-vergessen')"
                 class="font-medium text-purple-400 hover:text-purple-500"
               >
                 Passwort vergessen
@@ -82,7 +82,6 @@
 <script lang="ts">
 import {
   defineComponent,
-  Ref,
   ref,
   useMeta,
   useStore,
