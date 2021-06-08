@@ -105,19 +105,10 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useContext,
-  useStore,
-  ref,
-  ComputedRef,
-  computed,
-  onMounted,
-  watch,
-} from '@nuxtjs/composition-api'
+import { defineComponent, ref, onMounted, watch } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
-import { RootState } from '~/store'
-import { IProject } from '~/types/apiSchema'
+import editApplication from '~/composables/editApplication'
+import { IPartner } from '~/types/apiSchema'
 
 interface CreatePartnerForm {
   contactEmail?: string
@@ -141,21 +132,24 @@ export default defineComponent({
     const partnerFormData = ref<PartnerForm>({})
     const createPartnerFormData = ref<CreatePartnerForm>({ name: '' })
     const partners = ref([])
-    const context = useContext()
-    const store = useStore<RootState>()
 
-    const project: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.project
-    )
+    const { createEntity, deleteEntity, updateEntity, project } =
+      editApplication()
 
     onMounted(() => {
       if (project.value?.partners)
         partners.value = cloneDeep(project.value.partners)
     })
 
-    watch(project, (currentValue) => {
-      partners.value = cloneDeep(currentValue?.partners || [])
-    })
+    watch(
+      project,
+      (currentValue) => {
+        partners.value = cloneDeep(currentValue?.partners || [])
+      },
+      {
+        deep: true,
+      }
+    )
 
     const createPartner = async () => {
       if (project.value && typeof project.value['@id'] === 'string') {
@@ -163,43 +157,23 @@ export default defineComponent({
           ...createPartnerFormData.value,
           project: project.value['@id'],
         }
-        await context.$axios.post('/partners', payload).then(() => {
-          store.dispatch('projects/fetchProject', project.value?.id)
-          createPartnerFormData.value = { name: '' }
-          context.$notify({
-            title: 'Partner erstellt',
-            duration: 300,
-            type: 'success',
-          })
-        })
+        await createEntity<IPartner>('partners', partners.value, payload).then(
+          () => (createPartnerFormData.value = { name: '' })
+        )
       }
     }
 
     const deletePartner = async (id: string | number) => {
-      await context.$axios.delete('/partners/' + id).then(() => {
-        store.dispatch('projects/fetchProject', project.value?.id)
-        context.$notify({
-          title: 'Partner gelöscht',
-          duration: 300,
-          type: 'success',
-        })
-      })
+      await deleteEntity('partners', id, partners.value)
     }
 
     const updatePartner = async (id: string | number) => {
       if (project.value && typeof project.value['@id'] === 'string') {
-        const payload: PartnerArguments = {
+        const payload: PartnerArguwments = {
           ...partnerFormData.value[id],
           project: project.value['@id'],
         }
-        await context.$axios.put('/partners/' + id, payload).then(() => {
-          store.dispatch('projects/fetchProject', project.value?.id)
-          context.$notify({
-            title: 'Partner aktualisiert',
-            duration: 300,
-            type: 'success',
-          })
-        })
+        await updateEntity<IPartner>('partners', id, payload)
       }
     }
     return {

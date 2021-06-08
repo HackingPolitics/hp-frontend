@@ -2,12 +2,12 @@ import { ActionTree, MutationTree } from 'vuex'
 import { IProject } from '~/types/apiSchema'
 
 export interface ProjectsState {
-  project: IProject | null
+  project: IProject
   createdProject: IProject | null
 }
 
 const defaultProjectsState: ProjectsState = {
-  project: null,
+  project: {},
   createdProject: null,
 }
 
@@ -23,6 +23,9 @@ export const mutations: MutationTree<RootState> = {
   },
   SET_CREATED_PROJECT(state, project) {
     state.createdProject = project
+  },
+  SET_PROJECT_PROPERTY(state, [property, value]) {
+    state.project[property] = value
   },
 }
 
@@ -50,6 +53,9 @@ export const actions: ActionTree<RootState, RootState> = {
       // this.error = e.response.data.message
       console.log(e)
     }
+  },
+  updateProjectProperty({ commit }, [property, value]) {
+    commit('SET_PROJECT_PROPERTY', [property, value])
   },
   async fetchProject({ commit }, id) {
     const response = await this.$api.projects.getProject(id)

@@ -142,3 +142,10 @@ export interface IRegistration extends IUser {
   validationUrl: string
   createdProjects?: IProject[]
 }
+
+export interface IPartner extends IModel {
+  contactEmail?: 'user@example.com'
+  contactName?: 'string'
+  contactPhone?: 'string'
+  name?: 'string'
+}

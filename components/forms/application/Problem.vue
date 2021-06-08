@@ -12,8 +12,8 @@
             ghost-class="ghost"
             @update="updateProblemPriority($event)"
           >
-            <transition-group type="transition" name="flip-list">
-              <div
+            <transition-group tag="ul" type="transition" name="flip-list">
+              <li
                 v-for="problem in problems"
                 :key="problem.id"
                 class="inline-flex w-full justify-center cursor-move"
@@ -38,7 +38,7 @@
                   @click="deleteProblem(problem.id)"
                   ><outline-trash-icon class="h-5 w-5"
                 /></FormulateInput>
-              </div>
+              </li>
             </transition-group>
           </draggable>
           <FormulateForm v-model="createProblemForm" @submit="createProblem()">
@@ -89,8 +89,6 @@
 
 <script lang="ts">
 import {
-  computed,
-  ComputedRef,
   defineComponent,
   onMounted,
   useContext,
@@ -98,10 +96,11 @@ import {
   ref,
   useStore,
 } from '@nuxtjs/composition-api'
-import { IProblem, IProject } from '~/types/apiSchema'
+import { cloneDeep } from 'lodash'
+import { IProblem } from '~/types/apiSchema'
 import { RootState } from '~/store'
 
-import { cloneDeep } from 'lodash'
+import editApplication from '~/composables/editApplication'
 
 interface ProblemForm {
   problems?: IProblem[]
@@ -111,15 +110,15 @@ interface ProblemForm {
 export default defineComponent({
   name: 'Problem',
   setup() {
+    const { createEntity, deleteEntity, updateEntity, project } =
+      editApplication()
+
     const problems = ref<IProblem[]>([])
     const createProblemForm = ref<ProblemForm>({})
 
     const store = useStore<RootState>()
     const context = useContext()
 
-    const project: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.project
-    )
     onMounted(() => {
       if (project.value?.problems) {
         problems.value = cloneDeep(project.value.problems)
@@ -127,10 +126,16 @@ export default defineComponent({
       }
     })
 
-    watch(project, (currentValue) => {
-      problems.value = cloneDeep(currentValue?.problems || [])
-      problems.value.sort((a, b) => b.priority - a.priority)
-    })
+    watch(
+      project,
+      (currentValue) => {
+        problems.value = cloneDeep(currentValue?.problems || [])
+        problems.value.sort((a, b) => b.priority - a.priority)
+      },
+      {
+        deep: true, // immediate: true
+      }
+    )
 
     const createProblem = async () => {
       if (project.value) {
@@ -138,25 +143,22 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await context.$axios.post('/problems', payload).then(() => {
-          store.dispatch('projects/fetchProject', project.value?.id)
-          createProblemForm.value = {}
-        })
+        await createEntity<IProblem>('problems', problems.value, payload).then(
+          () => {
+            createProblemForm.value = {}
+          }
+        )
       }
     }
     const deleteProblem = async (id: number | string) => {
-      await context.$axios.delete('/problems/' + id).then(() => {
-        store.dispatch('projects/fetchProject', project.value?.id)
-      })
+      await deleteEntity<IProblem>('problems', id, problems.value)
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
       const payload = {
         description: desc,
       }
-      await context.$axios.put('/problems/' + id, payload).then(() => {
-        store.dispatch('projects/fetchProject', project.value?.id)
-      })
+      await updateEntity<IProblem>('problems', id, payload)
     }
 
     const updateProblemPriority = async () => {
@@ -175,14 +177,15 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        console.log(res)
-        store.dispatch('projects/fetchProject', project.value?.id)
+        store.dispatch('projects/updateProjectProperty', [
+          'problems',
+          res.map((e) => e.data),
+        ])
       })
     }
     return {
       problems,
       createProblemForm,
-      project,
       deleteProblem,
       createProblem,
       updateProblem,
