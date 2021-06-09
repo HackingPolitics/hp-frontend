@@ -55,7 +55,7 @@ export default {
   vite: {
     optimizeDeps: {
       exclude: ['nuxt-i18n', '@nuxt/date-fns'],
-      include: ['vue-notification'],
+      include: ['vue-notification', 'cookie'],
     },
   },
 
