@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view>
+  <layouts-single-view title="Konzept">
     <application-header></application-header>
     <forms-application-writing></forms-application-writing>
   </layouts-single-view>

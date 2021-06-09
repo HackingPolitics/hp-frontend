@@ -47,7 +47,7 @@
                 v-for="(category, categoryIndex) in project.categories"
                 :key="categoryIndex"
                 class="mr-2"
-                >{{ category.id }}</chip
+                >{{ category.name }}</chip
               >
               <h3 class="text-gray-900 text-xl mt-4 font-medium">
                 {{ project.title }}

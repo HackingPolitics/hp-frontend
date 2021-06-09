@@ -1,12 +1,12 @@
 <template>
-  <layouts-single-view>
+  <layouts-single-view title="Konzept">
     <application-header></application-header>
-    <forms-application-problem></forms-application-problem>
+    <forms-application-fraction-and-interest></forms-application-fraction-and-interest>
   </layouts-single-view>
 </template>
 
 <script>
 export default {
-  name: 'politik',
+  name: 'FractionForm',
 }
 </script>

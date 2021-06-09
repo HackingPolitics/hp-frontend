@@ -38,7 +38,6 @@ export default defineComponent({
     const options = ['Dresden', 'Berlin', 'München']
     const fetchProjects = async () => {
       const result = await store.dispatch('projects/fetchProjects')
-      console.log(result)
       projects.value = result
     }
     const projectsLoading = computed(() => {
