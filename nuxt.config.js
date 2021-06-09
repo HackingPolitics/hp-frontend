@@ -26,7 +26,9 @@ export default {
   plugins: [
     '~/plugins/click-outside.js',
     '~/plugins/api.ts',
-    // '~/plugins/notifications.js',
+    '~/plugins/lodash.js',
+    '~/plugins/vue-draggable.js',
+    '~/plugins/notifications.js',
   ],
 
   env: {
@@ -52,12 +54,8 @@ export default {
 
   vite: {
     optimizeDeps: {
-      exclude: [
-        'nuxt-i18n',
-        'vue-notification',
-        'plugins/notifications.js',
-        '@nuxt/date-fns',
-      ],
+      exclude: ['nuxt-i18n', '@nuxt/date-fns'],
+      include: ['vue-notification'],
     },
   },
 

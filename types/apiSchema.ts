@@ -44,7 +44,9 @@ export interface IParliament extends IModel {
   zipArea?: string
 }
 
-export interface ICategory extends IModel {}
+export interface ICategory extends IModel {
+  name: string
+}
 
 export interface IHydraCollection<T extends IModel> {
   'hydra:firstPage'?: number
@@ -113,6 +115,11 @@ export interface IUserStatistics {
   notValidated: number
 }
 
+export interface IProblem extends IModel {
+  description?: string
+  project?: string
+}
+
 export interface IProject extends IModel {
   categories?: ICategory[]
   '@context'?: string
@@ -125,6 +132,7 @@ export interface IProject extends IModel {
   state?: string
   title?: string
   topic?: string
+  problems?: IProblem[]
   updatedAt?: string
   createdBy?: IUser
   createdAt?: Date | string
@@ -133,4 +141,12 @@ export interface IProject extends IModel {
 export interface IRegistration extends IUser {
   validationUrl: string
   createdProjects?: IProject[]
+}
+
+export interface IPartner extends IModel {
+  contactEmail?: string
+  contactName?: string
+  contactPhone?: string
+  name: string
+  teamContact?: string
 }

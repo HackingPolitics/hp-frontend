@@ -2,14 +2,14 @@ import { ActionTree, MutationTree } from 'vuex'
 import { IProject } from '~/types/apiSchema'
 
 export interface ProjectsState {
-  project: IProject | null
+  project: IProject
   createdProject: IProject | null
   isLoading: false
   error: string | null
 }
 
 const defaultProjectsState: ProjectsState = {
-  project: null,
+  project: {},
   createdProject: null,
   isLoading: false,
   error: null,
@@ -27,6 +27,9 @@ export const mutations: MutationTree<RootState> = {
   },
   SET_CREATED_PROJECT(state, project) {
     state.createdProject = project
+  },
+  SET_PROJECT_PROPERTY(state, [property, value]) {
+    state.project[property] = value
   },
 
   SET_LOADING_FLAG(state, flag) {
@@ -51,7 +54,21 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-
+  async updateProject({ commit }, [id, data]) {
+    try {
+      const response = await this.$api.projects.updateProject(id, data)
+      // @ts-ignore
+      this.$notify({ title: 'Änderungen gespeichert', duration: 500 })
+      commit('SET_PROJECT', response.data)
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
+    }
+  },
+  updateProjectProperty({ commit }, [property, value]) {
+    commit('SET_PROJECT_PROPERTY', [property, value])
+  },
   async fetchProjects({ commit }) {
     commit('SET_LOADING_FLAG', true)
     try {
