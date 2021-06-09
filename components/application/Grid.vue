@@ -1,5 +1,9 @@
 <template>
-  <ul v-if="projects" class="w-full grid gap-4" :class="getCols()">
+  <ul
+    v-if="projects && projects.length > 0 && !isLoading"
+    class="w-full grid gap-4"
+    :class="getCols()"
+  >
     <li
       v-for="(project, index) in projects"
       :key="index"
@@ -43,7 +47,7 @@
                 v-for="(category, categoryIndex) in project.categories"
                 :key="categoryIndex"
                 class="mr-2"
-                >{{ category }}</chip
+                >{{ category.id }}</chip
               >
               <h3 class="text-gray-900 text-xl mt-4 font-medium">
                 {{ project.title }}
@@ -93,6 +97,21 @@
       </div>
     </li>
   </ul>
+  <div v-else-if="projects && projects.length === 0">
+    <div class="flex flex-col text-center my-16">
+      <div class="text-gray-400 mt-8 font-semibold text-lg">
+        Keine Antragsprojekte vorhanden
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class="flex flex-col text-center my-16">
+      <loading-indicator v-if="isLoading"></loading-indicator>
+      <div class="text-gray-400 mt-8 font-semibold text-lg">
+        Projekte werden geladen...
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -108,6 +127,10 @@ export default defineComponent({
     cols: {
       type: Number,
       default: 2,
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {

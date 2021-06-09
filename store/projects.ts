@@ -4,11 +4,15 @@ import { IProject } from '~/types/apiSchema'
 export interface ProjectsState {
   project: IProject | null
   createdProject: IProject | null
+  isLoading: false
+  error: string | null
 }
 
 const defaultProjectsState: ProjectsState = {
   project: null,
   createdProject: null,
+  isLoading: false,
+  error: null,
 }
 
 export const state = () => ({
@@ -24,6 +28,14 @@ export const mutations: MutationTree<RootState> = {
   SET_CREATED_PROJECT(state, project) {
     state.createdProject = project
   },
+
+  SET_LOADING_FLAG(state, flag) {
+    state.isLoading = flag
+  },
+
+  SET_ERROR(state, error) {
+    state.error = error
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -37,6 +49,18 @@ export const actions: ActionTree<RootState, RootState> = {
     } catch (e) {
       // this.error = e.response.data.message
       console.log(e)
+    }
+  },
+
+  async fetchProjects({ commit }) {
+    commit('SET_LOADING_FLAG', true)
+    try {
+      const response = await this.$api.projects.fetchProjects()
+      commit('SET_LOADING_FLAG', false)
+      return response.data['hydra:member']
+    } catch (e) {
+      commit('SET_LOADING_FLAG', false)
+      commit('SET_ERROR', e.response.data.message)
     }
   },
 }
