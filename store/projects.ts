@@ -69,6 +69,10 @@ export const actions: ActionTree<RootState, RootState> = {
   updateProjectProperty({ commit }, [property, value]) {
     commit('SET_PROJECT_PROPERTY', [property, value])
   },
+  async fetchProject({ commit }, id) {
+    const response = await this.$api.projects.fetchProject(id)
+    commit('SET_PROJECT', response.data)
+  },
   async fetchProjects({ commit }) {
     commit('SET_LOADING_FLAG', true)
     try {

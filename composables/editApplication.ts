@@ -4,7 +4,7 @@ import {
   useContext,
   useStore,
 } from '@nuxtjs/composition-api'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, camelCase } from 'lodash'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
@@ -33,8 +33,10 @@ export default function () {
     await context.$axios.post(endpoint, payload).then((res) => {
       const payload = cloneDeep(entityData)
       payload.push(res.data)
-      store.dispatch('projects/updateProjectProperty', [endpoint, payload])
-      // @ts-ignore
+      store.dispatch('projects/updateProjectProperty', [
+        camelCase(endpoint),
+        payload,
+      ])
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,
@@ -59,8 +61,10 @@ export default function () {
   ) => {
     await context.$axios.delete(endpoint + '/' + id).then(() => {
       const payload = entityData.filter((e: T) => e.id !== id)
-      store.dispatch('projects/updateProjectProperty', [endpoint, payload])
-      // @ts-ignore
+      store.dispatch('projects/updateProjectProperty', [
+        camelCase(endpoint),
+        payload,
+      ])
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,
@@ -78,7 +82,7 @@ export default function () {
       duration?: number
       type?: string
     } = {
-      title: 'Erfolgreich gelöscht',
+      title: 'Erfolgreich gespeichert',
       duration: 300,
       type: 'success',
     }

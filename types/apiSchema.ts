@@ -150,3 +150,23 @@ export interface IPartner extends IModel {
   name: string
   teamContact?: string
 }
+
+export interface IArgument extends IModel {
+  description?: string
+  priority?: string
+  project?: string
+  updatedAt?: string
+}
+
+export interface IProposal extends IModel {
+  description?: string
+  actionMandate?: string
+  comment?: string
+  introduction?: string
+  project?: string
+  sponsor?: string
+  updatedAt?: string
+  url?: string
+}
+
+export interface ICounterArgument extends IArgument {}

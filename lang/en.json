@@ -1,21 +1,54 @@
 {
-  "step": "Step",
+  "actionMandate": "Action mandat",
+  "comment": "comment",
+  "contact": {
+    "email": "Email"
+  },
+  "email": "email",
+  "forms": {
+    "arguments": {
+      "question": "Was spricht für dein Konzept",
+      "title": "Argumente"
+    },
+    "counter_arguments": {
+      "question": "Concept"
+    },
+    "proposals": {
+      "title": "forms.proposals.title"
+    }
+  },
+  "introduction": "introduction",
+  "menu": {
+    "collaboration": "Collaboration",
+    "faq": "FAQ",
+    "overview": "Overview"
+  },
   "of": "of",
   "proposal": {
-    "myProposals": "My proposals",
     "createProposal": "New proposal",
     "form": {
       "header": "Create new proposal",
       "title": {
+        "help": "All the feathers you do not need you can also fill in later",
         "label": "What do you call your project?",
-        "name": "Project title",
-        "help": "All the feathers you do not need you can also fill in later"
+        "name": "Project title"
+      }
+    },
+    "myProposals": "My proposals"
+  },
+  "reasoning": "reasoning",
+  "sponsor": "sponsor",
+  "step": "Step",
+  "title": "titel",
+  "url": "url",
+  "validation": {
+    "name": {
+      "arguments": {
+        "description": "Arguement description"
+      },
+      "counter_arguments": {
+        "description": "problem description"
       }
     }
-  },
-  "menu": {
-    "overview": "Overview",
-    "faq": "FAQ",
-    "collaboration": "Collaboration"
   }
 }

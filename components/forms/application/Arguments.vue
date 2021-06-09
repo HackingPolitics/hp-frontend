@@ -1,154 +1,421 @@
 <template>
   <FormulateForm>
-    <forms-layout title="Argumente" no-actions>
-      <div class="space-y-4">
-        <forms-form-section title="Was spricht gegen dein Konzept?">
-          <div v-if="counterArgumentations.length">
-            <FormulateInput
-              v-for="counterArgumentation in counterArgumentations"
-              :key="counterArgumentation.id"
-              type="textarea"
-              rows="10"
-              :value="counterArgumentation.description"
-              @focusout="
-                editCounterArgumentation(
-                  $event.target.value,
-                  counterArgumentation.id
+    <forms-layout :title="$t('forms.arguments.title')" no-actions>
+      <div>
+        <div class="grid grid-cols-2 gap-6">
+          <forms-form-section
+            :title="$t('forms.arguments.question')"
+            class="col-span-1"
+          >
+            <draggable :list="argumentations" :sort="true" ghost-class="ghost">
+              <transition-group tag="ul" type="transition" name="flip-list">
+                <li
+                  v-for="argumentation in argumentations"
+                  :key="argumentation.id"
+                  class="inline-flex w-full justify-center cursor-move"
+                >
+                  <FormulateInput
+                    :value="argumentation.description"
+                    name="description"
+                    type="textarea"
+                    rows="3"
+                    element-class="inline-flex w-full"
+                    :validation-name="
+                      $t('validation.name.arguments.description')
+                    "
+                    @focusout="
+                      updateEntity(
+                        'arguments',
+                        { description: $event.target.value },
+                        argumentation.id
+                      )
+                    "
+                  >
+                  </FormulateInput>
+                  <FormulateInput
+                    input-class="ml-4 form-button"
+                    type="button"
+                    @click="
+                      deleteEntity(
+                        'arguments',
+                        argumentation.id,
+                        argumentations
+                      )
+                    "
+                    ><outline-trash-icon class="h-4 w-4"
+                  /></FormulateInput>
+                </li>
+              </transition-group>
+            </draggable>
+
+            <FormulateForm
+              v-model="formData.createArgument"
+              @submit="
+                createEntity('arguments', 'createArgument', argumentations)
+              "
+            >
+              <div class="inline-flex w-full justify-between">
+                <FormulateInput
+                  type="text"
+                  name="description"
+                  validation="required"
+                  :validation-name="$t('validation.name.arguments.description')"
+                />
+                <FormulateInput input-class="ml-4 form-button" type="submit"
+                  ><outline-plus-icon class="h-5 w-5"
+                /></FormulateInput>
+              </div>
+            </FormulateForm>
+          </forms-form-section>
+
+          <forms-form-section
+            :title="$t('forms.counter_arguments.question')"
+            class="col-span-1"
+          >
+            <draggable
+              :list="counterArguments"
+              :sort="true"
+              ghost-class="ghost"
+            >
+              <transition-group tag="ul" type="transition" name="flip-list">
+                <li
+                  v-for="counterArgument in counterArguments"
+                  :key="counterArgument.id"
+                  class="inline-flex w-full justify-center cursor-move"
+                >
+                  <FormulateInput
+                    :value="counterArgument.description"
+                    name="description"
+                    type="textarea"
+                    rows="3"
+                    input-class="w-full form-input"
+                    element-class="inline-flex w-full"
+                    @focusout="
+                      updateEntity(
+                        'counter_arguments',
+                        { description: $event.target.value },
+                        counterArgument.id
+                      )
+                    "
+                  >
+                  </FormulateInput>
+                  <FormulateInput
+                    input-class="ml-4 form-button"
+                    type="button"
+                    @click="
+                      deleteArgumentation(
+                        'counter_arguments',
+                        counterArgument.id,
+                        counterArguments
+                      )
+                    "
+                    ><outline-trash-icon class="h-5 w-5"
+                  /></FormulateInput>
+                </li>
+              </transition-group>
+            </draggable>
+
+            <FormulateForm
+              v-model="formData.createCounterArgument"
+              @submit="
+                createEntity(
+                  'counter_arguments',
+                  'createCounterArgument',
+                  counterArguments
                 )
               "
             >
-            </FormulateInput>
-          </div>
-          <FormulateInput
-            v-else
-            type="textarea"
-            rows="10"
-            @focusout="editCounterArgumentation($event.target.value)"
-          >
-          </FormulateInput>
-        </forms-form-section>
+              <div class="inline-flex w-full justify-between">
+                <FormulateInput
+                  type="text"
+                  name="description"
+                  validation="required"
+                  :validation-name="
+                    $t('validation.name.counter_arguments.description')
+                  "
+                />
+                <FormulateInput input-class="ml-4 form-button" type="submit"
+                  ><outline-plus-icon class="h-5 w-5" />
+                </FormulateInput>
+              </div>
+            </FormulateForm>
+          </forms-form-section>
+        </div>
 
-        <forms-form-section
-          title="Warum lohnt es sich trotzdem, das Konzept umzusetzen?"
-        >
-          <div v-if="argumentations.length">
-            <FormulateInput
-              v-for="argumation in argumentations"
-              :key="argumation.id"
-              type="textarea"
-              rows="10"
-              :value="argumation.description"
-              @focusout="editArgumentation($event.target.value, argumation.id)"
-            >
-            </FormulateInput>
-          </div>
-          <FormulateInput
-            v-else
-            type="textarea"
-            rows="10"
-            @focusout="editArgumentation($event.target.value)"
+        <div>
+          <h2 class="text-3xl font-extrabold text-blue-gray-900 mb-4">
+            {{ $t('forms.proposals.title') }}
+          </h2>
+          <forms-form-section
+            v-for="proposal in proposals"
+            :key="proposal.id"
+            title="Vorschläge"
           >
-          </FormulateInput>
-        </forms-form-section>
+            <h3 class="text-lg leading-6 text-gray-900 mb-8">
+              Vorschlag:
+              <span class="font-semibold">{{ proposal.title }}</span>
+            </h3>
+            <FormulateForm
+              v-model="proposalsFormData[proposal.id]"
+              @submit="
+                updateEntity(
+                  'proposals',
+                  ...proposalsFormData[proposal.id],
+                  proposal.id
+                )
+              "
+            >
+              <div class="grid grid-cols-4 gap-4">
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  :value="proposal.title"
+                  name="title"
+                  validation="required"
+                  :label="$t('title')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  :value="proposal.introduction"
+                  name="contactName"
+                  :label="$t('introduction')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  :value="proposal.reasoning"
+                  name="reasoning"
+                  :label="$t('reasoning')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  :value="proposal.sponsor"
+                  name="reasoning"
+                  :label="$t('sponsor')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  :value="proposal.actionMandate"
+                  name="actionMandate"
+                  :label="$t('actionMandate')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  :value="proposal.comment"
+                  name="url"
+                  :label="$t('url')"
+                />
+                <FormulateInput
+                  outer-class="col-span-4"
+                  type="textarea"
+                  :value="proposal.comment"
+                  rows="3"
+                  name="comment"
+                  :label="$t('comment')"
+                />
+                <div class="col-span-4">
+                  <div class="flex justify-end">
+                    <FormulateInput
+                      outer-class="py-4 pr-4"
+                      type="button"
+                      @click="deletePartner(proposal.id)"
+                    >
+                      <outline-trash-icon class="h-5 w-5"></outline-trash-icon>
+                    </FormulateInput>
+                    <FormulateInput
+                      outer-class="py-4"
+                      type="submit"
+                      :label="$t('save')"
+                    >
+                      <outline-check-circle-icon
+                        class="h-5 w-5"
+                      ></outline-check-circle-icon>
+                    </FormulateInput>
+                  </div>
+                </div>
+              </div>
+            </FormulateForm>
+          </forms-form-section>
+          <forms-form-section>
+            <FormulateForm
+              v-model="formData.createProposal"
+              @submit="createEntity('proposals', 'createProposal', proposals)"
+            >
+              <div class="grid grid-cols-4 gap-4">
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  name="title"
+                  validation="required"
+                  :label="$t('title')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  name="contactName"
+                  :label="$t('introduction')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  name="reasoning"
+                  :label="$t('reasoning')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  name="sponsor"
+                  :label="$t('sponsor')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  name="actionMandate"
+                  :label="$t('actionMandate')"
+                />
+                <FormulateInput
+                  outer-class="col-span-2"
+                  type="text"
+                  name="url"
+                  :label="$t('url')"
+                />
+                <FormulateInput
+                  outer-class="col-span-4"
+                  type="textarea"
+                  rows="3"
+                  name="comment"
+                  :label="$t('comment')"
+                />
+
+                <FormulateInput
+                  outer-class="col-span-4"
+                  type="submit"
+                  :label="$t('forms.proposals.add')"
+                />
+              </div>
+            </FormulateForm>
+          </forms-form-section>
+        </div>
       </div>
     </forms-layout>
   </FormulateForm>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useStore,
-  ref,
-  onMounted,
-  useContext,
-  computed,
-  ComputedRef,
-  watch,
-} from '@nuxtjs/composition-api'
+import { defineComponent, ref, onMounted, watch } from '@nuxtjs/composition-api'
 
 import { cloneDeep } from 'lodash'
 
-import { RootState } from '~/store'
-import { IProject } from '~/types/apiSchema'
+import { IArgument, ICounterArgument, IProposal } from '~/types/apiSchema'
+import editApplication from '~/composables/editApplication'
 
-interface ArgumentParams {
-  description: string
-  project: string
+interface CreateForm {
+  createArgument: { description?: string }
+  createCounterArgument: { description?: string }
+  createProposal: IProposal
+}
+
+interface ProposalsForm {
+  [name: string]: CreateForm
 }
 
 export default defineComponent({
   name: 'Arguments',
   setup() {
-    const argumentations = ref([])
-    const counterArgumentations = ref([])
+    const argumentations = ref<IArgument[]>([])
+    const counterArguments = ref<ICounterArgument[]>([])
+    const proposals = ref<IProposal[]>([])
+    const proposalsFormData = ref<ProposalsForm>({})
 
-    const store = useStore<RootState>()
-    const context = useContext()
-    const project: ComputedRef<IProject | null> = computed(
-      () => store.state.projects.project
-    )
+    const formData = ref<CreateForm>({
+      createArgument: { description: '' },
+      createCounterArgument: { description: '' },
+      createProposal: {},
+    })
+
+    const {
+      createEntity: createE,
+      deleteEntity: deleteE,
+      updateEntity: updateE,
+      project,
+    } = editApplication()
 
     onMounted(() => {
       if (project.value?.arguments)
         argumentations.value = cloneDeep(project.value.arguments)
       if (project.value?.counterArguments)
-        counterArgumentations.value = cloneDeep(project.value.counterArguments)
+        counterArguments.value = cloneDeep(project.value.counterArguments)
+      if (project.value?.counterArguments)
+        proposals.value = cloneDeep(project.value.proposals)
     })
 
-    watch(project, (currentValue) => {
-      argumentations.value = cloneDeep(currentValue?.arguments || [])
-      counterArgumentations.value = cloneDeep(
-        currentValue?.counterArguments || []
-      )
-    })
+    watch(
+      project,
+      (currentValue) => {
+        argumentations.value = cloneDeep(currentValue?.arguments || [])
+        counterArguments.value = cloneDeep(currentValue?.counterArguments || [])
+        proposals.value = cloneDeep(currentValue?.proposals || [])
+      },
+      { deep: true }
+    )
 
-    const editArgumentation = async (desc: string, id?: string | number) => {
-      if (project.value && typeof project.value['@id'] === 'string') {
-        const payload: ArgumentParams = {
-          description: desc,
+    const createEntity = async (
+      endpoint: string,
+      FormDataKey: keyof CreateForm,
+      projectProperty: (IArgument | ICounterArgument)[]
+    ) => {
+      if (project.value) {
+        const payload = {
+          ...formData.value[FormDataKey],
           project: project.value['@id'],
         }
-        if (project.value?.arguments?.length === 0)
-          await context.$axios.post('/arguments', payload).then(() => {
-            store.dispatch('projects/fetchProject', project.value?.id)
-          })
-        else if (project.value?.arguments) {
-          await context.$axios.put('/arguments/' + id, payload).then(() => {
-            store.dispatch('projects/fetchProject', project.value?.id)
-          })
-        }
+        await createE<IArgument | ICounterArgument>(
+          endpoint,
+          projectProperty,
+          payload
+        ).then(() => {
+          formData.value[FormDataKey] = {}
+        })
       }
     }
-
-    const editCounterArgumentation = async (
-      desc: string,
-      id?: string | number
+    const updateEntity = async (
+      endpoint: string,
+      data: IProposal | IArgument | ICounterArgument,
+      id: string | number
     ) => {
       if (project.value && typeof project.value['@id'] === 'string') {
-        const payload: ArgumentParams = {
-          description: desc,
+        const payload: IProposal | IArgument | ICounterArgument = {
+          ...data,
           project: project.value['@id'],
         }
-        if (project.value?.counterArguments?.length === 0)
-          await context.$axios.post('/counter_arguments', payload).then(() => {
-            store.dispatch('projects/fetchProject', project.value?.id)
-          })
-        else if (project.value?.counterArguments) {
-          await context.$axios
-            .put('/counter_arguments/' + id, payload)
-            .then(() => {
-              store.dispatch('projects/fetchProject', project.value?.id)
-            })
-        }
+        await updateE<IArgument | IProposal | ICounterArgument>(
+          endpoint,
+          id,
+          payload
+        )
       }
+    }
+    const deleteEntity = async (
+      endpoint: string,
+      id: number | string,
+      projectProperty: IArgument | ICounterArgument
+    ) => {
+      await deleteE<IArgument | ICounterArgument>(endpoint, id, projectProperty)
     }
 
     return {
       argumentations,
-      counterArgumentations,
-      editArgumentation,
-      editCounterArgumentation,
+      counterArguments,
+      proposalsFormData,
+      proposals,
+      formData,
+      createEntity,
+      updateEntity,
+      deleteEntity,
     }
   },
 })
