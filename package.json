@@ -32,7 +32,7 @@
     "@nuxtjs/composition-api": "^0.24.4",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/jit": "^0.1.18",
-    "chart.js": "^3.3.2",
+    "chart.js": "2.9.4",
     "core-js": "^3.14.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",

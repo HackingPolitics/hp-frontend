@@ -48,13 +48,12 @@ export default {
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
-    'nuxt-vite',
     '@nuxtjs/date-fns',
   ],
 
   vite: {
     optimizeDeps: {
-      exclude: ['nuxt-i18n', '@nuxt/date-fns'],
+      exclude: ['nuxt-i18n', '@nuxt/date-fns', 'vue-chartjs', 'chart.js'],
       include: ['vue-notification'],
     },
   },

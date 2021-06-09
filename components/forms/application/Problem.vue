@@ -22,7 +22,6 @@
                   :value="problem.description"
                   name="description"
                   type="text"
-                  input-class="w-full form-input"
                   element-class="inline-flex w-full"
                   @focusout="updateProblem($event.target.value, problem.id)"
                 >

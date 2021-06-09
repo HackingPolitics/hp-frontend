@@ -265,7 +265,7 @@
                     hover:bg-purple-300
                   "
                 >
-                  Login
+                  this.$t('general.login')
                 </nuxt-link>
               </div>
             </div>
@@ -320,7 +320,6 @@ export default defineComponent({
   name: 'Create',
   setup() {
     const context = useContext()
-    console.log(context)
     const formData = ref({})
     const router = useRouter()
     const currentStep = ref(1)

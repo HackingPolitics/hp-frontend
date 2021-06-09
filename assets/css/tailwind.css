@@ -36,7 +36,11 @@ html {
 }
 
 .form-input {
-  @apply block shadow-sm focus:ring-purple-500 focus:border-purple-500  sm:text-sm border-gray-300 rounded-md
+  @apply block shadow-sm focus:ring-purple-500 focus:border-purple-500  sm:text-sm border-gray-300 rounded-md;
+}
+
+.formulate-input-grouping {
+  @apply space-y-4;
 }
 
 *,

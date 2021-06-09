@@ -1,7 +1,7 @@
 <template>
   <layouts-single-view title="Konzept">
     <application-header></application-header>
-    <forms-application-theme></forms-application-theme>
+    <forms-application-strategy></forms-application-strategy>
   </layouts-single-view>
 </template>
 

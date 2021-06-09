@@ -148,7 +148,7 @@ export default defineComponent({
           current: 0,
           total: 2,
         },
-        href: 'antraege-id-problem',
+        href: 'antraege-id-fraktion-interessen',
       },
       {
         title: 'Argumente und Gegenargumente',
