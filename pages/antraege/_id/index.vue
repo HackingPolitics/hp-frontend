@@ -20,7 +20,12 @@
             class="p-4 h-40 bg-gray-200 flex"
           >
             <nuxt-link
-              :to="{ name: applicationStep.href, params: { id: projectId } }"
+              :to="
+                localePath({
+                  name: applicationStep.href,
+                  params: { id: projectId },
+                })
+              "
               class="flex-col justify-between flex"
             >
               <div class="flex-col">
@@ -74,7 +79,7 @@
         <div
           class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline justify-between"
         >
-          <h3 class="ml-2 text-xl leading-6 font-medium text-lg text-gray-900">
+          <h3 class="ml-2 leading-6 font-medium text-lg text-gray-900">
             Antrag schreiben
           </h3>
 
@@ -84,7 +89,12 @@
           </button>
         </div>
         <nuxt-link
-          :to="{ name: 'antraege-id-schreiben', params: { id: projectId } }"
+          :to="
+            localePath({
+              name: 'antraege-id-schreiben',
+              params: { id: projectId },
+            })
+          "
         >
           <application-list></application-list>
         </nuxt-link>

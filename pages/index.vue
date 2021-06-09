@@ -1,272 +1,18 @@
 <template>
-  <layouts-single-view title="Meine Anträge">
-    <div class="sm:flex mt-4">
-      <ul
-        class="
-          sm:grid sm:grid-cols-2
-          gap-3
-          sm:w-1/3
-          sm:mr-8
-          sm:h-64
-          mb-4
-          sm:mb-0
-        "
-      >
-        <li
-          v-if="user"
-          class="
-            col-span-2
-            flex
-            sm:flex-col
-            text-center
-            bg-white
-            rounded-lg
-            shadow
-            divide-y divide-gray-200
-          "
-        >
-          <div class="flex-1 flex flex-col p-2 sm:p-8">
-            <img
-              v-if="user.image"
-              class="
-                w-16
-                h-16
-                sm:w-32
-                sm:h-32
-                flex-shrink-0
-                mx-auto
-                bg-black
-                rounded-full
-              "
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-              alt=""
-            />
-            <span
-              v-else
-              class="
-                inline-block
-                h-16
-                w-16
-                sm:w-32
-                sm:h-32
-                rounded-full
-                overflow-hidden
-                mx-auto
-                bg-gray-100
-              "
-            >
-              <svg
-                class="h-full w-full text-gray-300"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-            </span>
-            <h3 class="mt-2 sm:mt-6 text-gray-900 text-sm font-medium">
-              Willkommen
-            </h3>
-            <dl class="mt-1 flex-grow flex flex-col justify-between">
-              <dt class="sr-only">Title</dt>
-              <dd
-                v-if="user.firstname && user.lastname"
-                class="text-gray-500 text-sm"
-              >
-                {{ user.firstname + ' ' + user.lastname }}
-              </dd>
-              <dd v-else class="text-gray-500 text-sm">
-                {{ user.username }}
-              </dd>
-              <dt class="sr-only">Role</dt>
-              <dd class="mt-3">
-                <span
-                  class="
-                    px-2
-                    py-1
-                    text-green-800 text-xs
-                    font-medium
-                    bg-green-100
-                    rounded-full
-                  "
-                  >Profil bearbeiten</span
-                >
-              </dd>
-            </dl>
-          </div>
-          <div>
-            <div class="-mt-px flex-col divide-y divide-gray-200">
-              <div class="flex-1 flex">
-                <span
-                  class="
-                    relative
-                    -mr-px
-                    w-0
-                    flex-1
-                    inline-flex
-                    items-center
-                    justify-center
-                    py-4
-                    text-sm text-gray-700
-                    font-medium
-                    border border-transparent
-                    rounded-bl-lg
-                    hover:text-gray-500
-                  "
-                >
-                  <span class="font-bold mr-2">{{
-                    user.createdProjects.length
-                  }}</span>
-                  Anträge
-                </span>
-              </div>
-              <div class="-ml-px flex-1 flex">
-                <span
-                  class="
-                    relative
-                    w-0
-                    flex-1
-                    inline-flex
-                    items-center
-                    justify-center
-                    py-4
-                    text-sm text-gray-400
-                    font-medium
-                    border border-transparent
-                    rounded-br-lg
-                    hover:text-gray-500
-                  "
-                >
-                  registriert seit {{ $dateFns.format(user.createdAt) }}
-                  <!-- Heroicon name: solid/phone -->
-                </span>
-              </div>
-              <div class="-ml-px flex-1 flex py-4 justify-center">
-                <nuxt-link to="antraege/erstellen">
-                  <chip chip-class="text-green-800"
-                    ><outline-plus-icon class="w-5 h-5" /> Antrag
-                    hinzufügen</chip
-                  >
-                </nuxt-link>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          v-else
-          class="
-            col-span-2
-            flex
-            sm:flex-col
-            justify-center
-            text-center
-            bg-white
-            rounded-lg
-            shadow
-          "
-        >
-          <nuxt-link to="antraege/erstellen">
-            <chip chip-class="text-green-800"
-              ><outline-plus-icon class="w-5 h-5" /> Antrag hinzufügen</chip
-            >
-          </nuxt-link>
-        </li>
-      </ul>
-      <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div
-          v-for="(project, index) in projects"
-          :key="index"
-          class="col-span-2"
-        >
-          <ul>
-            <li
-              class="
-                flex flex-col
-                bg-white
-                rounded-lg
-                shadow
-                divide-y divide-gray-200
-              "
-            >
-              <div class="flex-1">
-                <nuxt-link
-                  class="flex-1 flex flex-col"
-                  :to="{ name: 'antraege-id', params: { id: project.id } }"
-                >
-                  <img
-                    v-if="project.imageUrl"
-                    class="h-48 object-cover rounded-tl rounded-tr"
-                    :src="project.imageUrl"
-                  />
-                  <div
-                    v-else
-                    class="
-                      h-48
-                      w-full
-                      flex
-                      items-center
-                      justify-center
-                      rounded-tl rounded-tr
-                      bg-gray-300
-                      text-center
-                    "
-                  >
-                    <span class="font-semibold text-xl text-gray-700"
-                      >Kein Bild vorhanden</span
-                    >
-                  </div>
-                  <div class="px-4 pt-2 pb-4">
-                    <div class="mt-4">
-                      <chip
-                        v-for="(category, categoryIndex) in project.categories"
-                        :key="categoryIndex"
-                        class="mr-2"
-                        >{{ category.name }}</chip
-                      >
-                      <h3 class="text-gray-900 text-xl mt-4 font-medium">
-                        {{ project.title }}
-                      </h3>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="-mt-px flex justify-between">
-                      <div class="flex-1 flex p-4">
-                        <avatar-group
-                          :avatars="project.memberships"
-                        ></avatar-group>
-                      </div>
-                      <div class="-ml-px flex-1 flex">
-                        <span
-                          class="
-                            relative
-                            w-0
-                            flex-1
-                            inline-flex
-                            items-center
-                            justify-end
-                            py-4
-                            pr-4
-                            text-sm text-gray-400
-                            font-medium
-                            border border-transparent
-                            rounded-br-lg
-                            hover:text-gray-500
-                          "
-                        >
-                          {{ $dateFns.format(project.updatedAt) }}
-                          <!-- Heroicon name: solid/phone -->
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </nuxt-link>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <layouts-single-view
+    title="Stadtratsanträge in deiner Region und der ganzen Republik"
+  >
+    <div class="font-semibold text-3xl mt-16 flex relative overflow">
+      {{ projects.length }} Anträge in
+      <inline-dropdown v-model="city" :options="options"></inline-dropdown>
     </div>
+
+    <application-grid
+      :cols="3"
+      class="mt-8"
+      :projects="projects"
+      :is-loading="projectsLoading"
+    ></application-grid>
   </layouts-single-view>
 </template>
 
@@ -276,32 +22,34 @@ import {
   useStore,
   computed,
   ref,
+  watch,
 } from '@nuxtjs/composition-api'
+import { parseISO } from 'date-fns'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'ApplicationsPage',
   setup() {
+    const city = ref<String | null>('Dresden')
     const projects = ref<IProject[]>([])
     const store = useStore<RootState>()
     const user = computed(() => store.state.auth.user)
-    return { projects, user }
-  },
-  async fetch() {
-    if (this.$store.state.auth.user)
-      try {
-        const createdProjectsIds: number[] =
-          this.$store.state.auth.user.createdProjects.map(
-            (project: { id: number }) => project.id
-          )
-        const response = await this.$axios.get('/projects', {
-          params: { id: createdProjectsIds },
-        })
-        this.projects = response.data['hydra:member']
-      } catch (e) {
-        console.log(e)
-      }
+    const options = ['Dresden', 'Berlin', 'München']
+    const fetchProjects = async () => {
+      const result = await store.dispatch('projects/fetchProjects')
+      console.log(result)
+      projects.value = result
+    }
+    const projectsLoading = computed(() => {
+      return store.state.projects.isLoading
+    })
+    fetchProjects()
+
+    watch(city, () => {
+      fetchProjects()
+    })
+    return { projects, user, parseISO, city, options, projectsLoading }
   },
 })
 </script>

@@ -8,7 +8,7 @@ export default (axios: AxiosInstance) => ({
   updateProject(id: number | string, project: IProject) {
     return axios.put('/projects/' + id, project) as Promise<IProject>
   },
-  getProject(id: number | string) {
-    return axios.get('/projects/' + id) as Promise<IProject>
+  fetchProjects(): Promise<IProject[]> {
+    return axios.get('/projects') as Promise<IProject[]>
   },
 })

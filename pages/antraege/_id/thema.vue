@@ -6,13 +6,9 @@
 </template>
 
 <script>
-import { defineComponent, useRoute } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ApplicationTopic',
-  setup() {
-    const route = useRoute()
-    console.log(route.value.params.id)
-  },
 })
 </script>

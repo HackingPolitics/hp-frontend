@@ -4,11 +4,15 @@ import { IProject } from '~/types/apiSchema'
 export interface ProjectsState {
   project: IProject
   createdProject: IProject | null
+  isLoading: false
+  error: string | null
 }
 
 const defaultProjectsState: ProjectsState = {
   project: {},
   createdProject: null,
+  isLoading: false,
+  error: null,
 }
 
 export const state = () => ({
@@ -27,6 +31,14 @@ export const mutations: MutationTree<RootState> = {
   SET_PROJECT_PROPERTY(state, [property, value]) {
     state.project[property] = value
   },
+
+  SET_LOADING_FLAG(state, flag) {
+    state.isLoading = flag
+  },
+
+  SET_ERROR(state, error) {
+    state.error = error
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -34,7 +46,7 @@ export const actions: ActionTree<RootState, RootState> = {
     try {
       const response = await this.$api.projects.createProject(data)
       // @ts-ignore
-      this.$notify({ title: 'Projekt erstellt', duration: 10000 })
+      // this.$notify({ title: 'Projekt erstellt', duration: 10000 })
       commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {
@@ -57,8 +69,15 @@ export const actions: ActionTree<RootState, RootState> = {
   updateProjectProperty({ commit }, [property, value]) {
     commit('SET_PROJECT_PROPERTY', [property, value])
   },
-  async fetchProject({ commit }, id) {
-    const response = await this.$api.projects.getProject(id)
-    commit('SET_PROJECT', response.data)
+  async fetchProjects({ commit }) {
+    commit('SET_LOADING_FLAG', true)
+    try {
+      const response = await this.$api.projects.fetchProjects()
+      commit('SET_LOADING_FLAG', false)
+      return response.data['hydra:member']
+    } catch (e) {
+      commit('SET_LOADING_FLAG', false)
+      commit('SET_ERROR', e.response.data.message)
+    }
   },
 }

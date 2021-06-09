@@ -4,8 +4,7 @@
       <ol class="space-y-8">
         <li v-for="(concept, index) in concepts" :key="index" class="mb-8">
           <nuxt-link
-            :to="{ name: concept.link, params: { id: projectId } }"
-            href="#"
+            :to="localePath({ name: concept.link, params: { id: projectId } })"
             class="
               border-l-4
               hover
@@ -30,12 +29,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  useRoute,
-  computed,
-} from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRoute } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ConceptSideBar',

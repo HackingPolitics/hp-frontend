@@ -27,8 +27,8 @@ export default {
     '~/plugins/click-outside.js',
     '~/plugins/api.ts',
     '~/plugins/lodash.js',
-    '~/plugins/notifications.js',
     '~/plugins/vue-draggable.js',
+    // '~/plugins/notifications.js',
   ],
 
   env: {
@@ -48,8 +48,29 @@ export default {
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/netlify-files',
+    'nuxt-vite',
     '@nuxtjs/date-fns',
   ],
+
+  vite: {
+    optimizeDeps: {
+      exclude: [
+        'nuxt-i18n',
+        'vue-notification',
+        'plugins/notifications.js',
+        '@nuxt/date-fns',
+      ],
+    },
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.json', dir: 'ltr' },
+      { code: 'de', iso: 'de-US', file: 'de.json', dir: 'ltr' },
+    ],
+    defaultLocale: 'de',
+    langDir: 'lang',
+  },
 
   generate: {
     // choose to suit your project
@@ -76,15 +97,12 @@ export default {
     ],
   },
 
-  tailwindcss: {
-    jit: true,
-  },
-
   dateFns: {
-    defaultLocale: 'de',
-    locales: ['de'],
+    defaultLocale: 'deLocale',
+    locales: ['deLocale'],
     format: 'dd.MM.yyyy',
   },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }

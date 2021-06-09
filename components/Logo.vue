@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="{ name: 'index' }">
+  <nuxt-link :to="localePath({ name: 'index' })">
     <div
       class="
         shadow

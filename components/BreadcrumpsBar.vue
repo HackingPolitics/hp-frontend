@@ -9,7 +9,10 @@
     >
       <li class="flex">
         <div class="flex items-center">
-          <nuxt-link to="/" class="text-gray-400 hover:text-gray-500">
+          <nuxt-link
+            :to="localePath('/')"
+            class="text-gray-400 hover:text-gray-500"
+          >
             <!-- Heroicon name: solid/home -->
             <svg
               class="flex-shrink-0 h-5 w-5"
@@ -40,7 +43,7 @@
             <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
           </svg>
           <nuxt-link
-            to="/antraege"
+            :to="localePath('/antraege')"
             class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
             >Anträge</nuxt-link
           >
@@ -71,8 +74,10 @@
   </nav>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'BreadcrumpsBar',
-}
+})
 </script>

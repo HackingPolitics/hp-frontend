@@ -56,7 +56,16 @@
   <div v-else-if="response && response.success" key="success-notice">
     <div class="my-8">
       <div
-        class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-black"
+        class="
+          mx-auto
+          flex
+          items-center
+          justify-center
+          h-12
+          w-12
+          rounded-full
+          bg-black
+        "
       >
         <!-- Heroicon name: outline/check -->
         <svg
@@ -89,8 +98,27 @@
         </div>
         <div class="mt-5 sm:mt-6">
           <nuxt-link
-            to="/login"
-            class="transition duration-150 inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-400 text-base font-medium text-black hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
+            :to="localePath('/login')"
+            class="
+              transition
+              duration-150
+              inline-flex
+              justify-center
+              w-full
+              rounded-md
+              border border-transparent
+              shadow-sm
+              px-4
+              py-2
+              bg-purple-400
+              text-base
+              font-medium
+              text-black
+              hover:bg-purple-500
+              focus:outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
+              sm:text-sm
+            "
           >
             Zum Login
           </nuxt-link>
@@ -101,7 +129,16 @@
   <div v-else-if="response && !response.success" key="error-notice">
     <div class="my-8">
       <div
-        class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-black"
+        class="
+          mx-auto
+          flex
+          items-center
+          justify-center
+          h-12
+          w-12
+          rounded-full
+          bg-black
+        "
       >
         <!-- Heroicon name: outline/check -->
         <svg
