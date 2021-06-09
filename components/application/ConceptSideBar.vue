@@ -35,8 +35,8 @@ export default defineComponent({
   name: 'ConceptSideBar',
   setup() {
     const route = useRoute()
-    const projectId = ref(route.value.params.id)
-    const concepts = ref([
+    const projectId = ref<string>(route.value.params.id)
+    const concepts = ref<{ text: string; link: string }[]>([
       { text: '1. Thema', link: 'antraege-id-thema' },
       { text: '2. Probleme und Handlungsfelder', link: 'antraege-id-problem' },
       {
@@ -51,7 +51,7 @@ export default defineComponent({
     ])
     function isActive(name: string): object {
       return {
-        'border-purple-500 text-purple-500': route.value.name === name,
+        'border-purple-500 text-purple-500': route.value.name.includes(name),
       }
     }
     return { concepts, projectId, isActive }
