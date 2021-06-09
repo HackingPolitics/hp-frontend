@@ -1,5 +1,3 @@
-import { deLocale } from 'date-fns/locale/de'
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -65,8 +63,8 @@ export default {
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.js', dir: 'ltr' },
-      { code: 'de', iso: 'de-US', file: 'de.js', dir: 'ltr' },
+      { code: 'en', iso: 'en-US', file: 'en.json', dir: 'ltr' },
+      { code: 'de', iso: 'de-US', file: 'de.json', dir: 'ltr' },
     ],
     defaultLocale: 'de',
     langDir: 'lang',
