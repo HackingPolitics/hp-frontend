@@ -91,8 +91,9 @@ export const actions: ActionTree<RootState, RootState> = {
           await dispatch('projects/createProject', createdProject, {
             root: true,
           }).then((res) => {
+            console.log(this)
             this.$router.push({
-              name: 'antraege-id',
+              name: 'antraege-id___de',
               params: { id: res.data.id.toString() },
             })
           })

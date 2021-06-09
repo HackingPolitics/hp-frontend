@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative overflow-hidden">
+    <div class="relative">
       <main-nav></main-nav>
     </div>
 

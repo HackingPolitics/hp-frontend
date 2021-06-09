@@ -121,8 +121,10 @@ export default defineComponent({
   watch: {
     isSelected(newVal, _) {
       if (newVal) {
-        const list = cloneDeep(this.selectedFractions)
-        list.push(this.fraction)
+        const list: Fraction[] | null = cloneDeep(this.selectedFractions)
+        if (Array.isArray(list) && this.fraction) {
+          list.push(this.fraction)
+        }
         this.$emit('select', list)
         return
       }

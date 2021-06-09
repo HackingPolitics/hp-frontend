@@ -42,7 +42,7 @@ export default defineComponent({
           text: 'Chart.js Pie Chart',
         },
       },
-      onClick(_index, element) {
+      onClick(_: any, element: any) {
         emit('dataClick', element[0]._index)
       },
     })

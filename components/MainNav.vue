@@ -229,7 +229,7 @@
       leave-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
     >
-      <div v-if="isMobileDropdownOpen" id="mobile-menu" class="lg:hidden">
+      <div v-if="isMobileDropdownOpen" id="mobile-menu" class="lg:hidden z-10">
         <div class="pt-2 pb-3 px-2 space-y-1">
           <nav-link type="mobile" :to="localePath('/')">{{
             $t('menu.overview')
@@ -338,7 +338,7 @@
               "
               @click="$store.dispatch('auth/logout')"
             >
-              Ausloggen
+              {{ $t('general.logout') }}
             </div>
           </div>
         </div>

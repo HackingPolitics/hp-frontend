@@ -34,6 +34,7 @@ export default function () {
       const payload = cloneDeep(entityData)
       payload.push(res.data)
       store.dispatch('projects/updateProjectProperty', [endpoint, payload])
+      // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,
@@ -59,6 +60,7 @@ export default function () {
     await context.$axios.delete(endpoint + '/' + id).then(() => {
       const payload = entityData.filter((e: T) => e.id !== id)
       store.dispatch('projects/updateProjectProperty', [endpoint, payload])
+      // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,
@@ -83,6 +85,7 @@ export default function () {
   ) => {
     await context.$axios.put(endpoint + '/' + id, payload).then(() => {
       store.dispatch('projects/fetchProject', project.value?.id)
+      // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,

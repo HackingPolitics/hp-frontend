@@ -51,7 +51,7 @@ export default defineComponent({
     ])
     function isActive(name: string): object {
       return {
-        'border-purple-500 text-purple-500': route.value.name.includes(name),
+        'border-purple-500 text-purple-500': route.value?.name?.includes(name),
       }
     }
     return { concepts, projectId, isActive }

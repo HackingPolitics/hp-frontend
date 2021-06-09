@@ -150,7 +150,8 @@ export default defineComponent({
       }
     }
     const deleteProblem = async (id: number | string) => {
-      await deleteEntity<IProblem>('problems', id, problems.value)
+      // @ts-ignore
+      await deleteEntity('problems', id, problems.value)
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
