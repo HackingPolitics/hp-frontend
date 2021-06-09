@@ -65,7 +65,7 @@ export default {
       { code: 'de', iso: 'de-US', file: 'de.json', dir: 'ltr' },
     ],
     defaultLocale: 'de',
-    langDir: 'lang',
+    langDir: '~/lang/',
   },
 
   generate: {

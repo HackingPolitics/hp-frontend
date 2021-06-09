@@ -1,7 +1,7 @@
 <template>
-  <layouts-single-view>
+  <layouts-single-view :title="project.title">
     <application-header :application="project"></application-header>
-    <div class="-mt-6 space-y-16">
+    <div class="space-y-16 mt-6">
       <div>
         <div class="pb-5 border-b border-gray-200 mb-8 bg-white p-4 rounded">
           <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">

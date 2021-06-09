@@ -1,7 +1,7 @@
 <template>
-  <layouts-single-view>
-    <application-header editable></application-header>
-    <forms-application-arguments></forms-application-arguments>
+  <layouts-single-view title="Konzept">
+    <application-header></application-header>
+    <forms-application-theme></forms-application-theme>
   </layouts-single-view>
 </template>
 
