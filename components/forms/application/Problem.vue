@@ -23,6 +23,8 @@
                   name="description"
                   type="text"
                   element-class="inline-flex w-full"
+                  validation="required"
+                  @validation="validation = $event"
                   @focusout="updateProblem($event.target.value, problem.id)"
                 >
                   <template #prefix>
@@ -40,13 +42,19 @@
               </li>
             </transition-group>
           </draggable>
-          <FormulateForm v-model="createProblemForm" @submit="createProblem()">
+          <FormulateForm
+            ref="problemForm"
+            v-model="createProblemForm"
+            @submit="createProblem()"
+          >
             <div class="inline-flex w-full justify-between">
               <FormulateInput
                 type="text"
                 name="description"
                 validation="required"
                 validation-name="Problembeschreibung"
+                :key="formKey"
+                error-behavior="submit"
               />
               <FormulateInput input-class="ml-4 form-button" type="submit"
                 >+ Hinzufügen</FormulateInput
@@ -63,7 +71,7 @@
           >
             <FormulateInput name="description" type="text" />
           </FormulateInput>-->
-        </forms-form-section>
+          <!--        </forms-form-section>
         <forms-form-section
           title="Handlungsauftrag"
           subtitle="Was sollte die Stadtverwaltung tun, um das Problem anzugehen"
@@ -79,7 +87,7 @@
             <FormulateInput input-class="ml-4 form-button" type="button"
               >Hinzufügen</FormulateInput
             >
-          </div>
+          </div>-->
         </forms-form-section>
       </div>
     </forms-layout>
@@ -90,7 +98,6 @@
 import {
   defineComponent,
   onMounted,
-  useContext,
   watch,
   ref,
   useStore,
@@ -100,23 +107,31 @@ import { IProblem } from '~/types/apiSchema'
 import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
+import { IValidation } from '~/types/vueFormulate'
 
 interface ProblemForm {
   problems?: IProblem[]
   description?: string
   project?: string
 }
+
 export default defineComponent({
   name: 'Problem',
-  setup() {
+  setup(context) {
     const { createEntity, deleteEntity, updateEntity, project } =
       editApplication()
 
     const problems = ref<IProblem[]>([])
     const createProblemForm = ref<ProblemForm>({})
 
+    /*
+     workaround for resetting form and validation because
+     $formulate plugin is not support for vue 3 now
+     */
+    const validation = ref<IValidation>({ hasErrors: false })
+    const formKey = ref(1)
+
     const store = useStore<RootState>()
-    const context = useContext()
 
     onMounted(() => {
       if (project.value?.problems) {
@@ -144,7 +159,7 @@ export default defineComponent({
         }
         await createEntity<IProblem>('problems', problems.value, payload).then(
           () => {
-            createProblemForm.value = {}
+            formKey.value++
           }
         )
       }
@@ -155,10 +170,12 @@ export default defineComponent({
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
-      const payload = {
-        description: desc,
+      if (!validation.value.hasErrors) {
+        const payload = {
+          description: desc,
+        }
+        await updateEntity<IProblem>('problems', id, payload)
       }
-      await updateEntity<IProblem>('problems', id, payload)
     }
 
     const updateProblemPriority = async () => {
@@ -186,7 +203,9 @@ export default defineComponent({
     }
     return {
       problems,
+      formKey,
       createProblemForm,
+      validation,
       deleteProblem,
       createProblem,
       updateProblem,

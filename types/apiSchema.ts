@@ -65,7 +65,6 @@ export interface IHydraCollection<T extends IModel> {
 }
 
 export interface IUser extends INumericIdentifierModel {
-  '@id'?: string
   active?: boolean
   createdAt?: string
   deletedAt?: Date | string
@@ -122,9 +121,6 @@ export interface IProblem extends IModel {
 
 export interface IProject extends IModel {
   categories?: ICategory[]
-  '@context'?: string
-  '@id'?: string
-  '@type'?: string
   description?: string
   impact?: string
   parliament?: IParliament
