@@ -83,26 +83,8 @@ export const actions: ActionTree<RootState, RootState> = {
       const user = await this.$api.user.getUser(decoded.id)
       commit('SET_USER', user.data)
 
-      // @ts-ignore
-      const createdProject = rootState.projects.createdProject
+      this.$router.push('/')
 
-      if (createdProject !== null) {
-        try {
-          await dispatch('projects/createProject', createdProject, {
-            root: true,
-          }).then((res) => {
-            console.log(this)
-            this.$router.push({
-              name: 'antraege-id___de',
-              params: { id: res.data.id.toString() },
-            })
-          })
-        } catch (error) {
-          console.log(error)
-        }
-      } else {
-        this.$router.push('/')
-      }
       commit('SET_LOADING_FLAG', false)
       return response
     } catch (error) {
