@@ -78,6 +78,7 @@
                 type="text"
                 name="contactName"
                 label="Ansprechpartner"
+                :validation="'not:' + createPartnerFormData.name"
               />
               <FormulateInput
                 outer-class="w-1/2 pr-4 pb-4"

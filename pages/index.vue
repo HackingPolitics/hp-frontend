@@ -21,12 +21,18 @@ import {
   defineComponent,
   useStore,
   computed,
+  useRouter,
+  useContext,
   ref,
   watch,
+  onBeforeMount,
+  ComputedRef,
 } from '@nuxtjs/composition-api'
 import { parseISO } from 'date-fns'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
+import { onMounted } from '@vue/runtime-dom'
+import { cloneDeep } from 'lodash'
 
 export default defineComponent({
   name: 'ApplicationsPage',
@@ -40,6 +46,31 @@ export default defineComponent({
       const result = await store.dispatch('projects/fetchProjects')
       projects.value = result
     }
+    const router = useRouter()
+    const context = useContext()
+
+    const createdProject: ComputedRef<IProject | null> = computed(
+      (): IProject | null => store.state.projects.createdProject
+    )
+    const isLoggedIn: ComputedRef<IProject | null> = computed(
+      () => store.getters['auth/isLoggedIn']
+    )
+    onBeforeMount(async () => {
+      if (isLoggedIn.value && createdProject) {
+        try {
+          await store
+            .dispatch('projects/createProject', createdProject.value)
+            .then((res) => {
+              router.push(
+                context.localePath('/antraege/' + res.data.id.toString())
+              )
+            })
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    })
+
     const projectsLoading = computed(() => {
       return store.state.projects.isLoading
     })
@@ -48,7 +79,14 @@ export default defineComponent({
     watch(city, () => {
       fetchProjects()
     })
-    return { projects, user, parseISO, city, options, projectsLoading }
+    return {
+      projects,
+      user,
+      parseISO,
+      city,
+      options,
+      projectsLoading,
+    }
   },
 })
 </script>

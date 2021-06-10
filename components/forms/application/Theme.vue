@@ -7,8 +7,10 @@
       >
         <FormulateInput
           type="textarea"
-          rows="5"
           v-model="topic"
+          rows="5"
+          validation="required"
+          @validation="validation = $event"
           @focusout="updateProject()"
         >
         </FormulateInput>
@@ -43,6 +45,7 @@ import {
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 import { ICategory, IProject } from '~/types/apiSchema'
+import { IValidation } from '~/types/vueFormulate'
 
 interface TopicForm {
   topic: string
@@ -61,6 +64,8 @@ export default defineComponent({
       (): IProject | null => store.state.projects.project
     )
 
+    const validation = ref<IValidation>({ hasErrors: false })
+
     onBeforeMount(() => {
       topic.value = project.value?.topic
       project.value?.categories?.forEach((category) => {
@@ -69,16 +74,19 @@ export default defineComponent({
     })
 
     const updateProject = () => {
-      store.dispatch('projects/updateProject', [
-        project.value?.id,
-        { topic: topic.value, categories: categories.value },
-      ])
+      if (!validation.value.hasErrors) {
+        store.dispatch('projects/updateProject', [
+          project.value?.id,
+          { topic: topic.value, categories: categories.value },
+        ])
+      }
     }
     return {
       formData,
       topic,
       categories,
       categoryOptions,
+      validation,
       updateProject,
     }
   },
