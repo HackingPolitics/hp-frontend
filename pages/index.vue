@@ -31,8 +31,6 @@ import {
 import { parseISO } from 'date-fns'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
-import { onMounted } from '@vue/runtime-dom'
-import { cloneDeep } from 'lodash'
 
 export default defineComponent({
   name: 'ApplicationsPage',

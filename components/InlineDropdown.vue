@@ -65,6 +65,7 @@
             bg-white
             ring-1 ring-black ring-opacity-5
             focus:outline-none
+            z-20
           "
           role="menu"
           aria-orientation="vertical"
@@ -82,8 +83,7 @@
                 px-4
                 py-2
                 text-sm
-                hover:bg-purple-300
-                hover:text-purple-800
+                hover:bg-purple-300 hover:text-purple-800
                 cursor-pointer
               "
               role="menuitem"
