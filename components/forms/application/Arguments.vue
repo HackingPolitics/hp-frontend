@@ -52,11 +52,11 @@
             >
               <div class="inline-flex w-full justify-between">
                 <FormulateInput
+                  :key="formKey"
                   type="text"
                   name="description"
                   validation="required"
                   :validation-name="$t('validation.name.arguments.description')"
-                  :key="formKey"
                 />
                 <FormulateInput input-class="ml-4 form-button" type="submit"
                   ><outline-plus-icon class="h-5 w-5"
@@ -128,13 +128,13 @@
             >
               <div class="inline-flex w-full justify-between">
                 <FormulateInput
+                  :key="formKey"
                   type="text"
                   name="description"
                   validation="required"
                   :validation-name="
                     $t('validation.name.counter_arguments.description')
                   "
-                  :key="formKey"
                 />
                 <FormulateInput input-class="ml-4 form-button" type="submit"
                   ><outline-plus-icon class="h-5 w-5" />
@@ -417,6 +417,7 @@ export default defineComponent({
       id: number | string,
       projectProperty: IArgument | ICounterArgument
     ) => {
+      // @ts-ignore
       await deleteE<IArgument | ICounterArgument>(endpoint, id, projectProperty)
     }
 

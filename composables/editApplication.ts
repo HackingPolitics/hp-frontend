@@ -37,6 +37,7 @@ export default function () {
         camelCase(endpoint),
         payload,
       ])
+      // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,
@@ -65,6 +66,7 @@ export default function () {
         camelCase(endpoint),
         payload,
       ])
+      // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
         duration: notificationOptions.duration,

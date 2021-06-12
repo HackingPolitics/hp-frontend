@@ -49,11 +49,11 @@
           >
             <div class="inline-flex w-full justify-between">
               <FormulateInput
+                :key="formKey"
                 type="text"
                 name="description"
                 validation="required"
                 validation-name="Problembeschreibung"
-                :key="formKey"
                 error-behavior="submit"
               />
               <FormulateInput input-class="ml-4 form-button" type="submit"
@@ -101,6 +101,7 @@ import {
   watch,
   ref,
   useStore,
+  useContext,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
 import { IProblem } from '~/types/apiSchema'
@@ -117,12 +118,14 @@ interface ProblemForm {
 
 export default defineComponent({
   name: 'Problem',
-  setup(context) {
+  setup() {
     const { createEntity, deleteEntity, updateEntity, project } =
       editApplication()
 
     const problems = ref<IProblem[]>([])
     const createProblemForm = ref<ProblemForm>({})
+
+    const context = useContext()
 
     /*
      workaround for resetting form and validation because
