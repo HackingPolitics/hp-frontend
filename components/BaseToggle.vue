@@ -13,8 +13,7 @@
       h-5
       w-10
       cursor-pointer
-      focus:outline-none
-      focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
+      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
     "
     role="switch"
     aria-checked="false"
@@ -39,7 +38,7 @@
         ease-in-out
         duration-200
       "
-      :class="value ? 'bg-purple-600' : 'bg-gray-200'"
+      :class="value ? 'bg-green-500' : 'bg-gray-200'"
     ></span>
     <span
       aria-hidden="true"

@@ -31,8 +31,8 @@ export default defineComponent({
   setup(_, { emit }) {
     const options = ref({
       responsive: true,
-      maintainAspectRatio: false,
-      height: 300,
+      maintainAspectRatio: true,
+      height: 200,
       circumference: 3.13,
       rotation: -3.12,
       plugins: {
@@ -50,3 +50,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="postcss">
+/* .chartjs-size-monitor {
+  @apply relative h-48;
+} */
+</style>
