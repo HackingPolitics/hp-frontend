@@ -1,36 +1,18 @@
 {
-  "actionMandate": "Aktions Mandat",
+  "actionMandate": "Handlungsauftrag",
   "comment": "Kommentar",
   "contact": {
     "email": "Kontakt-Email"
   },
   "email": "Email",
-  "forms": {
-    "arguments": {
-      "question": "Was spricht für dein Konzept ?",
-      "title": "Argumente"
-    },
-    "counter_arguments": {
-      "question": "Was spreicht gegen dein Konzept"
-    },
-    "proposals": {
-      "add": "Vorschalg hinzufügen",
-      "title": "Vorschläge"
-    }
-  },
   "introduction": "Einführung",
-  "menu": {
-    "collaboration": "Kollaboration",
-    "faq": "FAQ",
-    "overview": "Übersicht"
-  },
   "of": "von",
   "proposal": {
     "createProposal": "Antrag hinzufügen",
     "form": {
       "header": "Neuen Antrag erstellen",
       "title": {
-        "help": "Alle nicht benötigten Federn kannst du auch später auszufüllen",
+        "help": "Alle nicht benötigten Felden kannst du auch später ausfüllen",
         "label": "Wie nennst du dein Projekt?",
         "name": "Projekttitel"
       }
@@ -42,6 +24,32 @@
   "step": "Schritt",
   "title": "Titel",
   "url": "Url",
+
+
+
+
+  "forms": {
+    "arguments": {
+      "question": "Welche Argumente sprechen dafür, diesen Handlungsauftrag umzusetzen?",
+      "title": "Argumente"
+    },
+    "counter_arguments": {
+      "question": "Welche Gegenargumente könnten kommen?"
+    },
+    "proposals": {
+      "add": "Vorschlag hinzufügen",
+      "title": "Vorschläge"
+    }
+  },
+  "menu": {
+    "collaboration": "Kollaboration",
+    "faq": "FAQ",
+    "overview": "Übersicht"
+  },
+  "page": {
+  },
+  "user": {
+  },
   "validation": {
     "name": {
       "arguments": {
