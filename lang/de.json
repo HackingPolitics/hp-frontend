@@ -26,17 +26,19 @@
   "url": "Url",
   "repeatable": {
     "category": {
-      "buildingAndLiving": "Bauen und Wohnen",
-      "educationAndResearch": "Bildung und Forschung",
-      "energyAndSupply": "Energie und Versorgung",
-      "mobility": "Mobilität und Logistik",
-      "environmentAndClimate": "Stadtgrün und Stadtklima",
-      "participationAndGovernment": "Bürgerbeteiligung und Verwaltung",
-      "socialAndHealth": "Soziales und Gesundheit",
-      "economyAndResources": "Wirtschaft und Rohstoffe",
+      "buildingAndLiving": "Bauen & Wohnen",
+      "educationAndResearch": "Bildung & Forschung",
+      "educationAndSocial": "Bildung & Soziales",
+      "energyAndSupply": "Energie & Versorgung",
+      "mobility": "Mobilität & Logistik",
+      "environmentAndClimate": "Stadtgrün & Stadtklima",
+      "environment": "Klima",
+      "participationAndGovernment": "Bürgerbeteiligung & Verwaltung",
+      "socialAndHealth": "Soziales & Gesundheit",
+      "economyAndResources": "Wirtschaft & Rohstoffe",
       "infrastructure": "Infrastruktur",
       "leisure": "Freizeit",
-      "artAndCulture": "Kunst und Kultur",
+      "artAndCulture": "Kunst & Kultur",
       "other": "Sonstiges"
     }
   },
