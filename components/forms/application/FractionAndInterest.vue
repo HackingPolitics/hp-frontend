@@ -1,20 +1,20 @@
 <template>
   <FormulateForm v-model="formData">
-    <forms-layout title="Ratsmehrheit und Fraktionsinteressen">
+    <forms-layout title="{{$t('forms.fractioninterests.title')}}">
       <div class="bg-gray-200 py-4">
         <div class="flex justify-between px-6">
           <div class="font-semibold">{{ council.name }}</div>
-          <div class="">Stand: 20.05.2021</div>
+          <div class="">$t('forms.fractioninterests.parliamentProfileUpdatedAt'): 20.05.2021</div>
         </div>
       </div>
       <div class="px-6 bg-white py-4">
         <div class="flex space-x-6 mt-4">
-          <div><span class="font-semibold">5</span> Fraktionen</div>
+          <div><span class="font-semibold">5</span> $t('forms.fractioninterests.fractions')</div>
           <div>
-            <span class="font-semibold">{{ council.members }}</span> Sitze
+            <span class="font-semibold">{{ council.members }}</span> $t('forms.fractioninterests.mandates')
           </div>
           <div class="text-green-500">
-            <span class="font-semibold">{{ votesCount }}</span> Partnerstimmen
+            <span class="font-semibold">{{ votesCount }}</span> $t('forms.fractioninterests.partnerMandates')
           </div>
         </div>
         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -32,7 +32,7 @@
             <div v-if="neededVotes > 0" class="w-56 py-8 text-center mx-auto">
               Noch
               <span class="text-green-500 text-xl"
-                >{{ neededVotes }} Stimmen</span
+                >{{ neededVotes }} $t('forms.fractioninterests.votes')</span
               >
               für ein mehrheitliches Interesse
             </div>

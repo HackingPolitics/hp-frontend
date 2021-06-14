@@ -29,12 +29,18 @@
 
   "default": {
     "category": {
-      "educationAndSocial": "Bildung und Soziales",
-      "mobility": "Mobilität",
-      "environment": "Umwelt",
+      "buildingAndLiving": "Bauen & Wohnen",
+      "educationAndResearch": "Bildung & Forschung",
+      "energyAndSupply": "Energie & Versorgung",
+      "mobility": "Mobilität & Logistik",
+      "environmentAndClimate": "Stadtgrün & Stadtklima",
+      "participationAndGovernment": "Bürgerbeteiligung & Verwaltung",
+      "socialAndHealth": "Soziales & Gesundheit",
+      "economyAndResources": "Wirtschaft & Rohstoffe",
       "infrastructure": "Infrastruktur",
       "leisure": "Freizeit",
-      "artAndCulture": "Kunst & Kultur"
+      "artAndCulture": "Kunst & Kultur",
+      "other": "Sonstiges"
     }
   },
   "forms": {
@@ -70,6 +76,14 @@
         "label": "Mit welchem Thema soll sich der Antrag befassen?",
         "placeholder": "Parkplätze in der Stadt"
       }
+    },
+    "fractioninterests": {
+      "fractions": "Fraktionen",
+      "mandates": "Sitze/Stimmen",
+      "title": "Ratsmehrheit und Fraktionsinteressen",
+      "parliamentProfileUpdatedAt": "Stand",
+      "partnerMandates": "Partnerstimmen",
+      "votes": "Stimmen"
     },
     "proposals": {
       "add": "Vorschlag hinzufügen",
