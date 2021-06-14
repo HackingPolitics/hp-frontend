@@ -101,20 +101,20 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
-                  label="$t('forms.proposal.topic.label')"
+                  :label="$t('forms.proposal.topic.label')"
                   type="textarea"
                   name="topic"
                   :validation="currentStep === 2 ? 'required' : ''"
                 />
                 <FormulateInput
-                  label="$t('forms.proposal.description.label')"
+                  :label="$t('forms.proposal.description.label')"
                   type="textarea"
                   name="description"
                   :validation="currentStep === 2 ? 'required' : ''"
                 />
                 <div class="flex justify-between w-full">
                   <FormulateInput
-                    label="$t('forms.proposal.motivation.label')"
+                    :label="$t('forms.proposal.motivation.label')"
                     type="text"
                     name="motivation"
                     :validation="
@@ -123,7 +123,7 @@
                     wrapper-class="w-4/5"
                   />
                   <FormulateInput
-                    label="$t('forms.proposal.skills.label')"
+                    :label="$t('forms.proposal.skills.label')"
                     type="text"
                     name="skills"
                     :validation="
@@ -133,31 +133,34 @@
                   />
                 </div>
                 <FormulateInput
-                  aria-label="$t('forms.proposal.category.label')"
+                  :aria-label="$t('forms.proposal.category.label')"
                   type="chipGroup"
                   name="category"
                   limit="2"
-                  label="$t('forms.proposal.category.label')"
+                  :label="$t('forms.proposal.category.label')"
                   :options="[
                     {
-                      label: $t('default.category.educationAndSocial'),
+                      label: $t('repeatable.category.educationAndSocial'),
                       value: 'education_social',
                     },
                     {
-                      label: $t('default.category.mobility'),
+                      label: $t('repeatable.category.mobility'),
                       value: 'mobility',
                     },
                     {
-                      label: $t('default.category.environment'),
+                      label: $t('repeatable.category.environment'),
                       value: 'environment',
                     },
                     {
-                      label: $t('default.category.infrastructure'),
+                      label: $t('repeatable.category.infrastructure'),
                       value: 'infrastructure',
                     },
-                    { label: $t('default.category.leisure'), value: 'leisure' },
                     {
-                      label: $t('default.category.artAndCulture'),
+                      label: $t('repeatable.category.leisure'),
+                      value: 'leisure',
+                    },
+                    {
+                      label: $t('repeatable.category.artAndCulture'),
                       value: 'art_culture',
                     },
                   ]"

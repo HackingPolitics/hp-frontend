@@ -24,19 +24,19 @@
   "step": "Schritt",
   "title": "Titel",
   "url": "Url",
-  "default": {
+  "repeatable": {
     "category": {
-      "buildingAndLiving": "Bauen & Wohnen",
-      "educationAndResearch": "Bildung & Forschung",
-      "energyAndSupply": "Energie & Versorgung",
-      "mobility": "Mobilität & Logistik",
-      "environmentAndClimate": "Stadtgrün & Stadtklima",
-      "participationAndGovernment": "Bürgerbeteiligung & Verwaltung",
-      "socialAndHealth": "Soziales & Gesundheit",
-      "economyAndResources": "Wirtschaft & Rohstoffe",
+      "buildingAndLiving": "Bauen und Wohnen",
+      "educationAndResearch": "Bildung und Forschung",
+      "energyAndSupply": "Energie und Versorgung",
+      "mobility": "Mobilität und Logistik",
+      "environmentAndClimate": "Stadtgrün und Stadtklima",
+      "participationAndGovernment": "Bürgerbeteiligung und Verwaltung",
+      "socialAndHealth": "Soziales und Gesundheit",
+      "economyAndResources": "Wirtschaft und Rohstoffe",
       "infrastructure": "Infrastruktur",
       "leisure": "Freizeit",
-      "artAndCulture": "Kunst & Kultur",
+      "artAndCulture": "Kunst und Kultur",
       "other": "Sonstiges"
     }
   },
@@ -101,7 +101,7 @@
     "proposal": {
       "createProposal": "Antragsprojekt starten"
     },
-    "myProposals": {
+    "myproposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
       "proposals": "Anträge",
       "registeredSince": "registriert seit",
