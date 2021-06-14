@@ -5,9 +5,7 @@
         class="
           sm:grid sm:grid-cols-2
           gap-3
-          sm:w-1/3
-          sm:mr-8
-          sm:h-64
+          sm:w-1/3 sm:mr-8 sm:h-64
           mb-4
           sm:mb-0
         "
@@ -31,8 +29,7 @@
               class="
                 w-16
                 h-16
-                sm:w-32
-                sm:h-32
+                sm:w-32 sm:h-32
                 flex-shrink-0
                 mx-auto
                 bg-black
@@ -47,8 +44,7 @@
                 inline-block
                 h-16
                 w-16
-                sm:w-32
-                sm:h-32
+                sm:w-32 sm:h-32
                 rounded-full
                 overflow-hidden
                 mx-auto
@@ -66,7 +62,7 @@
               </svg>
             </span>
             <h3 class="mt-2 sm:mt-6 text-gray-900 text-sm font-medium">
-              $t('page.myproposals.heading')
+              {{ $t('page.myproposals.heading') }}
             </h3>
             <dl class="mt-1 flex-grow flex flex-col justify-between">
               <dt class="sr-only">Title</dt>
@@ -90,7 +86,7 @@
                     bg-green-100
                     rounded-full
                   "
-                  >$t('goto.userProfile')</span
+                  >{{ $t('goto.userProfile') }}</span
                 >
               </dd>
             </dl>
@@ -118,7 +114,7 @@
                   <span class="font-bold mr-2">{{
                     user.createdProjects.length
                   }}</span>
-                  $t('page.myproposals.proposals')
+                  {{ $t('page.myproposals.proposals') }}
                 </span>
               </div>
               <div class="-ml-px flex-1 flex">
@@ -138,7 +134,7 @@
                     hover:text-gray-500
                   "
                 >
-                  $t('page.myproposals.registeredSince')
+                  {{ $t('page.myproposals.registeredSince') }}
                   <!-- {{
                       user.createdAt
                         ? $dateFns.format(
