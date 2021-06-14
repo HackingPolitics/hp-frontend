@@ -27,7 +27,16 @@
 
 
 
-
+  "default": {
+    "category": {
+      "educationAndSocial": "Bildung und Soziales",
+      "mobility": "Mobilität",
+      "environment": "Umwelt",
+      "infrastructure": "Infrastruktur",
+      "leisure": "Freizeit",
+      "artAndCulture": "Kunst & Kultur"
+    }
+  },
   "forms": {
     "arguments": {
       "question": "Welche Argumente sprechen dafür, diesen Handlungsauftrag umzusetzen?",
@@ -36,10 +45,41 @@
     "counter_arguments": {
       "question": "Welche Gegenargumente könnten kommen?"
     },
+    "proposal": {
+      "category": {
+        "label": "Welcher Kategorie läßt sich das Thema einordnen?"
+      },
+      "description": {
+        "label": "Beschreibe deine Antragsidee!",
+        "placeholder": "In diesem Stadtratsantrag geht es um..."
+      },
+      "motivation": {
+        "label": "Was treibt dich an?",
+        "placeholder": "Meine Motivation ist..."
+      },
+      "skills": {
+        "label": "Welche Fähigkeiten bringst du ein?",
+        "placeholder": "Ich habe Erfahrung mit..."
+      },
+      "title": {
+        "help": "Alle nicht benötigten Felden kannst du auch später ausfüllen",
+        "label": "Wie nennst du dein Projekt?",
+        "placeholder": "Titel des Antragsprojekts"
+      },
+      "topic": {
+        "label": "Mit welchem Thema soll sich der Antrag befassen?",
+        "placeholder": "Parkplätze in der Stadt"
+      }
+    },
     "proposals": {
       "add": "Vorschlag hinzufügen",
       "title": "Vorschläge"
     }
+  },
+  "goto": {
+    "createProposal": "Antragsprojekt starten",
+    "myproposals": "Meine Antragsprojekte",
+    "userProfile": "Benutzerprofil"
   },
   "menu": {
     "collaboration": "Kollaboration",
@@ -47,6 +87,15 @@
     "overview": "Übersicht"
   },
   "page": {
+    "proposal": {
+      "createProposal": "Antragsprojekt starten",
+    },
+    "myproposals": {
+      "heading": "Du arbeitest an folgenden Antragsprojekten mit",
+      "proposals": "Anträge",
+      "registeredSince": "registriert seit",
+      "title": "Meine Antragsprojekte",
+    }
   },
   "user": {
   },

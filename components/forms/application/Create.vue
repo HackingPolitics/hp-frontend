@@ -5,7 +5,7 @@
     @submit="createProject()"
   >
     <forms-layout
-      :title="currentStep !== 4 ? $t('proposal.createProposal') : ''"
+      :title="currentStep !== 4 ? $t('page.proposal.createProposal') : ''"
       :steps="steps"
       no-concept-sidebar
       no-floating-sidebar
@@ -20,11 +20,11 @@
                     ? 'Projektthema'
                     : currentStep === 3
                     ? 'Politik'
-                    : $t('proposal.form.title.label')
+                    : $t('forms.proposal.title.label')
                 }}
               </h3>
               <p class="mt-1 text-sm text-gray-500">
-                {{ $t('proposal.form.title.help') }}
+                {{ $t('forms.proposal.title.help') }}
               </p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -33,8 +33,8 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
-                  :label="$t('proposal.form.title.label')"
-                  :placeholder="$t('proposal.form.title.name')"
+                  :label="$t('forms.proposal.title.label')"
+                  :placeholder="$t('forms.proposal.title.placeholder')"
                   type="text"
                   name="title"
                   validation="required"
@@ -101,14 +101,20 @@
                 class="space-y-6 flex flex-col justify-center"
               >
                 <FormulateInput
-                  label="Wie würdet ihr euer Projekt beschreiben?"
+                  label="$t('forms.proposal.topic.label')"
+                  type="textarea"
+                  name="topic"
+                  :validation="currentStep === 2 ? 'required' : ''"
+                />
+                <FormulateInput
+                  label="$t('forms.proposal.description.label')"
                   type="textarea"
                   name="description"
                   :validation="currentStep === 2 ? 'required' : ''"
                 />
                 <div class="flex justify-between w-full">
                   <FormulateInput
-                    label="Was treibt euch an?"
+                    label="$t('forms.proposal.motivation.label')"
                     type="text"
                     name="motivation"
                     :validation="
@@ -117,7 +123,7 @@
                     wrapper-class="w-4/5"
                   />
                   <FormulateInput
-                    label="Welche Fähigkeiten habt ihr?"
+                    label="$t('forms.proposal.skills.label')"
                     type="text"
                     name="skills"
                     :validation="
@@ -127,27 +133,21 @@
                   />
                 </div>
                 <FormulateInput
-                  label="Was ist das Thema mit dem sich euer Antrag befasst?"
-                  type="textarea"
-                  name="topic"
-                  :validation="currentStep === 2 ? 'required' : ''"
-                />
-                <FormulateInput
-                  aria-label="In welche Thema passt euer Thema"
+                  aria-label="$t('forms.proposal.category.label')"
                   type="chipGroup"
                   name="category"
                   limit="2"
-                  label="In Welche Kategorie passt euer Thema"
+                  label="$t('forms.proposal.category.label')"
                   :options="[
                     {
-                      label: 'Bildung und Soziales',
+                      label: }$t('default.category.educationAndSocial'){,
                       value: 'education_social',
                     },
-                    { label: 'Mobilität', value: 'mobility' },
-                    { label: 'Umwelt', value: 'environment' },
-                    { label: 'Infrastruktur', value: 'infrastructure' },
-                    { label: 'Freizeit', value: 'leisure' },
-                    { label: 'Kunst und Kultur', value: 'art_culture' },
+                    { label: }$t('default.category.mobility'){, value: 'mobility' },
+                    { label: }$t('default.category.environment'){, value: 'environment' },
+                    { label: }$t('default.category.infrastructure'){, value: 'infrastructure' },
+                    { label: }$t('default.category.leisure'){, value: 'leisure' },
+                    { label: }$t('default.category.artAndCulture'){, value: 'art_culture' },
                   ]"
                 />
               </div>

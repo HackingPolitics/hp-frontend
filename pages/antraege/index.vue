@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view :title="$t('proposal.myProposals')">
+  <layouts-single-view :title="$t('page.myproposals.title')">
     <div class="sm:flex mt-4">
       <ul
         class="
@@ -66,7 +66,7 @@
               </svg>
             </span>
             <h3 class="mt-2 sm:mt-6 text-gray-900 text-sm font-medium">
-              Willkommen
+              $t('page.myproposals.heading')
             </h3>
             <dl class="mt-1 flex-grow flex flex-col justify-between">
               <dt class="sr-only">Title</dt>
@@ -90,7 +90,7 @@
                     bg-green-100
                     rounded-full
                   "
-                  >Profil bearbeiten</span
+                  >$t('goto.userProfile')</span
                 >
               </dd>
             </dl>
@@ -118,7 +118,7 @@
                   <span class="font-bold mr-2">{{
                     user.createdProjects.length
                   }}</span>
-                  Anträge
+                  $t('page.myproposals.proposals')
                 </span>
               </div>
               <div class="-ml-px flex-1 flex">
@@ -138,7 +138,7 @@
                     hover:text-gray-500
                   "
                 >
-                  registriert seit
+                  $t('page.myproposals.registeredSince')
                   <!-- {{
                       user.createdAt
                         ? $dateFns.format(
@@ -157,7 +157,7 @@
                 <nuxt-link :to="localePath('/antraege/erstellen')">
                   <chip chip-class="text-green-800"
                     ><outline-plus-icon class="w-5 h-5" />
-                    {{ $t('proposal.createProposal') }}</chip
+                    {{ $t('goto.createProposal') }}</chip
                   >
                 </nuxt-link>
               </div>
@@ -180,7 +180,7 @@
           <nuxt-link :to="localePath('/antraege/erstellen')">
             <chip chip-class="text-gray-600"
               ><outline-plus-icon class="w-5 h-5 text-purple-500 block" />
-              {{ $t('proposal.createProposal') }}</chip
+              {{ $t('goto.createProposal') }}</chip
             >
           </nuxt-link>
         </li>
