@@ -140,14 +140,26 @@
                   label="$t('forms.proposal.category.label')"
                   :options="[
                     {
-                      label: }$t('default.category.educationAndSocial'){,
+                      label: $t('default.category.educationAndSocial'),
                       value: 'education_social',
                     },
-                    { label: }$t('default.category.mobility'){, value: 'mobility' },
-                    { label: }$t('default.category.environment'){, value: 'environment' },
-                    { label: }$t('default.category.infrastructure'){, value: 'infrastructure' },
-                    { label: }$t('default.category.leisure'){, value: 'leisure' },
-                    { label: }$t('default.category.artAndCulture'){, value: 'art_culture' },
+                    {
+                      label: $t('default.category.mobility'),
+                      value: 'mobility',
+                    },
+                    {
+                      label: $t('default.category.environment'),
+                      value: 'environment',
+                    },
+                    {
+                      label: $t('default.category.infrastructure'),
+                      value: 'infrastructure',
+                    },
+                    { label: $t('default.category.leisure'), value: 'leisure' },
+                    {
+                      label: $t('default.category.artAndCulture'),
+                      value: 'art_culture',
+                    },
                   ]"
                 />
               </div>

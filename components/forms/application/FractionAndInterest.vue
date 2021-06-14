@@ -1,20 +1,27 @@
 <template>
   <FormulateForm v-model="formData">
-    <forms-layout title="{{$t('forms.fractioninterests.title')}}">
+    <forms-layout :title="$t('forms.fractioninterests.title')">
       <div class="bg-gray-200 py-4">
         <div class="flex justify-between px-6">
           <div class="font-semibold">{{ council.name }}</div>
-          <div class="">$t('forms.fractioninterests.parliamentProfileUpdatedAt'): 20.05.2021</div>
+          <div class="">
+            $t('forms.fractioninterests.parliamentProfileUpdatedAt'): 20.05.2021
+          </div>
         </div>
       </div>
       <div class="px-6 bg-white py-4">
         <div class="flex space-x-6 mt-4">
-          <div><span class="font-semibold">5</span> $t('forms.fractioninterests.fractions')</div>
           <div>
-            <span class="font-semibold">{{ council.members }}</span> $t('forms.fractioninterests.mandates')
+            <span class="font-semibold">5</span>
+            $t('forms.fractioninterests.fractions')
+          </div>
+          <div>
+            <span class="font-semibold">{{ council.members }}</span>
+            $t('forms.fractioninterests.mandates')
           </div>
           <div class="text-green-500">
-            <span class="font-semibold">{{ votesCount }}</span> $t('forms.fractioninterests.partnerMandates')
+            <span class="font-semibold">{{ votesCount }}</span>
+            $t('forms.fractioninterests.partnerMandates')
           </div>
         </div>
         <!-- This example requires Tailwind CSS v2.0+ -->

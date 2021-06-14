@@ -24,9 +24,6 @@
   "step": "Schritt",
   "title": "Titel",
   "url": "Url",
-
-
-
   "default": {
     "category": {
       "buildingAndLiving": "Bauen & Wohnen",
@@ -92,7 +89,7 @@
   },
   "goto": {
     "createProposal": "Antragsprojekt starten",
-    "myproposals": "Meine Antragsprojekte",
+    "myProposals": "Meine Antragsprojekte",
     "userProfile": "Benutzerprofil"
   },
   "menu": {
@@ -102,13 +99,13 @@
   },
   "page": {
     "proposal": {
-      "createProposal": "Antragsprojekt starten",
+      "createProposal": "Antragsprojekt starten"
     },
-    "myproposals": {
+    "myProposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
       "proposals": "Anträge",
       "registeredSince": "registriert seit",
-      "title": "Meine Antragsprojekte",
+      "title": "Meine Antragsprojekte"
     }
   },
   "user": {
