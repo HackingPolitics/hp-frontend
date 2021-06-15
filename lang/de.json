@@ -103,6 +103,17 @@
     "proposal": {
       "createProposal": "Antragsprojekt starten"
     },
+    "application": {
+      "concept": "Antragskonzept",
+      "write": "Antrag schreiben",
+      "problems": "Problem",
+      "topic": "Thema",
+      "fraction": "Ratsmehrheiten und Fraktionsinteressen",
+      "arguments_counterarguments": "Argumente und Gegenargumente",
+      "strategy": "Strategie",
+      "publish": "Projekt veröffentlichen",
+      "hide": "Projekt verstecken"
+    },
     "myproposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
       "proposals": "Anträge",

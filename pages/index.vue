@@ -18,15 +18,15 @@
 
 <script lang="ts">
 import {
-  defineComponent,
-  useStore,
   computed,
-  useRouter,
-  useContext,
-  ref,
-  watch,
-  onBeforeMount,
   ComputedRef,
+  defineComponent,
+  onBeforeMount,
+  ref,
+  useContext,
+  useRouter,
+  useStore,
+  watch,
 } from '@nuxtjs/composition-api'
 import { parseISO } from 'date-fns'
 import { RootState } from '~/store'
@@ -41,8 +41,7 @@ export default defineComponent({
     const user = computed(() => store.state.auth.user)
     const options = ['Dresden', 'Berlin', 'München']
     const fetchProjects = async () => {
-      const result = await store.dispatch('projects/fetchProjects')
-      projects.value = result
+      projects.value = await store.dispatch('projects/fetchProjects')
     }
     const router = useRouter()
     const context = useContext()
@@ -54,7 +53,7 @@ export default defineComponent({
       () => store.getters['auth/isLoggedIn']
     )
     onBeforeMount(async () => {
-      if (isLoggedIn.value && createdProject) {
+      if (isLoggedIn.value && createdProject.value) {
         try {
           await store
             .dispatch('projects/createProject', createdProject.value)

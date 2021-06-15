@@ -2,77 +2,76 @@
   <layouts-single-view :title="project.title">
     <application-header :application="project"></application-header>
     <div class="space-y-16 mt-6">
-      <div>
-        <div class="pb-5 border-b border-gray-200 mb-8 bg-white p-4 rounded">
-          <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
-            <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
-              Antragskonzept
-            </h3>
-            <div class="flex ml-4">
-              <progress-bar progress="10"></progress-bar>
-            </div>
+      <div
+        class="
+          flex
+          justify-between
+          pb-5
+          border-b border-gray-200
+          mb-8
+          bg-white
+          p-4
+          rounded
+        "
+      >
+        <div class="-ml-2 -mt-2 flex items-baseline">
+          <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
+            {{ $t('page.application.concept') }}
+          </h3>
+          <div class="flex ml-4">
+            <progress-bar progress="10"></progress-bar>
           </div>
         </div>
-        <div class="grid sm:grid-cols-3 gap-8 pt-4">
-          <div
-            v-for="(applicationStep, index) in applicationSteps"
-            :key="index"
-            class="p-4 h-40 bg-gray-200 flex"
+        <div>
+          <FormulateInput
+            v-if="memberShipRole === 'coordinator'"
+            key="publish"
+            type="button"
+            wrapper-class="w-56"
+            @click="
+              project.state === 'private'
+                ? publishProject()
+                : project.state === 'public'
+                ? hideProject()
+                : {}
+            "
           >
-            <nuxt-link
-              :to="
-                localePath({
-                  name: applicationStep.href,
-                  params: { id: projectId },
-                })
-              "
-              class="flex-col justify-between flex"
+            <transition
+              enter-active-class="transition-opacity duration-100 opacity-0"
+              leave-active-class="transition-opacity duration-100 opacity-0"
+              mode="out-in"
             >
-              <div class="flex-col">
-                <div class="inline-flex mb-2 items-center">
-                  <div
-                    class="
-                      rounded-full
-                      border border-black
-                      flex
-                      w-6
-                      h-6
-                      items-center
-                      justify-center
-                      mr-3
-                    "
-                  >
-                    {{ index + 1 }}
-                  </div>
-                  <span class="text-sm text-gray-400">
-                    {{ applicationStep.step.current }}/{{
-                      applicationStep.step.total
-                    }}
-                    erledigt
-                  </span>
-                </div>
-                <h3 class="text-xl">{{ applicationStep.title }}</h3>
+              <div
+                v-if="project.state === 'private'"
+                key="publish"
+                class="inline-flex space-x-4"
+              >
+                <span>{{ $t('page.application.publish') }}</span>
+                <outline-eye-icon class="h-5 w-5"></outline-eye-icon>
               </div>
-              <div class="text-gray-500 text-sm">
-                <span
-                  class="
-                    inline-flex
-                    items-center
-                    justify-center
-                    h-8
-                    w-8
-                    rounded-full
-                    bg-gray-500
-                  "
-                >
-                  <span class="text-sm font-medium leading-none text-white"
-                    >TW</span
-                  >
-                </span>
-                gerade aktiv
+              <div
+                v-if="project.state === 'public'"
+                key="hide"
+                class="inline-flex space-x-4"
+              >
+                <span>{{ $t('page.application.hide') }}</span>
+                <outline-eye-off-icon class="h-5 w-5"></outline-eye-off-icon>
               </div>
-            </nuxt-link>
-          </div>
+            </transition>
+          </FormulateInput>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-8 pt-4">
+        <div
+          v-for="(applicationStep, index) in applicationSteps"
+          :key="index"
+          class="p-4 h-40 bg-gray-200 flex"
+        >
+          <application-edit-progress-card
+            :application-step="applicationStep"
+            :project-id="projectId"
+            :step-number="index + 1"
+          />
         </div>
       </div>
       <div class="pb-5 border-b border-gray-200 mb-8">
@@ -80,7 +79,7 @@
           class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline justify-between"
         >
           <h3 class="ml-2 leading-6 font-medium text-lg text-gray-900">
-            Antrag schreiben
+            {{ $t('page.application.write') }}
           </h3>
 
           <button class="inline-flex items-center">
@@ -104,8 +103,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useRoute } from '@nuxtjs/composition-api'
-import { IProject } from '~/types/apiSchema'
+import {
+  computed,
+  defineComponent,
+  ref,
+  useContext,
+  useRoute,
+  useStore,
+} from '@nuxtjs/composition-api'
+import { RootState } from '~/store'
+import { IProject, IProjectMembership } from '~/types/apiSchema'
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -123,11 +130,12 @@ export default defineComponent({
     const route = useRoute()
     const projectId = ref<string>(route.value.params.id)
     const project = ref<IProject>({})
-
+    const context = useContext()
+    const store = useStore<RootState>()
     // only mockup data for rendering and testing
     const applicationSteps = ref<ApplicationStep[]>([
       {
-        title: 'Thema',
+        title: context.i18n.t('page.application.topic').toString(),
         step: {
           current: 1,
           total: 3,
@@ -135,7 +143,7 @@ export default defineComponent({
         href: 'antraege-id-thema',
       },
       {
-        title: 'Probleme und Handlungsfelder',
+        title: context.i18n.t('page.application.problems').toString(),
         step: {
           current: 0,
           total: 2,
@@ -143,7 +151,7 @@ export default defineComponent({
         href: 'antraege-id-problem',
       },
       {
-        title: 'Ratsmehrheiten und Fraktionsinteressen',
+        title: context.i18n.t('page.application.fraction').toString(),
         step: {
           current: 0,
           total: 2,
@@ -151,7 +159,9 @@ export default defineComponent({
         href: 'antraege-id-fraktion-interessen',
       },
       {
-        title: 'Argumente und Gegenargumente',
+        title: context.i18n
+          .t('page.application.arguments_counterarguments')
+          .toString(),
         step: {
           current: 0,
           total: 2,
@@ -159,7 +169,7 @@ export default defineComponent({
         href: 'antraege-id-argumente',
       },
       {
-        title: 'Strategie',
+        title: context.i18n.t('page.application.strategy').toString(),
         step: {
           current: 0,
           total: 6,
@@ -168,7 +178,39 @@ export default defineComponent({
       },
     ])
 
-    return { applicationSteps, projectId, project }
+    const publishProject = async () => {
+      const response = await store.dispatch('projects/updateProject', [
+        projectId.value,
+        { state: 'public' },
+      ])
+      project.value = response.data
+    }
+
+    const hideProject = async () => {
+      const response = await store.dispatch('projects/updateProject', [
+        projectId.value,
+        { state: 'private' },
+      ])
+      project.value = response.data
+    }
+
+    const memberShipRole = computed((): string | undefined => {
+      if (project.value.memberships) {
+        return project.value.memberships.find(
+          (membership: IProjectMembership) =>
+            membership?.user?.id === store.state.auth.user?.id
+        )?.role
+      }
+    })
+
+    return {
+      applicationSteps,
+      projectId,
+      project,
+      publishProject,
+      hideProject,
+      memberShipRole,
+    }
   },
   async fetch() {
     const id = this.$nuxt.context?.params?.id
