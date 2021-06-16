@@ -38,7 +38,7 @@
     "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
     "nuxt": "^2.15.6",
-    "nuxt-i18n": "^6.27.0",
+    "nuxt-i18n": "^6.27.1",
     "nuxt-socket-io": "^1.1.18",
     "prosemirror-keymap": "^1.1.4",
     "sass-loader": "10",
