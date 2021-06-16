@@ -44,11 +44,21 @@
   },
   "forms": {
     "arguments": {
-      "question": "Welche Argumente sprechen dafür, diesen Handlungsauftrag umzusetzen?",
-      "title": "Argumente"
+      "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
+      "title": "Argumente",
+      "add": "Argument hinzufügen",
+      "add_source": "Quelle hinzufügen"
     },
     "counter_arguments": {
-      "question": "Welche Gegenargumente könnten kommen?"
+      "question": "Nehme die Rolle eines Skeptikers ein, der dein Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er dein Vorhaben angreifen?",
+      "help": "Formuliere mindestens ein Gegenargument mit passenden Konter-Argumenten. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
+      "add": "Gegenargument hinzufügen",
+      "add_counter": "Konter-Argument hinzufügen",
+      "placeholder": {
+        "description": "Was spricht gegen dein Vorhaben?",
+        "counter": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
+      },
+      "cons": "Contra"
     },
     "proposal": {
       "category": {
@@ -121,5 +131,6 @@
         "description": "Problembeschreibung"
       }
     }
-  }
+  },
+  "save": "Speichern"
 }

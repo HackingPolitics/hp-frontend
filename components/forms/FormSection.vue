@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 mb-6 bg-white pt-6 pb-2 px-4 rounded">
+  <div class="mt-10 mb-6 bg-white py-6 px-4 rounded">
     <div>
       <slot name="header"></slot>
       <h3

@@ -16,6 +16,8 @@ export default {
           return 'mb-8 flex-1'
         case 'textarea':
           return 'mb-8 flex-1'
+        case 'group':
+          return 'w-full'
         default:
           return ''
       }
@@ -29,12 +31,12 @@ export default {
         case 'box':
           return 'h-4 w-4 cursor-pointer text-purple-600 border-gray-300 focus:ring-purple-500'
         case 'textarea':
-          return 'shadow-sm block w-full focus:ring-purple-500 focus:border-purple-500 sm:text-sm border-gray-300 rounded-md'
+          return 'shadow-sm w-full focus:ring-purple-500 focus:border-purple-500 sm:text-sm border-gray-300 rounded-md'
       }
 
       switch (context.type) {
         case 'submit':
-          return 'mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-500 hover:bg-purple-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:bg-purple-700 transition duration-150 ease-in-out'
+          return "mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-500 border-gray-400 hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out'"
         case 'button':
           return 'mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-500 border-gray-400 hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out'
       }

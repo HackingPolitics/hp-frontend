@@ -2,95 +2,118 @@
   <FormulateForm>
     <forms-layout :title="$t('forms.arguments.title')" no-actions>
       <div>
-        <div class="grid grid-cols-2 gap-6">
-          <forms-form-section
-            :title="$t('forms.arguments.question')"
-            class="col-span-1"
+        <forms-form-section
+          :title="$t('forms.counter_arguments.question')"
+          :subtitle="$t('forms.counter_arguments.help')"
+        >
+          <draggable
+            :list="counterArguments"
+            :sort="true"
+            ghost-class="ghost"
+            handle=".handle"
           >
             <transition-group tag="ul" type="transition" name="flip-list">
               <li
-                v-for="argumentation in argumentations"
-                :key="argumentation.id"
-                class="inline-flex w-full justify-center"
+                v-for="counterArgument in counterArguments"
+                :key="counterArgument.id"
+                class="flex flex-col w-full justify-center items-center mb-8"
               >
                 <FormulateInput
-                  :value="argumentation.description"
+                  :value="counterArgument.description"
                   name="description"
-                  type="textarea"
-                  rows="3"
-                  element-class="inline-flex w-full"
+                  type="text"
+                  :placeholder="
+                    $t('forms.counter_arguments.placeholder.description')
+                  "
                   :validation-name="$t('validation.name.arguments.description')"
+                  element-class="inline-flex w-full  items-center"
+                  input-class="border-0 focus:ring-0 focus:border-purple-500 border-l-2 border-gray-300 bg-gray-200 w-full"
+                  outer-class="p-2 bg-gray-200 w-full mb-4"
                   validation="required"
-                  @validation="validationArguments = $event"
+                  @validation="validationCounterArguments = $event"
                   @focusout="
-                    !validationArguments.hasErrors
+                    !validationCounterArguments.hasErrors
                       ? updateEntity(
-                          'arguments',
+                          'counter_arguments',
                           { description: $event.target.value },
-                          argumentation.id
+                          counterArgument.id
                         )
                       : {}
                   "
                 >
+                  <template #prefix>
+                    <div
+                      class="
+                        inline-flex
+                        items-center
+                        space-x-2
+                        pr-4
+                        handle
+                        cursor-move
+                      "
+                    >
+                      <outline-menu-alt-4-icon
+                        class="w-5 h-5"
+                      ></outline-menu-alt-4-icon>
+                      <outline-thumb-down-icon
+                        class="w-5 h-5 text-red-500"
+                      ></outline-thumb-down-icon>
+                      <span class="text-red-500">{{
+                        $t('forms.counter_arguments.cons')
+                      }}</span>
+                    </div>
+                  </template>
+                  <template #suffix>
+                    <FormulateInput
+                      input-class="flex items-center ml-4"
+                      type="button"
+                      @click="
+                        deleteEntity(
+                          'arguments',
+                          counterArgument.id,
+                          counterArguments
+                        )
+                      "
+                      ><solid-x-icon class="h-5 w-5"
+                    /></FormulateInput>
+                  </template>
                 </FormulateInput>
                 <FormulateInput
-                  input-class="ml-4 form-button"
-                  type="button"
-                  @click="
-                    deleteEntity('arguments', argumentation.id, argumentations)
-                  "
-                  ><outline-trash-icon class="h-4 w-4"
-                /></FormulateInput>
-              </li>
-            </transition-group>
-
-            <FormulateForm
-              v-model="formData.createArgument"
-              @submit="
-                createEntity('arguments', 'createArgument', argumentations)
-              "
-            >
-              <div class="inline-flex w-full justify-between">
-                <FormulateInput
-                  :key="formKey"
-                  type="text"
-                  name="description"
-                  validation="required"
-                  :validation-name="$t('validation.name.arguments.description')"
-                />
-                <FormulateInput input-class="ml-4 form-button" type="submit"
-                  ><outline-plus-icon class="h-5 w-5"
-                /></FormulateInput>
-              </div>
-            </FormulateForm>
-          </forms-form-section>
-
-          <forms-form-section
-            :title="$t('forms.counter_arguments.question')"
-            class="col-span-1"
-          >
-            <draggable
-              :list="counterArguments"
-              :sort="true"
-              ghost-class="ghost"
-            >
-              <transition-group tag="ul" type="transition" name="flip-list">
-                <li
-                  v-for="counterArgument in counterArguments"
-                  :key="counterArgument.id"
-                  class="inline-flex w-full justify-center cursor-move"
+                  type="group"
+                  remove-position="after"
+                  :repeatable="true"
+                  minimum="1"
+                  add-label="Konter-Argument hinzufügen"
                 >
+                  <template #addmore="{ addMore }">
+                    <FormulateInput
+                      input-class="flex space-x-2 items-center mt-4 text-purple-500"
+                      type="button"
+                      @click="addMore()"
+                    >
+                      <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
+                      <span class="">{{
+                        $t('forms.counter_arguments.add_counter')
+                      }}</span>
+                    </FormulateInput>
+                  </template>
                   <FormulateInput
                     :value="counterArgument.description"
                     name="description"
-                    type="textarea"
-                    rows="3"
-                    input-class="w-full form-input"
-                    element-class="inline-flex w-full"
+                    type="text"
+                    :validation-name="
+                      $t('validation.name.arguments.description')
+                    "
+                    element-class="inline-flex w-full items-center"
+                    input-class="border-0 w-full"
+                    outer-class="w-full"
+                    :placeholder="
+                      $t('forms.counter_arguments.placeholder.counter')
+                    "
                     validation="required"
-                    @validation="validationCounterArguments = $event"
+                    @validation="validationArguments = $event"
                     @focusout="
-                      !validationCounterArguments.hasErrors
+                      !validationArguments.hasErrors
                         ? updateEntity(
                             'counter_arguments',
                             { description: $event.target.value },
@@ -99,210 +122,133 @@
                         : {}
                     "
                   >
+                    <template #prefix>
+                      <div class="inline-flex items-center space-x-2 px-4">
+                        <outline-chat-alt-2-icon
+                          class="w-5 h-5"
+                        ></outline-chat-alt-2-icon>
+                      </div>
+                    </template>
                   </FormulateInput>
+                </FormulateInput>
+              </li>
+            </transition-group>
+          </draggable>
+          <div class="border-t-2 pt-6">
+            <forms-application-create-counter-arguments
+              @submit="
+                createEntity('counter_arguments', $event, counterArguments)
+              "
+            >
+            </forms-application-create-counter-arguments>
+          </div>
+        </forms-form-section>
+
+        <forms-form-section :title="$t('forms.arguments.question')">
+          <transition-group tag="ul" type="transition" name="flip-list">
+            <li
+              v-for="argumentation in argumentations"
+              :key="argumentation.id"
+              class="flex flex-col w-full justify-center items-center mb-8"
+            >
+              <FormulateInput
+                :value="argumentation.description"
+                name="description"
+                type="text"
+                :validation-name="$t('validation.name.arguments.description')"
+                element-class="inline-flex w-full  items-center"
+                input-class="border-0 border-l-2 border-gray-300 bg-gray-200 w-full"
+                outer-class="p-2 bg-gray-200 w-full mb-4"
+                validation="required"
+                @validation="validationArguments = $event"
+                @focusout="
+                  !validationArguments.hasErrors
+                    ? updateEntity(
+                        'arguments',
+                        { description: $event.target.value },
+                        argumentation.id
+                      )
+                    : {}
+                "
+              >
+                <template #prefix>
+                  <div class="inline-flex items-center space-x-2 pr-4">
+                    <outline-thumb-up-icon
+                      class="w-5 h-5 text-green-500"
+                    ></outline-thumb-up-icon>
+                    <span class="text-green-500"> Pro </span>
+                  </div>
+                </template>
+                <template #suffix>
                   <FormulateInput
-                    input-class="ml-4 form-button"
+                    input-class="flex items-center ml-4"
                     type="button"
                     @click="
                       deleteEntity(
-                        'counter_arguments',
-                        counterArgument.id,
-                        counterArguments
+                        'arguments',
+                        argumentation.id,
+                        argumentations
                       )
                     "
-                    ><outline-trash-icon class="h-5 w-5"
+                    ><solid-x-icon class="h-5 w-5"
                   /></FormulateInput>
-                </li>
-              </transition-group>
-            </draggable>
-
-            <FormulateForm
-              v-model="formData.createCounterArgument"
-              @submit="
-                createEntity(
-                  'counter_arguments',
-                  'createCounterArgument',
-                  counterArguments
-                )
-              "
-            >
-              <div class="inline-flex w-full justify-between">
+                </template>
+              </FormulateInput>
+              <FormulateInput
+                type="group"
+                remove-position="after"
+                :repeatable="true"
+                minimum="1"
+                outer-class="w-full"
+                add-label="Quelle hinzufügen"
+              >
+                <template #addmore="{ addMore }">
+                  <FormulateInput
+                    input-class="flex space-x-2 items-center mt-4 text-purple-500"
+                    type="button"
+                    @click="addMore()"
+                  >
+                    <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
+                    <span class="">{{ $t('forms.arguments.add_source') }}</span>
+                  </FormulateInput>
+                </template>
                 <FormulateInput
-                  :key="formKey"
-                  type="text"
+                  :value="argumentation.description"
                   name="description"
+                  type="text"
+                  :validation-name="$t('validation.name.arguments.description')"
+                  element-class="inline-flex w-full items-center"
+                  input-class="border-0 w-full"
+                  outer-class="w-full"
                   validation="required"
-                  :validation-name="
-                    $t('validation.name.counter_arguments.description')
+                  @validation="validationArguments = $event"
+                  @focusout="
+                    !validationArguments.hasErrors
+                      ? updateEntity(
+                          'counter_arguments',
+                          { description: $event.target.value },
+                          argumentation.id
+                        )
+                      : {}
                   "
-                />
-                <FormulateInput input-class="ml-4 form-button" type="submit"
-                  ><outline-plus-icon class="h-5 w-5" />
+                >
+                  <template #prefix>
+                    <div class="inline-flex items-center space-x-2 px-4">
+                      <outline-link-icon class="w-5 h-5"></outline-link-icon>
+                    </div>
+                  </template>
                 </FormulateInput>
-              </div>
-            </FormulateForm>
-          </forms-form-section>
-        </div>
+              </FormulateInput>
+            </li>
+          </transition-group>
 
-        <div>
-          <h2 class="text-3xl font-extrabold text-blue-gray-900 mb-4">
-            {{ $t('forms.proposals.title') }}
-          </h2>
-          <forms-form-section
-            v-for="proposal in proposals"
-            :key="proposal.id"
-            title="Vorschläge"
-          >
-            <h3 class="text-lg leading-6 text-gray-900 mb-8">
-              Vorschlag:
-              <span class="font-semibold">{{ proposal.title }}</span>
-            </h3>
-            <FormulateForm
-              v-model="proposalsFormData[proposal.id]"
-              @submit="
-                updateEntity(
-                  'proposals',
-                  ...proposalsFormData[proposal.id],
-                  proposal.id
-                )
-              "
-            >
-              <div class="grid grid-cols-4 gap-4">
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  :value="proposal.title"
-                  name="title"
-                  validation="required"
-                  :label="$t('title')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  :value="proposal.introduction"
-                  name="contactName"
-                  :label="$t('introduction')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  :value="proposal.reasoning"
-                  name="reasoning"
-                  :label="$t('reasoning')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  :value="proposal.sponsor"
-                  name="reasoning"
-                  validation="required"
-                  :label="$t('sponsor')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  :value="proposal.actionMandate"
-                  name="actionMandate"
-                  :label="$t('actionMandate')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  :value="proposal.comment"
-                  name="url"
-                  :label="$t('url')"
-                />
-                <FormulateInput
-                  outer-class="col-span-4"
-                  type="textarea"
-                  :value="proposal.comment"
-                  rows="3"
-                  name="comment"
-                  :label="$t('comment')"
-                />
-                <div class="col-span-4">
-                  <div class="flex justify-end items-center">
-                    <FormulateInput
-                      outer-class="pr-4"
-                      type="button"
-                      @click="deletePartner(proposal.id)"
-                    >
-                      <outline-trash-icon class="h-5 w-5"></outline-trash-icon>
-                    </FormulateInput>
-                    <FormulateInput
-                      outer-class=""
-                      type="submit"
-                      :label="$t('save')"
-                    >
-                      <outline-check-circle-icon
-                        class="h-5 w-5"
-                      ></outline-check-circle-icon>
-                    </FormulateInput>
-                  </div>
-                </div>
-              </div>
-            </FormulateForm>
-          </forms-form-section>
-          <forms-form-section>
-            <FormulateForm
-              v-model="formData.createProposal"
-              @submit="createEntity('proposals', 'createProposal', proposals)"
-            >
-              <div class="grid grid-cols-4 gap-4">
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  name="title"
-                  validation="required"
-                  :label="$t('title')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  name="contactName"
-                  :label="$t('introduction')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  name="reasoning"
-                  :label="$t('reasoning')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  name="sponsor"
-                  :label="$t('sponsor')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  name="actionMandate"
-                  :label="$t('actionMandate')"
-                />
-                <FormulateInput
-                  outer-class="col-span-2"
-                  type="text"
-                  name="url"
-                  :label="$t('url')"
-                />
-                <FormulateInput
-                  outer-class="col-span-4"
-                  type="textarea"
-                  rows="3"
-                  name="comment"
-                  :label="$t('comment')"
-                />
-
-                <FormulateInput
-                  outer-class="col-span-4"
-                  type="submit"
-                  :label="$t('forms.proposals.add')"
-                />
-              </div>
-            </FormulateForm>
-          </forms-form-section>
-        </div>
+          <FormulateInput type="button"
+            ><outline-thumb-up-icon class="h-5 w-5 text-green-500" />
+            <span class="text-green-500 pl-4">{{
+              $t('forms.arguments.add')
+            }}</span>
+          </FormulateInput>
+        </forms-form-section>
       </div>
     </forms-layout>
   </FormulateForm>
@@ -320,11 +266,6 @@ import { IValidation } from '~/types/vueFormulate'
 interface CreateForm {
   createArgument: { description?: string }
   createCounterArgument: { description?: string }
-  createProposal: IProposal
-}
-
-interface ProposalsForm {
-  [name: string]: CreateForm
 }
 
 export default defineComponent({
@@ -332,14 +273,6 @@ export default defineComponent({
   setup() {
     const argumentations = ref<IArgument[]>([])
     const counterArguments = ref<ICounterArgument[]>([])
-    const proposals = ref<IProposal[]>([])
-    const proposalsFormData = ref<ProposalsForm>({})
-
-    const formData = ref<CreateForm>({
-      createArgument: { description: '' },
-      createCounterArgument: { description: '' },
-      createProposal: {},
-    })
 
     /*
  workaround for resetting form and validation because
@@ -359,8 +292,6 @@ export default defineComponent({
         argumentations.value = cloneDeep(project.value.arguments)
       if (project.value?.counterArguments)
         counterArguments.value = cloneDeep(project.value.counterArguments)
-      if (project.value?.counterArguments)
-        proposals.value = cloneDeep(project.value.proposals)
     })
 
     watch(
@@ -368,7 +299,6 @@ export default defineComponent({
       (currentValue) => {
         argumentations.value = cloneDeep(currentValue?.arguments || [])
         counterArguments.value = cloneDeep(currentValue?.counterArguments || [])
-        proposals.value = cloneDeep(currentValue?.proposals || [])
       },
       { deep: true }
     )
@@ -378,12 +308,12 @@ export default defineComponent({
 
     const createEntity = async (
       endpoint: string,
-      FormDataKey: keyof CreateForm,
+      formData: IArgument | ICounterArgument,
       projectProperty: (IArgument | ICounterArgument)[]
     ) => {
       if (project.value) {
         const payload = {
-          ...formData.value[FormDataKey],
+          ...formData.value,
           project: project.value['@id'],
         }
         await createE<IArgument | ICounterArgument>(
@@ -400,7 +330,7 @@ export default defineComponent({
       data: IProposal | IArgument | ICounterArgument,
       id: string | number
     ) => {
-      if (project.value && typeof project.value['@id'] === 'string') {
+      /* if (project.value && typeof project.value['@id'] === 'string') {
         const payload: IProposal | IArgument | ICounterArgument = {
           ...data,
           project: project.value['@id'],
@@ -410,7 +340,7 @@ export default defineComponent({
           id,
           payload
         )
-      }
+      } */
     }
     const deleteEntity = async (
       endpoint: string,
@@ -424,9 +354,6 @@ export default defineComponent({
     return {
       argumentations,
       counterArguments,
-      proposalsFormData,
-      proposals,
-      formData,
       formKey,
       validationArguments,
       validationCounterArguments,

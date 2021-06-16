@@ -217,14 +217,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style scoped>
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-}
-
-.flip-list-move {
-  transition: transform 0.5s;
-}
-</style>
