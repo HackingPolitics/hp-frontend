@@ -4,9 +4,9 @@
       :key="formKey"
       name="description"
       type="text"
-      :placeholder="$t('forms.counter_arguments.placeholder.description')"
-      :validation-name="$t('validation.name.counter_arguments.description')"
-      input-class="list-text-input"
+      :placeholder="$t('forms.arguments.placeholder.description')"
+      :validation-name="$t('validation.name.arguments.description')"
+      input-class="border-0 focus:ring-0  bg-gray-200 w-full"
       outer-class="mb-4"
       validation="required"
     >
@@ -24,30 +24,29 @@
           @click="addMore()"
         >
           <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
-          <span class="">{{ $t('forms.counter_arguments.add_counter') }}</span>
+          <span class="">{{
+            $t('forms.arguments.add_inspiration_source')
+          }}</span>
         </FormulateInput>
       </template>
       <FormulateInput
-        name="counter"
+        name="source"
         type="text"
         element-class="inline-flex w-full items-center mt-2"
         input-class="border-0 w-full"
         outer-class="w-full"
-        validation="required"
-        :placeholder="$t('forms.counter_arguments.placeholder.counter')"
+        :placeholder="$t('forms.arguments.placeholder.inspiration_source')"
       >
         <template #prefix>
           <div class="inline-flex items-center space-x-2 px-4">
-            <outline-chat-alt-2-icon class="w-5 h-5"></outline-chat-alt-2-icon>
+            <outline-link-icon class="w-5 h-5"></outline-link-icon>
           </div>
         </template>
       </FormulateInput>
     </FormulateInput>
     <FormulateInput type="submit">
-      <outline-thumb-down-icon class="h-5 w-5 text-red-500" />
-      <span class="text-red-500 pl-4">{{
-        $t('forms.counter_arguments.add')
-      }}</span>
+      <outline-thumb-up-icon class="h-5 w-5 text-green-500" />
+      <span class="text-green-500 pl-4">{{ $t('forms.arguments.add') }}</span>
     </FormulateInput>
   </FormulateForm>
 </template>
@@ -56,7 +55,7 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'CreateCounterArguments',
+  name: 'CreateArguments',
   props: {
     formKey: {
       type: Number,

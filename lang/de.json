@@ -47,7 +47,11 @@
       "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
       "title": "Argumente",
       "add": "Argument hinzufügen",
-      "add_source": "Quelle hinzufügen"
+      "add_inspiration_source": "Quelle hinzufügen",
+      "placeholder": {
+        "description": "Welches starke Argument unterstützt dein Vorhaben?",
+        "inspiration_source": "Hast du ein Vorbild oder Fakten? Dann ergänze hier eine passende Quelle"
+      }
     },
     "counter_arguments": {
       "question": "Nehme die Rolle eines Skeptikers ein, der dein Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er dein Vorhaben angreifen?",

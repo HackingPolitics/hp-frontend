@@ -149,7 +149,7 @@ export interface IPartner extends IModel {
 
 export interface IArgument extends IModel {
   description?: string
-  priority?: string
+  priority?: number
   project?: string
   updatedAt?: string
 }
