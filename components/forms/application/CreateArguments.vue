@@ -7,11 +7,10 @@
       :placeholder="$t('forms.arguments.placeholder.description')"
       :validation-name="$t('validation.name.arguments.description')"
       input-class="border-0 focus:ring-0  bg-gray-200 w-full"
-      outer-class="mb-4"
       validation="required"
     >
     </FormulateInput>
-    <FormulateInput
+    <!--    <FormulateInput
       type="group"
       remove-position="after"
       :repeatable="true"
@@ -43,7 +42,7 @@
           </div>
         </template>
       </FormulateInput>
-    </FormulateInput>
+    </FormulateInput>-->
     <FormulateInput type="submit">
       <outline-thumb-up-icon class="h-5 w-5 text-green-500" />
       <span class="text-green-500 pl-4">{{ $t('forms.arguments.add') }}</span>

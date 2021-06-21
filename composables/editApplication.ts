@@ -20,6 +20,7 @@ export default function () {
     endpoint: string,
     entityData: T[],
     payload: T,
+    projectKey: string | null = null,
     notificationOptions: {
       title?: string
       duration?: number
@@ -34,7 +35,7 @@ export default function () {
       const payload = cloneDeep(entityData)
       payload.push(res.data)
       store.dispatch('projects/updateProjectProperty', [
-        camelCase(endpoint),
+        projectKey || camelCase(endpoint),
         payload,
       ])
       // @ts-ignore

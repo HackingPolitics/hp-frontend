@@ -21,3 +21,7 @@
 .list-input-outer{
   @apply p-2 bg-gray-200 w-full mb-4;
 }
+
+.group-remove-button{
+  @apply ml-4 rounded-full h-6 w-6 bg-gray-200 flex justify-center items-center hover:bg-purple-500 cursor-pointer;
+}
