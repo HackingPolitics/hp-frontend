@@ -6,13 +6,13 @@
       type="text"
       :placeholder="$t('forms.counter_arguments.placeholder.description')"
       :validation-name="$t('validation.name.counter_arguments.description')"
-      input-class="list-text-input"
-      outer-class="mb-4"
+      input-class="list-input-text"
       validation="required"
     >
     </FormulateInput>
     <FormulateInput
       type="group"
+      name="negations"
       remove-position="after"
       :repeatable="true"
       minimum="1"
@@ -28,13 +28,13 @@
         </FormulateInput>
       </template>
       <FormulateInput
-        name="counter"
+        name="description"
         type="text"
         element-class="inline-flex w-full items-center mt-2"
         input-class="border-0 w-full"
         outer-class="w-full"
         validation="required"
-        :placeholder="$t('forms.counter_arguments.placeholder.counter')"
+        :placeholder="$t('forms.counter_arguments.placeholder.negations')"
       >
         <template #prefix>
           <div class="inline-flex items-center space-x-2 px-4">

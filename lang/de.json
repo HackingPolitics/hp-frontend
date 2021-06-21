@@ -60,7 +60,7 @@
       "add_counter": "Konter-Argument hinzufügen",
       "placeholder": {
         "description": "Was spricht gegen dein Vorhaben?",
-        "counter": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
+        "negations": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
       },
       "cons": "Contra"
     },
@@ -129,7 +129,8 @@
   "validation": {
     "name": {
       "arguments": {
-        "description": "Argumentbeschreibung"
+        "description": "Argumentbeschreibung",
+        "negations": "Konter-Argument"
       },
       "counter_arguments": {
         "description": "Problembeschreibung"

@@ -20,120 +20,120 @@
                 :key="counterArgument.id"
                 class="flex flex-col w-full justify-center items-center mb-8"
               >
-                <FormulateInput
-                  :value="counterArgument.description"
-                  name="description"
-                  type="text"
-                  :placeholder="
-                    $t('forms.counter_arguments.placeholder.description')
-                  "
-                  :validation-name="
-                    $t('validation.name.counter_arguments.description')
-                  "
-                  element-class="inline-flex w-full  items-center"
-                  input-class="border-0 focus:ring-0 focus:border-purple-500 border-l-2 border-gray-300 bg-gray-200 w-full"
-                  outer-class="p-2 bg-gray-200 w-full mb-4"
-                  validation="required"
-                  @validation="validationCounterArguments = $event"
-                  @focusout="
-                    !validationCounterArguments.hasErrors
-                      ? updateEntity(
-                          'counter_arguments',
-                          { description: $event.target.value },
-                          counterArgument.id
-                        )
-                      : {}
-                  "
-                >
-                  <template #prefix>
-                    <div
-                      class="
-                        inline-flex
-                        items-center
-                        space-x-2
-                        pr-4
-                        handle
-                        cursor-move
-                      "
-                    >
-                      <outline-menu-alt-4-icon
-                        class="w-5 h-5"
-                      ></outline-menu-alt-4-icon>
-                      <outline-thumb-down-icon
-                        class="w-5 h-5 text-red-500"
-                      ></outline-thumb-down-icon>
-                      <span class="text-red-500">{{
-                        $t('forms.counter_arguments.cons')
-                      }}</span>
-                    </div>
-                  </template>
-                  <template #suffix>
-                    <FormulateInput
-                      input-class="flex items-center ml-4"
-                      type="button"
-                      @click="
-                        deleteEntity(
-                          'counter_arguments',
-                          counterArgument.id,
-                          counterArguments
-                        )
-                      "
-                      ><solid-x-icon class="h-5 w-5"
-                    /></FormulateInput>
-                  </template>
-                </FormulateInput>
-                <FormulateInput
-                  type="group"
-                  remove-position="after"
-                  :repeatable="true"
-                  minimum="1"
-                  add-label="Konter-Argument hinzufügen"
-                >
-                  <template #addmore="{ addMore }">
-                    <FormulateInput
-                      input-class="flex space-x-2 items-center mt-4 text-purple-500"
-                      type="button"
-                      @click="addMore()"
-                    >
-                      <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
-                      <span class="">{{
-                        $t('forms.counter_arguments.add_counter')
-                      }}</span>
-                    </FormulateInput>
-                  </template>
+                <FormulateForm class="w-full">
                   <FormulateInput
                     :value="counterArgument.description"
                     name="description"
                     type="text"
-                    :validation-name="
-                      $t('validation.name.arguments.description')
-                    "
-                    element-class="inline-flex w-full items-center"
-                    input-class="border-0 w-full"
-                    outer-class="w-full"
                     :placeholder="
-                      $t('forms.counter_arguments.placeholder.counter')
+                      $t('forms.counter_arguments.placeholder.description')
                     "
+                    :validation-name="
+                      $t('validation.name.counter_arguments.description')
+                    "
+                    element-class="inline-flex w-full  items-center"
+                    input-class="list-input-text"
+                    outer-class="list-input-outer"
                     validation="required"
+                    @validation="validationCounterArguments = $event"
+                    @focusout="
+                      !validationCounterArguments.hasErrors
+                        ? updateEntity(
+                            'counter_arguments',
+                            { description: $event.target.value },
+                            counterArgument.id
+                          )
+                        : {}
+                    "
                   >
                     <template #prefix>
-                      <div class="inline-flex items-center space-x-2 px-4">
-                        <outline-chat-alt-2-icon
+                      <div
+                        class="
+                          inline-flex
+                          items-center
+                          space-x-2
+                          pr-4
+                          handle
+                          cursor-move
+                        "
+                      >
+                        <outline-menu-alt-4-icon
                           class="w-5 h-5"
-                        ></outline-chat-alt-2-icon>
+                        ></outline-menu-alt-4-icon>
+                        <outline-thumb-down-icon
+                          class="w-5 h-5 text-red-500"
+                        ></outline-thumb-down-icon>
+                        <span class="text-red-500">{{
+                          $t('forms.counter_arguments.cons')
+                        }}</span>
                       </div>
                     </template>
+                    <template #suffix>
+                      <FormulateInput
+                        input-class="flex items-center ml-4"
+                        type="button"
+                        @click="
+                          deleteEntity(
+                            'counter_arguments',
+                            counterArgument.id,
+                            counterArguments
+                          )
+                        "
+                        ><solid-x-icon class="h-5 w-5"
+                      /></FormulateInput>
+                    </template>
                   </FormulateInput>
-                </FormulateInput>
+                  <FormulateInput
+                    type="group"
+                    remove-position="after"
+                    name="negations"
+                    :repeatable="true"
+                    minimum="1"
+                    add-label="Konter-Argument hinzufügen"
+                    :value="counterArgument.negations"
+                  >
+                    <template #addmore="{ addMore }">
+                      <FormulateInput
+                        input-class="flex space-x-2 items-center mt-4 text-purple-500"
+                        type="button"
+                        @click="addMore()"
+                      >
+                        <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
+                        <span class="">{{
+                          $t('forms.counter_arguments.add_counter')
+                        }}</span>
+                      </FormulateInput>
+                    </template>
+                    <FormulateInput
+                      name="description"
+                      type="text"
+                      :validation-name="
+                        $t('validation.name.arguments.negations')
+                      "
+                      element-class="inline-flex w-full items-center"
+                      input-class="border-0 w-full"
+                      :placeholder="
+                        $t('forms.counter_arguments.placeholder.negations')
+                      "
+                      validation="required"
+                    >
+                      <template #prefix>
+                        <div class="inline-flex items-center space-x-2 px-4">
+                          <outline-chat-alt-2-icon
+                            class="w-5 h-5"
+                          ></outline-chat-alt-2-icon>
+                        </div>
+                      </template>
+                    </FormulateInput>
+                  </FormulateInput>
+                </FormulateForm>
               </li>
             </transition-group>
           </draggable>
           <div class="border-t-2 pt-6">
             <forms-application-create-counter-arguments
               :form-key="formKey"
-              @submit="
-                createEntity('counter_arguments', $event, counterArguments)
-              "
+              @submit="createCounterArguments($event)"
             >
             </forms-application-create-counter-arguments>
           </div>
@@ -160,8 +160,8 @@
                   type="text"
                   :validation-name="$t('validation.name.arguments.description')"
                   element-class="inline-flex w-full  items-center"
-                  input-class="border-0 border-l-2 border-gray-300 bg-gray-200 w-full"
-                  outer-class="p-2 bg-gray-200 w-full mb-4"
+                  input-class="list-input-text"
+                  outer-class="list-input-outer"
                   validation="required"
                   @validation="validationArguments = $event"
                   @focusout="
@@ -254,7 +254,7 @@
           <div class="border-t-2 pt-6">
             <forms-application-create-arguments
               :form-key="formKey"
-              @submit="createEntity('arguments', $event, argumentations)"
+              @submit="createArgumentType('arguments', $event, argumentations)"
             >
             </forms-application-create-arguments>
           </div>
@@ -276,15 +276,15 @@ import {
 
 import { camelCase, cloneDeep } from 'lodash'
 
-import { IArgument, ICounterArgument, IProposal } from '~/types/apiSchema'
+import {
+  IArgument,
+  ICounterArgument,
+  INegations,
+  IProposal,
+} from '~/types/apiSchema'
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
 import { RootState } from '~/store'
-
-interface CreateForm {
-  createArgument: { description?: string }
-  createCounterArgument: { description?: string }
-}
 
 export default defineComponent({
   name: 'Arguments',
@@ -302,9 +302,9 @@ export default defineComponent({
     const context = useContext()
 
     const {
-      createEntity: createE,
-      deleteEntity: deleteE,
-      updateEntity: updateE,
+      createProjectEntity,
+      deleteProjectEntity,
+      updateProjectEntity,
       project,
     } = editApplication()
 
@@ -333,22 +333,48 @@ export default defineComponent({
     const validationArguments = ref<IValidation>({ hasErrors: false })
     const validationCounterArguments = ref<IValidation>({ hasErrors: false })
 
-    const createEntity = async (
+    const createCounterArguments = async (
+      formData: IArgument | ICounterArgument
+    ) => {
+      await createArgumentType(
+        'counter_arguments',
+        counterArguments.value,
+        formData
+      ).then(async (res) => {
+        const createdCounterArgument = res?.data
+        await Promise.all(
+          formData.value.negations.map(async (negation: INegations) => {
+            const payload = {
+              description: negation.description,
+              counterArgument: createdCounterArgument['@id'],
+            }
+            await createProjectEntity<INegations>(
+              'negations',
+              counterArguments.value,
+              payload
+            )
+          })
+        )
+      })
+    }
+
+    const createArgumentType = async (
       endpoint: string,
-      formData: IArgument | ICounterArgument,
-      projectProperty: (IArgument | ICounterArgument)[]
+      projectProperty: (IArgument | ICounterArgument)[],
+      formData: IArgument | ICounterArgument
     ) => {
       if (project.value) {
         const payload = {
           ...formData.value,
           project: project.value['@id'],
         }
-        await createE<IArgument | ICounterArgument>(
+        return await createProjectEntity<IArgument | ICounterArgument>(
           endpoint,
           projectProperty,
           payload
-        ).then(() => {
+        ).then((res) => {
           formKey.value++
+          return res
         })
       }
     }
@@ -362,7 +388,7 @@ export default defineComponent({
           ...data,
           project: project.value['@id'],
         }
-        await updateE<IArgument | IProposal | ICounterArgument>(
+        await updateProjectEntity<IArgument | IProposal | ICounterArgument>(
           endpoint,
           id,
           payload
@@ -375,7 +401,11 @@ export default defineComponent({
       projectProperty: IArgument | ICounterArgument
     ) => {
       // @ts-ignore
-      await deleteE<IArgument | ICounterArgument>(endpoint, id, projectProperty)
+      await deleteProjectEntity<IArgument | ICounterArgument>(
+        endpoint,
+        id,
+        projectProperty
+      )
     }
 
     const updatePriority = async (
@@ -409,10 +439,11 @@ export default defineComponent({
       formKey,
       validationArguments,
       validationCounterArguments,
-      createEntity,
+      createArgumentType,
       updateEntity,
       deleteEntity,
       updatePriority,
+      createCounterArguments,
     }
   },
 })

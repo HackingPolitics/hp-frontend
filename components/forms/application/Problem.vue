@@ -119,8 +119,12 @@ interface ProblemForm {
 export default defineComponent({
   name: 'Problem',
   setup() {
-    const { createEntity, deleteEntity, updateEntity, project } =
-      editApplication()
+    const {
+      createProjectEntity,
+      deleteProjectEntity,
+      updateProjectEntity,
+      project,
+    } = editApplication()
 
     const problems = ref<IProblem[]>([])
     const createProblemForm = ref<ProblemForm>({})
@@ -160,16 +164,18 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createEntity<IProblem>('problems', problems.value, payload).then(
-          () => {
-            formKey.value++
-          }
-        )
+        await createProjectEntity<IProblem>(
+          'problems',
+          problems.value,
+          payload
+        ).then(() => {
+          formKey.value++
+        })
       }
     }
     const deleteProblem = async (id: number | string) => {
       // @ts-ignore
-      await deleteEntity('problems', id, problems.value)
+      await deleteProjectEntity('problems', id, problems.value)
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
@@ -177,7 +183,7 @@ export default defineComponent({
         const payload = {
           description: desc,
         }
-        await updateEntity<IProblem>('problems', id, payload)
+        await updateProjectEntity<IProblem>('problems', id, payload)
       }
     }
 

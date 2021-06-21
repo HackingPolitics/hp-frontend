@@ -166,3 +166,7 @@ export interface IProposal extends IModel {
 }
 
 export interface ICounterArgument extends IArgument {}
+
+export interface INegations extends IModel {
+  description?: string
+}

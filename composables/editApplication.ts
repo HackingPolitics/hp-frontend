@@ -4,7 +4,7 @@ import {
   useContext,
   useStore,
 } from '@nuxtjs/composition-api'
-import { cloneDeep, camelCase } from 'lodash'
+import { camelCase, cloneDeep } from 'lodash'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
@@ -16,7 +16,7 @@ export default function () {
     (): IProject | null => store.state.projects.project
   )
 
-  const createEntity = async <T>(
+  const createProjectEntity = async <T>(
     endpoint: string,
     entityData: T[],
     payload: T,
@@ -30,7 +30,7 @@ export default function () {
       type: 'success',
     }
   ) => {
-    await context.$axios.post(endpoint, payload).then((res) => {
+    return await context.$axios.post(endpoint, payload).then((res) => {
       const payload = cloneDeep(entityData)
       payload.push(res.data)
       store.dispatch('projects/updateProjectProperty', [
@@ -43,10 +43,11 @@ export default function () {
         duration: notificationOptions.duration,
         type: notificationOptions.type,
       })
+      return res
     })
   }
 
-  const deleteEntity = async <T extends { id?: string }>(
+  const deleteProjectEntity = async <T extends { id?: string }>(
     endpoint: string,
     id: string | number,
     entityData: T[],
@@ -75,7 +76,7 @@ export default function () {
     })
   }
 
-  const updateEntity = async <T>(
+  const updateProjectEntity = async <T>(
     endpoint: string,
     id: string | number,
     payload: T,
@@ -101,9 +102,9 @@ export default function () {
   }
 
   return {
-    createEntity,
-    deleteEntity,
-    updateEntity,
+    createProjectEntity,
+    deleteProjectEntity,
+    updateProjectEntity,
     project,
   }
 }
