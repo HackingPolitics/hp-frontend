@@ -23,42 +23,12 @@
           </div>
         </div>
         <div>
-          <FormulateInput
-            v-if="memberShipRole === 'coordinator'"
-            key="publish"
-            type="button"
-            wrapper-class="w-56"
-            @click="
-              project.state === 'private'
-                ? publishProject()
-                : project.state === 'public'
-                ? hideProject()
-                : {}
-            "
-          >
-            <transition
-              enter-active-class="transition-opacity duration-100 opacity-0"
-              leave-active-class="transition-opacity duration-100 opacity-0"
-              mode="out-in"
-            >
-              <div
-                v-if="project.state === 'private'"
-                key="publish"
-                class="inline-flex space-x-4"
-              >
-                <span>{{ $t('page.application.publish') }}</span>
-                <outline-eye-icon class="h-5 w-5"></outline-eye-icon>
-              </div>
-              <div
-                v-if="project.state === 'public'"
-                key="hide"
-                class="inline-flex space-x-4"
-              >
-                <span>{{ $t('page.application.hide') }}</span>
-                <outline-eye-off-icon class="h-5 w-5"></outline-eye-off-icon>
-              </div>
-            </transition>
-          </FormulateInput>
+          <project-memberships-publish-project-button
+            :membership-role="membershipRole"
+            :project-state="project.state"
+            @hide="hideProject()"
+            @publish="publishProject()"
+          />
         </div>
       </div>
       <div class="grid sm:grid-cols-3 gap-8 pt-4">
@@ -194,7 +164,7 @@ export default defineComponent({
       project.value = response.data
     }
 
-    const memberShipRole = computed((): string | undefined => {
+    const membershipRole = computed((): string | undefined => {
       if (project.value.memberships) {
         return project.value.memberships.find(
           (membership: IProjectMembership) =>
@@ -209,7 +179,7 @@ export default defineComponent({
       project,
       publishProject,
       hideProject,
-      memberShipRole,
+      membershipRole,
     }
   },
   async fetch() {

@@ -111,7 +111,9 @@
       "fraction": "Ratsmehrheiten und Fraktionsinteressen",
       "arguments_counterarguments": "Argumente und Gegenargumente",
       "strategy": "Strategie",
-      "publish": "Projekt veröffentlichen",
+      "publish": "Projekt veröffentlicht",
+      "not_published": "Projekt unveröffentlicht",
+      "publishing": "Projekt veröffentlichen",
       "hide": "Projekt verstecken"
     },
     "myproposals": {
