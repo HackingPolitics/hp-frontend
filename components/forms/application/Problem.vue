@@ -3,13 +3,14 @@
     <forms-layout title="Probleme und Handlungsfelder" no-actions>
       <div class="space-y-6">
         <forms-form-section
-          title="Welche Probleme hast du beobachtet und möchtest angeben?"
-          subtitle="Gebe den Problemen eine Gewichtung indem du ihre Reihenfolge änderst."
+          :title="$t('forms.problems.title')"
+          :subtitle="$t('forms.problems.introduction')"
         >
           <draggable
             :list="problems"
             :sort="true"
             ghost-class="ghost"
+            handle=".handle"
             @update="updateProblemPriority($event)"
           >
             <transition-group tag="ul" type="transition" name="flip-list">
@@ -18,76 +19,65 @@
                 :key="problem.id"
                 class="inline-flex w-full justify-center cursor-move"
               >
-                <FormulateInput
+                <forms-list-item-input
                   :value="problem.description"
                   name="description"
                   type="text"
                   element-class="inline-flex w-full"
                   validation="required"
+                  :placeholder="$t('forms.problems.placeholder.description')"
+                  :validation-name="$t('validation.problems.description')"
                   @validation="validation = $event"
-                  @focusout="updateProblem($event.target.value, problem.id)"
+                  @focusout="updateProblem($event, problem.id)"
+                  @delete="deleteProblem(problem.id)"
                 >
                   <template #prefix>
-                    <div>
-                      <outline-arrows-expand-icon class="h-10 w-10 pr-4" />
+                    <div
+                      class="
+                        inline-flex
+                        items-center
+                        space-x-2
+                        pr-4
+                        handle
+                        cursor-move
+                      "
+                    >
+                      <outline-menu-alt-4-icon
+                        class="w-5 h-5"
+                      ></outline-menu-alt-4-icon>
+                      <outline-shield-exclamation-icon
+                        class="w-5 h-5"
+                      ></outline-shield-exclamation-icon>
                     </div>
                   </template>
-                </FormulateInput>
-                <FormulateInput
-                  input-class="ml-4 form-button"
-                  type="button"
-                  @click="deleteProblem(problem.id)"
-                  ><outline-trash-icon class="h-5 w-5"
-                /></FormulateInput>
+                </forms-list-item-input>
               </li>
             </transition-group>
           </draggable>
-          <FormulateForm
-            ref="problemForm"
-            v-model="createProblemForm"
-            @submit="createProblem()"
-          >
-            <div class="inline-flex w-full justify-between">
+          <div class="border-t-2 pt-6">
+            <FormulateForm
+              ref="problemForm"
+              v-model="createProblemForm"
+              @submit="createProblem()"
+            >
               <FormulateInput
                 :key="formKey"
                 type="text"
                 name="description"
                 validation="required"
-                validation-name="Problembeschreibung"
+                :validation-name="$t('validation.problems.description')"
                 error-behavior="submit"
+                input-class="list-input-text"
+                :placeholder="$t('forms.problems.placeholder.description')"
               />
-              <FormulateInput input-class="ml-4 form-button" type="submit"
-                >+ Hinzufügen</FormulateInput
-              >
-            </div>
-          </FormulateForm>
-          <!--          <FormulateInput
-            type="group"
-            :repeatable="true"
-            name="problems"
-            aria-label="Welche Probleme hast du beobachtet und möchtest du anlegen?"
-            add-label="+ Problem hinzufügen"
-            remove-position="after"
-          >
-            <FormulateInput name="description" type="text" />
-          </FormulateInput>-->
-          <!--        </forms-form-section>
-        <forms-form-section
-          title="Handlungsauftrag"
-          subtitle="Was sollte die Stadtverwaltung tun, um das Problem anzugehen"
-        >
-          <div class="inline-flex w-full justify-between">
-            <FormulateInput name="description" type="text" />
-            <FormulateInput input-class="ml-4 form-button" type="button"
-              ><outline-x-icon class="h-4 w-4"
-            /></FormulateInput>
+              <FormulateInput type="submit">
+                <outline-thumb-down-icon class="h-5 w-5 text-red-500" />
+                <span class="text-red-500 pl-4">{{
+                  $t('forms.problems.add')
+                }}</span>
+              </FormulateInput>
+            </FormulateForm>
           </div>
-          <div class="inline-flex w-full justify-between">
-            <FormulateInput type="text" />
-            <FormulateInput input-class="ml-4 form-button" type="button"
-              >Hinzufügen</FormulateInput
-            >
-          </div>-->
         </forms-form-section>
       </div>
     </forms-layout>

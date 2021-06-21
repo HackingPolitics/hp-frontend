@@ -34,6 +34,7 @@
         input-class="border-0 w-full"
         outer-class="w-full"
         validation="required"
+        :validation-name="$t('validation.name.arguments.negations')"
         :placeholder="$t('forms.counter_arguments.placeholder.negations')"
       >
         <template #prefix>

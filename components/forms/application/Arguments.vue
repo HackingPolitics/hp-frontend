@@ -20,7 +20,7 @@
                 :key="counterArgument.id"
                 class="flex flex-col w-full justify-center items-center mb-8"
               >
-                <FormulateInput
+                <forms-list-item-input
                   :value="counterArgument.description"
                   name="description"
                   type="text"
@@ -30,19 +30,23 @@
                   :validation-name="
                     $t('validation.name.counter_arguments.description')
                   "
-                  element-class="inline-flex w-full  items-center"
-                  input-class="list-input-text"
-                  outer-class="list-input-outer"
                   validation="required"
                   @validation="validationCounterArguments = $event"
                   @focusout="
                     !validationCounterArguments.hasErrors
                       ? updateEntity(
                           'counter_arguments',
-                          { description: $event.target.value },
+                          { description: $event },
                           counterArgument.id
                         )
                       : {}
+                  "
+                  @delete="
+                    deleteEntity(
+                      'counter_arguments',
+                      counterArgument.id,
+                      counterArguments
+                    )
                   "
                 >
                   <template #prefix>
@@ -67,90 +71,74 @@
                       }}</span>
                     </div>
                   </template>
-                  <template #suffix>
+                </forms-list-item-input>
+                <FormulateInput
+                  type="group"
+                  remove-position="after"
+                  name="negations"
+                  :repeatable="true"
+                  minimum="1"
+                  add-label="Konter-Argument hinzufügen"
+                  :value="counterArgument.negations"
+                >
+                  <template #addmore="{ addMore }">
                     <FormulateInput
-                      input-class="flex items-center ml-4"
+                      input-class="flex space-x-2 items-center mt-4 text-purple-500"
                       type="button"
+                      @click="addMore()"
+                    >
+                      <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
+                      <span class="">{{
+                        $t('forms.counter_arguments.add_counter')
+                      }}</span>
+                    </FormulateInput>
+                  </template>
+                  <template #default="{ index }">
+                    <FormulateInput
+                      name="description"
+                      type="text"
+                      :validation-name="
+                        $t('validation.name.arguments.negations')
+                      "
+                      element-class="inline-flex w-full items-center"
+                      input-class="border-0 w-full"
+                      :placeholder="
+                        $t('forms.counter_arguments.placeholder.negations')
+                      "
+                      validation="required"
+                      @validation="validationNegations = $event"
+                      @focusout="
+                        !validationNegations.hasErrors
+                          ? createOrUpdateNegations(
+                              counterArgument.negations[index].id,
+                              counterArgument,
+                              $event.target.value
+                            )
+                          : {}
+                      "
+                    >
+                      <template #prefix>
+                        <div class="inline-flex items-center space-x-2 px-4">
+                          <outline-chat-alt-2-icon
+                            class="w-5 h-5"
+                          ></outline-chat-alt-2-icon>
+                        </div>
+                      </template>
+                    </FormulateInput>
+                  </template>
+                  <template #remove="{ index, removeItem }">
+                    <remove-button
                       @click="
+                        removeItem()
                         deleteEntity(
-                          'counter_arguments',
-                          counterArgument.id,
+                          'negations',
+                          counterArgument.negations[index].id,
                           counterArguments
                         )
                       "
-                      ><solid-x-icon class="h-5 w-5"
-                    /></FormulateInput>
+                    />
                   </template>
                 </FormulateInput>
-                <FormulateForm class="w-full">
-                  <FormulateInput
-                    type="group"
-                    remove-position="after"
-                    name="negations"
-                    :repeatable="true"
-                    minimum="1"
-                    add-label="Konter-Argument hinzufügen"
-                    :value="counterArgument.negations"
-                  >
-                    <template #addmore="{ addMore }">
-                      <FormulateInput
-                        input-class="flex space-x-2 items-center mt-4 text-purple-500"
-                        type="button"
-                        @click="addMore()"
-                      >
-                        <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
-                        <span class="">{{
-                          $t('forms.counter_arguments.add_counter')
-                        }}</span>
-                      </FormulateInput>
-                    </template>
-                    <template #default="{ index }">
-                      <FormulateInput
-                        name="description"
-                        type="text"
-                        :validation-name="
-                          $t('validation.name.arguments.negations')
-                        "
-                        element-class="inline-flex w-full items-center"
-                        input-class="border-0 w-full"
-                        :placeholder="
-                          $t('forms.counter_arguments.placeholder.negations')
-                        "
-                        validation="required"
-                        @validation="validationNegations = $event"
-                        @focusout="
-                          !validationNegations.hasErrors
-                            ? createOrUpdateNegations(
-                                counterArgument.negations[index].id,
-                                counterArgument,
-                                $event.target.value
-                              )
-                            : {}
-                        "
-                      >
-                        <template #prefix>
-                          <div class="inline-flex items-center space-x-2 px-4">
-                            <outline-chat-alt-2-icon
-                              class="w-5 h-5"
-                            ></outline-chat-alt-2-icon>
-                          </div>
-                        </template>
-                      </FormulateInput>
-                    </template>
-                    <template #remove="{ index, removeItem }">
-                      <remove-button
-                        @click="
-                          removeItem()
-                          deleteEntity(
-                            'negations',
-                            counterArgument.negations[index].id,
-                            counterArguments
-                          )
-                        "
-                      />
-                    </template>
-                  </FormulateInput>
-                </FormulateForm>
               </li>
             </transition-group>
           </draggable>
@@ -178,24 +166,24 @@
                 :key="argumentation.id"
                 class="flex flex-col w-full justify-center items-center mb-8"
               >
-                <FormulateInput
+                <forms-list-item-input
                   :value="argumentation.description"
                   name="description"
                   type="text"
                   :validation-name="$t('validation.name.arguments.description')"
-                  element-class="inline-flex w-full  items-center"
-                  input-class="list-input-text"
-                  outer-class="list-input-outer"
                   validation="required"
                   @validation="validationArguments = $event"
                   @focusout="
                     !validationArguments.hasErrors
                       ? updateEntity(
                           'arguments',
-                          { description: $event.target.value },
+                          { description: $event },
                           argumentation.id
                         )
                       : {}
+                  "
+                  @delete="
+                    deleteEntity('arguments', argumentation.id, argumentations)
                   "
                 >
                   <template #prefix>
@@ -218,21 +206,7 @@
                       <span class="text-green-500"> Pro </span>
                     </div>
                   </template>
-                  <template #suffix>
-                    <FormulateInput
-                      input-class="flex items-center ml-4"
-                      type="button"
-                      @click="
-                        deleteEntity(
-                          'arguments',
-                          argumentation.id,
-                          argumentations
-                        )
-                      "
-                      ><solid-x-icon class="h-5 w-5"
-                    /></FormulateInput>
-                  </template>
-                </FormulateInput>
+                </forms-list-item-input>
               </li>
             </transition-group>
           </draggable>

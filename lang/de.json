@@ -101,6 +101,14 @@
     "proposals": {
       "add": "Vorschlag hinzufügen",
       "title": "Vorschläge"
+    },
+    "problems": {
+      "add": "Problem hinzufügen",
+      "title": "Welche Probleme hast du beobachtet und möchtest angeben?",
+      "introduction": "Gebe den Problemen eine Gewichtung indem du ihre Reihenfolge änderst.",
+      "placeholder": {
+        "description": "Gebe hier das Problem ein, dass du beobachtet hast."
+      }
     }
   },
   "goto": {
@@ -135,6 +143,9 @@
       "counter_arguments": {
         "description": "Problembeschreibung"
       }
+    },
+    "problems": {
+      "description": "Problembeschreibung"
     }
   },
   "save": "Speichern"
