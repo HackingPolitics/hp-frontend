@@ -9,8 +9,9 @@
     >
       <project-memberships-apply-project-form
         :project-iri="project['@id']"
-        :user-iri="user['@id']"
+        :user-iri="user ? user['@id'] : ''"
         @cancel="toggleModal()"
+        @application-submitted="toggleModal()"
       />
     </modal>
     <div class="space-y-16 mt-6">
@@ -60,6 +61,12 @@
             :step-number="index + 1"
           />
         </div>
+      </div>
+      <div class="pb-5 border-b border-gray-200 mb-8">
+        <project-memberships-list
+          :project-id="project.id"
+          :project-memberships="project.memberships"
+        />
       </div>
       <div class="pb-5 border-b border-gray-200 mb-8">
         <div

@@ -27,7 +27,7 @@
   </FormulateForm>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, useStore, ref } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 
@@ -45,18 +45,21 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, context) {
     const formData = ref({})
 
     const store = useStore()
 
     const applyForProject = async () => {
       const payload = {
-        ...formData,
+        ...formData.value,
         user: props.userIri,
         project: props.projectIri,
+        role: 'applicant',
       }
-      await store.dispatch('projects/applyForProject', payload)
+      await store.dispatch('projects/applyForProject', payload).then(() => {
+        context.emit('application-submitted')
+      })
     }
     return {
       formData,

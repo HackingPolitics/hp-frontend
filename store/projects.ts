@@ -83,9 +83,33 @@ export const actions: ActionTree<RootState, RootState> = {
   },
   async applyForProject({ commit }, membership) {
     try {
-      const response = await this.$api.projectMemberships.create(membership)
-      // @ts-ignore
-      console.log(response)
+      const response = await this.$api.projectMemberships
+        .create(membership)
+        .then(() => {
+          // @ts-ignore
+          this.$notify({
+            title: 'Bewerbung wurde verschickt',
+            duration: 500,
+          })
+        })
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
+    }
+  },
+  async updateProjectMemberShip({ commit }, [id, data]) {
+    try {
+      console.log(id)
+      const response = await this.$api.projectMemberships
+        .update(id, data)
+        .then(() => {
+          // @ts-ignore
+          this.$notify({
+            title: 'Bewerbung angenommen',
+            duration: 500,
+          })
+        })
       return response
     } catch (e) {
       // this.error = e.response.data.message

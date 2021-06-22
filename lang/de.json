@@ -146,5 +146,10 @@
       }
     }
   },
-  "back": "Zurück"
+  "back": "Zurück",
+  "notifications": {
+    "project_memberships": {
+      "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
+    }
+  }
 }
