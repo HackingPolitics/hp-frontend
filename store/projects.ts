@@ -66,9 +66,6 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-  updateProjectProperty({ commit }, [property, value]) {
-    commit('SET_PROJECT_PROPERTY', [property, value])
-  },
   async fetchProject({ commit }, id) {
     const response = await this.$api.projects.fetchProject(id)
     commit('SET_PROJECT', response.data)
@@ -82,6 +79,17 @@ export const actions: ActionTree<RootState, RootState> = {
     } catch (e) {
       commit('SET_LOADING_FLAG', false)
       commit('SET_ERROR', e.response.data.message)
+    }
+  },
+  async applyForProject({ commit }, membership) {
+    try {
+      const response = await this.$api.projectMemberships.create(membership)
+      // @ts-ignore
+      console.log(response)
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
     }
   },
 }

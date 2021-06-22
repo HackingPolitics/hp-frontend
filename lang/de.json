@@ -87,6 +87,16 @@
     "proposals": {
       "add": "Vorschlag hinzufügen",
       "title": "Vorschläge"
+    },
+    "project_memberships": {
+      "motivation": "Motivation",
+      "skills": "Fähigkeiten",
+      "placeholder": {
+        "motivation": "Wieso möchtest du dich antizipieren?",
+        "skills": "Welche Fähigkeiten besitzt du, die uns helfen könnte?"
+      },
+      "send_apply": "Bewerbung abschicken",
+      "title": "Bewerbung für das Projekt"
     }
   },
   "goto": {
@@ -114,7 +124,8 @@
       "publish": "Projekt veröffentlicht",
       "not_published": "Projekt unveröffentlicht",
       "publishing": "Projekt veröffentlichen",
-      "hide": "Projekt verstecken"
+      "hide": "Projekt verstecken",
+      "apply_project": "Bewirb dich für das Projekt"
     },
     "myproposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
@@ -134,5 +145,6 @@
         "description": "Problembeschreibung"
       }
     }
-  }
+  },
+  "back": "Zurück"
 }

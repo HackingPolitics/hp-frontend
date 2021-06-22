@@ -4,6 +4,7 @@ import { Plugin } from '@nuxt/types'
 import Auth from '@/api/auth'
 import User from '@/api/user'
 import Projects from '@/api/project'
+import ProjectMemberships from '@/api/project_memberships'
 
 declare module 'vuex/types/index' {
   // this.$api inside Vuex stores
@@ -18,6 +19,7 @@ const apiPlugin: Plugin = (context, inject) => {
     auth: Auth(context.$axios),
     user: User(context.$axios),
     projects: Projects(context.$axios),
+    projectMemberships: ProjectMemberships(context.$axios),
   }
 
   // Inject $api

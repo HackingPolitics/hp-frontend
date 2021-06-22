@@ -165,10 +165,17 @@ export interface IProposal extends IModel {
   url?: string
 }
 
+export enum MemberShipsRoles {
+  applicant = 'applicant',
+  writer = 'writer',
+  coordinator = 'coordinator',
+  observer = 'observer',
+}
+
 export interface IProjectMembership extends IModel {
   motivation?: string
   project?: IProject
-  role?: string
+  role?: MemberShipsRoles
   skills?: string
   user?: IUser
 }
