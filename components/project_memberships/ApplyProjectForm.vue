@@ -82,6 +82,7 @@
 <script lang="ts">
 import { defineComponent, useStore, ref } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
+import { IProjectMembership } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'ApplyProjectButton',
@@ -104,7 +105,7 @@ export default defineComponent({
     const authRequestIsActive = ref<Boolean>(false)
 
     const applyForProject = async () => {
-      const payload = {
+      const payload: IProjectMembership = {
         ...formData.value,
         project: props.project['@id'],
         role: 'applicant',

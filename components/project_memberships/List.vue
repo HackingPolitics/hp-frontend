@@ -109,7 +109,7 @@ export default defineComponent({
         payload,
       ])
     }
-    const deleteApplication = (userId) => {
+    const deleteApplication = (userId: string) => {
       const projectMemberShipId = `project=${props.projectId};user=${userId}`
       store.dispatch('projects/deleteProjectMemberShip', projectMemberShipId)
     }

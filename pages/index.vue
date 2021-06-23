@@ -76,7 +76,7 @@ export default defineComponent({
         try {
           const payload = {
             ...createdProjectMembership.value,
-            user: user.value['@id'],
+            user: user.value && user.value['@id'],
           }
           await store.dispatch('projects/applyForProject', payload).then(() => {
             store.commit('projects/SET_CREATED_PROJECT_MEMBERSHIP', null)
