@@ -1,7 +1,7 @@
 <template>
   <div class="rounded-lg bg-white overflow-hidden shadow mb-16">
     <h2 id="profile-overview-title" class="sr-only">Profile Overview</h2>
-    <div class="bg-white p-6">
+    <div class="bg-white p-6 pb-16">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="sm:flex sm:space-x-5">
           <div class="text-center sm:mt-0 sm:pt-1 sm:text-left">

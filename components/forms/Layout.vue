@@ -59,13 +59,13 @@
       <div>
         <slot name="left-side"></slot>
       </div>
-      <main class="mx-auto max-auto px-4 lg:pb-12 relative flex-1 mx-10">
+      <main class="mx-auto max-auto px-4 lg:pb-12 relative flex-1">
         <!--        <button class="absolute -left-44" @click="goBack()">
           <outline-chevron-left-icon
             class="w-10 h-10"
           ></outline-chevron-left-icon>
         </button>-->
-        <h1 class="text-3xl font-extrabold text-blue-gray-900 mb-4">
+        <h1 class="text-3xl font-normal text-blue-gray-900 mb-4">
           {{ title }}
         </h1>
         <slot> </slot>
@@ -86,7 +86,9 @@
                 text-gray-700
                 hover:bg-gray-50
                 focus:outline-none
-                focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-light-blue-500
               "
             >
               Zurück
@@ -108,7 +110,9 @@
                 bg-light-blue-500
                 hover:bg-light-blue-600
                 focus:outline-none
-                focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-light-blue-500
               "
             >
               Speichern
@@ -131,7 +135,9 @@
                 bg-indigo-600
                 hover:bg-indigo-700
                 focus:outline-none
-                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-indigo-500
                 mb-4
               "
             >
@@ -150,7 +156,9 @@
                 bg-indigo-600
                 hover:bg-indigo-700
                 focus:outline-none
-                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-indigo-500
               "
             >
               <!-- Heroicon name: outline/plus -->

@@ -1,21 +1,10 @@
 <template>
   <layouts-single-view :title="project.title">
     <application-header :application="project"></application-header>
-    <div class="space-y-16 mt-6">
-      <div
-        class="
-          flex
-          justify-between
-          pb-5
-          border-b border-gray-200
-          mb-8
-          bg-white
-          p-4
-          rounded
-        "
-      >
-        <div class="-ml-2 -mt-2 flex items-baseline">
-          <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
+    <div class="mt-6">
+      <div class="flex justify-between rounded">
+        <div class="flex items-baseline mb-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 font-body">
             {{ $t('page.application.concept') }}
           </h3>
           <div class="flex ml-4">
@@ -31,11 +20,11 @@
           />
         </div>
       </div>
-      <div class="grid sm:grid-cols-3 gap-8 pt-4">
+      <div class="grid sm:grid-cols-3 gap-4">
         <div
           v-for="(applicationStep, index) in applicationSteps"
           :key="index"
-          class="p-4 h-40 bg-gray-200 flex"
+          class="p-4 bg-white flex rounded"
         >
           <application-edit-progress-card
             :application-step="applicationStep"
@@ -44,17 +33,15 @@
           />
         </div>
       </div>
-      <div class="pb-5 border-b border-gray-200 mb-8">
-        <div
-          class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline justify-between"
-        >
-          <h3 class="ml-2 leading-6 font-medium text-lg text-gray-900">
+      <div class="pb-5 border-b border-gray-200 mt-16">
+        <div class="mb-4 flex flex-wrap items-baseline justify-between">
+          <h3 class="leading-6 font-medium text-lg text-gray-900">
             {{ $t('page.application.write') }}
           </h3>
 
           <button class="inline-flex items-center">
             <solid-eye-icon class="w-7 h-7 pr-2"></solid-eye-icon>
-            <span class="font-medium text-lg">PDF-Vorschau</span>
+            <span class="font-medium text-lg">{{ $t('pdfPreview') }}</span>
           </button>
         </div>
         <nuxt-link

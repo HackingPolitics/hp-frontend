@@ -7,6 +7,9 @@
   "email": "Email",
   "introduction": "Einführung",
   "of": "von",
+  "currentActive": "gerade aktiv",
+  "done": "erledigt",
+  "pdfPreview": "PDF-Vorschau",
   "proposal": {
     "createProposal": "Antrag hinzufügen",
     "form": {
@@ -126,7 +129,7 @@
       "createProposal": "Antragsprojekt starten"
     },
     "application": {
-      "concept": "Antragskonzept",
+      "concept": "Konzept",
       "write": "Antrag schreiben",
       "problems": "Problem",
       "topic": "Thema",

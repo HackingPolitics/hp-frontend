@@ -4,7 +4,7 @@
       <slot name="header"></slot>
       <h3
         v-if="!hasHeaderSlot"
-        class="text-lg font-semibold leading-6 text-gray-900"
+        class="text-lg font-medium leading-6 text-gray-900"
       >
         {{ title }}
       </h3>

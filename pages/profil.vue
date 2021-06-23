@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view title="Mein Profil"> </layouts-single-view>
+  <layouts-header-title title="Mein Profil"> </layouts-header-title>
 </template>
 
 <script>
