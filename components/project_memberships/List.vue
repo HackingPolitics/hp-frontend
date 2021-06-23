@@ -7,25 +7,22 @@
       >
         <a href="#" class="block hover:bg-gray-50">
           <div class="flex items-center px-4 py-4 sm:px-6 relative">
-            <div class="min-w-0 flex-1 flex items-center space-x-6">
-              <div class="flex-shrink-0">
+            <div
+              class="
+                min-w-0
+                flex-1 flex
+                items-center
+                space-x-6
+                grid grid-cols-6
+              "
+            >
+              <div class="flex flex-shrink-0 col-span-1">
                 <img
                   class="h-12 w-12 rounded-full"
                   src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   alt=""
                 />
-              </div>
-
-              <div
-                class="
-                  min-w-0
-                  px-4
-                  flex-1
-                  md:grid md:grid-cols-3 md:gap-4
-                  justify-center
-                "
-              >
-                <div>
+                <div class="ml-2">
                   <p class="text-sm font-medium text-indigo-600 truncate">
                     {{ `${projectMembership.user.username}` }}
                   </p>
@@ -39,6 +36,9 @@
                     }}</span>
                   </p>
                 </div>
+              </div>
+
+              <div class="col-span-3 min-w-0 px-6 flex-1justify-center">
                 <div class="hidden md:block">
                   <div>
                     <p class="text-sm text-gray-900">
@@ -52,7 +52,7 @@
                   </div>
                 </div>
               </div>
-              <div class="absolute right-2">
+              <div class="col-span-2 flex space-x-2">
                 <FormulateInput
                   v-show="projectMembership.role === 'applicant'"
                   type="button"
@@ -60,7 +60,17 @@
                 >
                   Bewerbung annehmen
                 </FormulateInput>
-                <!-- Heroicon name: solid/chevron-right -->
+                <FormulateInput
+                  v-show="projectMembership.role !== 'coordinator'"
+                  type="button"
+                  @click="deleteApplication(projectMembership.user.id)"
+                >
+                  <span class="text-red-500">{{
+                    projectMembership.role === 'applicant'
+                      ? $t('page.application.reject_application')
+                      : $t('page.application.delete_membership')
+                  }}</span>
+                </FormulateInput>
               </div>
             </div>
           </div>
@@ -89,7 +99,7 @@ export default defineComponent({
   setup(props) {
     const store = useStore<RootState>()
 
-    const acceptApplication = (userId) => {
+    const acceptApplication = (userId: string) => {
       const payload = {
         role: 'writer',
       }
@@ -99,8 +109,14 @@ export default defineComponent({
         payload,
       ])
     }
+    const deleteApplication = (userId) => {
+      const projectMemberShipId = `project=${props.projectId};user=${userId}`
+      store.dispatch('projects/deleteProjectMemberShip', projectMemberShipId)
+    }
+
     return {
       acceptApplication,
+      deleteApplication,
     }
   },
 })

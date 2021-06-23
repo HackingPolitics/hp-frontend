@@ -1,15 +1,10 @@
 <template>
   <layouts-single-view :title="project.title">
     <application-header :application="project"></application-header>
-    <modal
-      ref="projectMemberShipModal"
-      :modal-title="`${$t('forms.project_memberships.title')}:  ${
-        project.title
-      }`"
-    >
+    <modal ref="projectMemberShipModal">
       <project-memberships-apply-project-form
-        :project-iri="project['@id']"
-        :user-iri="user ? user['@id'] : ''"
+        :project="project"
+        :user="user"
         @cancel="toggleModal()"
         @application-submitted="toggleModal()"
       />
@@ -63,6 +58,10 @@
         </div>
       </div>
       <div class="pb-5 border-b border-gray-200 mb-8">
+        <h3 class="leading-6 font-medium text-lg text-gray-900 pb-5">
+          {{ $t('page.application.project_member') }}
+        </h3>
+
         <project-memberships-list
           :project-id="project.id"
           :project-memberships="project.memberships"

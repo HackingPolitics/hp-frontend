@@ -14,4 +14,9 @@ export default (axios: AxiosInstance) => ({
       projectMembership
     ) as Promise<IProjectMembership>
   },
+  delete(id: number | string) {
+    return axios.delete(
+      'project_memberships/' + id
+    ) as Promise<IProjectMembership>
+  },
 })

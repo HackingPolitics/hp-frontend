@@ -125,7 +125,10 @@
       "not_published": "Projekt unveröffentlicht",
       "publishing": "Projekt veröffentlichen",
       "hide": "Projekt verstecken",
-      "apply_project": "Bewirb dich für das Projekt"
+      "apply_project": "Bewirb dich für das Projekt",
+      "reject_application": "Bewerbung ablehnen",
+      "delete_membership": "Mitgliedschaft löschen",
+      "project_member": "Projekt Mitglieder"
     },
     "myproposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
@@ -151,5 +154,7 @@
     "project_memberships": {
       "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
     }
-  }
+  },
+  "login": "Login",
+  "register": "Registrieren"
 }

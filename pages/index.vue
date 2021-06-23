@@ -49,6 +49,11 @@ export default defineComponent({
     const createdProject: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.createdProject
     )
+
+    const createdProjectMembership = computed(
+      () => store.state.projects.createdProjectMembership
+    )
+
     const isLoggedIn: ComputedRef<IProject | null> = computed(
       () => store.getters['auth/isLoggedIn']
     )
@@ -58,10 +63,24 @@ export default defineComponent({
           await store
             .dispatch('projects/createProject', createdProject.value)
             .then((res) => {
+              store.commit('projects/SET_CREATED_PROJECT', null)
               router.push(
                 context.localePath('/antraege/' + res.data.id.toString())
               )
             })
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      if (isLoggedIn.value && createdProjectMembership.value) {
+        try {
+          const payload = {
+            ...createdProjectMembership.value,
+            user: user.value['@id'],
+          }
+          await store.dispatch('projects/applyForProject', payload).then(() => {
+            store.commit('projects/SET_CREATED_PROJECT_MEMBERSHIP', null)
+          })
         } catch (error) {
           console.log(error)
         }
