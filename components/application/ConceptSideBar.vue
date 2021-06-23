@@ -1,6 +1,6 @@
 <template>
   <div class="py-12">
-    <nav class="flex justify-center" aria-label="Progress">
+    <nav class="" aria-label="Progress">
       <ol class="space-y-8">
         <li v-for="(concept, index) in concepts" :key="index" class="mb-8">
           <nuxt-link
@@ -32,7 +32,7 @@
 import { defineComponent, ref, useRoute } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'ConceptSideBar',
+  name: 'ConceptSidebar',
   setup() {
     const route = useRoute()
     const projectId = ref<string>(route.value.params.id)

@@ -47,7 +47,15 @@
     }
   },
   "forms": {
+      "topic": {
+          "formTitle":"Thema",
+          "mainTopic":"Was ist das Thema, mit dem sich euer Auftrag beschäftigt",
+          "mainTopicSubtitle":"Schreiben Sie etwas zu dem Projekt auf",
+          "category":"In welche Kategorie passt euer Thema",
+          "categorySubtitle":"Wähle bis zu 2 Möglichkeiten aus"
+      },
     "arguments": {
+      "formTitle":"Argumente und Gegenargumente",
       "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
       "title": "Argumente",
       "add": "Argument hinzufügen",
@@ -95,9 +103,9 @@
       }
     },
     "fractioninterests": {
+        "formTitle": "Ratsmehrheit und Fraktionsinteressen",
       "fractions": "Fraktionen",
       "mandates": "Sitze/Stimmen",
-      "title": "Ratsmehrheit und Fraktionsinteressen",
       "parliamentProfileUpdatedAt": "Stand",
       "partnerMandates": "Partnerstimmen",
       "votes": "Stimmen"
@@ -117,12 +125,17 @@
       "title": "Bewerbung für das Projekt"
     },
     "problems": {
+        "formTitle":"Probleme und Handlungsfelder",
       "add": "Problem hinzufügen",
       "title": "Welche Probleme hast du beobachtet und möchtest angeben?",
       "introduction": "Gebe den Problemen eine Gewichtung indem du ihre Reihenfolge änderst.",
       "placeholder": {
         "description": "Gebe hier das Problem ein, dass du beobachtet hast."
       }
+    },
+    "strategy": {
+        "formTitle": "Strategie",
+        "possiblePartners": "Mögliche strategische Partner"
     }
   },
   "goto": {

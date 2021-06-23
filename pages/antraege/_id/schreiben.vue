@@ -6,7 +6,7 @@
       params: { id: project.id },
     }"
   >
-    <forms-application-writing></forms-application-writing>
+    <forms-project-writing></forms-project-writing>
   </layouts-full-width>
 </template>
 

@@ -1,86 +1,84 @@
 <template>
   <FormulateForm>
-    <forms-layout title="Probleme und Handlungsfelder" no-actions>
-      <div class="space-y-6">
-        <forms-form-section
-          :title="$t('forms.problems.title')"
-          :subtitle="$t('forms.problems.introduction')"
+    <div class="space-y-6">
+      <forms-form-section
+        :title="$t('forms.problems.title')"
+        :subtitle="$t('forms.problems.introduction')"
+      >
+        <draggable
+          :list="problems"
+          :sort="true"
+          ghost-class="ghost"
+          handle=".handle"
+          @update="updateProblemPriority($event)"
         >
-          <draggable
-            :list="problems"
-            :sort="true"
-            ghost-class="ghost"
-            handle=".handle"
-            @update="updateProblemPriority($event)"
-          >
-            <transition-group tag="ul" type="transition" name="flip-list">
-              <li
-                v-for="problem in problems"
-                :key="problem.id"
-                class="inline-flex w-full justify-center cursor-move"
-              >
-                <forms-list-item-input
-                  :value="problem.description"
-                  name="description"
-                  type="text"
-                  element-class="inline-flex w-full"
-                  validation="required"
-                  :placeholder="$t('forms.problems.placeholder.description')"
-                  :validation-name="$t('validation.problems.description')"
-                  @validation="validation = $event"
-                  @focusout="updateProblem($event, problem.id)"
-                  @delete="deleteProblem(problem.id)"
-                >
-                  <template #prefix>
-                    <div
-                      class="
-                        inline-flex
-                        items-center
-                        space-x-2
-                        pr-4
-                        handle
-                        cursor-move
-                      "
-                    >
-                      <outline-menu-alt-4-icon
-                        class="w-5 h-5"
-                      ></outline-menu-alt-4-icon>
-                      <outline-shield-exclamation-icon
-                        class="w-5 h-5"
-                      ></outline-shield-exclamation-icon>
-                    </div>
-                  </template>
-                </forms-list-item-input>
-              </li>
-            </transition-group>
-          </draggable>
-          <div class="border-t-2 pt-6">
-            <FormulateForm
-              ref="problemForm"
-              v-model="createProblemForm"
-              @submit="createProblem()"
+          <transition-group tag="ul" type="transition" name="flip-list">
+            <li
+              v-for="problem in problems"
+              :key="problem.id"
+              class="inline-flex w-full justify-center cursor-move"
             >
-              <FormulateInput
-                :key="formKey"
-                type="text"
+              <forms-list-item-input
+                :value="problem.description"
                 name="description"
+                type="text"
+                element-class="inline-flex w-full"
                 validation="required"
-                :validation-name="$t('validation.problems.description')"
-                error-behavior="submit"
-                input-class="list-input-text"
                 :placeholder="$t('forms.problems.placeholder.description')"
-              />
-              <FormulateInput type="submit">
-                <outline-thumb-down-icon class="h-5 w-5 text-red-500" />
-                <span class="text-red-500 pl-4">{{
-                  $t('forms.problems.add')
-                }}</span>
-              </FormulateInput>
-            </FormulateForm>
-          </div>
-        </forms-form-section>
-      </div>
-    </forms-layout>
+                :validation-name="$t('validation.problems.description')"
+                @validation="validation = $event"
+                @focusout="updateProblem($event, problem.id)"
+                @delete="deleteProblem(problem.id)"
+              >
+                <template #prefix>
+                  <div
+                    class="
+                      inline-flex
+                      items-center
+                      space-x-2
+                      pr-4
+                      handle
+                      cursor-move
+                    "
+                  >
+                    <outline-menu-alt-4-icon
+                      class="w-5 h-5"
+                    ></outline-menu-alt-4-icon>
+                    <outline-shield-exclamation-icon
+                      class="w-5 h-5"
+                    ></outline-shield-exclamation-icon>
+                  </div>
+                </template>
+              </forms-list-item-input>
+            </li>
+          </transition-group>
+        </draggable>
+        <div class="border-t-2 pt-6">
+          <FormulateForm
+            ref="problemForm"
+            v-model="createProblemForm"
+            @submit="createProblem()"
+          >
+            <FormulateInput
+              :key="formKey"
+              type="text"
+              name="description"
+              validation="required"
+              :validation-name="$t('validation.problems.description')"
+              error-behavior="submit"
+              input-class="list-input-text"
+              :placeholder="$t('forms.problems.placeholder.description')"
+            />
+            <FormulateInput type="submit">
+              <outline-thumb-down-icon class="h-5 w-5 text-red-500" />
+              <span class="text-red-500 pl-4">{{
+                $t('forms.problems.add')
+              }}</span>
+            </FormulateInput>
+          </FormulateForm>
+        </div>
+      </forms-form-section>
+    </div>
   </FormulateForm>
 </template>
 

@@ -1,37 +1,35 @@
 <template>
-  <forms-layout title="Thema" no-actions>
-    <div class="space-y-4">
-      <forms-form-section
-        title="Was ist das Thema, mit dem sich euer Auftrag beschäftigt"
-        subtitle="Schreiben Sie etwas zu dem Projekt auf"
+  <div class="space-y-4">
+    <forms-form-section
+      :title="$t('forms.topic.mainTopic')"
+      :subtitle="$t('forms.topic.mainTopicSubtitle')"
+    >
+      <FormulateInput
+        v-model="topic"
+        type="textarea"
+        rows="5"
+        validation="required"
+        @validation="validation = $event"
+        @focusout="updateProject()"
       >
-        <FormulateInput
-          type="textarea"
-          v-model="topic"
-          rows="5"
-          validation="required"
-          @validation="validation = $event"
-          @focusout="updateProject()"
-        >
-        </FormulateInput>
-      </forms-form-section>
+      </FormulateInput>
+    </forms-form-section>
 
-      <forms-form-section
-        title="In welche Thema passt euer Thema"
-        subtitle="Wähle bis zu 2 Möglichkeiten aus"
-      >
-        <FormulateInput
-          v-model="categories"
-          aria-label="In welche Thema passt euer Thema"
-          type="chipGroup"
-          name="category"
-          limit="2"
-          :options="categoryOptions"
-          @change="updateProject()"
-        />
-      </forms-form-section>
-    </div>
-  </forms-layout>
+    <forms-form-section
+      :title="$t('forms.topic.category')"
+      :subtitle="$t('forms.topic.categorySubtitle')"
+    >
+      <FormulateInput
+        v-model="categories"
+        :aria-label="$t('forms.topic.category')"
+        type="chipGroup"
+        name="category"
+        limit="2"
+        :options="categoryOptions"
+        @change="updateProject()"
+      />
+    </forms-form-section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -52,7 +50,7 @@ interface TopicForm {
 }
 
 export default defineComponent({
-  name: 'ApplicationFormTheme',
+  name: 'TopicForm',
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const topic = ref<String | undefined>('')

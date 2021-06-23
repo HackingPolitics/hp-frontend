@@ -1,7 +1,7 @@
 <template>
   <layouts-single-view :title="project.title">
     <application-header :application="project"></application-header>
-     <modal ref="projectMemberShipModal">
+    <modal ref="projectMemberShipModal">
       <project-memberships-apply-project-form
         :project="project"
         :user="user"
@@ -10,8 +10,8 @@
       />
     </modal>
     <div class="mt-6">
-      <div class="flex justify-between rounded">
-        <div class="flex items-baseline mb-4">
+      <div class="flex justify-between rounded items-center">
+        <div class="flex items-center">
           <h3 class="text-lg leading-6 font-medium text-gray-900 font-body">
             {{ $t('page.application.concept') }}
           </h3>
@@ -21,9 +21,31 @@
         </div>
 
         <div v-if="!membershipRoles.includes(userMembershipRole)">
-          <FormulateInput type="button" @click="toggleModal()">{{
-            $t('page.application.apply_project')
-          }}</FormulateInput>
+          <button
+            class="
+              w-full
+              flex
+              justify-center
+              py-2
+              px-4
+              text-sm
+              font-medium
+              rounded-md
+              bg-purple-500
+              text-white
+              hover:text-white hover:bg-purple-600
+              focus:outline-none
+              focus:border-purple-700
+              focus:shadow-outline-purple
+              active:border-purple-700
+              transition
+              duration-150
+              ease-in-out
+            "
+            @click="toggleModal()"
+          >
+            {{ $t('page.application.apply_project') }}
+          </button>
         </div>
 
         <project-memberships-publish-project-button
@@ -33,7 +55,7 @@
           @publish="publishProject()"
         />
       </div>
-      <div class="grid sm:grid-cols-3 gap-4">
+      <div class="grid sm:grid-cols-3 gap-4 mt-4">
         <div
           v-for="(applicationStep, index) in applicationSteps"
           :key="index"
@@ -46,7 +68,7 @@
           />
         </div>
       </div>
-      <div class="pb-5 border-b border-gray-200 mb-8">
+      <div class="pb-5 border-b border-gray-200 mb-8 mt-4">
         <h3 class="leading-6 font-medium text-lg text-gray-900 pb-5">
           {{ $t('page.application.project_member') }}
         </h3>

@@ -1,34 +1,17 @@
 <template>
-  <layouts-header-title
-    :menu-title="project ? project.title : null"
-    title="Konzept"
-    :link-to="{
-      name: 'antraege-id',
-      params: { id: project ? project.id : null },
-    }"
-    :has-project-menu="true"
-  >
-    <forms-application-problem></forms-application-problem>
-  </layouts-header-title>
+  <div>
+    <h1 class="text-3xl font-normal text-blue-gray-900 mb-4">
+      {{ $t('forms.problems.formTitle') }}
+    </h1>
+    <forms-project-problem></forms-project-problem>
+  </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  //   useStore,
-  //   computed,
-  useRoute,
-} from '@nuxtjs/composition-api'
-import useProject from '~/composables/useProject'
-// import { RootState } from '~/store'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  name: 'ApplicationProblem',
-  setup() {
-    const route = useRoute()
-    const { project, isLoading } = useProject(route.value.params.id)
-
-    return { project, isLoading }
-  },
+  name: 'Problem',
+  layout: 'formWithSidebar',
 })
 </script>

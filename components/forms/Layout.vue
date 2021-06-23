@@ -53,9 +53,9 @@
       </ol>
     </nav>
     <div class="flex mt-8">
-      <application-concept-side-bar
+      <application-concept-sidebar
         v-if="!noConceptSidebar"
-      ></application-concept-side-bar>
+      ></application-concept-sidebar>
       <div>
         <slot name="left-side"></slot>
       </div>
