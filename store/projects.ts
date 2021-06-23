@@ -73,8 +73,14 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('SET_PROJECT_PROPERTY', [property, value])
   },
   async fetchProject({ commit }, id) {
-    const response = await this.$api.projects.fetchProject(id)
-    commit('SET_PROJECT', response.data)
+    commit('SET_LOADING_FLAG', true)
+    try {
+      const response = await this.$api.projects.fetchProject(id)
+      commit('SET_PROJECT', response.data)
+    } catch (e) {
+      commit('SET_LOADING_FLAG', false)
+      commit('SET_ERROR', e.response.data.message)
+    }
   },
   async fetchProjects({ commit }) {
     commit('SET_LOADING_FLAG', true)
