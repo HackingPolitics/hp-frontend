@@ -106,6 +106,16 @@
       "add": "Vorschlag hinzufügen",
       "title": "Vorschläge"
     },
+    "project_memberships": {
+      "motivation": "Motivation",
+      "skills": "Fähigkeiten",
+      "placeholder": {
+        "motivation": "Wieso möchtest du dich antizipieren?",
+        "skills": "Welche Fähigkeiten besitzt du, die uns helfen könnte?"
+      },
+      "send_apply": "Bewerbung abschicken",
+      "title": "Bewerbung für das Projekt"
+    },
     "problems": {
       "add": "Problem hinzufügen",
       "title": "Welche Probleme hast du beobachtet und möchtest angeben?",
@@ -140,7 +150,11 @@
       "publish": "Projekt veröffentlicht",
       "not_published": "Projekt unveröffentlicht",
       "publishing": "Projekt veröffentlichen",
-      "hide": "Projekt verstecken"
+      "hide": "Projekt verstecken",
+      "apply_project": "Bewirb dich für das Projekt",
+      "reject_application": "Bewerbung ablehnen",
+      "delete_membership": "Mitgliedschaft löschen",
+      "project_member": "Projekt Mitglieder"
     },
     "myproposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
@@ -149,8 +163,7 @@
       "title": "Meine Antragsprojekte"
     }
   },
-  "user": {
-  },
+  "user": {},
   "validation": {
     "name": {
       "arguments": {
@@ -165,5 +178,13 @@
       "description": "Problembeschreibung"
     }
   },
+  "back": "Zurück",
+  "notifications": {
+    "project_memberships": {
+      "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
+    }
+  },
+  "login": "Login",
+  "register": "Registrieren",
   "save": "Speichern"
 }

@@ -1,6 +1,14 @@
 <template>
   <layouts-single-view :title="project.title">
     <application-header :application="project"></application-header>
+     <modal ref="projectMemberShipModal">
+      <project-memberships-apply-project-form
+        :project="project"
+        :user="user"
+        @cancel="toggleModal()"
+        @application-submitted="toggleModal()"
+      />
+    </modal>
     <div class="mt-6">
       <div class="flex justify-between rounded">
         <div class="flex items-baseline mb-4">
@@ -11,14 +19,19 @@
             <progress-bar progress="10"></progress-bar>
           </div>
         </div>
-        <div>
-          <project-memberships-publish-project-button
-            :membership-role="membershipRole"
-            :project-state="project.state"
-            @hide="hideProject()"
-            @publish="publishProject()"
-          />
+
+        <div v-if="!membershipRoles.includes(userMembershipRole)">
+          <FormulateInput type="button" @click="toggleModal()">{{
+            $t('page.application.apply_project')
+          }}</FormulateInput>
         </div>
+
+        <project-memberships-publish-project-button
+          :membership-role="userMembershipRole"
+          :project-state="project.state"
+          @hide="hideProject()"
+          @publish="publishProject()"
+        />
       </div>
       <div class="grid sm:grid-cols-3 gap-4">
         <div
@@ -33,9 +46,21 @@
           />
         </div>
       </div>
-      <div class="pb-5 border-b border-gray-200 mt-16">
-        <div class="mb-4 flex flex-wrap items-baseline justify-between">
-          <h3 class="leading-6 font-medium text-lg text-gray-900">
+      <div class="pb-5 border-b border-gray-200 mb-8">
+        <h3 class="leading-6 font-medium text-lg text-gray-900 pb-5">
+          {{ $t('page.application.project_member') }}
+        </h3>
+
+        <project-memberships-list
+          :project-id="project.id"
+          :project-memberships="project.memberships"
+        />
+      </div>
+      <div class="pb-5 border-b border-gray-200 mb-8">
+        <div
+          class="-ml-2 -mt-2 mb-4 flex flex-wrap items-baseline justify-between"
+        >
+          <h3 class="ml-2 leading-6 font-medium text-lg text-gray-900">
             {{ $t('page.application.write') }}
           </h3>
 
@@ -69,7 +94,11 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
-import { IProject, IProjectMembership } from '~/types/apiSchema'
+import {
+  IProject,
+  IProjectMembership,
+  MemberShipsRoles,
+} from '~/types/apiSchema'
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -135,6 +164,14 @@ export default defineComponent({
       },
     ])
 
+    const user = computed(() => store.state.auth.user)
+
+    const membershipRoles = ref<MemberShipsRoles[]>(
+      Object.values(MemberShipsRoles)
+    )
+
+    const projectMemberShipModal = ref()
+
     const publishProject = async () => {
       const response = await store.dispatch('projects/updateProject', [
         projectId.value,
@@ -151,7 +188,11 @@ export default defineComponent({
       project.value = response.data
     }
 
-    const membershipRole = computed((): string | undefined => {
+    const toggleModal = () => {
+      projectMemberShipModal.value?.toggleModal()
+    }
+
+    const userMembershipRole = computed((): string | undefined => {
       if (project.value.memberships) {
         return project.value.memberships.find(
           (membership: IProjectMembership) =>
@@ -166,7 +207,11 @@ export default defineComponent({
       project,
       publishProject,
       hideProject,
-      membershipRole,
+      userMembershipRole,
+      membershipRoles,
+      projectMemberShipModal,
+      toggleModal,
+      user,
     }
   },
   async fetch() {

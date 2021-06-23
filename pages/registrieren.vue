@@ -179,7 +179,7 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 
-import { IProject, IRegistration } from '~/types/apiSchema'
+import { IProject, IProjectMembership, IRegistration } from '~/types/apiSchema'
 import { RootState } from '~/store'
 import formErrorsHandling from '~/composables/formErrorsHandling'
 
@@ -196,12 +196,20 @@ export default defineComponent({
     const formSent = ref(false)
 
     const createdProject = computed(() => store.state.projects.createdProject)
+    const createdProjectMembership = computed(
+      () => store.state.projects.createdProjectMembership
+    )
 
     const createAccount = async () => {
       if (createdProject.value) {
         const projects: IProject[] = []
         projects.push(createdProject.value)
         credentials.value.createdProjects = projects
+      }
+      if (createdProjectMembership.value) {
+        const projectMemberships: IProjectMembership[] = []
+        projectMemberships.push(createdProjectMembership.value)
+        credentials.value.projectMemberships = projectMemberships
       }
       const response = await store.dispatch('auth/register', credentials.value)
       handleStatusErrors(response)
