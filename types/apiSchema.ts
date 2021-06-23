@@ -134,11 +134,6 @@ export interface IProject extends IModel {
   createdAt?: Date | string
 }
 
-export interface IRegistration extends IUser {
-  validationUrl: string
-  createdProjects?: IProject[]
-}
-
 export interface IPartner extends IModel {
   contactEmail?: string
   contactName?: string
@@ -165,12 +160,25 @@ export interface IProposal extends IModel {
   url?: string
 }
 
+export enum MemberShipsRoles {
+  applicant = 'applicant',
+  writer = 'writer',
+  coordinator = 'coordinator',
+  observer = 'observer',
+}
+
 export interface IProjectMembership extends IModel {
   motivation?: string
   project?: IProject
-  role?: string
+  role?: MemberShipsRoles
   skills?: string
   user?: IUser
+}
+
+export interface IRegistration extends IUser {
+  validationUrl: string
+  createdProjects?: IProject[]
+  projectMemberships?: IProjectMembership
 }
 
 export interface ICounterArgument extends IArgument {}

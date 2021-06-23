@@ -1,10 +1,11 @@
 import { ActionTree, MutationTree } from 'vuex'
+import { IProject, IProjectMembership } from '~/types/apiSchema'
 import { set } from 'lodash'
-import { IProject } from '~/types/apiSchema'
 
 export interface ProjectsState {
   project: IProject
   createdProject: IProject | null
+  createdProjectMembership: IProjectMembership | null
   isLoading: false
   error: string | null
 }
@@ -12,6 +13,7 @@ export interface ProjectsState {
 const defaultProjectsState: ProjectsState = {
   project: {},
   createdProject: null,
+  createdProjectMembership: null,
   isLoading: false,
   error: null,
 }
@@ -25,6 +27,9 @@ export type RootState = ReturnType<typeof state>
 export const mutations: MutationTree<RootState> = {
   SET_PROJECT(state, project) {
     state.project = project
+  },
+  SET_CREATED_PROJECT_MEMBERSHIP(state, projectMembership) {
+    state.createdProjectMembership = projectMembership
   },
 
   SET_CREATED_PROJECT(state, project) {
@@ -69,9 +74,6 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-  updateProjectProperty({ commit }, [property, value]) {
-    commit('SET_PROJECT_PROPERTY', [property, value])
-  },
   async fetchProject({ commit }, id) {
     commit('SET_LOADING_FLAG', true)
     try {
@@ -91,6 +93,57 @@ export const actions: ActionTree<RootState, RootState> = {
     } catch (e) {
       commit('SET_LOADING_FLAG', false)
       commit('SET_ERROR', e.response.data.message)
+    }
+  },
+  async applyForProject({ commit }, membership) {
+    try {
+      const response = await this.$api.projectMemberships
+        .create(membership)
+        .then(() => {
+          // @ts-ignore
+          this.$notify({
+            title: 'Bewerbung wurde verschickt',
+            duration: 500,
+          })
+        })
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
+    }
+  },
+  async updateProjectMemberShip({ commit }, [id, data]) {
+    try {
+      const response = await this.$api.projectMemberships
+        .update(id, data)
+        .then(() => {
+          // @ts-ignore
+          this.$notify({
+            title: 'Bewerbung angenommen',
+            duration: 500,
+          })
+        })
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
+    }
+  },
+  async deleteProjectMemberShip({ commit }, id) {
+    try {
+      const response = await this.$api.projectMemberships
+        .delete(id)
+        .then(() => {
+          // @ts-ignore
+          this.$notify({
+            title: 'Mitgliedschaft gelöscht',
+            duration: 500,
+          })
+        })
+      return response
+    } catch (e) {
+      // this.error = e.response.data.message
+      console.log(e)
     }
   },
 }
