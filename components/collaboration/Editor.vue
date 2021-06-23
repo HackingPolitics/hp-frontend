@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { Editor, EditorContent } from '@tiptap/vue-2'
 import StarterKit from '@tiptap/starter-kit'
 import Collaboration from '@tiptap/extension-collaboration'
@@ -33,7 +33,7 @@ import { WebsocketProvider } from 'y-websocket'
 import { IndexeddbPersistence } from 'y-indexeddb'
 import { defineComponent } from '@nuxtjs/composition-api'
 
-const getRandomElement = (list: string[]) => {
+const getRandomElement = (list) => {
   return list[Math.floor(Math.random() * list.length)]
 }
 
