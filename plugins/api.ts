@@ -6,6 +6,7 @@ import User from '@/api/user'
 import Projects from '@/api/project'
 import Arguments from '@/api/arguments'
 import CounterArguments from '@/api/counter_arguments'
+import Negations from '@/api/negations'
 
 declare module 'vuex/types/index' {
   // this.$api inside Vuex stores
@@ -22,6 +23,7 @@ const apiPlugin: Plugin = (context, inject) => {
     projects: Projects(context.$axios),
     arguments: Arguments(context.$axios),
     counter_arguments: CounterArguments(context.$axios),
+    negations: Negations(context.$axios),
   }
 
   // Inject $api
