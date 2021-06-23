@@ -16,7 +16,9 @@
           >
             <transition-group tag="ul" type="transition" name="flip-list">
               <li
-                v-for="counterArgument in counterArguments"
+                v-for="(
+                  counterArgument, counterArgumentIndex
+                ) in counterArguments"
                 :key="counterArgument.id"
                 class="flex flex-col w-full justify-center items-center mb-8"
               >
@@ -75,7 +77,6 @@
                 <FormulateInput
                   type="group"
                   remove-position="after"
-                  name="negations"
                   :repeatable="true"
                   minimum="1"
                   add-label="Konter-Argument hinzufügen"
@@ -95,6 +96,11 @@
                   </template>
                   <template #default="{ index }">
                     <FormulateInput
+                      :value="
+                        counterArgument.negations &&
+                        counterArgument.negations[index] &&
+                        counterArgument.negations[index].description
+                      "
                       name="description"
                       type="text"
                       :validation-name="
@@ -110,8 +116,13 @@
                       @focusout="
                         !validationNegations.hasErrors
                           ? createOrUpdateNegations(
-                              counterArgument.negations[index].id,
+                              counterArgument.negations &&
+                                counterArgument.negations[index]
+                                ? counterArgument.negations[index].id
+                                : null,
+                              counterArgumentIndex,
                               counterArgument,
+                              index,
                               $event.target.value
                             )
                           : {}
@@ -128,13 +139,14 @@
                   </template>
                   <template #remove="{ index, removeItem }">
                     <remove-button
+                      v-if="counterArgument.negations.length > 1"
                       @click="
-                        removeItem(),
-                          deleteEntity(
-                            'negations',
-                            counterArgument.negations[index].id,
-                            counterArguments
-                          )
+                        removeItem()
+                        deleteNegation(
+                          counterArgument.negations[index].id,
+                          counterArgumentIndex,
+                          counterArgument.negations
+                        )
                       "
                     />
                   </template>
@@ -305,22 +317,7 @@ export default defineComponent({
         'counter_arguments',
         counterArguments.value,
         formData
-      ).then(async (res) => {
-        const createdCounterArgument = res?.data
-        await Promise.all(
-          formData.value.negations.map(async (negation: INegations) => {
-            const payload = {
-              description: negation.description,
-              counterArgument: createdCounterArgument['@id'],
-            }
-            await createProjectEntity<INegations>(
-              'negations',
-              counterArguments.value,
-              payload
-            )
-          })
-        )
-      })
+      )
     }
 
     const createArgumentType = async (
@@ -401,9 +398,21 @@ export default defineComponent({
       })
     }
 
+    const deleteNegation = async (id, counterArgumentIndex, negations) => {
+      await context.$api.negations.delete(id).then(() => {
+        const data = negations.filter((e) => e.id !== id)
+        store.commit('projects/SET_PROJECT_PROPERTY', [
+          `counterArguments[${counterArgumentIndex}].negations`,
+          data,
+        ])
+      })
+    }
+
     const createOrUpdateNegations = async (
       id: string,
+      counterArgumentIndex: number,
       counterArgument: ICounterArgument,
+      negationIndex: number,
       value: string
     ) => {
       const payload = {
@@ -411,13 +420,21 @@ export default defineComponent({
         counterArgument: counterArgument['@id'],
       }
       if (id) {
-        await updateEntity('negations', payload, id)
+        await context.$api.negations.update(id, payload).then((res) => {
+          store.commit('projects/SET_PROJECT_PROPERTY', [
+            `counterArguments[${counterArgumentIndex}].negations[${negationIndex}]`,
+            res.data,
+          ])
+        })
       } else {
-        await createProjectEntity<INegations>(
-          'negations',
-          counterArguments.value,
-          payload
-        )
+        await context.$api.negations.create(payload).then((res) => {
+          counterArguments.value[counterArgumentIndex].negations.push(res.data)
+          const data = counterArguments.value[counterArgumentIndex].negations
+          store.commit('projects/SET_PROJECT_PROPERTY', [
+            `counterArguments[${counterArgumentIndex}].negations`,
+            data,
+          ])
+        })
       }
     }
 
@@ -431,6 +448,7 @@ export default defineComponent({
       createArgumentType,
       updateEntity,
       deleteEntity,
+      deleteNegation,
       updatePriority,
       createCounterArguments,
       createOrUpdateNegations,
