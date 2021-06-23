@@ -248,12 +248,7 @@ import {
 
 import { camelCase, cloneDeep } from 'lodash'
 
-import {
-  IArgument,
-  ICounterArgument,
-  INegations,
-  IProposal,
-} from '~/types/apiSchema'
+import { IArgument, ICounterArgument, IProposal } from '~/types/apiSchema'
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
 import { RootState } from '~/store'
@@ -398,8 +393,11 @@ export default defineComponent({
       })
     }
 
+    // @ts-ignore
     const deleteNegation = async (id, counterArgumentIndex, negations) => {
+      // @ts-ignore
       await context.$api.negations.delete(id).then(() => {
+        // @ts-ignore
         const data = negations.filter((e) => e.id !== id)
         store.commit('projects/SET_PROJECT_PROPERTY', [
           `counterArguments[${counterArgumentIndex}].negations`,
@@ -420,6 +418,7 @@ export default defineComponent({
         counterArgument: counterArgument['@id'],
       }
       if (id) {
+        // @ts-ignore
         await context.$api.negations.update(id, payload).then((res) => {
           store.commit('projects/SET_PROJECT_PROPERTY', [
             `counterArguments[${counterArgumentIndex}].negations[${negationIndex}]`,
@@ -427,6 +426,7 @@ export default defineComponent({
           ])
         })
       } else {
+        // @ts-ignore
         await context.$api.negations.create(payload).then((res) => {
           counterArguments.value[counterArgumentIndex].negations.push(res.data)
           const data = counterArguments.value[counterArgumentIndex].negations

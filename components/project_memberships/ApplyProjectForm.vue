@@ -105,9 +105,11 @@ export default defineComponent({
     const authRequestIsActive = ref<Boolean>(false)
 
     const applyForProject = async () => {
+      // TODO: check role
       const payload: IProjectMembership = {
         ...formData.value,
         project: props.project['@id'],
+        // @ts-ignore
         role: 'applicant',
       }
       if (props.user) {
