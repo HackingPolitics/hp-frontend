@@ -129,12 +129,12 @@
                   <template #remove="{ index, removeItem }">
                     <remove-button
                       @click="
-                        removeItem()
-                        deleteEntity(
-                          'negations',
-                          counterArgument.negations[index].id,
-                          counterArguments
-                        )
+                        removeItem(),
+                          deleteEntity(
+                            'negations',
+                            counterArgument.negations[index].id,
+                            counterArguments
+                          )
                       "
                     />
                   </template>
@@ -271,11 +271,13 @@ export default defineComponent({
     onMounted(() => {
       if (project.value?.arguments) {
         argumentations.value = cloneDeep(project.value.arguments)
+        // @ts-ignore
         argumentations.value.sort((a, b) => b.priority - a.priority)
       }
       if (project.value?.counterArguments) {
         counterArguments.value = cloneDeep(project.value.counterArguments)
-        counterArguments.value.sort((a, b) => b.priority - a.priority)
+        // @ts-ignore
+        counterArguments.value.sort((a, b) => b?.priority - a.priority)
       }
     })
 
@@ -283,8 +285,10 @@ export default defineComponent({
       project,
       (currentValue) => {
         argumentations.value = cloneDeep(currentValue?.arguments || [])
+        // @ts-ignore
         argumentations.value.sort((a, b) => b.priority - a.priority)
         counterArguments.value = cloneDeep(currentValue?.counterArguments || [])
+        // @ts-ignore
         counterArguments.value.sort((a, b) => b.priority - a.priority)
       },
       { deep: true }
@@ -381,6 +385,7 @@ export default defineComponent({
         const payload: ICounterArgument | IArgument = {
           priority: entity.length - (index + 1),
         }
+        // @ts-ignore
         const asyncResult: any = await context.$api[endpoint].update(
           entity[index].id,
           payload
