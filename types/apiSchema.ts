@@ -165,4 +165,12 @@ export interface IProposal extends IModel {
   url?: string
 }
 
+export interface IProjectMembership extends IModel {
+  motivation?: string
+  project?: IProject
+  role?: string
+  skills?: string
+  user?: IUser
+}
+
 export interface ICounterArgument extends IArgument {}
