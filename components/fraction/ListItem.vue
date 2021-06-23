@@ -4,8 +4,7 @@
     <div
       class="
         group
-        hover:font-semibold
-        hover:text-purple-500
+        hover:font-semibold hover:text-purple-500
         cursor-pointer
         flex
         space-x-6
@@ -79,7 +78,13 @@
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
 import { watch } from '@vue/runtime-core'
 import { cloneDeep } from 'lodash'
-import { Fraction } from '../forms/application/FractionAndInterest.vue'
+
+interface Fraction {
+  id: number
+  name: string
+  memberCount: number
+  color: string
+}
 
 export default defineComponent({
   name: 'FractionListItem',

@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-200">
-    <div>
-      <div class="relative">
+  <div class="min-h-screen bg-gray-200 relative">
+    <div class="relative">
+      <div class="sticky">
         <menu-project-nav
           :title="project ? project.title : 'zurück'"
           :link-to="{
