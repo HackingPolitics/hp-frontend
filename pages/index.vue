@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view
+  <layouts-header-title
     title="Stadtratsanträge in deiner Region und der ganzen Republik"
   >
     <div class="font-semibold text-3xl mt-16 flex relative overflow">
@@ -13,7 +13,7 @@
       :projects="projects"
       :is-loading="projectsLoading"
     ></application-grid>
-  </layouts-single-view>
+  </layouts-header-title>
 </template>
 
 <script lang="ts">

@@ -1,8 +1,7 @@
 <template>
-  <layouts-single-view title="Konzept">
-    <application-header></application-header>
+  <layouts-header-title title="Konzept">
     <forms-application-arguments></forms-application-arguments>
-  </layouts-single-view>
+  </layouts-header-title>
 </template>
 
 <script>

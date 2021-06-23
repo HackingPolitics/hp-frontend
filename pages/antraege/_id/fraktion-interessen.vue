@@ -1,8 +1,7 @@
 <template>
-  <layouts-single-view title="Konzept">
-    <application-header></application-header>
+  <layouts-header-title title="Konzept">
     <forms-application-fraction-and-interest></forms-application-fraction-and-interest>
-  </layouts-single-view>
+  </layouts-header-title>
 </template>
 
 <script>

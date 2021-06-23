@@ -144,7 +144,7 @@ export interface IPartner extends IModel {
 
 export interface IArgument extends IModel {
   description?: string
-  priority?: string
+  priority?: number
   project?: string
   updatedAt?: string
 }
@@ -182,3 +182,7 @@ export interface IRegistration extends IUser {
 }
 
 export interface ICounterArgument extends IArgument {}
+
+export interface INegations extends IModel {
+  description?: string
+}

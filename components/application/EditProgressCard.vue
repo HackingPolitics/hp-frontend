@@ -13,25 +13,26 @@
         <div
           class="
             rounded-full
-            border border-black
+            border-black border-2
             flex
-            w-6
-            h-6
+            w-8
+            h-8
             items-center
             justify-center
             mr-3
+            font-medium
           "
         >
           {{ stepNumber }}
         </div>
-        <span class="text-sm text-gray-400">
+        <span class="text-gray-400">
           {{ applicationStep.step.current }}/{{ applicationStep.step.total }}
-          erledigt
+          {{ $t('done') }}
         </span>
       </div>
-      <h3 class="text-xl">{{ applicationStep.title }}</h3>
+      <h3 class="text-xl font-medium mt-2">{{ applicationStep.title }}</h3>
     </div>
-    <div class="text-gray-500 text-sm">
+    <div class="text-gray-500 mt-6">
       <span
         class="
           inline-flex
@@ -43,14 +44,14 @@
           bg-gray-500
         "
       >
-        <span class="text-sm font-medium leading-none text-white">TW</span>
+        <span class="font-medium leading-none text-white">TW</span>
       </span>
-      gerade aktiv
+      {{ $t('currentActive') }}
     </div>
   </nuxt-link>
 </template>
 
-<script>
+<script lang="ts">
 const { defineComponent } = require('@nuxtjs/composition-api')
 
 export default defineComponent({
@@ -69,6 +70,9 @@ export default defineComponent({
       type: Number,
       default: 0,
     },
+  },
+  setup() {
+    return {}
   },
 })
 </script>

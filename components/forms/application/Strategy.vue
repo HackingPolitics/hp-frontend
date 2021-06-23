@@ -134,8 +134,12 @@ export default defineComponent({
     const createPartnerFormData = ref<CreatePartnerForm>({ name: '' })
     const partners = ref([])
 
-    const { createEntity, deleteEntity, updateEntity, project } =
-      editApplication()
+    const {
+      createProjectEntity,
+      deleteProjectEntity,
+      updateProjectEntity,
+      project,
+    } = editApplication()
 
     onMounted(() => {
       if (project.value?.partners)
@@ -158,14 +162,16 @@ export default defineComponent({
           ...createPartnerFormData.value,
           project: project.value['@id'],
         }
-        await createEntity<IPartner>('partners', partners.value, payload).then(
-          () => (createPartnerFormData.value = { name: '' })
-        )
+        await createProjectEntity<IPartner>(
+          'partners',
+          partners.value,
+          payload
+        ).then(() => (createPartnerFormData.value = { name: '' }))
       }
     }
 
     const deletePartner = async (id: string | number) => {
-      await deleteEntity('partners', id, partners.value)
+      await deleteProjectEntity('partners', id, partners.value)
     }
 
     const updatePartner = async (id: string | number) => {
@@ -174,7 +180,7 @@ export default defineComponent({
           ...partnerFormData.value[id],
           project: project.value['@id'],
         }
-        await updateEntity<IPartner>('partners', id, payload)
+        await updateProjectEntity<IPartner>('partners', id, payload)
       }
     }
     return {

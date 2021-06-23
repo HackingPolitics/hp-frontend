@@ -1,6 +1,10 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
+  fontFamily: {
+    display: ['Roboto Slab', 'sans-serif'],
+    body: ['Inria Sans', 'sans-serif'],
+  },
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
     enabled: process.env.NODE_ENV === 'production',
@@ -20,7 +24,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'light-blue': colors.lightBlue,
+        'light-blue': colors.sky,
         teal: colors.teal,
       },
     },

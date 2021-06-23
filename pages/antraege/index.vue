@@ -1,5 +1,5 @@
 <template>
-  <layouts-single-view :title="$t('page.myproposals.title')">
+  <layouts-header-title :title="$t('page.myproposals.title')">
     <div class="sm:flex mt-4">
       <ul
         class="
@@ -34,7 +34,7 @@
       </ul>
       <application-grid :projects="projects"></application-grid>
     </div>
-  </layouts-single-view>
+  </layouts-header-title>
 </template>
 
 <script lang="ts">

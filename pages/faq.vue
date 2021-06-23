@@ -1,11 +1,19 @@
 <template>
   <div class="h-screen flex flex-col justify-between">
     <div class="relative bg-gray-50 overflow-hidden">
-      <layouts-single-view title="FAQ"> </layouts-single-view>
+      <layouts-header-title title="FAQ"> </layouts-header-title>
     </div>
     <footer class="bg-white">
       <div
-        class="max-w-7xl mx-auto py-6 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
+        class="
+          max-w-7xl
+          mx-auto
+          py-6
+          px-4
+          sm:px-6
+          md:flex md:items-center md:justify-between
+          lg:px-8
+        "
       >
         <div class="flex justify-center space-x-6 md:order-2">
           <a
