@@ -1,6 +1,5 @@
 <template>
   <layouts-header-title title="Konzept">
-    <application-header></application-header>
     <forms-application-arguments></forms-application-arguments>
   </layouts-header-title>
 </template>
