@@ -6,7 +6,7 @@
           <nuxt-link
             :to="localePath({ name: concept.link, params: { id: projectId } })"
             class="
-              border-l-4
+              border-l-4 border-gray-400
               hover
               :border-purple-500
               pb-4
