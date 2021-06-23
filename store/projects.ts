@@ -1,4 +1,5 @@
 import { ActionTree, MutationTree } from 'vuex'
+import { set } from 'lodash'
 import { IProject } from '~/types/apiSchema'
 
 export interface ProjectsState {
@@ -25,11 +26,13 @@ export const mutations: MutationTree<RootState> = {
   SET_PROJECT(state, project) {
     state.project = project
   },
+
   SET_CREATED_PROJECT(state, project) {
     state.createdProject = project
   },
+
   SET_PROJECT_PROPERTY(state, [property, value]) {
-    state.project[property] = value
+    set(state.project, property, value)
   },
 
   SET_LOADING_FLAG(state, flag) {
