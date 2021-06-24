@@ -1,6 +1,6 @@
 <template>
   <div class="py-12">
-    <nav class="" aria-label="Progress">
+    <nav class="concept-sidebar" aria-label="sidebar-menu">
       <ol class="space-y-8">
         <li v-for="(concept, index) in concepts" :key="index" class="mb-8">
           <nuxt-link
@@ -16,7 +16,6 @@
               text-gray-500
               hover:text-purple-500
             "
-            :class="isActive(concept.link)"
           >
             <span class="ml-3 font-medium group-hover:text-gray-900">{{
               concept.text
@@ -36,25 +35,40 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const projectId = ref<string>(route.value.params.id)
-    const concepts = ref<{ text: string; link: string }[]>([
-      { text: '1. Thema', link: 'antraege-id-thema' },
-      { text: '2. Probleme und Handlungsfelder', link: 'antraege-id-problem' },
-      {
-        text: '3. Ratsmehrheiten und Fraktionsinteressen',
-        link: 'antraege-id-fraktion-interessen',
-      },
-      {
-        text: '4. Argumente und Gegenargumente',
-        link: 'antraege-id-argumente',
-      },
-      { text: '5. Strategie', link: 'antraege-id-strategie' },
-    ])
-    function isActive(name: string): object {
-      return {
-        'border-purple-500 text-purple-500': route.value?.name?.includes(name),
-      }
+
+    return { projectId }
+  },
+  data() {
+    return {
+      concepts: [
+        {
+          text: `1. ${this.$t('forms.topic.formTitle')}`,
+          link: 'antraege-id-thema',
+        },
+        {
+          text: `2. ${this.$t('forms.problems.formTitle')}`,
+          link: 'antraege-id-problem',
+        },
+        {
+          text: `3. ${this.$t('forms.fractioninterests.formTitle')}`,
+          link: 'antraege-id-fraktion-interessen',
+        },
+        {
+          text: `4. ${this.$t('forms.arguments.formTitle')}`,
+          link: 'antraege-id-argumente',
+        },
+        {
+          text: `5. ${this.$t('forms.strategy.formTitle')}`,
+          link: 'antraege-id-strategie',
+        },
+      ],
     }
-    return { concepts, projectId, isActive }
   },
 })
 </script>
+
+<style lang="postcss">
+.concept-sidebar .nuxt-link-exact-active {
+  @apply border-purple-500 text-purple-500;
+}
+</style>
