@@ -16,8 +16,8 @@
     "form": {
       "header": "Neuen Antrag erstellen",
       "title": {
-        "help": "Alle nicht benötigten Felden kannst du auch später ausfüllen",
-        "label": "Wie nennst du dein Projekt?",
+        "help": "Du bist dabei, ein neues Antragsprojekt zu starten! Lass dich durch einige Fragen führen.",
+        "label": "",
         "name": "Projekttitel"
       }
     },
@@ -78,28 +78,28 @@
     },
     "proposal": {
       "category": {
-        "label": "Welcher Kategorie läßt sich das Thema einordnen?"
+        "label": "Welchen (ein bis zwei) Kategorien läßt sich das Thema zuordnen?"
       },
       "description": {
-        "label": "Beschreibe deine Antragsidee!",
-        "placeholder": "In diesem Stadtratsantrag geht es um..."
+        "label": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
+        "placeholder": "Am Ende sollen alle Schulkinder einen Laptop haben, um besser lernen zu können"
       },
       "motivation": {
-        "label": "Was treibt dich an?",
+        "label": "Deine Motivation: Was treibt dich an, dieses Thema zu verfolgen?",
         "placeholder": "Meine Motivation ist..."
       },
       "skills": {
-        "label": "Welche Fähigkeiten bringst du ein?",
+        "label": "Welche Fähigkeiten bringst du in diese Antragserstellung ein?",
         "placeholder": "Ich habe Erfahrung mit..."
       },
       "title": {
-        "help": "Alle nicht benötigten Felden kannst du auch später ausfüllen",
-        "label": "Wie nennst du dein Projekt?",
-        "placeholder": "Titel des Antragsprojekts"
+        "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kenn später geändert werden.",
+        "label": "Gib deinem Antragsprojekt einen Titel",
+        "placeholder": "Gemeinschaftsgartenflächen in Musterstadt bereitstellen"
       },
       "topic": {
-        "label": "Mit welchem Thema soll sich der Antrag befassen?",
-        "placeholder": "Parkplätze in der Stadt"
+        "label": "Kannst du das Thema eingrenzen, mit dem sich der Antrag befassen wird?",
+        "placeholder": "Laptops für alle Schülerinnen und Schüler"
       }
     },
     "fractioninterests": {
@@ -154,17 +154,17 @@
     },
     "application": {
       "concept": "Denkarbeit am Antrag",
-      "write": "Antrag schreiben",
+      "write": "Schreibarbeit zum Antrag",
       "problems": "Problem & Handlungsauftrag",
       "topic": "Thema dieses Antragsprojekts",
       "fraction": "Ratsmehrheiten & Fraktionsinteressen",
       "arguments_counterarguments": "Argumente & Gegenargumente",
-      "strategy": "Strategieeeeeee",
+      "strategy": "Strategie",
       "publish": "Projekt veröffentlicht",
       "not_published": "Projekt unveröffentlicht",
       "publishing": "Projekt veröffentlichen",
       "hide": "Projekt verstecken",
-      "apply_project": "Bewirb dich für das Projekt",
+      "apply_project": "Beim Antrag mitmachen?",
       "reject_application": "Bewerbung ablehnen",
       "delete_membership": "Mitgliedschaft löschen",
       "project_member": "Projekt-Team"
@@ -176,7 +176,9 @@
       "title": "Meine Antragsprojekte"
     }
   },
-  "user": {},
+  "user": {
+    "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
+  },
   "validation": {
     "name": {
       "arguments": {
