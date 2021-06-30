@@ -48,14 +48,14 @@
   },
   "forms": {
       "topic": {
-          "formTitle":"Thema",
-          "mainTopic":"Was ist das Thema, mit dem sich euer Auftrag beschäftigt",
-          "mainTopicSubtitle":"Schreiben Sie etwas zu dem Projekt auf",
-          "category":"In welche Kategorie passt euer Thema",
+          "formTitle":"Antragsthema & Kategorie",
+          "mainTopic":"Mit welchem Thema beschäftigt sich euer Antrag?",
+          "mainTopicSubtitle":"Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
+          "category":"In welche Kategorien passt dieses Thema?",
           "categorySubtitle":"Wähle bis zu 2 Möglichkeiten aus"
       },
     "arguments": {
-      "formTitle":"Argumente und Gegenargumente",
+      "formTitle":"Argumente & Gegenargumente",
       "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
       "title": "Argumente",
       "add": "Argument hinzufügen",
@@ -66,12 +66,12 @@
       }
     },
     "counter_arguments": {
-      "question": "Nehme die Rolle eines Skeptikers ein, der dein Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er dein Vorhaben angreifen?",
-      "help": "Formuliere mindestens ein Gegenargument mit passenden Konter-Argumenten. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
+      "question": "Advocatus Diaboli: Nehmen Sie jetzt die Rolle eines Skeptikers ein, der Ihr Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er Ihr Vorhaben angreifen?",
+      "help": "Formuliere mindestens ein Gegenargument mit passenden Trotzdem-Begründungen. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
       "add": "Gegenargument hinzufügen",
-      "add_counter": "Konter-Argument hinzufügen",
+      "add_counter": "Trotzdem-Begründung hinzufügen",
       "placeholder": {
-        "description": "Was spricht gegen dein Vorhaben?",
+        "description": "...zu teuer, Widerstand der Anwohner, ...",
         "negations": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
       },
       "cons": "Contra"
@@ -118,19 +118,19 @@
       "motivation": "Motivation",
       "skills": "Fähigkeiten",
       "placeholder": {
-        "motivation": "Wieso möchtest du dich antizipieren?",
-        "skills": "Welche Fähigkeiten besitzt du, die uns helfen könnte?"
+        "motivation": "Was motiviert dich, an diesem Thema zu arbeiten?",
+        "skills": "Welche Fähigkeiten bringst du mit, die für dieses Antragsvorhaben hilfreich sein können?"
       },
       "send_apply": "Bewerbung abschicken",
       "title": "Bewerbung für das Projekt"
     },
     "problems": {
-        "formTitle":"Probleme und Handlungsfelder",
+        "formTitle":"Problem & Handlungsauftrag",
       "add": "Problem hinzufügen",
-      "title": "Welche Probleme hast du beobachtet und möchtest angeben?",
-      "introduction": "Gebe den Problemen eine Gewichtung indem du ihre Reihenfolge änderst.",
+      "title": "Was ist das Problem, dass du angehen willst?",
+      "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
       "placeholder": {
-        "description": "Gebe hier das Problem ein, dass du beobachtet hast."
+        "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
       }
     },
     "strategy": {
@@ -146,19 +146,19 @@
   "menu": {
     "collaboration": "Kollaboration",
     "faq": "FAQ",
-    "overview": "Übersicht"
+    "overview": "Alle Antragsprojekte"
   },
   "page": {
     "proposal": {
       "createProposal": "Antragsprojekt starten"
     },
     "application": {
-      "concept": "Konzept",
+      "concept": "Denkarbeit am Antrag",
       "write": "Antrag schreiben",
-      "problems": "Problem",
-      "topic": "Thema",
-      "fraction": "Ratsmehrheiten und Fraktionsinteressen",
-      "arguments_counterarguments": "Argumente und Gegenargumente",
+      "problems": "Problem & Handlungsauftrag",
+      "topic": "Thema dieses Antragsprojekts",
+      "fraction": "Ratsmehrheiten & Fraktionsinteressen",
+      "arguments_counterarguments": "Argumente & Gegenargumente",
       "strategy": "Strategie",
       "publish": "Projekt veröffentlicht",
       "not_published": "Projekt unveröffentlicht",
@@ -167,7 +167,7 @@
       "apply_project": "Bewirb dich für das Projekt",
       "reject_application": "Bewerbung ablehnen",
       "delete_membership": "Mitgliedschaft löschen",
-      "project_member": "Projekt Mitglieder"
+      "project_member": "Projekt-Team"
     },
     "myproposals": {
       "heading": "Du arbeitest an folgenden Antragsprojekten mit",
