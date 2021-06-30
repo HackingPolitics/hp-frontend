@@ -155,73 +155,73 @@
           "formTitle": "Strategie",
           "possiblePartners": "Mögliche strategische Partner"
         }
+      }
+    },
+    "goto": {
+      "createProposal": "Antragsprojekt starten",
+      "myProposals": "Meine Antragsprojekte",
+      "userProfile": "Benutzerprofil"
+    },
+    "menu": {
+      "collaboration": "Kollaboration",
+      "faq": "FAQ",
+      "overview": "Alle Antragsprojekte"
+    },
+    "page": {
+      "proposal": {
+        "createProposal": "Antragsprojekt starten"
       },
-      "goto": {
-        "createProposal": "Antragsprojekt starten",
-        "myProposals": "Meine Antragsprojekte",
-        "userProfile": "Benutzerprofil"
+      "application": {
+        "concept": "Denkarbeit am Antrag",
+        "write": "Schreibarbeit zum Antrag",
+        "problems": "Problem & Handlungsauftrag",
+        "topic": "Thema dieses Antragsprojekts",
+        "fraction": "Ratsmehrheiten & Fraktionsinteressen",
+        "arguments_counterarguments": "Argumente & Gegenargumente",
+        "strategy": "Strategie",
+        "publish": "Projekt veröffentlicht",
+        "not_published": "Projekt unveröffentlicht",
+        "publishing": "Projekt veröffentlichen",
+        "hide": "Projekt verstecken",
+        "apply_project": "Beim Antrag mitmachen?",
+        "reject_application": "Bewerbung ablehnen",
+        "delete_membership": "Mitgliedschaft löschen",
+        "project_member": "Projekt-Team"
       },
-      "menu": {
-        "collaboration": "Kollaboration",
-        "faq": "FAQ",
-        "overview": "Alle Antragsprojekte"
-      },
-      "page": {
-        "proposal": {
-          "createProposal": "Antragsprojekt starten"
+      "myproposals": {
+        "heading": "Du arbeitest an folgenden Antragsprojekten mit",
+        "proposals": "Anträge",
+        "registeredSince": "registriert seit",
+        "title": "Meine Antragsprojekte"
+      }
+    },
+    "user": {
+      "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
+    },
+    "validation": {
+      "name": {
+        "arguments": {
+          "description": "Argumentbeschreibung",
+          "negations": "Konter-Argument"
         },
-        "application": {
-          "concept": "Denkarbeit am Antrag",
-          "write": "Schreibarbeit zum Antrag",
-          "problems": "Problem & Handlungsauftrag",
-          "topic": "Thema dieses Antragsprojekts",
-          "fraction": "Ratsmehrheiten & Fraktionsinteressen",
-          "arguments_counterarguments": "Argumente & Gegenargumente",
-          "strategy": "Strategie",
-          "publish": "Projekt veröffentlicht",
-          "not_published": "Projekt unveröffentlicht",
-          "publishing": "Projekt veröffentlichen",
-          "hide": "Projekt verstecken",
-          "apply_project": "Beim Antrag mitmachen?",
-          "reject_application": "Bewerbung ablehnen",
-          "delete_membership": "Mitgliedschaft löschen",
-          "project_member": "Projekt-Team"
-        },
-        "myproposals": {
-          "heading": "Du arbeitest an folgenden Antragsprojekten mit",
-          "proposals": "Anträge",
-          "registeredSince": "registriert seit",
-          "title": "Meine Antragsprojekte"
-        }
-      },
-      "user": {
-        "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
-      },
-      "validation": {
-        "name": {
-          "arguments": {
-            "description": "Argumentbeschreibung",
-            "negations": "Konter-Argument"
-          },
-          "counter_arguments": {
-            "description": "Problembeschreibung"
-          }
-        },
-        "problems": {
+        "counter_arguments": {
           "description": "Problembeschreibung"
         }
       },
-      "back": "Zurück",
-      "notifications": {
-        "project_memberships": {
-          "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
-        }
-      },
-      "login": "Login",
-      "register": "Registrieren",
-      "save": "Speichern",
-      "faq": {
-        "content": "Test"
+      "problems": {
+        "description": "Problembeschreibung"
       }
+    },
+    "back": "Zurück",
+    "notifications": {
+      "project_memberships": {
+        "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
+      }
+    },
+    "login": "Login",
+    "register": "Registrieren",
+    "save": "Speichern",
+    "faq": {
+      "content": "Test"
     }
   }
