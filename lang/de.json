@@ -28,6 +28,11 @@
   "step": "Schritt",
   "title": "Titel",
   "url": "Url",
+  "common": {
+      "auth": {
+          "logout": "Ausloggen"
+      }
+  },
   "repeatable": {
     "category": {
       "buildingAndLiving": "Bauen & Wohnen",
@@ -199,5 +204,8 @@
   },
   "login": "Login",
   "register": "Registrieren",
-  "save": "Speichern"
+  "save": "Speichern",
+  "faq": {
+      "content": "Test"
+  }
 }
