@@ -2,9 +2,14 @@
   <layouts-header-title
     title="Stadtratsanträge in deiner Region und der ganzen Republik"
   >
-    <div class="font-semibold text-3xl mt-16 flex relative overflow">
-      {{ projects && projects.length ? projects.length : 0 }} Anträge in
-      <inline-dropdown v-model="city" :options="options"></inline-dropdown>
+    <div class="flex justify-between w-full items-baseline mt-16">
+      <div class="font-semibold text-3xl flex relative overflow">
+        {{ projects && projects.length ? projects.length : 0 }} Anträge in
+        <inline-dropdown v-model="city" :options="options"></inline-dropdown>
+      </div>
+      <base-button @click="$router.push('/antraege/erstellen')"
+        >Neuen Antrag erstellen</base-button
+      >
     </div>
 
     <application-grid
@@ -95,6 +100,7 @@ export default defineComponent({
     watch(city, () => {
       fetchProjects()
     })
+
     return {
       projects,
       user,

@@ -1,6 +1,6 @@
 <template>
   <layouts-header-title :title="$t('proposal.form.header')">
-    <div class="bg-white rounded-lg shadow overflow-hidden p-8">
+    <div class="bg-white rounded-lg shadow overflow-hidden p-8 mt-16">
       <forms-project-create></forms-project-create>
     </div>
   </layouts-header-title>
