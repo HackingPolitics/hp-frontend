@@ -186,3 +186,5 @@ export interface ICounterArgument extends IArgument {}
 export interface INegations extends IModel {
   description?: string
 }
+
+export default INegations

@@ -63,7 +63,7 @@ interface JwtPayloadWithUser extends JwtPayload {
 
 export const actions: ActionTree<RootState, RootState> = {
   // login
-  async login({ rootState, commit, dispatch }, loginData: LoginCredentials) {
+  async login({ commit }, loginData: LoginCredentials) {
     commit('SET_ERRORS', false)
     commit('SET_LOADING_FLAG', true)
     try {
@@ -83,7 +83,7 @@ export const actions: ActionTree<RootState, RootState> = {
       const user = await this.$api.user.getUser(decoded.id)
       commit('SET_USER', user.data)
 
-      this.$router.push('/')
+      this.$router.push('/antraege')
 
       commit('SET_LOADING_FLAG', false)
       return response

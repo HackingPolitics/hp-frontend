@@ -11,5 +11,6 @@
 export default {
   name: 'FractionForm',
   layout: 'formWithSidebar',
+  middleware: 'isProjectMember',
 }
 </script>

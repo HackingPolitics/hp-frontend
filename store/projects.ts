@@ -1,6 +1,6 @@
 import { ActionTree, MutationTree } from 'vuex'
-import { IProject, IProjectMembership } from '~/types/apiSchema'
 import { set } from 'lodash'
+import { IProject, IProjectMembership } from '~/types/apiSchema'
 
 export interface ProjectsState {
   project: IProject
@@ -75,14 +75,21 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
   async fetchProject({ commit }, id) {
+    commit('SET_ERROR', null)
     commit('SET_LOADING_FLAG', true)
     try {
       const response = await this.$api.projects.fetchProject(id)
+      commit('SET_LOADING_FLAG', false)
       commit('SET_PROJECT', response.data)
     } catch (e) {
+      console.log(e.response.data)
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data.message)
+      commit('SET_ERROR', e.response.data)
     }
+  },
+
+  setProject({ commit }, payload) {
+    commit('SET_PROJECT', payload)
   },
   async fetchProjects({ commit }) {
     commit('SET_LOADING_FLAG', true)
@@ -92,7 +99,7 @@ export const actions: ActionTree<RootState, RootState> = {
       return response.data['hydra:member']
     } catch (e) {
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data.message)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async applyForProject({ commit }, membership) {

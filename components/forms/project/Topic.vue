@@ -42,7 +42,7 @@ import {
   onBeforeMount,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
-import { ICategory, IProject } from '~/types/apiSchema'
+import { IProject } from '~/types/apiSchema'
 import { IValidation } from '~/types/vueFormulate'
 
 interface TopicForm {
@@ -54,10 +54,14 @@ export default defineComponent({
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const topic = ref<String | undefined>('')
-    const categories = ref<string[]>([])
-    const categoryOptions = ref<{ label: string; value: string }[]>([])
+    const categories = ref([])
 
     const store = useStore<RootState>()
+    store.dispatch('categories/fetchCategories')
+    const categoryOptions = computed(() => {
+      return store.getters['categories/categoryOptions']
+    })
+
     const project: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.project
     )
@@ -67,7 +71,7 @@ export default defineComponent({
     onBeforeMount(() => {
       topic.value = project.value?.topic
       project.value?.categories?.forEach((category) => {
-        if (category['@id']) categories.value.push(category['@id'])
+        if (category['@id']) categories?.value?.push(category['@id'])
       })
     })
 
@@ -87,19 +91,6 @@ export default defineComponent({
       validation,
       updateProject,
     }
-  },
-  async fetch() {
-    await this.$axios.get('/categories').then((res) => {
-      const data = res.data['hydra:member']
-      this.categoryOptions = data
-        ? data.map((e: ICategory) => {
-            return {
-              label: e.name,
-              value: e['@id'],
-            }
-          })
-        : []
-    })
   },
 })
 </script>

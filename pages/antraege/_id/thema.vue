@@ -13,5 +13,6 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   name: 'Topic',
   layout: 'formWithSidebar',
+  middleware: 'isProjectMember',
 })
 </script>

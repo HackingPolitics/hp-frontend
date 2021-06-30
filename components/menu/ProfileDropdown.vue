@@ -86,7 +86,7 @@
             class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
             role="menuitem"
             tabindex="-1"
-            @click="$store.dispatch('auth/logout')"
+            @click="logout"
           >
             Ausloggen
           </div>
@@ -97,11 +97,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useRouter,
+  useStore,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ProfileDropdown',
   setup() {
+    const store = useStore()
+    const router = useRouter()
     const isDropdownOpen = ref(false)
     const toggleDropdown = (): void => {
       isDropdownOpen.value = !isDropdownOpen.value
@@ -109,10 +116,16 @@ export default defineComponent({
     const closeDropdown = (): void => {
       isDropdownOpen.value = false
     }
+
+    const logout = () => {
+      store.dispatch('auth/logout')
+      router.push('/')
+    }
     return {
       isDropdownOpen,
       closeDropdown,
       toggleDropdown,
+      logout,
     }
   },
 })

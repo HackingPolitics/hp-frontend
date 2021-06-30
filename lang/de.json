@@ -119,7 +119,7 @@
             "placeholder": "Bitte wählen",
             "help": ""
           }
-        },
+        }  },
         "fractioninterests": {
           "formTitle": "Ratsmehrheit und Fraktionsinteressen",
           "fractions": "Fraktionen",
@@ -155,7 +155,7 @@
           "formTitle": "Strategie",
           "possiblePartners": "Mögliche strategische Partner"
         }
-      }
+
     },
     "goto": {
       "createProposal": "Antragsprojekt starten",
@@ -223,5 +223,10 @@
     "save": "Speichern",
     "faq": {
       "content": "Test"
+    },
+    "errors": {
+        "page": {
+            "notFound": "Seite nicht gefunden!"
+        }
     }
   }

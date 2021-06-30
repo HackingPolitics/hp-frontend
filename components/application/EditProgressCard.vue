@@ -25,14 +25,17 @@
         >
           {{ stepNumber }}
         </div>
-        <span class="text-gray-400">
-          {{ applicationStep.step.current }}/{{ applicationStep.step.total }}
+        <span
+          v-if="applicationStep && applicationStep.step"
+          class="text-gray-400"
+        >
+          {{ applicationStep.step.done }}/{{ applicationStep.step.total }}
           {{ $t('done') }}
         </span>
       </div>
       <h3 class="text-xl font-medium mt-2">{{ applicationStep.title }}</h3>
     </div>
-    <div class="text-gray-500 mt-6">
+    <div v-if="false" class="text-gray-500 mt-6">
       <span
         class="
           inline-flex
@@ -52,7 +55,7 @@
 </template>
 
 <script lang="ts">
-const { defineComponent } = require('@nuxtjs/composition-api')
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'EditProgressCard',
