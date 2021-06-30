@@ -3,7 +3,7 @@
     title="Stadtratsanträge in deiner Region und der ganzen Republik"
   >
     <div class="font-semibold text-3xl mt-16 flex relative overflow">
-      {{ projects.length }} Anträge in
+      {{ projects && projects.length ? projects.length : 0 }} Anträge in
       <inline-dropdown v-model="city" :options="options"></inline-dropdown>
     </div>
 
