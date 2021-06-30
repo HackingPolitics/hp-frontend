@@ -82,30 +82,62 @@
       "cons": "Contra"
     },
     "proposal": {
-      "category": {
-        "label": "Welcher Kategorie läßt sich das Thema einordnen?"
-      },
-      "description": {
-        "label": "Beschreibe deine Antragsidee!",
-        "placeholder": "In diesem Stadtratsantrag geht es um..."
-      },
-      "motivation": {
-        "label": "Was treibt dich an?",
-        "placeholder": "Meine Motivation ist..."
-      },
-      "skills": {
-        "label": "Welche Fähigkeiten bringst du ein?",
-        "placeholder": "Ich habe Erfahrung mit..."
-      },
-      "title": {
-        "help": "Alle nicht benötigten Felden kannst du auch später ausfüllen",
-        "label": "Wie nennst du dein Projekt?",
-        "placeholder": "Titel des Antragsprojekts"
-      },
-      "topic": {
-        "label": "Mit welchem Thema soll sich der Antrag befassen?",
-        "placeholder": "Parkplätze in der Stadt"
-      }
+        "steps": {
+            "step1": {
+                "title": "Wie nennst du dein Projekt?",
+                "description": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+            },
+            "step2": {
+                "title": "Projektthema",
+                "description": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+            },
+            "next":"weiter",
+            "submitProject":"Projekt erstellen"
+        },
+        "forms": {
+            "category": {
+                "name": "Kategorien",
+                "label": "Welcher Kategorie lässt sich das Thema einordnen?",
+                "placeholder": "In diesem Stadtratsantrag geht es um...",
+                "help": "Wähle maximal zwei Kategorien."
+            },
+            "description": {
+                "name": "Beschreibung",
+                "label": "Beschreibe deine Antragsidee!",
+                "placeholder": "In diesem Stadtratsantrag geht es um...",
+                "help": ""
+            },
+            "motivation": {
+                "name": "Motivation",
+                "label": "Was treibt dich an?",
+                "placeholder": "Meine Motivation ist...",
+                "help": ""
+            },
+            "skills": {
+                "name": "Fähigkeiten",
+                "label": "Welche Fähigkeiten bringst du ein?",
+                "placeholder": "Ich habe Erfahrung mit...",
+                "help": ""
+            },
+            "title": {
+                "name": "Titel",
+                "label": "Wie nennst du dein Projekt?",
+                "placeholder": "Titel des Antragsprojekts",
+                "help": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+            },
+            "topic": {
+                "name": "Thema",
+                "label": "Mit welchem Thema soll sich der Antrag befassen?",
+                "placeholder": "Parkplätze in der Stadt",
+                "help": ""
+            },
+            "parliament": {
+                "name": "Parlament",
+                "label": "Wähle dein Parlament",
+                "placeholder": "Bitte wählen",
+                "help": ""
+            }
+        }
     },
     "fractioninterests": {
       "formTitle": "Ratsmehrheit und Fraktionsinteressen",

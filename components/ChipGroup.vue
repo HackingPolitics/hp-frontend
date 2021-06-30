@@ -10,7 +10,7 @@
       class="focus:outline-none"
       @click.prevent="setValue(option.value)"
     >
-      <chip :chip-class="setActiveClass(option.value)" class="mr-2 mb-4">{{
+      <chip :chip-class="setActiveClass(option.value)" class="mr-2">{{
         option.label
       }}</chip>
     </button>
@@ -39,7 +39,7 @@ export default defineComponent({
 
     const setValue = (value: string): void => {
       if (selectedValues.value.find((v) => v === value)) {
-        selectedValues.value.splice(selectedValues.value.indexOf(value), 1) //unselect
+        selectedValues.value.splice(selectedValues.value.indexOf(value), 1) // unselect
       } else if (
         !props.context.limit ||
         selectedValues.value.length < props.context.limit
@@ -55,7 +55,7 @@ export default defineComponent({
       return selectedValues.value.find((v) => {
         return v === value
       })
-        ? 'bg-purple-200'
+        ? 'bg-purple-500 text-purple-50'
         : 'bg-gray-200'
     }
 
