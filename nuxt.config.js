@@ -26,7 +26,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto+Slab:wght@300;400;500&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto+Slab:wght@300;400;500;600&display=swap',
       },
     ],
   },
