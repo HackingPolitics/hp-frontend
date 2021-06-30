@@ -54,7 +54,7 @@ export default defineComponent({
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const topic = ref<String | undefined>('')
-    const categories = ref([])
+    const categories = ref<string[]>([])
 
     const store = useStore<RootState>()
     store.dispatch('categories/fetchCategories')
