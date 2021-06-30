@@ -93,13 +93,13 @@ export default {
   ],
 
   axios: {
-    baseUrl: 'https://api-stage.hpo.vrok.de/',
+    baseUrl: process.env.API_URL,
   },
 
   io: {
     sockets: [
       {
-        url: 'https://socket.hpo.vrok.de', // IO server lives here
+        url: process.env.WS_URL, // IO server lives here
       },
     ],
   },
