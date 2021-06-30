@@ -52,7 +52,7 @@
           "mainTopic":"Mit welchem Thema beschäftigt sich euer Antrag?",
           "mainTopicSubtitle":"Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
           "category":"In welche Kategorien passt dieses Thema?",
-          "categorySubtitle":"Wähle bis zu 2 Möglichkeiten aus"
+          "categorySubtitle":"Wähle bis zu zwei Möglichkeiten aus"
       },
     "arguments": {
       "formTitle":"Argumente & Gegenargumente",
@@ -159,7 +159,7 @@
       "topic": "Thema dieses Antragsprojekts",
       "fraction": "Ratsmehrheiten & Fraktionsinteressen",
       "arguments_counterarguments": "Argumente & Gegenargumente",
-      "strategy": "Strategie",
+      "strategy": "Strategieeeeeee",
       "publish": "Projekt veröffentlicht",
       "not_published": "Projekt unveröffentlicht",
       "publishing": "Projekt veröffentlichen",
