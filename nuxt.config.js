@@ -72,7 +72,7 @@ export default {
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json', dir: 'ltr' },
+      //   { code: 'en', iso: 'en-US', file: 'en.json', dir: 'ltr' },
       { code: 'de', iso: 'de-US', file: 'de.json', dir: 'ltr' },
     ],
     defaultLocale: 'de',
