@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     :to="localePath(to)"
-    class="py-2 px-3 font-medium text-white rounded-md"
+    class="py-2 px-3 font-medium text-purple-100 nav-link"
     :class="
       type === 'desktop'
         ? `hover:bg-purple-500`

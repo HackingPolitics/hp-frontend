@@ -36,9 +36,9 @@ export default {
 
       switch (context.type) {
         case 'submit':
-          return "mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-500 border-gray-400 hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out'"
+          return "flex justify-center py-2 px-4 border text-sm font-medium rounded-md bg-purple-500 text-white hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out'"
         case 'button':
-          return 'mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-500 border-gray-400 hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out'
+          return 'flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-500 border-gray-400 hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out'
       }
     },
     wrapper(context) {
@@ -64,7 +64,7 @@ export default {
             'block text-sm font-medium text-gray-900 ml-2 ' + validationClass
           )
         default:
-          return 'block font-medium text-gray-700 ' + validationClass
+          return 'block font-medium text-gray-700 mb-1 ' + validationClass
       }
     },
     help: 'mt-2 text-sm text-gray-500',

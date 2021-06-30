@@ -1,205 +1,227 @@
 {
-  "actionMandate": "Handlungsauftrag",
-  "comment": "Kommentar",
-  "contact": {
-    "email": "Kontakt-Email"
-  },
-  "email": "Email",
-  "introduction": "Einführung",
-  "of": "von",
-  "currentActive": "gerade aktiv",
-  "done": "erledigt",
-  "share": "Teilen",
-  "pdfPreview": "PDF-Vorschau",
-  "proposal": {
-    "createProposal": "Antrag hinzufügen",
-    "form": {
-      "header": "Neuen Antrag erstellen",
-      "title": {
-        "help": "Du bist dabei, ein neues Antragsprojekt zu starten! Lass dich durch einige Fragen führen.",
-        "label": "",
-        "name": "Projekttitel"
-      }
+    "actionMandate": "Handlungsauftrag",
+    "comment": "Kommentar",
+    "contact": {
+      "email": "Kontakt-Email"
     },
-    "myProposals": "Meine Anträge"
-  },
-  "reasoning": "Grund",
-  "sponsor": "Sponsor",
-  "step": "Schritt",
-  "title": "Titel",
-  "url": "Url",
-  "repeatable": {
-    "category": {
-      "buildingAndLiving": "Bauen & Wohnen",
-      "educationAndResearch": "Bildung & Forschung",
-      "educationAndSocial": "Bildung & Soziales",
-      "energyAndSupply": "Energie & Versorgung",
-      "mobility": "Mobilität & Logistik",
-      "environmentAndClimate": "Stadtgrün & Stadtklima",
-      "environment": "Klima",
-      "participationAndGovernment": "Bürgerbeteiligung & Verwaltung",
-      "socialAndHealth": "Soziales & Gesundheit",
-      "economyAndResources": "Wirtschaft & Rohstoffe",
-      "infrastructure": "Infrastruktur",
-      "leisure": "Freizeit",
-      "artAndCulture": "Kunst & Kultur",
-      "other": "Sonstiges"
-    }
-  },
-  "forms": {
-      "topic": {
-          "formTitle":"Antragsthema & Kategorie",
-          "mainTopic":"Mit welchem Thema beschäftigt sich euer Antrag?",
-          "mainTopicSubtitle":"Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
-          "category":"In welche Kategorien passt dieses Thema?",
-          "categorySubtitle":"Wähle bis zu zwei Möglichkeiten aus"
-      },
-    "arguments": {
-      "formTitle":"Argumente & Gegenargumente",
-      "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
-      "title": "Argumente",
-      "add": "Argument hinzufügen",
-      "add_inspiration_source": "Quelle hinzufügen",
-      "placeholder": {
-        "description": "Welches starke Argument unterstützt dein Vorhaben?",
-        "inspiration_source": "Hast du ein Vorbild oder Fakten? Dann ergänze hier eine passende Quelle"
-      }
-    },
-    "counter_arguments": {
-      "question": "Advocatus Diaboli: Nehmen Sie jetzt die Rolle eines Skeptikers ein, der Ihr Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er Ihr Vorhaben angreifen?",
-      "help": "Formuliere mindestens ein Gegenargument mit passenden Trotzdem-Begründungen. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
-      "add": "Gegenargument hinzufügen",
-      "add_counter": "Trotzdem-Begründung hinzufügen",
-      "placeholder": {
-        "description": "...zu teuer, Widerstand der Anwohner, ...",
-        "negations": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
-      },
-      "cons": "Contra"
-    },
+    "email": "Email",
+    "introduction": "Einführung",
+    "of": "von",
+    "currentActive": "gerade aktiv",
+    "done": "erledigt",
+    "share": "Teilen",
+    "pdfPreview": "PDF-Vorschau",
     "proposal": {
-      "category": {
-        "label": "Welchen (ein bis zwei) Kategorien läßt sich das Thema zuordnen?"
+      "createProposal": "Antrag hinzufügen",
+      "form": {
+        "header": "Neuen Antrag erstellen",
+        "title": {
+          "help": "Du bist dabei, ein neues Antragsprojekt zu starten! Lass dich durch einige Fragen führen.",
+          "label": "",
+          "name": "Projekttitel"
+        }
       },
-      "description": {
-        "label": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
-        "placeholder": "Am Ende sollen alle Schulkinder einen Laptop haben, um besser lernen zu können"
-      },
-      "motivation": {
-        "label": "Deine Motivation: Was treibt dich an, dieses Thema zu verfolgen?",
-        "placeholder": "Meine Motivation ist..."
-      },
-      "skills": {
-        "label": "Welche Fähigkeiten bringst du in diese Antragserstellung ein?",
-        "placeholder": "Ich habe Erfahrung mit..."
-      },
-      "title": {
-        "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kenn später geändert werden.",
-        "label": "Gib deinem Antragsprojekt einen Titel",
-        "placeholder": "Gemeinschaftsgartenflächen in Musterstadt bereitstellen"
-      },
+      "myProposals": "Meine Anträge"
+    },
+    "reasoning": "Grund",
+    "sponsor": "Sponsor",
+    "step": "Schritt",
+    "title": "Titel",
+    "url": "Url",
+    "common": {
+      "auth": {
+        "logout": "Ausloggen"
+      }
+    },
+    "forms": {
       "topic": {
-        "label": "Kannst du das Thema eingrenzen, mit dem sich der Antrag befassen wird?",
-        "placeholder": "Laptops für alle Schülerinnen und Schüler"
-      }
-    },
-    "fractioninterests": {
-      "formTitle": "Ratsmehrheit und Fraktionsinteressen",
-      "fractions": "Fraktionen",
-      "mandates": "Sitze/Stimmen",
-      "parliamentProfileUpdatedAt": "Stand",
-      "partnerMandates": "Partnerstimmen",
-      "votes": "Stimmen"
-    },
-    "proposals": {
-      "add": "Vorschlag hinzufügen",
-      "title": "Vorschläge"
-    },
-    "project_memberships": {
-      "motivation": "Motivation",
-      "skills": "Fähigkeiten",
-      "placeholder": {
-        "motivation": "Was motiviert dich, an diesem Thema zu arbeiten?",
-        "skills": "Welche Fähigkeiten bringst du mit, die für dieses Antragsvorhaben hilfreich sein können?"
+        "formTitle": "Antragsthema & Kategorie",
+        "mainTopic": "Mit welchem Thema beschäftigt sich euer Antrag?",
+        "mainTopicSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
+        "category": "In welche Kategorien passt dieses Thema?",
+        "categorySubtitle": "Wähle bis zu zwei Möglichkeiten aus"
       },
-      "send_apply": "Bewerbung abschicken",
-      "title": "Bewerbung für das Projekt"
-    },
-    "problems": {
-        "formTitle":"Problem & Handlungsauftrag",
-      "add": "Problem hinzufügen",
-      "title": "Was ist das Problem, dass du angehen willst?",
-      "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
-      "placeholder": {
-        "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
-      }
-    },
-    "strategy": {
-        "formTitle": "Strategie",
-        "possiblePartners": "Mögliche strategische Partner"
-    }
-  },
-  "goto": {
-    "createProposal": "Antragsprojekt starten",
-    "myProposals": "Meine Antragsprojekte",
-    "userProfile": "Benutzerprofil"
-  },
-  "menu": {
-    "collaboration": "Kollaboration",
-    "faq": "FAQ",
-    "overview": "Alle Antragsprojekte"
-  },
-  "page": {
-    "proposal": {
-      "createProposal": "Antragsprojekt starten"
-    },
-    "application": {
-      "concept": "Denkarbeit am Antrag",
-      "write": "Schreibarbeit zum Antrag",
-      "problems": "Problem & Handlungsauftrag",
-      "topic": "Thema dieses Antragsprojekts",
-      "fraction": "Ratsmehrheiten & Fraktionsinteressen",
-      "arguments_counterarguments": "Argumente & Gegenargumente",
-      "strategy": "Strategie",
-      "publish": "Projekt veröffentlicht",
-      "not_published": "Projekt unveröffentlicht",
-      "publishing": "Projekt veröffentlichen",
-      "hide": "Projekt verstecken",
-      "apply_project": "Beim Antrag mitmachen?",
-      "reject_application": "Bewerbung ablehnen",
-      "delete_membership": "Mitgliedschaft löschen",
-      "project_member": "Projekt-Team"
-    },
-    "myproposals": {
-      "heading": "Du arbeitest an folgenden Antragsprojekten mit",
-      "proposals": "Anträge",
-      "registeredSince": "registriert seit",
-      "title": "Meine Antragsprojekte"
-    }
-  },
-  "user": {
-    "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
-  },
-  "validation": {
-    "name": {
       "arguments": {
-        "description": "Argumentbeschreibung",
-        "negations": "Konter-Argument"
+        "formTitle": "Argumente & Gegenargumente",
+        "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
+        "title": "Argumente",
+        "add": "Argument hinzufügen",
+        "add_inspiration_source": "Quelle hinzufügen",
+        "placeholder": {
+          "description": "Welches starke Argument unterstützt dein Vorhaben?",
+          "inspiration_source": "Hast du ein Vorbild oder Fakten? Dann ergänze hier eine passende Quelle"
+        }
       },
       "counter_arguments": {
-        "description": "Problembeschreibung"
+        "question": "Advocatus Diaboli: Nehmen Sie jetzt die Rolle eines Skeptikers ein, der Ihr Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er Ihr Vorhaben angreifen?",
+        "help": "Formuliere mindestens ein Gegenargument mit passenden Trotzdem-Begründungen. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
+        "add": "Gegenargument hinzufügen",
+        "add_counter": "Trotzdem-Begründung hinzufügen",
+        "placeholder": {
+          "description": "...zu teuer, Widerstand der Anwohner, ...",
+          "negations": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
+        },
+        "cons": "Contra"
+      },
+      "proposal": {
+        "steps": {
+          "step1": {
+            "title": "Wie nennst du dein Projekt?",
+            "description": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+          },
+          "step2": {
+            "title": "Projektthema",
+            "description": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+          },
+          "next": "weiter",
+          "submitProject": "Projekt erstellen"
+        },
+        "forms": {
+          "category": {
+            "name": "Kategorien",
+            "label": "Welchen (ein bis zwei) Kategorien läßt sich das Thema zuordnen?",
+            "placeholder": "In diesem Stadtratsantrag geht es um...",
+            "help": "Wähle maximal zwei Kategorien."
+          },
+          "description": {
+            "name": "Beschreibung",
+            "label": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
+            "placeholder": "Am Ende sollen alle Schulkinder einen Laptop haben, um besser lernen zu können",
+            "help": ""
+          },
+          "motivation": {
+            "name": "Motivation",
+            "label": "Deine Motivation: Was treibt dich an, dieses Thema zu verfolgen?",
+            "placeholder": "Meine Motivation ist...",
+            "help": ""
+          },
+          "skills": {
+            "name": "Fähigkeiten",
+            "label": "Welche Fähigkeiten bringst du in diese Antragserstellung ein?",
+            "placeholder": "Ich habe Erfahrung mit...",
+            "help": ""
+          },
+          "title": {
+            "name": "Titel",
+            "label": "Gib deinem Antragsprojekt einen Titel",
+            "placeholder": "Gemeinschaftsgartenflächen in Musterstadt bereitstellen",
+            "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kenn später geändert werden."
+          },
+          "topic": {
+            "name": "Thema",
+            "label": "Kannst du das Thema eingrenzen, mit dem sich der Antrag befassen wird?",
+            "placeholder": "Laptops für alle Schülerinnen und Schüler",
+            "help": ""
+          },
+          "parliament": {
+            "name": "Parlament",
+            "label": "Wähle dein Parlament",
+            "placeholder": "Bitte wählen",
+            "help": ""
+          }
+        },
+        "fractioninterests": {
+          "formTitle": "Ratsmehrheit und Fraktionsinteressen",
+          "fractions": "Fraktionen",
+          "mandates": "Sitze/Stimmen",
+          "parliamentProfileUpdatedAt": "Stand",
+          "partnerMandates": "Partnerstimmen",
+          "votes": "Stimmen"
+        },
+        "proposals": {
+          "add": "Vorschlag hinzufügen",
+          "title": "Vorschläge"
+        },
+        "project_memberships": {
+          "motivation": "Motivation",
+          "skills": "Fähigkeiten",
+          "placeholder": {
+            "motivation": "Was motiviert dich, an diesem Thema zu arbeiten?",
+            "skills": "Welche Fähigkeiten bringst du mit, die für dieses Antragsvorhaben hilfreich sein können?"
+          },
+          "send_apply": "Bewerbung abschicken",
+          "title": "Bewerbung für das Projekt"
+        },
+        "problems": {
+          "formTitle": "Problem & Handlungsauftrag",
+          "add": "Problem hinzufügen",
+          "title": "Was ist das Problem, dass du angehen willst?",
+          "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
+          "placeholder": {
+            "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
+          }
+        },
+        "strategy": {
+          "formTitle": "Strategie",
+          "possiblePartners": "Mögliche strategische Partner"
+        }
+      },
+      "goto": {
+        "createProposal": "Antragsprojekt starten",
+        "myProposals": "Meine Antragsprojekte",
+        "userProfile": "Benutzerprofil"
+      },
+      "menu": {
+        "collaboration": "Kollaboration",
+        "faq": "FAQ",
+        "overview": "Alle Antragsprojekte"
+      },
+      "page": {
+        "proposal": {
+          "createProposal": "Antragsprojekt starten"
+        },
+        "application": {
+          "concept": "Denkarbeit am Antrag",
+          "write": "Schreibarbeit zum Antrag",
+          "problems": "Problem & Handlungsauftrag",
+          "topic": "Thema dieses Antragsprojekts",
+          "fraction": "Ratsmehrheiten & Fraktionsinteressen",
+          "arguments_counterarguments": "Argumente & Gegenargumente",
+          "strategy": "Strategie",
+          "publish": "Projekt veröffentlicht",
+          "not_published": "Projekt unveröffentlicht",
+          "publishing": "Projekt veröffentlichen",
+          "hide": "Projekt verstecken",
+          "apply_project": "Beim Antrag mitmachen?",
+          "reject_application": "Bewerbung ablehnen",
+          "delete_membership": "Mitgliedschaft löschen",
+          "project_member": "Projekt-Team"
+        },
+        "myproposals": {
+          "heading": "Du arbeitest an folgenden Antragsprojekten mit",
+          "proposals": "Anträge",
+          "registeredSince": "registriert seit",
+          "title": "Meine Antragsprojekte"
+        }
+      },
+      "user": {
+        "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
+      },
+      "validation": {
+        "name": {
+          "arguments": {
+            "description": "Argumentbeschreibung",
+            "negations": "Konter-Argument"
+          },
+          "counter_arguments": {
+            "description": "Problembeschreibung"
+          }
+        },
+        "problems": {
+          "description": "Problembeschreibung"
+        }
+      },
+      "back": "Zurück",
+      "notifications": {
+        "project_memberships": {
+          "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
+        }
+      },
+      "login": "Login",
+      "register": "Registrieren",
+      "save": "Speichern",
+      "faq": {
+        "content": "Test"
       }
-    },
-    "problems": {
-      "description": "Problembeschreibung"
     }
-  },
-  "back": "Zurück",
-  "notifications": {
-    "project_memberships": {
-      "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
-    }
-  },
-  "login": "Login",
-  "register": "Registrieren",
-  "save": "Speichern"
-}
+  }
