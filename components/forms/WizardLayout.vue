@@ -71,7 +71,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, useRouter } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  computed,
+  useRouter,
+  PropType,
+} from '@nuxtjs/composition-api'
+
+interface Step {
+  name: string
+  href: string
+}
 
 export default defineComponent({
   name: 'WizardLayout',
@@ -81,7 +91,7 @@ export default defineComponent({
       default: '',
     },
     steps: {
-      type: Array,
+      type: Array as PropType<Step[]>,
       default: null,
     },
     noActions: {
