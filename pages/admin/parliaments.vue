@@ -1,6 +1,13 @@
 <template>
   <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
     <!-- Billing history -->
+    <div class="w-full flex justify-between">
+      <div></div>
+      <base-button @click="newParliamentModal = true"
+        >Neues Parlament</base-button
+      >
+    </div>
+
     <section aria-labelledby="billing_history_heading">
       <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
         <div class="px-4 sm:px-6">
@@ -8,7 +15,7 @@
             id="billing_history_heading"
             class="text-lg leading-6 font-medium text-gray-900"
           >
-            Projektübersicht
+            Parlamente
           </h2>
         </div>
         <div class="mt-6 flex flex-col">
@@ -234,6 +241,15 @@
         </div>
       </div>
     </section>
+    <base-modal
+      :is-modal-open="newParliamentModal"
+      @close="newParliamentModal = false"
+    >
+      <forms-admin-parliament
+        @close="newParliamentModal = false"
+        @submit="createParliament"
+      ></forms-admin-parliament>
+    </base-modal>
   </div>
 </template>
 
@@ -287,6 +303,13 @@ export default defineComponent({
         currentLimit.value = currentLimit.value - 15
       }
     }
+
+    const newParliamentModal = ref(false)
+
+    const createParliament = (data: any) => {
+      console.log(data)
+    }
+
     return {
       parliaments,
       totalItems,
@@ -294,6 +317,8 @@ export default defineComponent({
       currentLimit,
       nextPage,
       prevPage,
+      newParliamentModal,
+      createParliament,
     }
   },
 })
