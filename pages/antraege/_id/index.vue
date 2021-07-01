@@ -73,13 +73,30 @@
             @publish="publishProject()"
           />
         </div>
-        <div class="grid sm:grid-cols-3 gap-4 mt-4">
+        <div class="grid sm:grid-cols-3 gap-4 mt-4 auto-rows-fr">
           <div
             v-for="(applicationStep, index) in applicationSteps"
             :key="index"
-            class="p-4 bg-white flex rounded"
+            class="h-full"
           >
+            <nuxt-link
+              v-if="canEdit"
+              :to="
+                localePath({
+                  name: applicationStep.href,
+                  params: { id: projectId },
+                })
+              "
+              class="flex-col justify-between flex h-full"
+            >
+              <application-edit-progress-card
+                :application-step="applicationStep"
+                :project-id="projectId"
+                :step-number="index + 1"
+              />
+            </nuxt-link>
             <application-edit-progress-card
+              v-else
               :application-step="applicationStep"
               :project-id="projectId"
               :step-number="index + 1"
@@ -211,6 +228,10 @@ export default defineComponent({
     const error = computed(() => {
       return store.state.projects.error
     })
+
+    const canEdit = computed(() => {
+      return store.getters['auth/canEditProject'](project.value.id)
+    })
     const context = useContext()
 
     // only mockup data for rendering and testing
@@ -297,6 +318,7 @@ export default defineComponent({
       toggleModal,
       user,
       error,
+      canEdit,
     }
   },
   data() {

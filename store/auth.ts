@@ -1,7 +1,6 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import {
   authTokenName,
-  getStoredAuthToken,
   refreshTokenName,
   storeAuthToken,
   storeRefreshToken,
@@ -11,13 +10,24 @@ import { IUser } from '../types/apiSchema'
 
 export interface AuthState {
   user: IUser | null
+  editableProjects: null | number[]
   isLoading: boolean
   errors: boolean
   passwordResetRequestSuccess: boolean
 }
 
+export interface TokenResponse {
+  editableProjects: number[]
+  exp: number
+  iat: number
+  id: number
+  roles: string[]
+  username: string
+}
+
 const defaultAuthState: AuthState = {
   user: null,
+  editableProjects: null,
   isLoading: false,
   errors: false,
   passwordResetRequestSuccess: false,
@@ -32,6 +42,13 @@ export type RootState = ReturnType<typeof state>
 export const getters: GetterTree<RootState, RootState> = {
   isLoggedIn: (state) => {
     return !!state.user
+  },
+  canEditProject: (state) => (projectId: number) => {
+    if (state.editableProjects) {
+      console.log(projectId, state.editableProjects?.includes(projectId))
+      return state.editableProjects?.includes(projectId)
+    }
+    return false
   },
 }
 
@@ -48,6 +65,9 @@ export const mutations: MutationTree<RootState> = {
   SET_REQ_PW_RESET_SUCCESS(state, flag: boolean) {
     state.passwordResetRequestSuccess = flag
   },
+  SET_EDITABLE_PROJECTS(state, projects) {
+    state.editableProjects = projects
+  },
 }
 
 export interface LoginCredentials {
@@ -56,9 +76,12 @@ export interface LoginCredentials {
 }
 
 interface JwtPayloadWithUser extends JwtPayload {
-  id: string
-  username: string
+  editableProjects: number[]
+  exp: number
+  iat: number
+  id: number
   roles: string[]
+  username: string
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -67,12 +90,18 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('SET_ERRORS', false)
     commit('SET_LOADING_FLAG', true)
     try {
+      console.log(this.$axios)
       // fetch token
-      const response = await this.$api.auth.requestAuthToken(loginData)
+      const response = await this.$axios.post(
+        '/authentication_token',
+        loginData
+      )
 
       // decode token
       const token: string = response.data.token
       const decoded = jwtDecode<JwtPayloadWithUser>(token)
+
+      commit('SET_EDITABLE_PROJECTS', decoded.editableProjects)
 
       // store token
       storeAuthToken(response.data.token)

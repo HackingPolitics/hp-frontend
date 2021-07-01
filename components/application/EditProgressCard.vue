@@ -1,13 +1,5 @@
 <template>
-  <nuxt-link
-    :to="
-      localePath({
-        name: applicationStep.href,
-        params: { id: projectId },
-      })
-    "
-    class="flex-col justify-between flex"
-  >
+  <div class="p-4 bg-white flex rounded h-full">
     <div class="flex-col">
       <div class="inline-flex mb-2 items-center">
         <div
@@ -51,7 +43,7 @@
       </span>
       {{ $t('currentActive') }}
     </div>
-  </nuxt-link>
+  </div>
 </template>
 
 <script lang="ts">
@@ -72,6 +64,10 @@ export default defineComponent({
     stepNumber: {
       type: Number,
       default: 0,
+    },
+    canEdit: {
+      type: Boolean,
+      default: false,
     },
   },
   setup() {
