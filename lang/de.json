@@ -119,7 +119,8 @@
             "placeholder": "Bitte wählen",
             "help": ""
           }
-        }  },
+        }
+    },
         "fractioninterests": {
           "formTitle": "Ratsmehrheit und Fraktionsinteressen",
           "fractions": "Fraktionen",
@@ -165,7 +166,8 @@
     "menu": {
       "collaboration": "Kollaboration",
       "faq": "FAQ",
-      "overview": "Alle Antragsprojekte"
+      "overview": "Alle Antragsprojekte",
+      "admin": "Admin"
     },
     "page": {
       "proposal": {

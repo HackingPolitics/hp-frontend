@@ -11,6 +11,7 @@ export interface IAuthReply {
 
 export enum UserRole {
   Admin = 'ROLE_ADMIN',
+  ProcessManager = 'ROLE_PROCESS_MANAGER',
   User = 'ROLE_USER',
   Guest = 'ROLE_GUEST',
 }
