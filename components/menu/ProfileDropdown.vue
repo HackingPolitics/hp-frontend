@@ -22,11 +22,7 @@
           @click="toggleDropdown"
         >
           <span class="sr-only">Open user menu</span>
-          <img
-            class="h-8 w-8 rounded-full"
-            src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-          />
+          <base-avatar :user="$store.state.auth.user"></base-avatar>
         </button>
       </div>
 
