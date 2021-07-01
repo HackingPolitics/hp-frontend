@@ -20,6 +20,7 @@ export default defineComponent({
     const axios = useAxios()
 
     const fetchUser = async () => {
+      // @ts-ignore
       const token = context.$auth.strategy.token.get()
 
       const decoded = jwtDecode<JwtPayloadWithUser>(token)

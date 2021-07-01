@@ -110,7 +110,7 @@ export default defineComponent({
       const response = await context.$auth.loginWith('local', {
         data: credentials.value,
       })
-
+      // @ts-ignore
       const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)
       try {
         const user = await axios.get(`/users/${decoded.id}`)

@@ -67,7 +67,7 @@ import {
   computed,
 } from '@nuxtjs/composition-api'
 
-import { AuthState } from '~/store/auth'
+import { AuthState } from '~/store/auth_old'
 
 interface State {
   auth: AuthState
