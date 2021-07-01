@@ -59,22 +59,24 @@
           tabindex="-1"
         >
           <!-- Active: "bg-gray-100", Not Active: "" -->
-          <a
+          <nuxt-link
             id="user-menu-item-0"
+            :to="localePath('/profil')"
             href="#"
             class="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabindex="-1"
-            >Profil</a
+            >Profil</nuxt-link
           >
 
-          <a
+          <nuxt-link
             id="user-menu-item-1"
+            :to="localePath('/einstellungen')"
             href="#"
             class="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabindex="-1"
-            >Einstellungen</a
+            >Einstellungen</nuxt-link
           >
 
           <div
