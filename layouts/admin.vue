@@ -22,11 +22,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import jwtDecode from 'jwt-decode'
+import { useAxios } from '~/composables/useAxios'
+import { JwtPayloadWithUser } from '~/store/auth_old'
 
 export default defineComponent({
   name: 'AdminLayout',
   setup() {
+    const context = useContext()
+    const axios = useAxios()
+
+    const fetchUser = async () => {
+      // @ts-ignore
+      const token = context.$auth.strategy.token.get()
+
+      const decoded = jwtDecode<JwtPayloadWithUser>(token)
+      if (token) {
+        try {
+          const user = await axios.get(`/users/${decoded.id}`)
+          context.$auth.setUser(user.data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    fetchUser()
+
     return {}
   },
 })
