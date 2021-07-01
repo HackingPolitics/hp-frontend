@@ -27,7 +27,7 @@ export type RootState = ReturnType<typeof state>
 export const getters: GetterTree<RootState, RootState> = {
   canEditProject: (_, __, rootState) => (projectId: number) => {
     // @ts-ignore
-    if (rootState.auth.user.projectMemberships) {
+    if (rootState.auth?.user?.projectMemberships) {
       // @ts-ignore
       const check = rootState.auth.user.projectMemberships.find(
         (el: IProject) => el.project.id === projectId
