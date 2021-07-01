@@ -230,7 +230,7 @@ export default defineComponent({
     })
 
     const canEdit = computed(() => {
-      return store.getters['auth/canEditProject'](project.value.id)
+      return store.getters['projects/canEditProject'](project.value.id)
     })
     const context = useContext()
 

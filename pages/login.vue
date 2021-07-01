@@ -83,11 +83,14 @@
 import {
   defineComponent,
   ref,
+  useContext,
   useMeta,
-  useStore,
 } from '@nuxtjs/composition-api'
 
+import jwtDecode from 'jwt-decode'
 import formErrorsHandling from '~/composables/formErrorsHandling'
+import { useAxios } from '~/composables/useAxios'
+import { JwtPayloadWithUser } from '~/store/auth_old'
 
 export default defineComponent({
   name: 'LoginPage',
@@ -98,10 +101,25 @@ export default defineComponent({
     const credentials = ref(null)
     const accountIsActivated = ref(false)
     const errorOnActivation = ref(false)
-    const store = useStore()
+    // const store = useStore()
+
+    const context = useContext()
+    const axios = useAxios()
 
     const handleLogin = async () => {
-      const response = await store.dispatch('auth/login', credentials.value)
+      const response = await context.$auth.loginWith('local', {
+        data: credentials.value,
+      })
+
+      const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)
+      try {
+        const user = await axios.get(`/users/${decoded.id}`)
+        context.$auth.setUser(user.data)
+        console.log(user)
+      } catch (error) {
+        console.log(error)
+      }
+
       handleStatusErrors(response)
     }
 

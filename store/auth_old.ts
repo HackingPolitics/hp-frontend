@@ -75,7 +75,7 @@ export interface LoginCredentials {
   password: string
 }
 
-interface JwtPayloadWithUser extends JwtPayload {
+export interface JwtPayloadWithUser extends JwtPayload {
   editableProjects: number[]
   exp: number
   iat: number
@@ -90,7 +90,6 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('SET_ERRORS', false)
     commit('SET_LOADING_FLAG', true)
     try {
-      console.log(this.$axios)
       // fetch token
       const response = await this.$axios.post(
         '/authentication_token',
@@ -107,6 +106,8 @@ export const actions: ActionTree<RootState, RootState> = {
       storeAuthToken(response.data.token)
       storeRefreshToken(response.data.refresh_token)
       this.$axios.setToken(response.data.token, 'Bearer')
+
+      console.log(response.data.token)
 
       // fetch user data
       const user = await this.$api.user.getUser(decoded.id)

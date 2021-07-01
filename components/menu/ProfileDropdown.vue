@@ -98,14 +98,13 @@
 import {
   defineComponent,
   ref,
+  useContext,
   useRouter,
-  useStore,
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ProfileDropdown',
   setup() {
-    const store = useStore()
     const router = useRouter()
     const isDropdownOpen = ref(false)
     const toggleDropdown = (): void => {
@@ -114,9 +113,9 @@ export default defineComponent({
     const closeDropdown = (): void => {
       isDropdownOpen.value = false
     }
-
+    const context = useContext()
     const logout = () => {
-      store.dispatch('auth/logout')
+      context.$auth.logout('local')
       router.push('/')
     }
     return {

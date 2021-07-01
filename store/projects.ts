@@ -1,4 +1,4 @@
-import { ActionTree, MutationTree } from 'vuex'
+import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { set } from 'lodash'
 import { IProject, IProjectMembership } from '~/types/apiSchema'
 
@@ -23,6 +23,21 @@ export const state = () => ({
 })
 
 export type RootState = ReturnType<typeof state>
+
+export const getters: GetterTree<RootState, RootState> = {
+  canEditProject: (_, __, rootState) => (projectId: number) => {
+    // @ts-ignore
+    if (rootState.auth.user.projectMemberships) {
+      // @ts-ignore
+      const check = rootState.auth.user.projectMemberships.find(
+        (el: IProject) => el.project.id === projectId
+      )
+
+      return !!check
+    }
+    return false
+  },
+}
 
 export const mutations: MutationTree<RootState> = {
   SET_PROJECT(state, project) {

@@ -1,4 +1,4 @@
-import { AuthState } from './auth'
+import { AuthState } from './auth_old'
 import { ProjectsState } from '~/store/projects'
 import { CategoriesState } from '~/store/categories'
 
