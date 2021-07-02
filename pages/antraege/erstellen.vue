@@ -70,6 +70,7 @@ import {
   useStore,
   useContext,
 } from '@nuxtjs/composition-api'
+import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'CreateNewProject',
@@ -89,9 +90,9 @@ export default defineComponent({
       { id: 3, name: 'Login', status: 'incomplete' },
     ])
 
-    const store = useStore()
+    const store = useStore<RootState>()
 
-    const isLoggedIn = computed(() => store.getters['auth/isLoggedIn'])
+    const isLoggedIn = computed(() => store.state.auth.loggedIn)
 
     const createProject = async () => {
       if (isLoggedIn.value) {

@@ -1,11 +1,19 @@
-import { AuthState } from './auth_old'
+import { AuthState } from './authentication'
 import { ProjectsState } from '~/store/projects'
 import { CategoriesState } from '~/store/categories'
+import { IUser } from '~/types/apiSchema'
 
 export const state = () => ({})
 
+interface NuxtAuth {
+  loggedIn: boolean
+  user: IUser
+  busy: boolean
+}
+
 export interface RootState {
-  auth: AuthState
+  authentication: AuthState
   projects: ProjectsState
   categories: CategoriesState
+  auth: NuxtAuth
 }

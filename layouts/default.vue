@@ -12,7 +12,7 @@
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import jwtDecode from 'jwt-decode'
 import { useAxios } from '~/composables/useAxios'
-import { JwtPayloadWithUser } from '~/store/auth_old'
+import { JwtPayloadWithUser } from '~/store/authentication'
 
 export default defineComponent({
   setup() {

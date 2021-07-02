@@ -59,8 +59,8 @@ export default defineComponent({
       () => store.state.projects.createdProjectMembership
     )
 
-    const isLoggedIn: ComputedRef<IProject | null> = computed(
-      () => store.getters['auth/isLoggedIn']
+    const isLoggedIn: ComputedRef<boolean | null> = computed(
+      () => store.state.auth.loggedIn
     )
     onBeforeMount(async () => {
       if (isLoggedIn.value && createdProject.value) {

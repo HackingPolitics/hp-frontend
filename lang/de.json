@@ -229,6 +229,114 @@
     "errors": {
         "page": {
             "notFound": "Seite nicht gefunden!"
-        }
+        },
+        "title": {
+            "400": "400 Ungültige Anfrage",
+            "403": "403 Zugriff verweigert",
+            "404": "404 Nicht gefunden",
+            "500": "500 Interner Fehler"
+          },
+          "explanation": {
+            "400": "Die Anfrage bzw. angegebene URL ist ungültig, bitte prüfen.",
+            "403": "Du hast keine Berechtigung für die angefragte Seite oder den Inhalt. Bist du mit dem richtigen Benutzerkonto eingeloggt?",
+            "404": "Die angefragte Seite oder der Inhalt wurde nicht gefunden. Bitte kontaktiere <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn du denkst etwas ist kaputt.",
+            "500": "Es ist ein interner Fehler aufgetreten. Bitte <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn das Problem weiter besteht."
+          },
+          "failure": {
+            "accessBlocked": "Der Zugriff auf diese Funktion wurde wegen zu vieler Anfragen (von Deiner IP-Adresse oder deinem Benutzer) vorübergehend gesperrt, bitte versuche es später wieder.",
+            "fundApplication": {
+              "notFound": "Der angefragte Förderantrag wurde leider nicht gefunden."
+            },
+            "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
+            "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort.",
+            "notLoggedIn": "Du bist nicht (mehr) eingeloggt!",
+            "sendingRequest": "Beim Senden einer Netzwerkanfrage ist leider etwas schiefgegangen.",
+            "user": {
+              "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden."
+            }
+          },
+          "validate": {
+            "fund": {
+              "activationNotPossible": "Der Fördertopf konnte nicht aktiviert werden.<br />Dies kann mehrere Ursachen haben: <ul><li>der Fördertopf ist bereits aktiviert (oder abgeschlossen)</li><li>es ist keine Zuspitzung angegeben</li><li>der Antragszeitraum ist nicht vollständig konfiguriert oder liegt nicht in der Zukunft</li></ul>",
+              "duplicateName": "Dieser Name wird bereits verwendet."
+            },
+            "fundAppliation": {
+              "duplicateApplication": "Zu diesem Projekt existiert bereits ein Förderantrag auf diesen Fördertopf."
+            },
+            "fundConcretization": {
+              "duplicateQuestion": "Diese Zuspitzungs-Frage existiert bereits."
+            },
+            "juryCriterion": {
+              "duplicateName": "Dieser Name existiert bereits."
+            },
+            "fundSearch": {
+              "patternTooShort": "Min. 3 Zeichen notwendig"
+            },
+            "general": {
+              "notBlank": "Dies ist ein Pflichtfeld.",
+              "noNumber": "Es sind nur Zahlen zulässig",
+              "outOfRange": "Der Wert liegt ausserhalb des zulässigen Bereichs.",
+              "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
+              "tooLong": "Der eingegebene Text ist zu lang.",
+              "tooShort": "Der eingegebene Text ist zu kurz."
+            },
+            "image": {
+              "tooBig": "Die Auflösung des gewählten Bildes ist zu hoch, bitte kleineres Bild wählen!",
+              "tooSmall": "Die Auflösung des gewählten Bildes ist zu gering, bitte anderes Bild wählen!"
+            },
+            "process": {
+              "duplicateName": "Ein Prozess mit diesem Name existiert bereits."
+            },
+            "project": {
+              "duplicatePackageNames": "Arbeitspakete müssen unterschiedliche Namen verwenden."
+            },
+            "projectMembership": {
+              "cannotDowngradeLastCoordinator": "Es muss mindestens ein Koordinator im Projekt verbleiben, diese Änderung ist daher nicht möglich.",
+              "duplicateMembership": "Eine Mitgliedschaft oder Bewerbung existiert bereits!",
+              "invalidRequest": "Die angefragte Änderung ist leider nicht zulässig!"
+            },
+            "projectSearch": {
+              "patternTooShort": "Min. 3 Zeichen notwendig"
+            },
+            "registration": {
+              "acceptTerms": "Ohne Zustimmung ist leider keine Registrierung möglich."
+            },
+            "user": {
+              "duplicateEmail": "Zu dieser E-Mail-Adresse existiert bereits ein Account.",
+              "duplicateUsername": "Dieser Nutzername wird bereits verwendet.",
+              "email": {
+                "notValid": "Ungültige Mailadresse!"
+              },
+              "password": {
+                "compromised": "Dieses Passwort wurde schon einmal bei einem Datenleck gefunden, bitte verwende ein anderes Passwort.",
+                "tooWeak": "Bitte verwende ein sicheres Passwort! (Groß-/Kleinschreibung, Ziffern, Sonderzeichen)"
+              },
+              "repeatPassword": {
+                "notMatching": "Die Passwörter stimmen nicht überein."
+              },
+              "username": {
+                "notValid": "Dieser Benutzername ist nicht zulässig."
+              }
+            },
+            "userSearch": {
+              "patternTooShort": "Min. 3 Zeichen notwendig"
+            }
+          },
+          "user": {
+            "invalidCredentials": "Das Passwort ist falsch oder der angegebene Benutzername/die Emailadresse ist unbekannt.",
+            "notActivated": "Das Benutzerkonto ist nicht aktiviert, ein Login ist leider derzeit nicht möglich.",
+            "notValidated": "Das Benutzerkonto wurde noch nicht bestätigt.<br />Bitte klicke den Link in der Bestätigungsemail."
+          },
+          "validation": {
+            "account": {
+              "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte registriere dich erneut!</li></ol>"
+            },
+            "changeEmail": {
+              "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Änderung erneut!</li></ol>"
+            },
+            "resetPassword": {
+              "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Zurücksetzung deines Passworts erneut!</li></ol>"
+            }
+          }
     }
   }

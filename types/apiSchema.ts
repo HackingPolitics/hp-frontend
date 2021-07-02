@@ -189,3 +189,24 @@ export interface INegations extends IModel {
 }
 
 export default INegations
+
+export interface IViolation {
+  code: string
+  message: string
+  propertyPath: string
+}
+
+export interface IErrors {
+  '@context': string
+  '@type': string
+  'hydra:description': string
+  'hydra:title': string
+  violations: IViolation[]
+}
+export interface IFraction {
+  '@id': string
+  '@type': string
+  active: boolean
+  id: number
+  memberCount: number
+}
