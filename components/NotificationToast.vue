@@ -11,8 +11,7 @@
           px-4
           py-6
           pointer-events-none
-          sm:p-6
-          sm:items-start
+          sm:p-6 sm:items-start
         "
       >
         <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
@@ -69,7 +68,7 @@
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="{2}"
+                      strokeWidth="2"
                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
@@ -104,7 +103,9 @@
                       text-gray-400
                       hover:text-gray-500
                       focus:outline-none
-                      focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                      focus:ring-2
+                      focus:ring-offset-2
+                      focus:ring-indigo-500
                     "
                     @click="close"
                   >

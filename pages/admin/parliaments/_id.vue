@@ -176,7 +176,28 @@ export default defineComponent({
 
     const context = useContext()
 
-    const updateParliament = () => {
+    const updateParliament = async () => {
+      isLoading.value = true
+      try {
+        await axios.put(`/councils/${route.value.params.id}`, formData.value)
+        fetchData()
+
+        // @ts-ignore
+        context.$notify({
+          title: 'Parlament aktualisiert',
+          duration: 300,
+          type: 'success',
+        })
+        isLoading.value = false
+      } catch (error) {
+        isLoading.value = false
+        context.$notify({
+          title: 'Parlament konnte nicht aktualisiert werden',
+          duration: 300,
+          type: 'warn',
+        })
+      }
+
       console.log(formData.value)
     }
 
