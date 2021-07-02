@@ -1,4 +1,5 @@
 import { de } from '@braid/vue-formulate-i18n'
+import Toggle from '@/components/InputToggle'
 import GroupRemoveButton from '~/components/GroupRemoveButton'
 import ChipGroup from '~/components/ChipGroup'
 
@@ -75,12 +76,16 @@ export default {
     groupRepeatableRemove: 'ml-2',
   },
   slotComponents: {
-    remove: 'GroupRemoveButton',
+    remove: GroupRemoveButton,
   },
   library: {
     chipGroup: {
       classification: 'chip',
-      component: 'ChipGroup',
+      component: ChipGroup,
+    },
+    toggle: {
+      classification: 'toggle',
+      component: Toggle,
     },
   },
 }

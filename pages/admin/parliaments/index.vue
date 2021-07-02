@@ -3,9 +3,7 @@
     <!-- Billing history -->
     <div class="w-full flex justify-between">
       <div></div>
-      <base-button @click="newParliamentModal = true"
-        >Neues Parlament</base-button
-      >
+      <base-button @click="openModal">Neues Parlament</base-button>
     </div>
 
     <section aria-labelledby="billing_history_heading">
@@ -56,39 +54,39 @@
                           tracking-wider
                         "
                       >
+                        Standort
+                      </th>
+                      <th
+                        scope="col"
+                        class="
+                          px-6
+                          py-3
+                          text-left text-xs
+                          font-medium
+                          text-gray-500
+                          uppercase
+                          tracking-wider
+                        "
+                      >
+                        Fraktionen
+                      </th>
+                      <th
+                        scope="col"
+                        class="
+                          px-6
+                          py-3
+                          text-left text-xs
+                          font-medium
+                          text-gray-500
+                          uppercase
+                          tracking-wider
+                        "
+                      >
                         Status
                       </th>
-                      <th
-                        scope="col"
-                        class="
-                          px-6
-                          py-3
-                          text-left text-xs
-                          font-medium
-                          text-gray-500
-                          uppercase
-                          tracking-wider
-                        "
-                      >
-                        Thema
-                      </th>
-                      <th
-                        scope="col"
-                        class="
-                          px-6
-                          py-3
-                          text-left text-xs
-                          font-medium
-                          text-gray-500
-                          uppercase
-                          tracking-wider
-                        "
-                      >
-                        Teammitglieder
-                      </th>
                       <!--
-                              `relative` is added here due to a weird bug in Safari that causes `sr-only` headings to introduce overflow on the body on mobile.
-                            -->
+                                `relative` is added here due to a weird bug in Safari that causes `sr-only` headings to introduce overflow on the body on mobile.
+                              -->
                       <th
                         scope="col"
                         class="
@@ -107,7 +105,7 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    <tr v-for="project in parliaments" :key="project.id">
+                    <tr v-for="parlament in parliaments" :key="parlament.id">
                       <td
                         class="
                           px-6
@@ -118,7 +116,7 @@
                           text-gray-900
                         "
                       >
-                        <div>{{ project.title }}</div>
+                        <div>{{ parlament.title }}</div>
                       </td>
                       <td
                         class="
@@ -128,7 +126,7 @@
                           text-sm text-gray-500
                         "
                       >
-                        {{ project.state }}
+                        {{ parlament.zipArea }}, {{ parlament.location }}
                       </td>
                       <td
                         class="
@@ -138,7 +136,7 @@
                           text-sm text-gray-500
                         "
                       >
-                        {{ project.topic }}
+                        {{ parlament.fractions.length }}
                       </td>
                       <td
                         class="
@@ -147,7 +145,9 @@
                           whitespace-nowrap
                           text-sm text-gray-500
                         "
-                      ></td>
+                      >
+                        {{ parlament.active }}
+                      </td>
                       <td
                         class="
                           px-6
@@ -157,10 +157,21 @@
                           font-medium
                         "
                       >
-                        <a
-                          href="#"
+                        <nuxt-link
+                          v-if="parlament"
+                          :to="
+                            localePath({
+                              name: 'admin-parliaments-id',
+                              params: {
+                                id:
+                                  parlament && parlament.id
+                                    ? parlament.id.toString()
+                                    : '',
+                              },
+                            })
+                          "
                           class="text-purple-600 hover:text-purple-900"
-                          >Bearbeiten</a
+                          >Bearbeiten</nuxt-link
                         >
                       </td>
                     </tr>
@@ -246,6 +257,7 @@
       @close="newParliamentModal = false"
     >
       <forms-admin-parliament
+        :errors="errors"
         @close="newParliamentModal = false"
         @submit="createParliament"
       ></forms-admin-parliament>
@@ -254,7 +266,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  watch,
+  useContext,
+} from '@nuxtjs/composition-api'
 import { useAxios } from '~/composables/useAxios'
 import { IParliament } from '~/types/apiSchema'
 
@@ -306,8 +323,37 @@ export default defineComponent({
 
     const newParliamentModal = ref(false)
 
-    const createParliament = (data: any) => {
-      console.log(data)
+    const openModal = () => {
+      newParliamentModal.value = true
+      errors.value = null
+    }
+
+    const context = useContext()
+
+    const errors = ref(null)
+
+    const createParliament = async (data: any) => {
+      try {
+        const response = await axios.post('/councils', data)
+        console.log(response)
+        fetchData()
+        // @ts-ignore
+        context.$notify({
+          title: 'Parlament erstellt',
+          duration: 300,
+          type: 'success',
+        })
+        newParliamentModal.value = false
+      } catch (error) {
+        console.log(error)
+        errors.value = error.response.data
+        // @ts-ignore
+        context.$notify({
+          title: 'Parlament konnte nicht erstellt werden',
+          duration: 300,
+          type: 'error',
+        })
+      }
     }
 
     return {
@@ -319,6 +365,8 @@ export default defineComponent({
       prevPage,
       newParliamentModal,
       createParliament,
+      errors,
+      openModal,
     }
   },
 })

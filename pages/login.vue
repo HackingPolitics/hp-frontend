@@ -1,10 +1,9 @@
 <template>
   <div class="">
-    <div v-if="accountIsActivated" class="text-green-500">
-      Ihr Konto ist nun aktiviert. Sie können sich ab sofort einloggen.
-    </div>
-    <div v-if="errorOnActivation" class="text-red-500">
-      Fehler bei der Aktivierung.
+    <div v-if="errors">
+      <div class="text-red-500 mt-4 text-sm">
+        {{ $t(`errors.${errors.message}`) }}
+      </div>
     </div>
     <div>
       <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Anmelden</h2>
@@ -85,12 +84,15 @@ import {
   ref,
   useContext,
   useMeta,
+  useRouter,
+  useStore,
 } from '@nuxtjs/composition-api'
 
 import jwtDecode from 'jwt-decode'
 import formErrorsHandling from '~/composables/formErrorsHandling'
 import { useAxios } from '~/composables/useAxios'
-import { JwtPayloadWithUser } from '~/store/auth_old'
+import { RootState } from '~/store'
+import { JwtPayloadWithUser } from '~/store/authentication'
 
 export default defineComponent({
   name: 'LoginPage',
@@ -101,26 +103,44 @@ export default defineComponent({
     const credentials = ref(null)
     const accountIsActivated = ref(false)
     const errorOnActivation = ref(false)
-    // const store = useStore()
+    const store = useStore<RootState>()
+    const errors = ref(null)
 
     const context = useContext()
     const axios = useAxios()
 
+    const router = useRouter()
+
     const handleLogin = async () => {
-      const response = await context.$auth.loginWith('local', {
-        data: credentials.value,
-      })
-      // @ts-ignore
-      const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)
       try {
-        const user = await axios.get(`/users/${decoded.id}`)
-        context.$auth.setUser(user.data)
-        console.log(user)
+        const response = await context.$auth.loginWith('local', {
+          data: credentials.value,
+        })
+        console.log(response)
+        // @ts-ignore
+        const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)
+        try {
+          const user = await axios.get(`/users/${decoded.id}`)
+          context.$auth.setUser(user.data)
+
+          if (store.state.projects.createdProject) {
+            store.dispatch(
+              'projects/createProject',
+              store.state.projects.createdProject
+            )
+          }
+
+          router.push('/antraege')
+          console.log(user)
+        } catch (error) {
+          console.log('user', error.response.data)
+        }
       } catch (error) {
-        console.log(error)
+        errors.value = error.response.data
+        console.log('login', error.response.data)
       }
 
-      handleStatusErrors(response)
+      //   handleStatusErrors(response)
     }
 
     useMeta({ title: 'Login | HackingPolitics' })
@@ -131,6 +151,7 @@ export default defineComponent({
       errorOnActivation,
       inputErrors,
       formErrors,
+      errors,
     }
   },
   head: {},

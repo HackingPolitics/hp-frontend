@@ -18,6 +18,7 @@
       </div>
     </main>
     <base-footer></base-footer>
+    <notification-toast />
   </div>
 </template>
 
