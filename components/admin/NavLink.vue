@@ -42,11 +42,11 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.admin-sidebar-link.nuxt-link-exact-active {
+.admin-sidebar-link.nuxt-link-active {
   @apply bg-gray-50 text-purple-600 hover:bg-white;
 }
 
-.admin-sidebar-link.nuxt-link-exact-active .icon {
+.admin-sidebar-link.nuxt-link-active .icon {
   @apply text-purple-500;
 }
 </style>

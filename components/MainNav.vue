@@ -177,7 +177,7 @@ export default defineComponent({
         if (isAdmin.value) {
           navLinks.value.push({
             title: 'menu.admin',
-            to: '/admin',
+            to: '/admin/general',
           })
         }
       },
