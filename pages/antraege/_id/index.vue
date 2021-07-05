@@ -96,16 +96,6 @@
             />
           </div>
         </div>
-        <div class="pb-5 border-b border-gray-200 mb-8 mt-4">
-          <h3 class="leading-6 font-medium text-lg text-gray-900 pb-5">
-            {{ $t('page.application.project_member') }}
-          </h3>
-
-          <project-memberships-list
-            :project-id="project.id"
-            :project-memberships="project.memberships"
-          />
-        </div>
         <div v-if="false" class="pb-5 border-b border-gray-200 mb-8">
           <div
             class="

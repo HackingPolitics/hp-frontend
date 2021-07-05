@@ -61,8 +61,40 @@
               <span class="pb-2 text-sm text-gray-500 text-center">
                 Mitglieder</span
               >
-              <avatar-group class="mt-2" :avatars="project.memberships">
-              </avatar-group>
+              <div class="flex items-center mt-2">
+                <avatar-group :avatars="project.memberships"> </avatar-group>
+                <div
+                  class="
+                    rounded-full
+                    border-2 border-gray-300
+                    h-8
+                    w-8
+                    flex
+                    justify-center
+                    items-center
+                    text-xl text-gray-400
+                    hover:border-purple-500 hover:text-purple-500
+                    cursor-pointer
+                  "
+                  :class="project.memberships ? '-ml-2' : ''"
+                  @click="isModalOpen = true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -75,6 +107,20 @@
         </div>
       </div>
     </div>
+    <base-modal :is-modal-open="isModalOpen" @close="isModalOpen = false">
+      <div class="relative">
+        <h2>Projektmitlieder</h2>
+        <div
+          class="absolute top-0 right-0 text-gray-500 cursor-pointer"
+          @click="isModalOpen = false"
+        >
+          x
+        </div>
+        <application-members-list
+          :memberships="project.memberships"
+        ></application-members-list>
+      </div>
+    </base-modal>
   </div>
 </template>
 
@@ -136,8 +182,6 @@ export default defineComponent({
       return false
     })
 
-    console.log(props)
-
     const userMembershipRole = computed((): string | undefined => {
       if (project.value.memberships) {
         return project.value.memberships.find(
@@ -171,6 +215,11 @@ export default defineComponent({
       store.dispatch('projects/setProject', response.data)
     }
 
+    const isModalOpen = ref(false)
+    const addUser = () => {
+      isModalOpen.value = true
+    }
+
     return {
       projectForm,
       editMode,
@@ -180,6 +229,8 @@ export default defineComponent({
       userMembershipRole,
       isCoordinator,
       changeProjectState,
+      addUser,
+      isModalOpen,
     }
   },
 })
