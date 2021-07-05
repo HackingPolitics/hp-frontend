@@ -65,9 +65,19 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async createProject({ commit }, data) {
+  async createProject({ commit, rootState }, data) {
     try {
       const response = await this.$api.projects.createProject(data)
+      // refetch user data if user is loggedIn
+      if (rootState.auth.user) {
+        // reload user data
+        try {
+          const user = await this.$axios.get(`/users/${rootState.auth.user.id}`)
+          this.$auth.setUser(user.data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
       // @ts-ignore
       // this.$notify({ title: 'Projekt erstellt', duration: 10000 })
       commit('SET_CREATED_PROJECT', null)
