@@ -1,11 +1,14 @@
 <template>
   <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-    <!-- Billing history -->
-    <section aria-labelledby="billing_history_heading">
+    <div class="w-full flex justify-between">
+      <div></div>
+      <base-button @click="openModal">Neue Kategorie</base-button>
+    </div>
+    <section aria-labelledby="category_heading">
       <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
         <div class="px-4 sm:px-6">
           <h2
-            id="billing_history_heading"
+            id="category_heading"
             class="text-lg leading-6 font-medium text-gray-900"
           >
             Kategorien
@@ -80,11 +83,12 @@
                           font-medium
                         "
                       >
-                        <a
-                          href="#"
+                        <button
                           class="text-purple-600 hover:text-purple-900"
-                          >Bearbeiten</a
+                          @click="openEditModal(category)"
                         >
+                          Bearbeiten
+                        </button>
                       </td>
                     </tr>
 
@@ -164,13 +168,31 @@
         </div>
       </div>
     </section>
+    <base-modal :is-modal-open="isModalOpen" @close="isModalOpen = false">
+      <forms-admin-category
+        :item="selectedCategory"
+        :errors="errors"
+        @close="isModalOpen = false"
+        @submit="createOrUpdateCategory"
+      ></forms-admin-category>
+    </base-modal>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  watch,
+  useContext,
+} from '@nuxtjs/composition-api'
 import { useAxios } from '~/composables/useAxios'
 import { ICategory } from '~/types/apiSchema'
+
+interface CategoryData {
+  name: string
+  id?: string
+}
 
 export default defineComponent({
   name: 'AdminCategories',
@@ -219,6 +241,84 @@ export default defineComponent({
         currentLimit.value = currentLimit.value - 15
       }
     }
+
+    const isModalOpen = ref(false)
+    const openModal = () => {
+      isModalOpen.value = true
+      errors.value = null
+    }
+    const selectedCategory = ref<ICategory | null>(null)
+    const openEditModal = (category) => {
+      selectedCategory.value = category
+      isModalOpen.value = true
+    }
+
+    const context = useContext()
+    // @ts-ignore
+    const { $axios, $notify } = context
+    const createOrUpdateCategory = async (categoryData: CategoryData) => {
+      if (selectedCategory.value) {
+        try {
+          const response = await $axios.put(
+            `/categories/${categoryData.id}`,
+            categoryData
+          )
+
+          if (response) {
+            fetchData()
+            // @ts-ignore
+            $notify({
+              title: 'Kategorie geändert',
+              duration: 300,
+              type: 'success',
+            })
+          }
+          isModalOpen.value = false
+        } catch (error) {
+          console.log(error)
+          // @ts-ignore
+          $notify({
+            title: 'Kategorie konnte nicht geändert werden',
+            duration: 300,
+            type: 'warn',
+          })
+        }
+      } else {
+        try {
+          const response = await $axios.post('/categories', categoryData)
+
+          if (response) {
+            fetchData()
+            // @ts-ignore
+            $notify({
+              title: 'Kategorie erstellt',
+              duration: 300,
+              type: 'success',
+            })
+          }
+          isModalOpen.value = false
+        } catch (error) {
+          console.log(error)
+          // @ts-ignore
+          $notify({
+            title: 'Kategorie konnte nicht erstellt werden',
+            duration: 300,
+            type: 'error',
+          })
+        }
+        console.log('create')
+      }
+    }
+
+    const updateCategory = () => {
+      console.log('update')
+    }
+
+    const deleteCategory = () => {
+      console.log('delete')
+    }
+
+    const errors = ref(null)
     return {
       categories,
       totalItems,
@@ -226,6 +326,14 @@ export default defineComponent({
       currentLimit,
       nextPage,
       prevPage,
+      openModal,
+      isModalOpen,
+      errors,
+      selectedCategory,
+      createOrUpdateCategory,
+      updateCategory,
+      deleteCategory,
+      openEditModal,
     }
   },
 })
