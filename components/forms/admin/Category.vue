@@ -24,22 +24,18 @@
           help="help"
           placeholder="Hier Name eingeben"
           class="mt-8"
-          validation="required"
+          validation="required|min:4,length"
         />
       </div>
     </div>
-    <div
-      class="
-        mt-5
-        sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense
-      "
-    >
-      <FormulateInput type="submit" class="w-full"> Erstellen </FormulateInput>
+    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse justify-start">
+      <FormulateInput type="submit" class="sm:ml-3">
+        {{ item ? 'Bearbeiten' : 'Erstellen' }}
+      </FormulateInput>
       <button
         type="button"
         class="
           mt-3
-          w-full
           inline-flex
           justify-center
           rounded-md

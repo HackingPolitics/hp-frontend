@@ -12,6 +12,7 @@
           py-6
           pointer-events-none
           sm:p-6 sm:items-start
+          mt-16
         "
       >
         <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
