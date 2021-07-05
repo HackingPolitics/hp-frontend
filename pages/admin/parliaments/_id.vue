@@ -208,16 +208,18 @@ export default defineComponent({
 
     const createFraction = async () => {
       try {
-        console.log(fractionFormData.value)
         const payload = {
           ...fractionFormData.value,
           memberCount: fractionFormData.value
             ? parseInt(fractionFormData.value.memberCount)
             : 0,
           council: parliament.value ? parliament.value['@id'] : null,
+          color: fractionFormData.value
+            ? fractionFormData.value.color.slice(1)
+            : '000000',
         }
-        const response = await axios.post('/fractions', payload)
-        console.log(response)
+        await axios.post('/fractions', payload)
+        newFraktionForm.value = false
         fetchData()
         // @ts-ignore
         context.$notify({
@@ -226,7 +228,6 @@ export default defineComponent({
           type: 'success',
         })
       } catch (error) {
-        console.log(error)
         errors.value = error.response.data
         // @ts-ignore
         context.$notify({

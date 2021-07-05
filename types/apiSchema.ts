@@ -208,5 +208,7 @@ export interface IFraction {
   '@type': string
   active: boolean
   id: number
+  color: string
+  number: string
   memberCount: number
 }

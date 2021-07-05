@@ -10,7 +10,14 @@
       />
     </div> -->
     <div class="grid grid-cols-12 gap-4">
-      <input id="head" type="color" name="head" value="#e66465" />
+      <FormulateInput
+        type="color"
+        class="col-span-1"
+        name="color"
+        label="Farbe"
+        validation="required"
+        :input-class="['']"
+      ></FormulateInput>
       <FormulateInput
         label="Fraktionsname"
         class="col-span-3"
@@ -23,7 +30,7 @@
       <FormulateInput
         label="Mitglieder"
         type="number"
-        class="col-span-3"
+        class="col-span-2"
         name="memberCount"
         help="help"
         validation="required"
