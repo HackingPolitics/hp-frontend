@@ -69,9 +69,11 @@ export const actions: ActionTree<RootState, RootState> = {
     try {
       const response = await this.$api.projects.createProject(data)
       // refetch user data if user is loggedIn
+      // @ts-ignore
       if (rootState.auth.user) {
         // reload user data
         try {
+          // @ts-ignore
           const user = await this.$axios.get(`/users/${rootState.auth.user.id}`)
           this.$auth.setUser(user.data)
         } catch (error) {
@@ -127,7 +129,7 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_ERROR', e.response.data)
     }
   },
-  async applyForProject({ commit }, membership) {
+  async applyForProject(_, membership) {
     try {
       const response = await this.$api.projectMemberships
         .create(membership)
@@ -144,7 +146,7 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-  async updateProjectMemberShip({ commit }, [id, data]) {
+  async updateProjectMemberShip(_, [id, data]) {
     try {
       const response = await this.$api.projectMemberships
         .update(id, data)
@@ -161,7 +163,7 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-  async deleteProjectMemberShip({ commit }, id) {
+  async deleteProjectMemberShip(_, id) {
     try {
       const response = await this.$api.projectMemberships
         .delete(id)
