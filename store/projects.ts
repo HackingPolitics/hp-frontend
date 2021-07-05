@@ -85,20 +85,22 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async updateProject({ commit }, [id, data]) {
     try {
       const response = await this.$api.projects.updateProject(id, data)
       // @ts-ignore
-      this.$notify({ title: 'Änderungen gespeichert', duration: 500 })
+      this.$notify({
+        title: 'Änderungen gespeichert',
+        duration: 500,
+        type: 'success',
+      })
       commit('SET_PROJECT', response.data)
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async fetchProject({ commit }, id) {
@@ -109,7 +111,12 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_LOADING_FLAG', false)
       commit('SET_PROJECT', response.data)
     } catch (e) {
-      console.log(e.response.data)
+      // @ts-ignore
+      this.$notify({
+        title: 'Projekt konnte nicht geladen werden',
+        duration: 500,
+        type: 'warn',
+      })
       commit('SET_LOADING_FLAG', false)
       commit('SET_ERROR', e.response.data)
     }
@@ -129,7 +136,7 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_ERROR', e.response.data)
     }
   },
-  async applyForProject(_, membership) {
+  async applyForProject({ commit }, membership) {
     try {
       const response = await this.$api.projectMemberships
         .create(membership)
@@ -142,8 +149,7 @@ export const actions: ActionTree<RootState, RootState> = {
         })
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async updateProjectMemberShip(_, [id, data]) {
