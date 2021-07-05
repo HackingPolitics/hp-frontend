@@ -77,6 +77,9 @@ export const actions: ActionTree<RootState, RootState> = {
       // store token
       storeAuthToken(response.data.token)
       storeRefreshToken(response.data.refresh_token)
+      localStorage.setItem('currentUser', decoded.username)
+      localStorage.setItem('currentUserId', decoded.id)
+
       this.$axios.setToken(response.data.token, 'Bearer')
 
       // fetch user data
@@ -96,8 +99,10 @@ export const actions: ActionTree<RootState, RootState> = {
 
   // logout
   logout({ commit }) {
+    // @todo warum hier nicht die funcs aus utils/authToken?
     localStorage.removeItem(authTokenName)
     localStorage.removeItem(refreshTokenName)
+
     commit('SET_USER', null)
     // this.$router.push('/login')
   },
@@ -157,13 +162,19 @@ export const actions: ActionTree<RootState, RootState> = {
     try {
       const response = await this.$axios.$post(`/auth/refresh`)
       commit('SET_USER', response.user)
+      // @todo warum hier nicht die funcs aus utils/authToken?
       localStorage.removeItem('auth_token')
       localStorage.setItem('auth_token', response.access_token)
       this.$axios.setToken(response.access_token, 'Bearer')
+
       commit('SET_LOADING_FLAG', false)
       return response
     } catch (error) {
+      // @todo warum hier nicht die funcs aus utils/authToken?
       localStorage.removeItem('auth_token')
+
+      // @todo collab: WS cookie löschen
+
       commit('SET_USER', null)
       this.$router.push('/login')
       commit('SET_ERRORS', true)

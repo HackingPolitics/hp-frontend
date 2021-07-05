@@ -5,16 +5,19 @@
     <div class="editor__footer">
       <div :class="`editor__status editor__status--${status}`">
         <template v-if="status === 'connected'">
-          {{ users.length }} user{{ users.length === 1 ? '' : 's' }} online in
-          {{ room }}
+          {{ states.length }} user{{ states.length === 1 ? '' : 's' }} online
         </template>
         <template v-else> offline </template>
       </div>
-      <div class="editor__name">
-        <button @click="setName">
-          {{ currentUser.name }}
-        </button>
-      </div>
+      <div>{{ savedAt }}</div>
+      <ul>
+        <li v-for="state in states" :key="state.clientId">
+          <span
+            :style="`background-color: ${state.user.color}; width: 1rem; height: 1rem; margin-right: 0.5rem; display: inline-block;`"
+          />
+          #{{ state.clientId }} {{ state.user.name }} (ID: {{ state.user.id }})
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -24,21 +27,19 @@ import { Editor, EditorContent } from '@tiptap/vue-2'
 import StarterKit from '@tiptap/starter-kit'
 import Collaboration from '@tiptap/extension-collaboration'
 import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
-import TaskList from '@tiptap/extension-task-list'
-import TaskItem from '@tiptap/extension-task-item'
 import Highlight from '@tiptap/extension-highlight'
 import CharacterCount from '@tiptap/extension-character-count'
 import * as Y from 'yjs'
-import { WebsocketProvider } from 'y-websocket'
-import { IndexeddbPersistence } from 'y-indexeddb'
 import { defineComponent } from '@nuxtjs/composition-api'
+import { authTokenName, getStoredAuthToken } from '../../utils/authToken'
+import {
+  HocuspocusProvider,
+  WebSocketStatus,
+} from '~/services/hocuspocus/HocuspocusProvider'
+import { TokenUpdateMessage } from '~/services/hocuspocus/OutgoingMessages/TokenUpdateMessage'
 
 const getRandomElement = (list) => {
   return list[Math.floor(Math.random() * list.length)]
-}
-
-const getRandomRoom = () => {
-  return getRandomElement(['room.4', 'room.5', 'room.6'])
 }
 
 export default defineComponent({
@@ -48,33 +49,65 @@ export default defineComponent({
 
   data() {
     return {
-      currentUser: JSON.parse(localStorage.getItem('currentUser')) || {
-        name: this.getRandomName(),
+      currentUser: {
+        name: localStorage.getItem('currentUser') || '[not logged in]',
+        id: localStorage.getItem('currentUserId') || 0,
         color: this.getRandomColor(),
       },
       provider: null,
-      indexdb: null,
+      yDoc: null,
       editor: null,
-      users: [],
       status: 'connecting',
-      room: getRandomRoom(),
+      states: [],
+      savedAt: -1,
+      syncState: null,
     }
   },
 
   mounted() {
-    const ydoc = new Y.Doc()
-    this.provider = new WebsocketProvider(
-      'wss://websocket.tiptap.dev',
-      this.room,
-      ydoc
-    )
-    this.provider.on('status', (event) => {
-      this.status = event.status
+    this.ydoc = new Y.Doc()
+    this.syncState = this.ydoc.getMap('syncState')
+
+    this.ydoc.on('update', () => {
+      this.savedAt = this.syncState.get('savedAt')
     })
 
-    window.ydoc = ydoc
+    this.provider = new HocuspocusProvider({
+      url: 'ws://localhost:1234', // @todo get from config, from process.env
+      name: 'project-1',
+      document: this.ydoc,
+      parameters: { authToken: getStoredAuthToken() },
+      onConnect: () => {
+        this.status = 'connected'
+      },
+      onMessage: ({ event, message }) => {
+        // any document update is applied *after* this hook
+        console.log(`[message] ◀️ ${message.name}`, event)
+      },
+      onOutgoingMessage: ({ message }) => {
+        // console.info(`[message] ▶️ ${message.name} (${message.description})`)
+      },
+      onClose: ({ event }) => {
+        // hocuspocus-server/CloseEvent.ts:Forbidden
+        if (event.code === 4403) {
+          // prevent the provider from endlessly retrying
+          this.provider.disconnect()
+          console.log('WS disconnected, authentication failure')
+        }
 
-    this.indexdb = new IndexeddbPersistence(this.room, ydoc)
+        this.status = 'disconnected'
+      },
+      onDisconnect: () => {
+        if (this.provider.shouldConnect) {
+          console.log(
+            'WS connection closed unexpectedly, trying to reconnect...'
+          )
+        }
+      },
+      onAwarenessChange: ({ states }) => {
+        this.states = states
+      },
+    })
 
     this.editor = new Editor({
       extensions: [
@@ -82,33 +115,76 @@ export default defineComponent({
           history: false,
         }),
         Highlight,
-        TaskList,
-        TaskItem,
+        CharacterCount.configure({
+          limit: 10000,
+        }),
         Collaboration.configure({
-          document: ydoc,
+          document: this.ydoc,
+          field: 'description',
         }),
         CollaborationCursor.configure({
           provider: this.provider,
           user: this.currentUser,
-          onUpdate: (users) => {
-            this.users = users
-          },
-        }),
-        CharacterCount.configure({
-          limit: 10000,
         }),
       ],
     })
 
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+    // when the localStorage changes: update the JWT for the WS connection
+    window.addEventListener('storage', this.sendTokenUpdate)
+
+    this.setAwarenessState()
   },
 
   beforeDestroy() {
-    this.editor.destroy()
-    this.provider.destroy()
+    this.editor && this.editor.destroy()
+    this.provider && this.provider.destroy()
+
+    window.removeEventListener('storage', this.sendTokenUpdate)
   },
 
   methods: {
+    /**
+     * Listen to JWT updates via localStorage, if the provider is connected send him
+     * the new token via a special message. (We don't want to send the token via the provider's
+     * request parameters as these show up in the URL and potentially any webserver/proxy log files).
+     *
+     * If the token is reset, disconnect the provider, the user should not receive any more updates
+     * from the other team members.
+     *
+     * The WS server needs a JWT to send the document updates to the API server (debounced & bundled),
+     * for this he needs a valid token to impersonate a team member. Because he cannot access a
+     * (eventually updated) cookie for an already opened connection we have to send it directly.
+     *
+     * The WS server will disconnect us if our new token no longer allows us in the current room.
+     */
+    sendTokenUpdate(e) {
+      if (e.key !== authTokenName) {
+        return
+      }
+
+      if (!this.provider.status !== WebSocketStatus.Connected) {
+        return
+      }
+
+      if (!e.newValue) {
+        this.provider.disconnect()
+        return
+      }
+
+      this.provider.send(TokenUpdateMessage, {
+        token: e.newValue,
+      })
+    },
+
+    setAwarenessState(values = {}) {
+      this.me = {
+        ...this.me,
+        ...values,
+      }
+
+      this.provider.setAwarenessField('user', this.me)
+    },
+
     setName() {
       const name = (window.prompt('Name') || '').trim().substring(0, 32)
 
@@ -135,36 +211,6 @@ export default defineComponent({
         '#70CFF8',
         '#94FADB',
         '#B9F18D',
-      ])
-    },
-
-    getRandomName() {
-      return getRandomElement([
-        'Lea Thompson',
-        'Cyndi Lauper',
-        'Tom Cruise',
-        'Madonna',
-        'Jerry Hall',
-        'Joan Collins',
-        'Winona Ryder',
-        'Christina Applegate',
-        'Alyssa Milano',
-        'Molly Ringwald',
-        'Ally Sheedy',
-        'Debbie Harry',
-        'Olivia Newton-John',
-        'Elton John',
-        'Michael J. Fox',
-        'Axl Rose',
-        'Emilio Estevez',
-        'Ralph Macchio',
-        'Rob Lowe',
-        'Jennifer Grey',
-        'Mickey Rourke',
-        'John Cusack',
-        'Matthew Broderick',
-        'Justine Bateman',
-        'Lisa Bonet',
       ])
     },
   },
