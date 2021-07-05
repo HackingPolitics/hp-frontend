@@ -191,6 +191,7 @@ export default defineComponent({
         isLoading.value = false
       } catch (error) {
         isLoading.value = false
+        // @ts-ignore
         context.$notify({
           title: 'Parlament konnte nicht aktualisiert werden',
           duration: 300,
