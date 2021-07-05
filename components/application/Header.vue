@@ -125,12 +125,15 @@ export default defineComponent({
     }
 
     const isCoordinator = computed(() => {
-      const check = project.value.memberships.find(
-        (member: IProjectMembership) =>
-          member.user?.id === store.state.auth.user?.id &&
-          member.role === 'coordinator'
-      )
-      return !!check
+      if (project.value.memberships) {
+        const check = project.value.memberships.find(
+          (member: IProjectMembership) =>
+            member.user?.id === store.state.auth.user?.id &&
+            member.role === 'coordinator'
+        )
+        return !!check
+      }
+      return false
     })
 
     console.log(props)
