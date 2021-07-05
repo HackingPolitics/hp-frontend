@@ -65,7 +65,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
 
-import { IErrors } from '~/types/apiSchema'
+import { ICategory, IErrors } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'CategoryForm',
@@ -75,12 +75,12 @@ export default defineComponent({
       default: null,
     },
     item: {
-      type: Object,
+      type: Object as PropType<ICategory>,
       default: null,
     },
   },
   setup(props) {
-    const formData = ref(null)
+    const formData = ref<ICategory | null>(null)
 
     const setFormData = () => {
       if (props.item) {
