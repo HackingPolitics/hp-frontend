@@ -33,7 +33,7 @@
         :help="$t('forms.proposal.forms.motivation.help')"
         type="text"
         name="motivation"
-        validation="required|min:9,length"
+        validation="required|min:12,length"
         :validation-messages="{
           required: `${$t(
             'forms.proposal.forms.motivation.name'
