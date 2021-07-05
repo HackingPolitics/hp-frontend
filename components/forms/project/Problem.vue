@@ -192,7 +192,7 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        store.dispatch('projects/updateProjectProperty', [
+        store.commit('projects/SET_PROJECT_PROPERTY', [
           'problems',
           res.map((e) => e.data),
         ])
