@@ -1,6 +1,9 @@
 <template>
   <div v-if="fraction" class="flex items-center space-x-6">
-    <base-toggle v-model="isSelected"></base-toggle>
+    <base-toggle
+      :value="fractionDetails ? fractionDetails.possiblePartner : false"
+      @input="togglePartnerStatus"
+    ></base-toggle>
     <div
       class="
         group
@@ -27,13 +30,7 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5 text-gray-400"
-          :class="
-            isActive
-              ? 'text-purple-500'
-              : isSelected
-              ? 'text-gray-800'
-              : 'text-gray-400'
-          "
+          :class="isSelected ? 'text-gray-800' : 'text-gray-400'"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -48,26 +45,11 @@
       </div>
       <div
         class="w-4 text-right"
-        :class="
-          isActive
-            ? 'font-semibold text-purple-500'
-            : isSelected
-            ? 'font-semibold text-gray-800'
-            : ''
-        "
+        :class="isSelected ? 'font-semibold text-gray-800' : ''"
       >
         {{ fraction.memberCount }}
       </div>
-      <div
-        class=""
-        :class="
-          isActive
-            ? 'font-semibold text-purple-500'
-            : isSelected
-            ? 'font-semibold text-gray-800'
-            : ''
-        "
-      >
+      <div class="" :class="isSelected ? 'font-semibold text-gray-800' : ''">
         {{ fraction.name }}
       </div>
     </div>
@@ -75,69 +57,78 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
-import { watch } from '@vue/runtime-core'
-import { cloneDeep } from 'lodash'
-
-interface Fraction {
-  id: number
-  name: string
-  memberCount: number
-  color: string
-}
+import {
+  defineComponent,
+  PropType,
+  //   ref,
+  useStore,
+  useRoute,
+  computed,
+} from '@nuxtjs/composition-api'
+import { useAxios } from '~/composables/useAxios'
+import { IFraction, IFractionDetails } from '~/types/apiSchema'
+import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'FractionListItem',
   props: {
     fraction: {
-      type: Object as PropType<Fraction | null>,
+      type: Object as PropType<IFraction | null>,
       default: null,
     },
-    selectedFractions: {
-      type: Array as PropType<Fraction[] | null>,
+    fractionDetails: {
+      type: Object as PropType<IFractionDetails>,
       default: null,
-    },
-    isActive: {
-      type: Boolean,
-      default: false,
     },
   },
   setup(props) {
-    const isSelected = ref(false)
+    const isSelected = computed(() => {
+      if (props.fractionDetails) {
+        return props.fractionDetails.possiblePartner
+      }
+      return false
+    })
 
-    const checkSelection = () => {
-      const item = props.selectedFractions?.find(
-        (el) => el.id === props.fraction?.id
-      )
-      if (item) {
-        isSelected.value = true
+    const axios = useAxios()
+    const store = useStore<RootState>()
+    const route = useRoute()
+
+    const projectId = computed(() => {
+      return store.state.projects.project?.['@id']
+    })
+
+    const createFractionDetail = async () => {
+      if (projectId.value && props.fraction) {
+        try {
+          const response = await axios.post('/fraction_details', {
+            project: projectId.value,
+            fraction: props.fraction?.['@id'],
+          })
+          return response
+        } catch (error) {}
       }
     }
 
-    watch(
-      () => props.selectedFractions,
-      () => {
-        checkSelection()
-      },
-      { deep: true, immediate: true }
-    )
-    return { isSelected }
-  },
-  watch: {
-    isSelected(newVal, _) {
-      if (newVal) {
-        const list: Fraction[] | null = cloneDeep(this.selectedFractions)
-        if (Array.isArray(list) && this.fraction) {
-          list.push(this.fraction)
-        }
-        this.$emit('select', list)
-        return
+    const togglePartnerStatus = async () => {
+      if (props.fractionDetails) {
+        try {
+          await axios.put(`/fraction_details/${props.fractionDetails.id}`, {
+            possiblePartner: !props.fractionDetails.possiblePartner,
+          })
+          store.dispatch('projects/fetchProject', route.value.params.id)
+        } catch (error) {}
+      } else {
+        try {
+          // create fraction details
+          const response = await createFractionDetail()
+          await axios.put(`/fraction_details/${response?.data.id}`, {
+            possiblePartner: true,
+          })
+          store.dispatch('projects/fetchProject', route.value.params.id)
+        } catch (error) {}
       }
-      const filteredList = this.selectedFractions?.filter(
-        (el) => el.id !== this.fraction?.id
-      )
-      this.$emit('select', filteredList)
-    },
+    }
+    return { isSelected, togglePartnerStatus }
   },
 })
 </script>
