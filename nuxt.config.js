@@ -103,7 +103,7 @@ export default {
         scheme: 'refresh',
         token: {
           property: 'token',
-          maxAge: 90,
+          maxAge: 840,
           global: true,
           type: 'Bearer',
         },

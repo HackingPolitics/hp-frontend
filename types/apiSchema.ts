@@ -208,5 +208,30 @@ export interface IFraction {
   '@type': string
   active: boolean
   id: number
+  color: string
+  name: string
   memberCount: number
+}
+
+export interface IFractionInterest {
+  '@id': string
+  '@type': string
+  id: number
+  description: string
+}
+
+export interface IFractionDetails {
+  '@id': string
+  '@type': string
+  id: number
+  contactEmail: string
+  contactPhone: string
+  contactName: string
+  possiblePartner: boolean
+  possibleSponsor: boolean
+  fraction: IFraction
+  teamContact: string
+  interests: IFractionInterest[]
+  updatedBy: IUser
+  updatedAt: string
 }

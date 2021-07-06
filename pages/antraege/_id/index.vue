@@ -18,7 +18,7 @@
       v-if="!isLoading && project && !error"
       :title="project.title"
     >
-      <application-header :application="project"></application-header>
+      <application-header :project="project"></application-header>
       <modal ref="projectMemberShipModal">
         <project-memberships-apply-project-form
           :project="project"
@@ -38,7 +38,7 @@
             </div>
           </div>
 
-          <div v-if="!membershipRoles.includes(userMembershipRole)">
+          <div v-if="!canEdit">
             <button
               class="
                 w-full
@@ -65,13 +65,6 @@
               {{ $t('page.application.apply_project') }}
             </button>
           </div>
-
-          <project-memberships-publish-project-button
-            :membership-role="userMembershipRole"
-            :project-state="project.state"
-            @hide="hideProject()"
-            @publish="publishProject()"
-          />
         </div>
         <div class="grid sm:grid-cols-3 gap-4 mt-4 auto-rows-fr">
           <div
@@ -103,17 +96,7 @@
             />
           </div>
         </div>
-        <div class="pb-5 border-b border-gray-200 mb-8 mt-4">
-          <h3 class="leading-6 font-medium text-lg text-gray-900 pb-5">
-            {{ $t('page.application.project_member') }}
-          </h3>
-
-          <project-memberships-list
-            :project-id="project.id"
-            :project-memberships="project.memberships"
-          />
-        </div>
-        <div class="pb-5 border-b border-gray-200 mb-8">
+        <div v-if="false" class="pb-5 border-b border-gray-200 mb-8">
           <div
             class="
               -ml-2
@@ -188,7 +171,6 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
-import { IProjectMembership, MemberShipsRoles } from '~/types/apiSchema'
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -215,7 +197,7 @@ export default defineComponent({
 
     const store = useStore<RootState>()
 
-    store.dispatch('projects/fetchProject', route.value.params.id)
+    store.dispatch('projects/fetchProject', projectId.value)
 
     const project = computed(() => {
       return store.state.projects.project
@@ -234,7 +216,6 @@ export default defineComponent({
     })
     const context = useContext()
 
-    // only mockup data for rendering and testing
     const applicationSteps = computed<ApplicationStep[]>(() => [
       {
         title: context.i18n.t('page.application.topic').toString(),
@@ -270,55 +251,22 @@ export default defineComponent({
 
     const user = computed(() => store.state.auth.user)
 
-    const membershipRoles = ref<MemberShipsRoles[]>(
-      Object.values(MemberShipsRoles)
-    )
-
     const projectMemberShipModal = ref()
-
-    const publishProject = async () => {
-      const response = await store.dispatch('projects/updateProject', [
-        projectId.value,
-        { state: 'public' },
-      ])
-      store.dispatch('projects/setProject', response.data)
-    }
-
-    const hideProject = async () => {
-      const response = await store.dispatch('projects/updateProject', [
-        projectId.value,
-        { state: 'private' },
-      ])
-      store.dispatch('projects/setProject', response.data)
-    }
 
     const toggleModal = () => {
       projectMemberShipModal.value?.toggleModal()
     }
-
-    const userMembershipRole = computed((): string | undefined => {
-      if (project.value?.memberships) {
-        return project.value.memberships.find(
-          (membership: IProjectMembership) =>
-            membership?.user?.id === store.state.auth.user?.id
-        )?.role
-      }
-    })
 
     return {
       applicationSteps,
       projectId,
       project,
       isLoading,
-      publishProject,
-      hideProject,
-      userMembershipRole,
-      membershipRoles,
+      canEdit,
       projectMemberShipModal,
       toggleModal,
       user,
       error,
-      canEdit,
     }
   },
   data() {

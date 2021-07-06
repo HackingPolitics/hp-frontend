@@ -1,4 +1,6 @@
 import { AuthState } from './authentication'
+import { FractionsState } from './fractions'
+import { CouncilState } from './councils'
 import { ProjectsState } from '~/store/projects'
 import { CategoriesState } from '~/store/categories'
 import { IUser } from '~/types/apiSchema'
@@ -15,5 +17,7 @@ export interface RootState {
   authentication: AuthState
   projects: ProjectsState
   categories: CategoriesState
+  fractions: FractionsState
+  councils: CouncilState
   auth: NuxtAuth
 }

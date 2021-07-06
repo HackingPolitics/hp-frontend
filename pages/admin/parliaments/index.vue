@@ -146,7 +146,7 @@
                           text-sm text-gray-500
                         "
                       >
-                        {{ parlament.active }}
+                        {{ parlament.active ? 'aktiv' : 'inaktiv' }}
                       </td>
                       <td
                         class="

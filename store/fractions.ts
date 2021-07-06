@@ -1,27 +1,27 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import { ICategory, IHydraCollection } from '~/types/apiSchema'
+import { IFraction, IHydraCollection } from '~/types/apiSchema'
 
-export interface CategoriesState {
-  categories: IHydraCollection<ICategory> | null
+export interface FractionsState {
+  fractions: IHydraCollection<IFraction> | null
   isLoading: false
   error: string | null
 }
 
-const defaultCategoriesState: CategoriesState = {
-  categories: null,
+const defaultFractionsState: FractionsState = {
+  fractions: null,
   isLoading: false,
   error: null,
 }
 
 export const state = () => ({
-  ...defaultCategoriesState,
+  ...defaultFractionsState,
 })
 
 export type RootState = ReturnType<typeof state>
 
 export const mutations: MutationTree<RootState> = {
-  SET_CATEGORIES(state, categories) {
-    state.categories = categories
+  SET_FRACTIONS(state, fractions) {
+    state.fractions = fractions
   },
   SET_LOADING_FLAG(state, flag) {
     state.isLoading = flag
@@ -34,9 +34,9 @@ export const mutations: MutationTree<RootState> = {
 
 export const getters: GetterTree<RootState, RootState> = {
   categoryOptions: (state) => {
-    if (state.categories) {
-      return state.categories?.['hydra:member']?.map((category: ICategory) => {
-        return { value: category['@id'], label: category.name }
+    if (state.fractions) {
+      return state.fractions?.['hydra:member']?.map((fraction: IFraction) => {
+        return { value: fraction['@id'], label: fraction.name }
       })
     }
     return []
@@ -44,14 +44,14 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async fetchCategories({ commit }, page = 1) {
+  async fetchFractions({ commit }, page = 1) {
     commit('SET_ERROR', null)
     commit('SET_LOADING_FLAG', true)
-    commit('SET_CATEGORIES', null)
+    commit('SET_FRACTIONS', null)
     try {
-      const response = await this.$axios.get(`/categories?page=${page}`)
+      const response = await this.$axios.get(`/councils?page=${page}`)
       commit('SET_LOADING_FLAG', false)
-      commit('SET_CATEGORIES', response.data)
+      commit('SET_FRACTIONS', response.data)
       return response.data['hydra:member']
     } catch (e) {
       commit('SET_LOADING_FLAG', false)
@@ -59,22 +59,22 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
 
-  async createCategory({ commit }, payload) {
+  async createFractions({ commit }, payload) {
     commit('SET_ERROR', null)
     commit('SET_LOADING_FLAG', true)
     try {
-      await this.$axios.post('/categories', payload)
+      await this.$axios.post('/fraction', payload)
       commit('SET_LOADING_FLAG', false)
       // @ts-ignore
       this.$notify({
-        title: 'Kategorie erstellt',
+        title: 'Fraktion erstellt',
         duration: 300,
         type: 'success',
       })
     } catch (e) {
       // @ts-ignore
       this.$notify({
-        title: 'Kategorie konnte nicht erstellt werden',
+        title: 'Fraktion konnte nicht erstellt werden',
         duration: 300,
         type: 'error',
       })
@@ -83,22 +83,22 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
 
-  async updateCategory({ commit }, { id, payload }) {
+  async updateFraction({ commit }, { id, payload }) {
     commit('SET_ERROR', null)
     commit('SET_LOADING_FLAG', true)
     try {
-      await this.$axios.put(`/categories/${id}`, payload)
+      await this.$axios.put(`/fractions/${id}`, payload)
       commit('SET_LOADING_FLAG', false)
       // @ts-ignore
       this.$notify({
-        title: 'Kategorie geändert',
+        title: 'Fraktion geändert',
         duration: 300,
         type: 'success',
       })
     } catch (e) {
       // @ts-ignore
       this.$notify({
-        title: 'Kategorie konnte nicht geändert werden',
+        title: 'Fraktion konnte nicht geändert werden',
         duration: 300,
         type: 'warn',
       })
@@ -107,19 +107,19 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
 
-  async deleteCategory(_, id) {
+  async deleteFraction(_, id) {
     try {
-      await this.$axios.delete(`/categories/${id}`)
+      await this.$axios.delete(`/fractions/${id}`)
       // @ts-ignore
       this.$notify({
-        title: 'Kategorie gelöscht',
+        title: 'Fraktion gelöscht',
         duration: 300,
         type: 'success',
       })
     } catch (e) {
       // @ts-ignore
       this.$notify({
-        title: 'Kategorie konnte nicht gelöscht werden',
+        title: 'Fraktion konnte nicht gelöscht werden',
         duration: 300,
         type: 'error',
       })

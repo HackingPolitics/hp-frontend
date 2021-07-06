@@ -17,7 +17,7 @@
               :value="partner.name"
               name="name"
               validation="required"
-              label="Name"
+              label="Name der Organisation"
             />
             <FormulateInput
               outer-class="w-1/2 pr-4 pb-4"
@@ -70,7 +70,7 @@
               type="text"
               name="name"
               validation="required"
-              label="Name"
+              label="Name der Organisation"
             />
             <FormulateInput
               outer-class="w-1/2 pr-4 pb-4"

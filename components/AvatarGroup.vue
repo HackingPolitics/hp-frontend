@@ -1,5 +1,5 @@
 <template>
-  <div class="flex -space-x-2 relative z-0 overflow-hidden">
+  <div class="flex relative z-0 overflow-hidden">
     <div v-for="(avatar, index) in avatars" :key="index">
       <img
         v-if="avatar.imageUrl"
@@ -10,12 +10,12 @@
         alt=""
       />
       <span
-        v-else-if="avatar.name"
+        v-else-if="avatar.user && avatar.user.firstName"
         class="inline-flex items-center justify-center h-8 w-8 rounded-full"
         :class="getRandomBgColor()"
       >
         <span class="text-xs font-medium leading-none text-white">{{
-          avatar.name.charAt(0).toUpperCase()
+          avatar.user.firstName.charAt(0).toUpperCase()
         }}</span>
       </span>
       <span
@@ -39,18 +39,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { IProjectMembership } from '~/types/apiSchema'
 import { getRandomBgColor } from '~/utils/randomColors'
-
-interface User {
-  imageUrl: string
-  name: string
-}
 
 export default defineComponent({
   name: 'AvatarGroup',
   props: {
     avatars: {
-      type: Array as PropType<User[]>,
+      type: Array as PropType<IProjectMembership[]>,
       default: () => [],
     },
   },

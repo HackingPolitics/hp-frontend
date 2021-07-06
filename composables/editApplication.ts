@@ -34,7 +34,7 @@ export default function () {
     return await context.$axios.post(endpoint, payload).then((res) => {
       const payload = cloneDeep(entityData)
       payload.push(res.data)
-      store.dispatch('projects/updateProjectProperty', [
+      store.commit('projects/SET_PROJECT_PROPERTY', [
         projectKey || camelCase(endpoint),
         payload,
       ])
@@ -64,7 +64,7 @@ export default function () {
   ) => {
     await context.$axios.delete(endpoint + '/' + id).then(() => {
       const payload = entityData.filter((e: T) => e.id !== id)
-      store.dispatch('projects/updateProjectProperty', [
+      store.commit('projects/SET_PROJECT_PROPERTY', [
         camelCase(endpoint),
         payload,
       ])

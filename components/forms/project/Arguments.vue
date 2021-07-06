@@ -62,7 +62,7 @@
                     "
                   >
                     <outline-menu-alt-4-icon
-                      class="w-5 h-5"
+                      class="w-5 h-5 bg-white rounded-sm text-gray-500"
                     ></outline-menu-alt-4-icon>
                     <outline-thumb-down-icon
                       class="w-5 h-5 text-red-500"
@@ -153,10 +153,45 @@
         </draggable>
         <div class="border-t-2 pt-6">
           <forms-project-create-counter-arguments
+            v-if="newCounterArgumentForm"
             :form-key="formKey"
             @submit="createCounterArguments($event)"
           >
           </forms-project-create-counter-arguments>
+          <base-button
+            v-if="!newCounterArgumentForm"
+            class="
+              bg-white
+              text-red-500
+              border border-gray-400
+              flex
+              items-center
+              hover:text-white hover:bg-red-500
+            "
+            @click="newCounterArgumentForm = true"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-2 transform rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+              />
+            </svg>
+            Gegenargument hinzufügen</base-button
+          >
+          <div
+            v-if="newCounterArgumentForm"
+            class="text-red-500 text-sm cursor-pointer text-right"
+            @click="newCounterArgumentForm = false"
+          >
+            Abbrechen
+          </div>
         </div>
       </forms-form-section>
 
@@ -173,7 +208,7 @@
             <li
               v-for="argumentation in argumentations"
               :key="argumentation.id"
-              class="flex flex-col w-full justify-center items-center mb-8"
+              class="flex flex-col w-full justify-center items-center"
             >
               <forms-list-item-input
                 :value="argumentation.description"
@@ -207,7 +242,7 @@
                     "
                   >
                     <outline-menu-alt-4-icon
-                      class="w-5 h-5"
+                      class="w-5 h-5 bg-white rounded-sm text-gray-500"
                     ></outline-menu-alt-4-icon>
                     <outline-thumb-up-icon
                       class="w-5 h-5 text-green-500"
@@ -222,10 +257,45 @@
 
         <div class="border-t-2 pt-6">
           <forms-project-create-arguments
+            v-if="newArgumentForm"
             :form-key="formKey"
             @submit="createArgumentType('arguments', argumentations, $event)"
           >
           </forms-project-create-arguments>
+          <base-button
+            v-if="!newArgumentForm"
+            class="
+              bg-white
+              text-green-500
+              border border-gray-400
+              flex
+              items-center
+              hover:text-white hover:bg-green-500
+            "
+            @click="newArgumentForm = true"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+              />
+            </svg>
+            Argument hinzufügen</base-button
+          >
+          <div
+            v-if="newArgumentForm"
+            class="text-red-500 text-sm cursor-pointer text-right"
+            @click="newArgumentForm = false"
+          >
+            Abbrechen
+          </div>
         </div>
       </forms-form-section>
     </div>
@@ -309,6 +379,7 @@ export default defineComponent({
         counterArguments.value,
         formData
       )
+      newCounterArgumentForm.value = false
     }
 
     const createArgumentType = async (
@@ -327,6 +398,7 @@ export default defineComponent({
           payload
         ).then((res) => {
           formKey.value++
+          newArgumentForm.value = false
           return res
         })
       }
@@ -382,7 +454,7 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        store.dispatch('projects/updateProjectProperty', [
+        store.commit('projects/SET_PROJECT_PROPERTY', [
           camelCase(endpoint),
           res.map((e) => e.data),
         ])
@@ -434,6 +506,9 @@ export default defineComponent({
       }
     }
 
+    const newArgumentForm = ref(false)
+    const newCounterArgumentForm = ref(false)
+
     return {
       argumentations,
       counterArguments,
@@ -448,6 +523,8 @@ export default defineComponent({
       updatePriority,
       createCounterArguments,
       createOrUpdateNegations,
+      newArgumentForm,
+      newCounterArgumentForm,
     }
   },
 })

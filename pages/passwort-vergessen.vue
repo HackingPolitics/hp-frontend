@@ -66,18 +66,13 @@ import {
   useStore,
   computed,
 } from '@nuxtjs/composition-api'
-
-import { AuthState } from '~/store/authentication'
-
-interface State {
-  auth: AuthState
-}
+import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'ForgotPasswordPage',
   layout: 'auth',
   setup() {
-    const store = useStore<State>()
+    const store = useStore<RootState>()
     const credentials = ref({
       username: '',
       validationUrl: `${window.location.origin}/reset-password/{{id}}/{{token}}`,
@@ -87,9 +82,11 @@ export default defineComponent({
     }
     useMeta({ title: 'Passwort zurücksetzen | HackingPolitics' })
     return {
-      loading: computed(() => store.state.auth.isLoading),
-      error: computed(() => store.state.auth.errors),
-      success: computed(() => store.state.auth.passwordResetRequestSuccess),
+      loading: computed(() => store.state.authentication.isLoading),
+      error: computed(() => store.state.authentication.errors),
+      success: computed(
+        () => store.state.authentication.passwordResetRequestSuccess
+      ),
       credentials,
       passwordResetRequest,
     }

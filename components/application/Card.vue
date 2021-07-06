@@ -143,7 +143,7 @@
           <chip
             v-for="(category, categoryIndex) in project.categories"
             :key="categoryIndex"
-            class="mr-2"
+            class="mr-2 mb-2"
             >{{ category.name }}</chip
           >
           <h3 class="text-gray-900 text-xl mt-4 font-medium">
