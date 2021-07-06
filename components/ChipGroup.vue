@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`formulate-input-element formulate-input-element--${context.type}`"
+    :class="`formulate-input-element formulate-input-element--${context.type} space-y-2`"
     :data-type="context.type"
   >
     <button
