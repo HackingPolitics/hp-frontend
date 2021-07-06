@@ -194,7 +194,6 @@ export default defineComponent({
       } else {
         const fractionDetails = await createFractionDetail()
         // create new details and add interest
-        console.log(fractionDetails)
         try {
           await axios.post('/fraction_interests', {
             description: formData?.value?.description,

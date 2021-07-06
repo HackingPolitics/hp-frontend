@@ -34,7 +34,7 @@
           <div class="w-full border-t border-gray-300"></div>
         </div>
       </div>
-      {{ project.fractionDetails }}
+
       <div class="flex mt-12 justify-center items-center space-x-12">
         <div class="w-1/2 flex flex-col justify-center">
           <charts-base-pie-chart
@@ -151,7 +151,6 @@ export default defineComponent({
       if (projectId.value && fractions.value) {
         try {
           const response = await axios.post('/fraction_details', {
-            contactName: 'Udo Möller',
             project: projectId.value,
             fraction: '/fractions/10',
           })
@@ -196,7 +195,6 @@ export default defineComponent({
     }
 
     const totalSeats = computed(() => {
-      console.log(fractions.value)
       if (fractions.value) {
         let sum = 0
         fractions.value.forEach((el) => (sum = sum + el.memberCount))
@@ -214,14 +212,15 @@ export default defineComponent({
     })
 
     const neededVotes = computed(() => {
-      const votes = council.members / 2 + 1 - votesCount.value
+      const votes = totalSeats.value / 2 + 1 - votesCount.value
       return votes > 0 ? votes : 0
     })
 
     const activeFraction = ref<Fraction | null>(null)
 
     const setActiveFraction = (index: number): void => {
-      activeFraction.value = fractions.value[index]
+      // @ts-ignore
+      activeFraction.value = fractions.value?.[index]
     }
 
     const data = computed(() => {
@@ -229,7 +228,7 @@ export default defineComponent({
         labels: orderedFractions.value.map((el: Fraction) => el.name),
         datasets: [
           {
-            label: council.name,
+            label: council.value?.title,
             data: orderedFractions.value.map((el: Fraction) => el.memberCount),
             backgroundColor: orderedFractions.value.map((el: Fraction) => {
               if (el.id === activeFraction.value?.id) {
