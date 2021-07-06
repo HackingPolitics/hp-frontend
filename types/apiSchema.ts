@@ -223,6 +223,7 @@ export interface IFractionInterest {
 export interface IFractionDetails {
   '@id': string
   '@type': string
+  id: number
   contactEmail: string
   contactPhone: string
   contactName: string

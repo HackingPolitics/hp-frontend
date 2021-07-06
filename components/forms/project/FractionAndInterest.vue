@@ -37,10 +37,7 @@
 
       <div class="flex mt-12 justify-center items-center space-x-12">
         <div class="w-1/2 flex flex-col justify-center">
-          <charts-base-pie-chart
-            :data="data"
-            @dataClick="setActiveFraction"
-          ></charts-base-pie-chart>
+          <charts-base-pie-chart :data="data"></charts-base-pie-chart>
           <div v-if="neededVotes > 0" class="w-56 py-8 text-center mx-auto">
             Noch
             <span class="text-green-500 text-xl"
@@ -54,18 +51,13 @@
         </div>
         <div class="w-1/2">
           <div
-            v-for="(fraction, i) in fractions"
+            v-for="fraction in fractions"
             :key="fraction.id"
             class="flex space-x-4 mb-4 items-center"
           >
             <fraction-list-item
               :fraction="fraction"
-              :selected-fractions="selectedFractions"
-              :is-active="
-                activeFraction ? activeFraction.id === fraction.id : false
-              "
-              @changeActive="setActiveFraction(i)"
-              @select="setSelection"
+              :fraction-details="getFractioDetails(fraction)"
             ></fraction-list-item>
           </div>
         </div>
@@ -91,7 +83,7 @@ import {
 import { cloneDeep } from 'lodash'
 import { parseISO, format } from 'date-fns'
 import { RootState } from '~/store'
-import { IFraction } from '~/types/apiSchema'
+import { IFraction, IFractionDetails } from '~/types/apiSchema'
 import { useAxios } from '~/composables/useAxios'
 
 export interface Fraction {
@@ -136,15 +128,31 @@ export default defineComponent({
       })
     })
 
-    const selectedFractions = ref<Fraction[] | null>([
-      { id: 2, name: 'CDU', memberCount: 14, color: '#000000' },
-      { id: 3, name: 'FDP', memberCount: 5, color: '#fbd601' },
-    ])
-
     const axios = useAxios()
 
     const projectId = computed(() => {
       return store.state.projects.project?.['@id']
+    })
+
+    const fractionDetails = computed(() => {
+      return store.state.projects.project?.fractionDetails
+    })
+
+    const selectedFractions = computed(() => {
+      if (fractionDetails.value && fractionDetails.value.length) {
+        const details = cloneDeep(fractionDetails.value)
+        return details
+          .filter((el: IFractionDetails) => el.possiblePartner)
+          .map((el: IFractionDetails) => {
+            return {
+              ...el.fraction,
+              memberCount: fractions.value?.find(
+                (fraction) => fraction.id === el.fraction.id
+              )?.memberCount,
+            }
+          })
+      }
+      return []
     })
 
     const createFractionDetail = async () => {
@@ -160,28 +168,13 @@ export default defineComponent({
       }
     }
 
-    // watch(
-    //   () => fractions.value,
-    //   () => {
-    //     if (fractions.value) {
-    //       createFractionDetail()
-    //     }
-    //   },
-    //   { immediate: true }
-    // )
-
-    // const isSelected = (fractionId: number) => {
-    //   const fraction = selectedFractions.value?.find(
-    //     (el: Fraction) => el.id === fractionId
-    //   )
-    //   return !!fraction
-    // }
-
     const orderedFractions = computed(() => {
       if (fractions.value) {
         const clonedFractions = cloneDeep(fractions.value)
         return clonedFractions.sort((a: Fraction, _: Fraction) => {
-          if (selectedFractions.value?.find((el) => el.id === a.id)) {
+          if (
+            selectedFractions.value?.find((el: IFraction) => el.id === a.id)
+          ) {
             return -1
           }
           return 1
@@ -189,10 +182,6 @@ export default defineComponent({
       }
       return []
     })
-
-    const setSelection = (list: Fraction[]) => {
-      selectedFractions.value = list
-    }
 
     const totalSeats = computed(() => {
       if (fractions.value) {
@@ -205,7 +194,7 @@ export default defineComponent({
 
     const votesCount = computed(() => {
       let count = 0
-      selectedFractions.value?.forEach((el) => {
+      selectedFractions.value?.forEach((el: IFraction) => {
         count = count + el.memberCount
       })
       return count
@@ -216,11 +205,10 @@ export default defineComponent({
       return votes > 0 ? votes : 0
     })
 
-    const activeFraction = ref<Fraction | null>(null)
-
-    const setActiveFraction = (index: number): void => {
-      // @ts-ignore
-      activeFraction.value = fractions.value?.[index]
+    const getFractioDetails = (fraction: IFraction) => {
+      return fractionDetails.value.find(
+        (el: IFractionDetails) => fraction.id === el.fraction.id
+      )
     }
 
     const data = computed(() => {
@@ -231,8 +219,22 @@ export default defineComponent({
             label: council.value?.title,
             data: orderedFractions.value.map((el: Fraction) => el.memberCount),
             backgroundColor: orderedFractions.value.map((el: Fraction) => {
-              if (el.id === activeFraction.value?.id) {
-                return '#7c3aed'
+              if (
+                selectedFractions.value.find(
+                  (fraction: IFraction) => fraction.id === el.id
+                )
+              ) {
+                return el.color
+              }
+              return '#fff'
+            }),
+            borderColor: orderedFractions.value.map((el: Fraction) => {
+              if (
+                !selectedFractions.value.find(
+                  (fraction: IFraction) => fraction.id === el.id
+                )
+              ) {
+                return el.color
               }
               return el.color
             }),
@@ -246,17 +248,16 @@ export default defineComponent({
       data,
       fractions,
       selectedFractions,
-      activeFraction,
       council,
       neededVotes,
       votesCount,
-      setSelection,
-      setActiveFraction,
       parseISO,
       format,
       totalSeats,
       createFractionDetail,
       project,
+      fractionDetails,
+      getFractioDetails,
     }
   },
 })
