@@ -17,6 +17,9 @@
         label="Farbe"
         validation="required"
         :input-class="['']"
+        :value="
+          fraction ? (fraction.color ? `#${fraction.color}` : null) : null
+        "
       ></FormulateInput>
       <FormulateInput
         label="Fraktionsname"
@@ -26,6 +29,7 @@
         help="help"
         validation="required"
         placeholder="Name angeben"
+        :value="fraction ? fraction.name : null"
       />
       <FormulateInput
         label="Mitglieder"
@@ -35,6 +39,7 @@
         help="help"
         validation="required"
         placeholder="Anzahl angeben"
+        :value="fraction ? fraction.memberCount : null"
       />
       <FormulateInput
         label="Website"
@@ -42,6 +47,7 @@
         type="text"
         validation="required"
         name="url"
+        :value="fraction ? fraction.url : null"
       />
     </div>
 
@@ -53,6 +59,12 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  props: {
+    fraction: {
+      type: Object,
+      default: () => {},
+    },
+  },
   setup() {
     return {}
   },
