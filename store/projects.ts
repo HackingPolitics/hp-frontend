@@ -1,6 +1,6 @@
-import { ActionTree, MutationTree } from 'vuex'
-import { IProject, IProjectMembership } from '~/types/apiSchema'
+import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { set } from 'lodash'
+import { IProject, IProjectMembership } from '~/types/apiSchema'
 
 export interface ProjectsState {
   project: IProject
@@ -23,6 +23,21 @@ export const state = () => ({
 })
 
 export type RootState = ReturnType<typeof state>
+
+export const getters: GetterTree<RootState, RootState> = {
+  canEditProject: (_, __, rootState) => (projectId: number) => {
+    // @ts-ignore
+    if (rootState.auth?.user?.projectMemberships) {
+      // @ts-ignore
+      const check = rootState.auth.user.projectMemberships.find(
+        (el: IProject) => el.project.id === projectId
+      )
+
+      return !!check
+    }
+    return false
+  },
+}
 
 export const mutations: MutationTree<RootState> = {
   SET_PROJECT(state, project) {
@@ -75,14 +90,21 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
   async fetchProject({ commit }, id) {
+    commit('SET_ERROR', null)
     commit('SET_LOADING_FLAG', true)
     try {
       const response = await this.$api.projects.fetchProject(id)
+      commit('SET_LOADING_FLAG', false)
       commit('SET_PROJECT', response.data)
     } catch (e) {
+      console.log(e.response.data)
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data.message)
+      commit('SET_ERROR', e.response.data)
     }
+  },
+
+  setProject({ commit }, payload) {
+    commit('SET_PROJECT', payload)
   },
   async fetchProjects({ commit }) {
     commit('SET_LOADING_FLAG', true)
@@ -92,7 +114,7 @@ export const actions: ActionTree<RootState, RootState> = {
       return response.data['hydra:member']
     } catch (e) {
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data.message)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async applyForProject({ commit }, membership) {

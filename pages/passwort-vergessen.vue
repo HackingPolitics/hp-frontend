@@ -67,7 +67,7 @@ import {
   computed,
 } from '@nuxtjs/composition-api'
 
-import { AuthState } from '~/store/auth'
+import { AuthState } from '~/store/authentication'
 
 interface State {
   auth: AuthState
@@ -83,7 +83,7 @@ export default defineComponent({
       validationUrl: `${window.location.origin}/reset-password/{{id}}/{{token}}`,
     })
     const passwordResetRequest = () => {
-      store.dispatch('auth/passwordResetRequest', credentials.value)
+      store.dispatch('authentication/passwordResetRequest', credentials.value)
     }
     useMeta({ title: 'Passwort zurücksetzen | HackingPolitics' })
     return {

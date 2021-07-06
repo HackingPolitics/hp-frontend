@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-purple-500" aria-label="Global">
+  <nav class="bg-purple-500 main-nav" aria-label="Global">
     <div class="max-w-screen-xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="flex justify-between h-20">
         <div class="flex items-center px-2 lg:px-0">
@@ -7,17 +7,13 @@
             <logo></logo>
           </div>
           <div class="hidden lg:ml-8 lg:flex lg:space-x-4">
-            <nav-link type="desktop" :to="localePath('/')">{{
-              $t('menu.overview')
-            }}</nav-link>
-            <nav-link type="desktop" :to="localePath('/faq')">{{
-              $t('menu.faq')
-            }}</nav-link>
-            <nav-link type="desktop" :to="localePath('/collaboration')">{{
-              $t('menu.collaboration')
-            }}</nav-link>
-
-            <language-switcher></language-switcher>
+            <nav-link
+              v-for="link in navLinks"
+              :key="link.title"
+              type="desktop"
+              :to="localePath(link.to)"
+              >{{ $t(link.title) }}</nav-link
+            >
           </div>
         </div>
 
@@ -124,127 +120,10 @@
       </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <transition
-      enter-active-class="transition ease-out duration-100"
-      enter-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-75"
-      leave-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95"
-    >
-      <div v-if="isMobileDropdownOpen" id="mobile-menu" class="lg:hidden z-10">
-        <div class="pt-2 pb-3 px-2 space-y-1">
-          <nav-link type="mobile" :to="localePath('/')">{{
-            $t('menu.overview')
-          }}</nav-link>
-          <nav-link type="mobile" :to="localePath('/faq')">{{
-            $t('menu.faq')
-          }}</nav-link>
-          <nav-link type="mobile" :to="localePath('/collaboration')">{{
-            $t('menu.collaboration')
-          }}</nav-link>
-        </div>
-        <div class="pt-4 pb-3 border-t border-purple-500">
-          <div class="flex items-center px-4">
-            <div class="flex-shrink-0">
-              <img
-                class="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-            </div>
-            <div class="ml-3">
-              <div class="text-base font-medium text-white">Floyd Miles</div>
-              <div class="text-sm font-medium text-purple-200">
-                floydmiles@example.com
-              </div>
-            </div>
-            <button
-              class="
-                ml-auto
-                flex-shrink-0
-                bg-purple-500
-                rounded-full
-                p-1
-                text-purple-200
-                hover:text-white
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-offset-purple-500
-                focus:ring-white
-              "
-            >
-              <span class="sr-only">View notifications</span>
-              <!-- Heroicon name: outline/bell -->
-              <svg
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-            </button>
-          </div>
-          <div class="mt-3 px-2">
-            <a
-              href="#"
-              class="
-                block
-                rounded-md
-                py-2
-                px-3
-                text-base
-                font-medium
-                text-purple-200
-                hover:text-white hover:bg-purple-400
-              "
-              >Profil</a
-            >
-
-            <a
-              href="#"
-              class="
-                block
-                rounded-md
-                py-2
-                px-3
-                text-base
-                font-medium
-                text-purple-200
-                hover:text-white hover:bg-purple-400
-              "
-              >Einstellungen</a
-            >
-
-            <div
-              class="
-                block
-                rounded-md
-                py-2
-                px-3
-                text-base
-                font-medium
-                text-purple-200
-                hover:text-white hover:bg-purple-400
-              "
-              @click="$store.dispatch('auth/logout')"
-            >
-              {{ $t('general.logout') }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
+    <mobile-menu
+      :links="navLinks"
+      :is-mobile-dropdown-open="isMobileDropdownOpen"
+    ></mobile-menu>
   </nav>
 </template>
 
@@ -255,17 +134,57 @@ import {
   useStore,
   computed,
 } from '@nuxtjs/composition-api'
+import { sortAndMergeDeleteSet } from 'yjs/dist/src/internals'
+import { watch } from '@vue/runtime-core'
 import NavLink from './NavLink.vue'
-import LanguageSwitcher from './LanguageSwitcher.vue'
+import { UserRole } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'MainNav',
-  components: { NavLink, LanguageSwitcher },
+  components: { NavLink },
   setup() {
     const store = useStore<any>()
     const user = computed(() => {
       return store.state.auth.user
     })
+
+    // Nav Links
+
+    const navLinks = ref([
+      {
+        title: 'menu.overview',
+        to: '/',
+      },
+      {
+        title: 'menu.faq',
+        to: '/faq',
+      },
+    ])
+    const isAdmin = computed(() => {
+      if (
+        store.state.auth &&
+        store.state.auth.user &&
+        store.state.auth.user.roles
+      ) {
+        return store.state.auth.user.roles.includes(UserRole.ProcessManager)
+      }
+      return false
+    })
+
+    watch(
+      () => isAdmin.value,
+      () => {
+        if (isAdmin.value) {
+          navLinks.value.push({
+            title: 'menu.admin',
+            to: '/admin/general',
+          })
+        }
+      },
+      { immediate: true }
+    )
+
+    // Dropdown
     const isDropdownOpen = ref(false)
     const toggleDropdown = (): void => {
       isDropdownOpen.value = !isDropdownOpen.value
@@ -273,6 +192,7 @@ export default defineComponent({
     const closeDropdown = (): void => {
       isDropdownOpen.value = false
     }
+
     // Mobile Dropdown
     const isMobileDropdownOpen = ref(false)
     const toggleMobileDropdown = (): void => {
@@ -289,7 +209,15 @@ export default defineComponent({
       toggleMobileDropdown,
       closeMobileDropdown,
       user,
+      navLinks,
+      isAdmin,
     }
   },
 })
 </script>
+
+<style lang="postcss" scoped>
+.main-nav .nav-link.nuxt-link-exact-active {
+  @apply text-white font-semibold;
+}
+</style>

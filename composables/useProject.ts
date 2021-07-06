@@ -1,10 +1,11 @@
 import { ref, useContext } from '@nuxtjs/composition-api'
+import { IProject } from '~/types/apiSchema'
 
 const useProject = (id: string) => {
   // @ts-ignore
   const { $axios, $api } = useContext()
 
-  const project = ref(null)
+  const project = ref<IProject | null>(null)
   const isLoading = ref(false)
   const error = ref(null)
 

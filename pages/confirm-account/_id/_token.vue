@@ -86,7 +86,9 @@
                   text-black
                   hover:bg-purple-500
                   focus:outline-none
-                  focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-purple-500
                   sm:text-sm
                 "
               >
@@ -165,18 +167,13 @@ import {
   computed,
   useRoute,
 } from '@nuxtjs/composition-api'
-
-import { AuthState } from '~/store/auth'
-
-interface State {
-  auth: AuthState
-}
+import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'ConfirmAccountPage',
   layout: 'auth',
   setup() {
-    const store = useStore<State>()
+    const store = useStore<RootState>()
     const route = useRoute()
 
     const id = computed(() => route.value.params.id)
@@ -184,13 +181,16 @@ export default defineComponent({
     const confirmationData = ref({ id, token })
 
     const validateToken = async () => {
-      await store.dispatch('auth/confirmEmailAddress', confirmationData.value)
+      await store.dispatch(
+        'authentication/confirmEmailAddress',
+        confirmationData.value
+      )
     }
 
     validateToken()
 
-    const loading = computed(() => store.state.auth.isLoading)
-    const error = computed(() => store.state.auth.errors)
+    const loading = computed(() => store.state.authentication.isLoading)
+    const error = computed(() => store.state.authentication.errors)
 
     useMeta({ title: 'E-Mail bestätigen | HackingPolitics' })
     return {

@@ -26,7 +26,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto+Slab:wght@300;400;500&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Roboto+Slab:wght@300;400;500;600&display=swap',
       },
     ],
   },
@@ -72,7 +72,7 @@ export default {
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json', dir: 'ltr' },
+      //   { code: 'en', iso: 'en-US', file: 'en.json', dir: 'ltr' },
       { code: 'de', iso: 'de-US', file: 'de.json', dir: 'ltr' },
     ],
     defaultLocale: 'de',
@@ -86,19 +86,47 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'nuxt-socket-io',
     'nuxt-i18n',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
 
   axios: {
-    baseUrl: 'https://api-dev.hpo.vrok.de/',
+    baseUrl: process.env.API_URL,
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'token',
+          maxAge: 90,
+          global: true,
+          type: 'Bearer',
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        user: false,
+        endpoints: {
+          login: { url: '/authentication_token', method: 'post' },
+          refresh: { url: '/refresh_token', method: 'post' },
+          user: false,
+          logout: false,
+        },
+        // autoLogout: false
+      },
+    },
   },
   io: {
     sockets: [
       {
-        url: 'https://socket.hpo.vrok.de', // IO server lives here
+        url: process.env.WS_URL, // IO server lives here
       },
     ],
   },

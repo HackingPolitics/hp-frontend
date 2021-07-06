@@ -1,13 +1,5 @@
 <template>
-  <nuxt-link
-    :to="
-      localePath({
-        name: applicationStep.href,
-        params: { id: projectId },
-      })
-    "
-    class="flex-col justify-between flex"
-  >
+  <div class="p-4 bg-white flex rounded h-full">
     <div class="flex-col">
       <div class="inline-flex mb-2 items-center">
         <div
@@ -25,14 +17,17 @@
         >
           {{ stepNumber }}
         </div>
-        <span class="text-gray-400">
-          {{ applicationStep.step.current }}/{{ applicationStep.step.total }}
+        <span
+          v-if="applicationStep && applicationStep.step"
+          class="text-gray-400"
+        >
+          {{ applicationStep.step.done }}/{{ applicationStep.step.total }}
           {{ $t('done') }}
         </span>
       </div>
       <h3 class="text-xl font-medium mt-2">{{ applicationStep.title }}</h3>
     </div>
-    <div class="text-gray-500 mt-6">
+    <div v-if="false" class="text-gray-500 mt-6">
       <span
         class="
           inline-flex
@@ -48,11 +43,11 @@
       </span>
       {{ $t('currentActive') }}
     </div>
-  </nuxt-link>
+  </div>
 </template>
 
 <script lang="ts">
-const { defineComponent } = require('@nuxtjs/composition-api')
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'EditProgressCard',
@@ -69,6 +64,10 @@ export default defineComponent({
     stepNumber: {
       type: Number,
       default: 0,
+    },
+    canEdit: {
+      type: Boolean,
+      default: false,
     },
   },
   setup() {

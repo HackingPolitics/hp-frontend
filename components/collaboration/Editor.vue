@@ -31,7 +31,6 @@ import Highlight from '@tiptap/extension-highlight'
 import CharacterCount from '@tiptap/extension-character-count'
 import * as Y from 'yjs'
 import { defineComponent } from '@nuxtjs/composition-api'
-import { authTokenName, getStoredAuthToken } from '../../utils/authToken'
 import {
   HocuspocusProvider,
   WebSocketStatus,
@@ -76,7 +75,7 @@ export default defineComponent({
       url: 'ws://localhost:1234', // @todo get from config, from process.env
       name: 'project-1',
       document: this.ydoc,
-      parameters: { authToken: getStoredAuthToken() },
+      parameters: { authToken: this.getToken() },
       onConnect: () => {
         this.status = 'connected'
       },
@@ -132,6 +131,11 @@ export default defineComponent({
     // when the localStorage changes: update the JWT for the WS connection
     window.addEventListener('storage', this.sendTokenUpdate)
 
+    // Watch state changes
+    this.$auth.$storage.watchState('token', (newValue) => {
+      console.log('auth', newValue)
+    })
+
     this.setAwarenessState()
   },
 
@@ -174,6 +178,11 @@ export default defineComponent({
       this.provider.send(TokenUpdateMessage, {
         token: e.newValue,
       })
+    },
+
+    getToken() {
+      const full = this.$auth.strategy.token.get()
+      return full.replace(`${this.$auth.strategy.options.token.type} `, '')
     },
 
     setAwarenessState(values = {}) {
