@@ -31,6 +31,11 @@
     "common": {
       "auth": {
         "logout": "Ausloggen"
+      },
+      "roles": {
+          "coordinator": "Koordinator",
+          "writer": "Mitglieder",
+          "applicant": "Bewerber"
       }
     },
     "forms": {
@@ -186,8 +191,8 @@
         "publishing": "Projekt veröffentlichen",
         "hide": "Projekt verstecken",
         "apply_project": "Beim Antrag mitmachen?",
-        "reject_application": "Bewerbung ablehnen",
-        "delete_membership": "Mitgliedschaft löschen",
+        "reject_application": "Ablehnen",
+        "delete_membership": "Löschen",
         "project_member": "Projekt-Team"
       },
       "myproposals": {

@@ -61,7 +61,7 @@
               <span class="pb-2 text-sm text-gray-500 text-center">
                 Mitglieder</span
               >
-              <div class="flex items-center mt-2">
+              <div class="flex mt-2">
                 <avatar-group :avatars="project.memberships"> </avatar-group>
                 <div
                   class="
@@ -94,6 +94,49 @@
                     />
                   </svg>
                 </div>
+                <div
+                  v-if="
+                    hasActiveApplications && hasActiveApplications.length > 0
+                  "
+                  class="
+                    text-purple-500 text-sm
+                    ml-4
+                    flex
+                    space-x-6
+                    items-center
+                    cursor-pointer
+                    hover:text-purple-600
+                  "
+                  @click="isModalOpen = true"
+                >
+                  <div class="relative mr-2">
+                    <span class="flex h-3 w-3">
+                      <span
+                        class="
+                          animate-ping
+                          absolute
+                          inline-flex
+                          h-full
+                          w-full
+                          rounded-full
+                          bg-purple-400
+                          opacity-75
+                        "
+                      ></span>
+                      <span
+                        class="
+                          relative
+                          inline-flex
+                          rounded-full
+                          h-3
+                          w-3
+                          bg-purple-500
+                        "
+                      ></span>
+                    </span>
+                  </div>
+                  Neue Projektbewerbungen
+                </div>
               </div>
             </div>
           </div>
@@ -118,6 +161,7 @@
         </div>
         <application-members-list
           :memberships="project.memberships"
+          :project-id="project.id"
         ></application-members-list>
       </div>
     </base-modal>
@@ -133,6 +177,7 @@ import {
   PropType,
   toRefs,
 } from '@nuxtjs/composition-api'
+import { cloneDeep } from 'lodash'
 import ToggleVisabilityButton from './ToggleVisabilityButton.vue'
 import { RootState } from '~/store'
 import { IProject, IProjectMembership } from '~/types/apiSchema'
@@ -220,6 +265,13 @@ export default defineComponent({
       isModalOpen.value = true
     }
 
+    const hasActiveApplications = computed(() => {
+      const applcations = cloneDeep(project.value.memberships)
+      return applcations.filter(
+        (el: IProjectMembership) => el.role === 'applicant'
+      )
+    })
+
     return {
       projectForm,
       editMode,
@@ -227,6 +279,7 @@ export default defineComponent({
       publishProject,
       hideProject,
       userMembershipRole,
+      hasActiveApplications,
       isCoordinator,
       changeProjectState,
       addUser,
