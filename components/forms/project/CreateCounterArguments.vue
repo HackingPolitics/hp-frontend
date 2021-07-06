@@ -1,21 +1,34 @@
 <template>
-  <FormulateForm v-model="formData" @submit="submit()">
+  <FormulateForm
+    v-model="formData"
+    class="flex items-center"
+    @submit="submit()"
+  >
     <FormulateInput
       :key="formKey"
       name="description"
       type="text"
       :placeholder="$t('forms.counter_arguments.placeholder.description')"
       :validation-name="$t('validation.name.counter_arguments.description')"
-      input-class="list-input-text"
       validation="required"
     >
     </FormulateInput>
-    <FormulateInput type="submit">
-      <outline-thumb-down-icon class="h-5 w-5 text-red-500" />
-      <span class="text-red-500 pl-4">{{
-        $t('forms.counter_arguments.add')
-      }}</span>
-    </FormulateInput>
+    <button type="submit" class="w-12 mb-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-green-500 mx-auto"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+    </button>
   </FormulateForm>
 </template>
 

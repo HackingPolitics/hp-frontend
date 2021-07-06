@@ -94,10 +94,16 @@
                     text-gray-900
                   "
                 >
-                  <div>{{ fraction.name }}</div>
+                  <div class="flex items-center">
+                    <div
+                      class="rounded-full w-4 h-4 mr-2"
+                      :style="{ 'background-color': `#${fraction.color}` }"
+                    ></div>
+                    {{ fraction.name }}
+                  </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ fraction.active }}
+                  {{ fraction.active ? 'aktiv' : 'inaktiv' }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {{ fraction.memberCount }}

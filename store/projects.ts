@@ -65,28 +65,42 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async createProject({ commit }, data) {
+  async createProject({ commit, rootState }, data) {
     try {
       const response = await this.$api.projects.createProject(data)
+      // refetch user data if user is loggedIn
+      // @ts-ignore
+      if (rootState.auth.user) {
+        // reload user data
+        try {
+          // @ts-ignore
+          const user = await this.$axios.get(`/users/${rootState.auth.user.id}`)
+          this.$auth.setUser(user.data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
       // @ts-ignore
       // this.$notify({ title: 'Projekt erstellt', duration: 10000 })
       commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async updateProject({ commit }, [id, data]) {
     try {
       const response = await this.$api.projects.updateProject(id, data)
       // @ts-ignore
-      this.$notify({ title: 'Änderungen gespeichert', duration: 500 })
+      this.$notify({
+        title: 'Änderungen gespeichert',
+        duration: 500,
+        type: 'success',
+      })
       commit('SET_PROJECT', response.data)
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async fetchProject({ commit }, id) {
@@ -97,7 +111,12 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_LOADING_FLAG', false)
       commit('SET_PROJECT', response.data)
     } catch (e) {
-      console.log(e.response.data)
+      // @ts-ignore
+      this.$notify({
+        title: 'Projekt konnte nicht geladen werden',
+        duration: 500,
+        type: 'warn',
+      })
       commit('SET_LOADING_FLAG', false)
       commit('SET_ERROR', e.response.data)
     }
@@ -130,11 +149,10 @@ export const actions: ActionTree<RootState, RootState> = {
         })
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
-  async updateProjectMemberShip({ commit }, [id, data]) {
+  async updateProjectMemberShip(_, [id, data]) {
     try {
       const response = await this.$api.projectMemberships
         .update(id, data)
@@ -151,7 +169,7 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-  async deleteProjectMemberShip({ commit }, id) {
+  async deleteProjectMemberShip(_, id) {
     try {
       const response = await this.$api.projectMemberships
         .delete(id)

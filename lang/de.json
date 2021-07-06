@@ -66,12 +66,12 @@
       "proposal": {
         "steps": {
           "step1": {
-            "title": "Wie nennst du dein Projekt?",
-            "description": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+            "title": "Titel & Parlament",
+            "description": "Wie dürfen wir dein Antragsprojekt nennen? Und für welches Parlament willst du es vorbereiten?"
           },
           "step2": {
-            "title": "Projektthema",
-            "description": "Alle nicht benötigten Felden kannst du auch später ausfüllen"
+            "title": "Antragsidee präzisieren",
+            "description": "Um welches Thema dreht sich dein Antrag? Weißt du schon, welches Ziel du mit ihm erreichen willst? Was motiviert dich, an diesem zu arbeiten?"
           },
           "next": "weiter",
           "submitProject": "Projekt erstellen"
@@ -105,7 +105,7 @@
             "name": "Titel",
             "label": "Gib deinem Antragsprojekt einen Titel",
             "placeholder": "Gemeinschaftsgartenflächen in Musterstadt bereitstellen",
-            "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kenn später geändert werden."
+            "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kann später geändert werden."
           },
           "topic": {
             "name": "Thema",
@@ -115,9 +115,9 @@
           },
           "parliament": {
             "name": "Parlament",
-            "label": "Wähle dein Parlament",
+            "label": "Für welches Parlament ist der Antrag vorgesehen?",
             "placeholder": "Bitte wählen",
-            "help": ""
+            "help": "Dein Parlament ist nicht dabei? Kontaktiere uns, um es hinzuzufügen. Wähle vorerst ein anderes Parlament aus, um weiterzukommen."
           }
         }
     },
@@ -224,7 +224,7 @@
     "register": "Registrieren",
     "save": "Speichern",
     "faq": {
-      "content": "Test"
+        "content": "<p>Politik machen ist leichter, wenn man weiß, wie es geht. Dazu haben wir in einem Wiki eine Liste wiederkehrender Fragen gesammelt, das politische System Deutschlands erläutert, häufige Begriffe in einem Glossar zusammengetragen und Tips & Tricks in einen politischen Werkzeugkoffer gepackt:</p><ul><li><a href='http://hackingpolitics.zukunftsstadt.de/'>FAQ/Wiki hacking politics</a></li><li><a href='http://hackingpolitics.zukunftsstadt.de/index.php?title=Glossar_Kommunalpolitik'>Glossar zur Kommunalpolitik</a></li><li><a href='http://hackingpolitics.zukunftsstadt.de/index.php?title=Politischer_Werkzeugkasten'>Politischer Werkzeugkasten</a></li></ul>"
     },
     "errors": {
         "page": {
