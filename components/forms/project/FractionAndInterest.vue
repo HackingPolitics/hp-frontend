@@ -1,22 +1,26 @@
 <template>
-  <FormulateForm v-model="formData">
-    <div class="bg-gray-200 py-4">
-      <div class="flex justify-between px-6">
-        <div class="font-semibold">{{ council.name }}</div>
+  <div>
+    <div class="bg-gray-300 py-4">
+      <div v-if="council" class="flex justify-between px-6">
+        <div class="font-semibold">{{ council.title }}</div>
         <div class="">
           {{ $t('forms.fractioninterests.parliamentProfileUpdatedAt') }}:
-          20.05.2021
+          {{
+            council.updatedAt
+              ? format(parseISO(council.updatedAt), 'dd.MM.yyyy')
+              : null
+          }}
         </div>
       </div>
     </div>
     <div class="px-6 bg-white py-4">
-      <div class="flex space-x-6 mt-4">
+      <div v-if="council" class="flex space-x-6 mt-4">
         <div>
-          <span class="font-semibold">5</span>
+          <span class="font-semibold">{{ council.fractions.length }}</span>
           {{ $t('forms.fractioninterests.fractions') }}
         </div>
         <div>
-          <span class="font-semibold">{{ council.members }}</span>
+          <span class="font-semibold">{{ totalSeats }}</span>
           {{ $t('forms.fractioninterests.mandates') }}
         </div>
         <div class="text-green-500">
@@ -30,6 +34,7 @@
           <div class="w-full border-t border-gray-300"></div>
         </div>
       </div>
+      {{ project.fractionDetails }}
       <div class="flex mt-12 justify-center items-center space-x-12">
         <div class="w-1/2 flex flex-col justify-center">
           <charts-base-pie-chart
@@ -65,36 +70,29 @@
           </div>
         </div>
       </div>
-      <div class="py-4"></div>
     </div>
-    <div class="mt-8">
-      <h3 class="font-semibold text-gray-800 text-xl">Eigeninteressen</h3>
-      <p class="text-sm text-gray-500 mt-2">
-        Wähle eine Fraktion aus, um die Eigeninteressen zu formulieren und
-        anzuzeigen.
-      </p>
-      <FormulateInput
-        name="interests"
-        type="group"
-        class="mt-6"
-        remove-position="after"
-        :repeatable="true"
-        add-label="Stichpunkte hinzufügen"
-      >
-        <FormulateInput
-          class="w-full"
-          element-class="inline-flex w-full"
-          type="textarea"
-          name="interest"
-        />
-      </FormulateInput>
-    </div>
-  </FormulateForm>
+    <forms-project-fraction-interest
+      :fractions="fractions"
+      :fraction-details="
+        project && project.fractionDetails ? project.fractionDetails : null
+      "
+    ></forms-project-fraction-interest>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  computed,
+  useStore,
+  watch,
+} from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
+import { parseISO, format } from 'date-fns'
+import { RootState } from '~/store'
+import { IFraction } from '~/types/apiSchema'
+import { useAxios } from '~/composables/useAxios'
 
 export interface Fraction {
   id: number
@@ -108,87 +106,104 @@ export default defineComponent({
   setup() {
     const formData = ref(null)
 
-    const council = {
-      members: 70,
-      name: 'Stadtrat Dresden',
-    }
+    const store = useStore<RootState>()
+
+    const councilId = computed(() => {
+      return store.state.projects.project?.council?.id
+    })
+
+    const project = computed(() => {
+      return store.state.projects?.project
+    })
+
+    const council = computed(() => {
+      return store.state.councils.council
+    })
+
+    watch(
+      () => councilId.value,
+      () => {
+        if (councilId.value) {
+          store.dispatch('councils/getCouncilById', councilId.value)
+        }
+      },
+      { immediate: true }
+    )
+
+    const fractions = computed<IFraction[] | null>(() => {
+      return store.state.councils?.council?.fractions.map((el: IFraction) => {
+        return { ...el, color: `#${el.color}` }
+      })
+    })
+
     const selectedFractions = ref<Fraction[] | null>([
       { id: 2, name: 'CDU', memberCount: 14, color: '#000000' },
       { id: 3, name: 'FDP', memberCount: 5, color: '#fbd601' },
     ])
 
-    const isSelected = (fractionId: number) => {
-      const fraction = selectedFractions.value?.find(
-        (el: Fraction) => el.id === fractionId
-      )
-      return !!fraction
+    const axios = useAxios()
+
+    const projectId = computed(() => {
+      return store.state.projects.project?.['@id']
+    })
+
+    const createFractionDetail = async () => {
+      if (projectId.value && fractions.value) {
+        try {
+          const response = await axios.post('/fraction_details', {
+            contactName: 'Udo Möller',
+            project: projectId.value,
+            fraction: '/fractions/10',
+          })
+
+          console.log(response)
+        } catch (error) {}
+      }
     }
 
-    console.log(isSelected(1))
-    const fractions = computed<Fraction[]>(() => [
-      {
-        id: 1,
-        name: 'AfD',
-        memberCount: 12,
-        color: isSelected(1) ? '#0096d1' : '#bce8f9',
-      },
-      {
-        id: 2,
-        name: 'CDU',
-        memberCount: 14,
-        color: isSelected(2) ? '#000000' : '#7c7c7c',
-      },
-      {
-        id: 3,
-        name: 'FDP',
-        memberCount: 5,
-        color: isSelected(3) ? '#fbd601' : '#feef96',
-      },
-      {
-        id: 4,
-        name: 'SPD',
-        memberCount: 6,
-        color: isSelected(4) ? '#e30613' : '#e48389',
-      },
-      {
-        id: 5,
-        name: 'B\u00FCndnis 90/ Die Gr\u00FCne',
-        memberCount: 15,
-        color: isSelected(5) ? '#94c11e' : '#c2d397',
-      },
-      {
-        id: 6,
-        name: 'Linke',
-        memberCount: 12,
-        color: isSelected(6) ? '#df0203' : '#e07d7d',
-      },
-      {
-        id: 7,
-        name: 'Freie W\u00E4hler',
-        memberCount: 4,
-        color: isSelected(7) ? '#b7b7b7' : '#d5d3d3',
-      },
-      {
-        id: 8,
-        name: 'fraktionslos',
-        memberCount: 2,
-        color: isSelected(8) ? '#a79a00' : '#bfba81',
-      },
-    ])
+    // watch(
+    //   () => fractions.value,
+    //   () => {
+    //     if (fractions.value) {
+    //       createFractionDetail()
+    //     }
+    //   },
+    //   { immediate: true }
+    // )
+
+    // const isSelected = (fractionId: number) => {
+    //   const fraction = selectedFractions.value?.find(
+    //     (el: Fraction) => el.id === fractionId
+    //   )
+    //   return !!fraction
+    // }
 
     const orderedFractions = computed(() => {
-      const clonedFractions = cloneDeep(fractions.value)
-      return clonedFractions.sort((a: Fraction, _: Fraction) => {
-        if (selectedFractions.value?.find((el) => el.id === a.id)) {
-          return -1
-        }
-        return 1
-      })
+      if (fractions.value) {
+        const clonedFractions = cloneDeep(fractions.value)
+        return clonedFractions.sort((a: Fraction, _: Fraction) => {
+          if (selectedFractions.value?.find((el) => el.id === a.id)) {
+            return -1
+          }
+          return 1
+        })
+      }
+      return []
     })
 
     const setSelection = (list: Fraction[]) => {
       selectedFractions.value = list
     }
+
+    const totalSeats = computed(() => {
+      console.log(fractions.value)
+      if (fractions.value) {
+        let sum = 0
+        fractions.value.forEach((el) => (sum = sum + el.memberCount))
+        return sum
+      }
+      return 0
+    })
 
     const votesCount = computed(() => {
       let count = 0
@@ -238,6 +253,11 @@ export default defineComponent({
       votesCount,
       setSelection,
       setActiveFraction,
+      parseISO,
+      format,
+      totalSeats,
+      createFractionDetail,
+      project,
     }
   },
 })
