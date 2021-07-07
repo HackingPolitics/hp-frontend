@@ -42,8 +42,12 @@
       "topic": {
         "formTitle": "Antragsthema & Kategorie",
         "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
+        "mainTitle": "Titel eures Antrag?",
+        "mainTitleSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
         "mainTopic": "Mit welchem Thema beschäftigt sich euer Antrag?",
         "mainTopicSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
+        "mainGoal": "Welches Ziel verfolgt euer Antrag?",
+        "mainGoalSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
         "category": "In welche Kategorien passt dieses Thema?",
         "categorySubtitle": "Wähle bis zu zwei Möglichkeiten aus"
       },
