@@ -129,8 +129,6 @@ import {
   ref,
   Ref,
 } from '@nuxtjs/composition-api'
-import type { NuxtSocket } from 'nuxt-socket-io'
-import { getStoredAuthToken } from '~/utils/authToken'
 import { getRandomBgColor } from '~/utils/randomColors'
 
 interface Field {
@@ -155,7 +153,7 @@ export default defineComponent({
 
     const ctx: any = useContext()
     ctx.onUnmounted = onUnmounted
-
+/*
     const token = getStoredAuthToken()
     const socket: NuxtSocket = ctx.$nuxtSocket({
       reconnection: false,
@@ -244,20 +242,20 @@ export default defineComponent({
       }
       return null
     }
-
+*/
     return {
       title,
-      blurEvent,
-      clickEvent,
-      changeEvent,
-      users,
-      lockedFields,
+//      blurEvent,
+      //clickEvent,
+      //changeEvent,
+      //users,
+      //lockedFields,
       description,
-      leaveGroup,
+      //leaveGroup,
       getRandomBgColor,
       hasJoined,
-      checkIfLocked,
-      getLockedByUserName,
+      //checkIfLocked,
+      //getLockedByUserName,
     }
   },
 })

@@ -19,6 +19,8 @@
         </li>
       </ul>
     </div>
+    <button class="flex justify-center py-2 px-4 border text-sm font-medium rounded-md bg-purple-500 text-white hover:border-purple-600 hover:text-600 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple active:border-purple-700 transition duration-150 ease-in-out" @click="toggleFormLocked">(Un-)Lock Form</button>
+    <span>{{ formLocked ? "Locked" : "Not locked" }}</span>
   </div>
 </template>
 
@@ -41,6 +43,10 @@ const getRandomElement = (list) => {
   return list[Math.floor(Math.random() * list.length)]
 }
 
+// @todo Philipp: der Provider muss weiter oben in der Hierarchie angesiedelt werden damit er
+// seitenübergreifend tracken kann welche Teammitglieder online und welche Formulare(lemente)
+// gesperrt sind.
+// Er muss dann samt ydoc, zu verwendendem Fieldnamen und currentUser zum Editor durchgereicht werden.
 export default defineComponent({
   components: {
     EditorContent,
@@ -49,17 +55,30 @@ export default defineComponent({
   data() {
     return {
       currentUser: {
-        name: localStorage.getItem('currentUser') || '[not logged in]',
-        id: localStorage.getItem('currentUserId') || 0,
+        name: this.$auth.user.username || '[not logged in]',
+        id: this.$auth.user.id | 0,
         color: this.getRandomColor(),
       },
+
+      // demo property to sync form is locked/yes no
+      formLocked: false,
+
       provider: null,
       yDoc: null,
       editor: null,
-      status: 'connecting',
-      states: [],
+
+      // holds the timestamp when the WS server last sent the data (successfully) to the backend
       savedAt: -1,
+
+      // connecting | connected | disconnected
+      status: 'connecting',
+
+      // holds the list of online users
+      states: [],
+
+      // internal
       syncState: null,
+      timer: null,
     }
   },
 
@@ -68,12 +87,13 @@ export default defineComponent({
     this.syncState = this.ydoc.getMap('syncState')
 
     this.ydoc.on('update', () => {
+      this.formLocked = this.syncState.get('formLocked')
       this.savedAt = this.syncState.get('savedAt')
     })
 
     this.provider = new HocuspocusProvider({
-      url: 'ws://localhost:1234', // @todo get from config, from process.env
-      name: 'project-1',
+      url: this.$config.WS_URL,
+      name: 'project-1', // @todo replace "1" with the real project ID
       document: this.ydoc,
       parameters: { authToken: this.getToken() },
       onConnect: () => {
@@ -81,7 +101,7 @@ export default defineComponent({
       },
       onMessage: ({ event, message }) => {
         // any document update is applied *after* this hook
-        console.log(`[message] ◀️ ${message.name}`, event)
+        // console.log(`[message] ◀️ ${message.name}`, event)
       },
       onOutgoingMessage: ({ message }) => {
         // console.info(`[message] ▶️ ${message.name} (${message.description})`)
@@ -128,63 +148,77 @@ export default defineComponent({
       ],
     })
 
-    // when the localStorage changes: update the JWT for the WS connection
-    window.addEventListener('storage', this.sendTokenUpdate)
+    // @todo how can we listen to token changes instead of polling?
+    // * localStorage eventListener only triggers when the change occured in another tab
+    // * $auth.$storage.watchState() did not trigger in tests (with: token, _token, _token.local, auth._token.local as key)
+    this.timer = setTimeout(this.sendTokenUpdate.bind(this), 5000)
 
-    // Watch state changes
-    this.$auth.$storage.watchState('token', (newValue) => {
-      console.log('auth', newValue)
-    })
-
-    this.setAwarenessState()
+    //this.setAwarenessState()
   },
 
   beforeDestroy() {
     this.editor && this.editor.destroy()
     this.provider && this.provider.destroy()
-
-    window.removeEventListener('storage', this.sendTokenUpdate)
+    this.timer && clearTimeout(this.timer)
   },
 
   methods: {
     /**
-     * Listen to JWT updates via localStorage, if the provider is connected send him
-     * the new token via a special message. (We don't want to send the token via the provider's
-     * request parameters as these show up in the URL and potentially any webserver/proxy log files).
+     * When the JWT changed through refreshes & if the provider is connected, send him
+     * the new token via a special message.
      *
      * If the token is reset, disconnect the provider, the user should not receive any more updates
      * from the other team members.
      *
      * The WS server needs a JWT to send the document updates to the API server (debounced & bundled),
      * for this he needs a valid token to impersonate a team member. Because he cannot access a
-     * (eventually updated) cookie for an already opened connection we have to send it directly.
+     * (eventually updated) cookie or the request parameters for an already opened connection we have
+     * to send it directly.
      *
-     * The WS server will disconnect us if our new token no longer allows us in the current room.
+     * The WS server will disconnect us if our new token no longer allows us in the current room or
+     * if our last token expired without receiving a new one.
      */
-    sendTokenUpdate(e) {
-      if (e.key !== authTokenName) {
+    sendTokenUpdate() {
+      // @todo how can we listen to token changes instead of polling?
+      // * localStorage eventListener only triggers when the change occured in another tab
+      // * $auth.$storage.watchState() did not trigger in tests (with: token, _token, _token.local, auth._token.local as key)
+      this.timer = setTimeout(this.sendTokenUpdate.bind(this), 5000)
+
+      const current = this.getToken()
+      if (this.provider.options.parameters.authToken === current) {
+        // token did not change since the last check
         return
       }
 
-      if (!this.provider.status !== WebSocketStatus.Connected) {
+      // update the options, even if the WS server does not receive this, so we can compare
+      // any new values and also if the connection is dropped the provider can reconnect
+      // with a valid token
+      this.provider.options.parameters.authToken = current
+
+      if (this.provider.status !== WebSocketStatus.Connected) {
         return
       }
 
-      if (!e.newValue) {
+      if (!current) {
         this.provider.disconnect()
         return
       }
 
-      this.provider.send(TokenUpdateMessage, {
-        token: e.newValue,
-      })
+      this.provider.send(TokenUpdateMessage, { token: current })
     },
 
+    // nuxt/auth stores & returns the token with the "Bearer" prefix, remove it as the
+    // WS server does not expect it
     getToken() {
-      const full = this.$auth.strategy.token.get()
-      return full.replace(`${this.$auth.strategy.options.token.type} `, '')
+      const prefixed = this.$auth.strategy.token.get() || ''
+      return prefixed.replace(`${this.$auth.strategy.options.token.type} `, '')
     },
 
+    toggleFormLocked() {
+      this.syncState.set('formLocked', !this.formLocked)
+    },
+
+    // @todu unused
     setAwarenessState(values = {}) {
       this.me = {
         ...this.me,
@@ -192,23 +226,6 @@ export default defineComponent({
       }
 
       this.provider.setAwarenessField('user', this.me)
-    },
-
-    setName() {
-      const name = (window.prompt('Name') || '').trim().substring(0, 32)
-
-      if (name) {
-        return this.updateCurrentUser({
-          name,
-        })
-      }
-    },
-
-    updateCurrentUser(attributes) {
-      this.currentUser = { ...this.currentUser, ...attributes }
-      this.editor.chain().focus().user(this.currentUser).run()
-
-      localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
     },
 
     getRandomColor() {

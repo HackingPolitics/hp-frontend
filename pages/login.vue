@@ -116,6 +116,7 @@ export default defineComponent({
         const response = await context.$auth.loginWith('local', {
           data: credentials.value,
         })
+        // @todo Philipp: remove debug, try/catch around jwtDecode
         console.log(response)
         // @ts-ignore
         const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)
