@@ -4,6 +4,7 @@
       {{ $t('forms.problems.formTitle') }}
     </h1>
     <forms-project-problem></forms-project-problem>
+    <forms-project-action-mandate></forms-project-action-mandate>
   </div>
 </template>
 

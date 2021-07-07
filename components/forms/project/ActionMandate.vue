@@ -2,11 +2,11 @@
   <FormulateForm>
     <div class="space-y-6">
       <forms-form-section
-        :title="$t('forms.problems.problems.title')"
-        :subtitle="$t('forms.problems.problems.introduction')"
+        :title="$t('forms.problems.actionMandate.title')"
+        :subtitle="$t('forms.problems.actionMandate.introduction')"
       >
         <draggable
-          :list="problems"
+          :list="actionMandates"
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
@@ -14,7 +14,7 @@
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="problem in problems"
+              v-for="problem in actionMandates"
               :key="problem.id"
               class="inline-flex w-full justify-center cursor-move"
             >
@@ -25,10 +25,10 @@
                 element-class="inline-flex w-full"
                 validation="required"
                 :placeholder="
-                  $t('forms.problems.problems.placeholder.description')
+                  $t('forms.problems.actionMandate.placeholder.description')
                 "
                 :validation-name="
-                  $t('validation.problems.problems.description')
+                  $t('validation.problems.actionMandate.description')
                 "
                 @validation="validation = $event"
                 @focusout="updateProblem($event, problem.id)"
@@ -67,10 +67,12 @@
               type="text"
               name="description"
               validation="required"
-              :validation-name="$t('validation.problems.problems.description')"
+              :validation-name="
+                $t('validation.problems.actionMandate.description')
+              "
               error-behavior="submit"
               :placeholder="
-                $t('forms.problems.problems.placeholder.description')
+                $t('forms.problems.actionMandate.placeholder.description')
               "
             />
             <button type="submit" class="w-12 mb-4">
@@ -102,7 +104,7 @@
             "
             @click="newProblemForm = true"
           >
-            {{ $t('forms.problems.problems.add') }}</base-button
+            {{ $t('forms.problems.actionMandate.add') }}</base-button
           >
           <div
             v-if="newProblemForm"
@@ -133,14 +135,14 @@ import { RootState } from '~/store'
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
 
-interface ProblemForm {
+interface MandateForm {
   problems?: IProblem[]
   description?: string
   project?: string
 }
 
 export default defineComponent({
-  name: 'Problem',
+  name: 'ActionMandateForm',
   setup() {
     const {
       createProjectEntity,
@@ -149,8 +151,8 @@ export default defineComponent({
       project,
     } = editApplication()
 
-    const problems = ref<IProblem[]>([])
-    const createProblemForm = ref<ProblemForm>({})
+    const actionMandates = ref<IProblem[]>([])
+    const createProblemForm = ref<MandateForm>({})
 
     const context = useContext()
 
@@ -164,17 +166,17 @@ export default defineComponent({
     const store = useStore<RootState>()
 
     onMounted(() => {
-      if (project.value?.problems) {
-        problems.value = cloneDeep(project.value.problems)
-        problems.value.sort((a, b) => b.priority - a.priority)
+      if (project.value?.actionMandates) {
+        actionMandates.value = cloneDeep(project.value.actionMandates)
+        actionMandates.value.sort((a, b) => b.priority - a.priority)
       }
     })
 
     watch(
       project,
       (currentValue) => {
-        problems.value = cloneDeep(currentValue?.problems || [])
-        problems.value.sort((a, b) => b.priority - a.priority)
+        actionMandates.value = cloneDeep(currentValue?.actionMandates || [])
+        actionMandates.value.sort((a, b) => b.priority - a.priority)
       },
       {
         deep: true, // immediate: true
@@ -183,13 +185,13 @@ export default defineComponent({
 
     const createProblem = async () => {
       if (project.value) {
-        const payload: ProblemForm = {
+        const payload: MandateForm = {
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
         await createProjectEntity<IProblem>(
-          'problems',
-          problems.value,
+          'action_mandates',
+          actionMandates.value,
           payload
         ).then(() => {
           formKey.value++
@@ -199,7 +201,7 @@ export default defineComponent({
     }
     const deleteProblem = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('problems', id, problems.value)
+      await deleteProjectEntity('action_mandates', id, actionMandates.value)
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
@@ -207,19 +209,19 @@ export default defineComponent({
         const payload = {
           description: desc,
         }
-        await updateProjectEntity<IProblem>('problems', id, payload)
+        await updateProjectEntity<IProblem>('action_mandates', id, payload)
       }
     }
 
     const updateProblemPriority = async () => {
       const allAsyncResults: Promise<any>[] = []
 
-      for (let index = 0; index < problems.value.length; index++) {
+      for (let index = 0; index < actionMandates.value.length; index++) {
         const payload: IProblem = {
-          priority: problems.value.length - (index + 1),
+          priority: actionMandates.value.length - (index + 1),
         }
         const asyncResult: any = await context.$axios
-          .put('/problems/' + problems.value[index].id, {
+          .put('/action_mandates/' + actionMandates.value[index].id, {
             ...payload,
           })
           .then()
@@ -229,7 +231,7 @@ export default defineComponent({
       }
       await Promise.all(allAsyncResults).then((res) => {
         store.commit('projects/SET_PROJECT_PROPERTY', [
-          'problems',
+          'actionMandates',
           res.map((e) => e.data),
         ])
       })
@@ -237,7 +239,7 @@ export default defineComponent({
 
     const newProblemForm = ref(false)
     return {
-      problems,
+      actionMandates,
       formKey,
       createProblemForm,
       validation,

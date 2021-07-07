@@ -150,11 +150,21 @@
         },
         "problems": {
           "formTitle": "Problem & Handlungsauftrag",
-          "add": "Problem hinzufügen",
-          "title": "Was ist das Problem, dass du angehen willst?",
-          "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
-          "placeholder": {
-            "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
+          "problems": {
+            "add": "Problem hinzufügen",
+            "title": "Was ist das Problem, dass du angehen willst?",
+            "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
+            "placeholder": {
+              "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
+            }
+          },
+          "actionMandate": {
+            "add": "Handlungsauftrag hinzufügen",
+            "title": "Was ist der Handlungsauftrag?",
+            "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
+            "placeholder": {
+              "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
+            }
           }
         },
         "strategy": {
