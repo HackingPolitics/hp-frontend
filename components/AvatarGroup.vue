@@ -1,6 +1,10 @@
 <template>
   <div class="flex relative z-0 overflow-hidden">
-    <div v-for="(avatar, index) in avatars" :key="index">
+    <div
+      v-for="(avatar, index) in avatars"
+      :key="index"
+      :class="index != 0 ? '-ml-3' : ''"
+    >
       <img
         v-if="avatar.imageUrl"
         :key="index"

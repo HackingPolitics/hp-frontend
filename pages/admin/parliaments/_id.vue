@@ -81,6 +81,7 @@
         <div v-if="parliament.fractions && parliament.fractions.length">
           <admin-fraction-list
             :fractions="parliament.fractions"
+            @update-fraction="updateFraction($event)"
           ></admin-fraction-list>
           <div class="py-6 px-4 space-y-6 sm:p-6">
             <base-button
@@ -140,9 +141,10 @@ import {
   ref,
   useContext,
   useRoute,
+  useStore,
 } from '@nuxtjs/composition-api'
 import { useAxios } from '~/composables/useAxios'
-import { IParliament } from '~/types/apiSchema'
+import { IFraction, IParliament } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'AdminParlaments',
@@ -152,6 +154,8 @@ export default defineComponent({
     const axios = useAxios()
     const parliament = ref<IParliament | null>(null)
     const isLoading = ref(false)
+
+    const store = useStore()
 
     const route = useRoute()
     const fetchData = async () => {
@@ -238,6 +242,12 @@ export default defineComponent({
       }
     }
 
+    const updateFraction = async (el: { id: string; payload: IFraction }) => {
+      await store.dispatch('fractions/updateFraction', { ...el }).then(() => {
+        fetchData()
+      })
+    }
+
     return {
       errors,
       parliament,
@@ -246,6 +256,7 @@ export default defineComponent({
       updateParliament,
       newFraktionForm,
       createFraction,
+      updateFraction,
       fractionFormData,
     }
   },

@@ -1,14 +1,15 @@
 <template>
   <div class="space-y-2 flex flex-col justify-center mt-6">
-    <!-- <div class="w-full flex justify-end">
+    <div v-if="editMode" class="w-full flex justify-end">
       <FormulateInput
         label="Status"
         class="col-span-5"
         type="toggle"
         validation="required"
         name="active"
+        :value="fraction ? fraction.active : null"
       />
-    </div> -->
+    </div>
     <div class="grid grid-cols-12 gap-4">
       <FormulateInput
         type="color"
@@ -17,6 +18,9 @@
         label="Farbe"
         validation="required"
         :input-class="['']"
+        :value="
+          fraction ? (fraction.color ? `#${fraction.color}` : null) : null
+        "
       ></FormulateInput>
       <FormulateInput
         label="Fraktionsname"
@@ -26,6 +30,7 @@
         help="help"
         validation="required"
         placeholder="Name angeben"
+        :value="fraction ? fraction.name : null"
       />
       <FormulateInput
         label="Mitglieder"
@@ -35,6 +40,7 @@
         help="help"
         validation="required"
         placeholder="Anzahl angeben"
+        :value="fraction ? fraction.memberCount : null"
       />
       <FormulateInput
         label="Website"
@@ -42,6 +48,7 @@
         type="text"
         validation="required"
         name="url"
+        :value="fraction ? fraction.url : null"
       />
     </div>
 
@@ -50,9 +57,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { IFraction } from '~/types/apiSchema'
 
 export default defineComponent({
+  props: {
+    fraction: {
+      type: Object as PropType<IFraction>,
+      default: () => {},
+    },
+    editMode: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     return {}
   },
