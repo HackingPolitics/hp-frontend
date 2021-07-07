@@ -124,7 +124,7 @@ export default defineComponent({
           context.$auth.setUser(user.data)
 
           if (store.state.projects.createdProject) {
-            store.dispatch(
+            await store.dispatch(
               'projects/createProject',
               store.state.projects.createdProject
             )

@@ -82,8 +82,12 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="fraction in fractions" :key="fraction.id">
+            <tbody
+              v-for="fraction in fractions"
+              :key="fraction.id"
+              class="bg-white divide-y divide-gray-200"
+            >
+              <tr>
                 <td
                   class="
                     px-6
@@ -120,12 +124,50 @@
                     font-medium
                   "
                 >
-                  <a href="#" class="text-purple-600 hover:text-purple-900"
-                    >Bearbeiten</a
+                  <FormulateInput
+                    type="button"
+                    input-class="text-purple-600 hover:text-purple-900"
+                    @click="toggleExpand(fraction.id)"
+                    >Bearbeiten</FormulateInput
                   >
                 </td>
               </tr>
-
+              <tr v-if="show.find((e) => e === fraction.id)">
+                <td colspan="12">
+                  <FormulateForm
+                    v-slot="values, hasErrors"
+                    class="bg-gray-50 p-4 rounded-md"
+                  >
+                    <forms-admin-fraction-field
+                      :edit-mode="true"
+                      :fraction="fraction"
+                    ></forms-admin-fraction-field>
+                    <div class="w-full flex justify-end items-center space-x-4">
+                      <div
+                        class="
+                          text-gray-600 text-sm
+                          hover:text-purple-500
+                          cursor-pointer
+                        "
+                        @click="toggleExpand(fraction.id)"
+                      >
+                        Abbrechen
+                      </div>
+                      <FormulateInput
+                        type="button"
+                        :disabled="hasErrors"
+                        @click="
+                          submitUpdate({
+                            id: fraction.id,
+                            payload: values.value,
+                          })
+                        "
+                        >Speichern</FormulateInput
+                      >
+                    </div>
+                  </FormulateForm>
+                </td>
+              </tr>
               <!-- More payments... -->
             </tbody>
           </table>
@@ -203,8 +245,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
 import { IFraction } from '~/types/apiSchema'
+
+interface FractionFormData {
+  color: string
+  memberCount: string | number
+  name: string
+  active: boolean
+}
 
 export default defineComponent({
   name: 'FractionList',
@@ -214,8 +263,30 @@ export default defineComponent({
       default: null,
     },
   },
-  setup() {
-    return {}
+  setup(_, context) {
+    const show = ref<string[]>([])
+
+    const toggleExpand = (e: string) => {
+      if (show.value.find((val) => val === e)) {
+        const index = show.value.indexOf(e)
+        if (show.value.length > 1) {
+          show.value.splice(index, index)
+        } else {
+          show.value.shift()
+        }
+      } else {
+        show.value.push(e)
+      }
+    }
+
+    const submitUpdate = (e: { id: string; payload: FractionFormData }) => {
+      const mCount: string = e.payload.memberCount.toString()
+      e.payload.memberCount = parseInt(mCount)
+      e.payload.color = e.payload.color.substring(1)
+      context.emit('update-fraction', e)
+    }
+
+    return { show, submitUpdate, toggleExpand }
   },
 })
 </script>
