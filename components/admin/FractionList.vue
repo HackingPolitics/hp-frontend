@@ -124,11 +124,11 @@
                     font-medium
                   "
                 >
-                  <a
-                    href="#"
-                    class="text-purple-600 hover:text-purple-900"
+                  <FormulateInput
+                    type="button"
+                    input-class="text-purple-600 hover:text-purple-900"
                     @click="toggleExpand(fraction.id)"
-                    >Bearbeiten</a
+                    >Bearbeiten</FormulateInput
                   >
                 </td>
               </tr>
@@ -263,7 +263,6 @@ export default defineComponent({
     },
   },
   setup(_, context) {
-    const formData = ref(null)
     const show = ref<string[]>([])
 
     const toggleExpand = (e: string) => {
@@ -286,7 +285,7 @@ export default defineComponent({
       context.emit('update-fraction', e)
     }
 
-    return { formData, show, submitUpdate, toggleExpand }
+    return { show, submitUpdate, toggleExpand }
   },
 })
 </script>
