@@ -121,7 +121,7 @@
           }
         },
         "fractioninterests": {
-          "formTitle": "Ratsmehrheit und Fraktionsinteressen",
+          "formTitle": "Ratsmehrheiten und Fraktionsinteressen",
           "fractions": "Fraktionen",
           "mandates": "Sitze/Stimmen",
           "parliamentProfileUpdatedAt": "Stand",
@@ -145,7 +145,7 @@
         "problems": {
           "formTitle": "Problem & Handlungsauftrag",
           "add": "Problem hinzufügen",
-          "title": "Was ist das Problem, dass du angehen willst?",
+          "title": "Welche Probleme existieren, die du mit diesem Antrag angehen willst?",
           "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
           "placeholder": {
             "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
@@ -175,7 +175,7 @@
         "concept": "Denkarbeit am Antrag",
         "write": "Schreibarbeit zum Antrag",
         "problems": "Problem & Handlungsauftrag",
-        "topic": "Thema dieses Antragsprojekts",
+        "topic": "Antragsthema & Kategorie",
         "fraction": "Ratsmehrheiten & Fraktionsinteressen",
         "arguments_counterarguments": "Argumente & Gegenargumente",
         "strategy": "Strategie",
