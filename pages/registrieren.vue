@@ -228,7 +228,6 @@ export default defineComponent({
         'authentication/register',
         credentials.value
       )
-      console.log(response, errors.value)
       if (response.status === 201) {
         formSent.value = true
       }
