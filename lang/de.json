@@ -41,6 +41,7 @@
     "forms": {
       "topic": {
         "formTitle": "Antragsthema & Kategorie",
+        "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
         "mainTopic": "Mit welchem Thema beschäftigt sich euer Antrag?",
         "mainTopicSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
         "category": "In welche Kategorien passt dieses Thema?",
@@ -48,6 +49,7 @@
       },
       "arguments": {
         "formTitle": "Argumente & Gegenargumente",
+        "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
         "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
         "title": "Argumente",
         "add": "Argument hinzufügen",
@@ -128,6 +130,7 @@
     },
         "fractioninterests": {
           "formTitle": "Ratsmehrheit und Fraktionsinteressen",
+          "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
           "fractions": "Fraktionen",
           "mandates": "Sitze/Stimmen",
           "parliamentProfileUpdatedAt": "Stand",
@@ -150,6 +153,7 @@
         },
         "problems": {
           "formTitle": "Problem & Handlungsauftrag",
+          "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
           "problems": {
             "add": "Problem hinzufügen",
             "title": "Was ist das Problem, dass du angehen willst?",
@@ -169,6 +173,7 @@
         },
         "strategy": {
           "formTitle": "Strategie",
+          "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
           "possiblePartners": "Mögliche strategische Partner"
         }
 

@@ -1,8 +1,11 @@
 <template>
   <div>
-    <h1 class="text-3xl font-normal text-blue-gray-900 mb-4">
+    <h1 class="text-3xl font-normal text-gray-900 mb-4">
       {{ $t('forms.problems.formTitle') }}
     </h1>
+    <p class="text-lg font-normal text-gray-600 mb-2 leading-6">
+      {{ $t('forms.problems.formDescription') }}
+    </p>
     <forms-project-problem></forms-project-problem>
     <forms-project-action-mandate></forms-project-action-mandate>
   </div>
