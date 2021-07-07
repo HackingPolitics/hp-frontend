@@ -135,7 +135,7 @@
               <tr v-if="show.find((e) => e === fraction.id)">
                 <td colspan="12">
                   <FormulateForm
-                    v-slot="values"
+                    v-slot="values, hasErrors"
                     class="bg-gray-50 p-4 rounded-md"
                   >
                     <forms-admin-fraction-field
@@ -155,6 +155,7 @@
                       </div>
                       <FormulateInput
                         type="button"
+                        :disabled="hasErrors"
                         @click="
                           submitUpdate({
                             id: fraction.id,
