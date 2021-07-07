@@ -139,6 +139,7 @@
                     class="bg-gray-50 p-4 rounded-md"
                   >
                     <forms-admin-fraction-field
+                      :edit-mode="true"
                       :fraction="fraction"
                     ></forms-admin-fraction-field>
                     <div class="w-full flex justify-end items-center space-x-4">
@@ -246,6 +247,13 @@
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
 import { IFraction } from '~/types/apiSchema'
 
+interface FractionFormData {
+  color: string
+  memberCount: string | number
+  name: string
+  active: boolean
+}
+
 export default defineComponent({
   name: 'FractionList',
   props: {
@@ -256,9 +264,9 @@ export default defineComponent({
   },
   setup(_, context) {
     const formData = ref(null)
-    const show = ref([])
+    const show = ref<string[]>([])
 
-    const toggleExpand = (e) => {
+    const toggleExpand = (e: string) => {
       if (show.value.find((val) => val === e)) {
         const index = show.value.indexOf(e)
         if (show.value.length > 1) {
@@ -271,8 +279,9 @@ export default defineComponent({
       }
     }
 
-    const submitUpdate = (e) => {
-      e.payload.memberCount = parseInt(e.payload.memberCount)
+    const submitUpdate = (e: { id: string; payload: FractionFormData }) => {
+      const mCount: string = e.payload.memberCount.toString()
+      e.payload.memberCount = parseInt(mCount)
       e.payload.color = e.payload.color.substring(1)
       context.emit('update-fraction', e)
     }

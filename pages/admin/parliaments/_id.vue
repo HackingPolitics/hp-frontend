@@ -144,7 +144,7 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 import { useAxios } from '~/composables/useAxios'
-import { IParliament } from '~/types/apiSchema'
+import { IFraction, IParliament } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'AdminParlaments',
@@ -242,9 +242,7 @@ export default defineComponent({
       }
     }
 
-    const updateFraction = async (el) => {
-      el.payload.memberCount = parseInt(el.payload.memberCount)
-      el.payload.color = el.payload.color.substring(1)
+    const updateFraction = async (el: { id: string; payload: IFraction }) => {
       await store.dispatch('fractions/updateFraction', { ...el }).then(() => {
         fetchData()
       })
