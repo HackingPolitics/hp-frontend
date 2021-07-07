@@ -73,7 +73,7 @@
     "@nuxtjs/netlify-files": "^1.2.0",
     "@nuxtjs/stylelint-module": "^4.0.0",
     "@nuxtjs/tailwindcss": "^4.2.0",
-    "@types/lodash": "^4.14.170",
+    "@types/lodash": "^4.14.171",
     "@vue/runtime-dom": "^3.1.3",
     "@vue/test-utils": "^1.2.1",
     "babel-core": "7.0.0-bridge.0",
