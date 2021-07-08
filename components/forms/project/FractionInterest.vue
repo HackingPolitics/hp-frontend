@@ -1,9 +1,10 @@
 <template>
   <div class="mt-8">
-    <h3 class="font-semibold text-gray-800 text-xl">Eigeninteressen</h3>
+    <h3 class="font-semibold text-gray-800 text-xl">
+      {{ $t('forms.fractioninterests.interests.title') }}
+    </h3>
     <p class="text-sm text-gray-500 mt-2">
-      Wähle eine Fraktion aus, um die Eigeninteressen zu formulieren und
-      anzuzeigen.
+      {{ $t('forms.fractioninterests.interests.description') }}
     </p>
     <div class="mt-4">
       <div class="sm:hidden">
@@ -54,7 +55,7 @@
         </FormulateInput>
       </div>
       <div v-else class="w-full text-center text-gray-500 py-6">
-        Noch keine Interessen für diese Fraktion angelegt
+        {{ $t('forms.fractioninterests.interests.noInterests') }}
       </div>
     </div>
 
@@ -69,9 +70,13 @@
         name="description"
         validation="required"
       />
-      <FormulateInput type="submit"
-        >Interesse für {{ activeFraction.name }} hinzufügen</FormulateInput
-      >
+      <FormulateInput type="submit">
+        <i18n path="forms.fractioninterests.interests.addInterest" tag="span">
+          <template #fraction>
+            {{ activeFraction.name }}
+          </template>
+        </i18n>
+      </FormulateInput>
     </FormulateForm>
     <base-button
       v-if="!newInterestForm"
@@ -86,14 +91,14 @@
       "
       @click="newInterestForm = true"
     >
-      Fraktionsinteresse hinzufügen</base-button
+      {{ $t('forms.fractioninterests.interests.newInterest') }}</base-button
     >
     <div
       v-if="newInterestForm"
       class="text-red-500 text-sm cursor-pointer text-right"
       @click="newInterestForm = false"
     >
-      Abbrechen
+      {{ $t('cancel') }}
     </div>
   </div>
 </template>

@@ -9,6 +9,7 @@
     "of": "von",
     "currentActive": "gerade aktiv",
     "done": "erledigt",
+    "cancel": "abbrechen",
     "share": "Teilen",
     "pdfPreview": "PDF-Vorschau",
     "proposal": {
@@ -139,7 +140,16 @@
           "mandates": "Sitze/Stimmen",
           "parliamentProfileUpdatedAt": "Stand",
           "partnerMandates": "Partnerstimmen ausgewählt",
-          "votes": "Stimmen"
+          "votesCounter": "Noch {votes} für ein mehrheitliches Interesse",
+          "enoughVotes":"Die Stimmen reichen für eine Mehrheit aus",
+          "votes": "Stimmen",
+          "interests": {
+              "title": "Eigeninteressen",
+              "description": "Wähle eine Fraktion aus, um die Eigeninteressen zu formulieren und anzuzeigen.",
+              "noInterests": "Noch keine Interessen für diese Fraktion angelegt",
+              "addInterest": "Interesse für {fraction} hinzufügen",
+              "newInterest": "Fraktionsinteresse hinzufügen"
+          }
         },
         "proposals": {
           "add": "Vorschlag hinzufügen",
