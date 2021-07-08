@@ -35,7 +35,7 @@
               {{ $t('page.application.concept') }}
             </h3>
             <div class="flex ml-4">
-              <progress-bar progress="10"></progress-bar>
+              <progress-bar :progress="projectProgress"></progress-bar>
             </div>
           </div>
 
@@ -286,6 +286,41 @@ export default defineComponent({
       projectMemberShipModal.value?.toggleModal()
     }
 
+    const projectProgress = computed(() => {
+      let progress = 0
+      if (project.value?.title) {
+        progress = progress + 10
+      }
+      if (project.value?.description) {
+        progress = progress + 10
+      }
+      if (project.value?.topic) {
+        progress = progress + 10
+      }
+      if (project.value?.categories?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.arguments?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.counterArguments?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.problems?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.actionMandates?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.partners?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.fractionDetails?.length) {
+        progress = progress + 10
+      }
+      return progress
+    })
+
     return {
       applicationSteps,
       projectId,
@@ -296,6 +331,7 @@ export default defineComponent({
       toggleModal,
       user,
       error,
+      projectProgress,
     }
   },
   data() {
