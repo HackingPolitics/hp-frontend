@@ -11,6 +11,7 @@ export interface IAuthReply {
 
 export enum UserRole {
   Admin = 'ROLE_ADMIN',
+  ProcessManager = 'ROLE_PROCESS_MANAGER',
   User = 'ROLE_USER',
   Guest = 'ROLE_GUEST',
 }
@@ -185,4 +186,52 @@ export interface ICounterArgument extends IArgument {}
 
 export interface INegations extends IModel {
   description?: string
+}
+
+export default INegations
+
+export interface IViolation {
+  code: string
+  message: string
+  propertyPath: string
+}
+
+export interface IErrors {
+  '@context': string
+  '@type': string
+  'hydra:description': string
+  'hydra:title': string
+  violations: IViolation[]
+}
+export interface IFraction {
+  '@id': string
+  '@type': string
+  active: boolean
+  id: number
+  color: string
+  name: string
+  memberCount: number
+}
+
+export interface IFractionInterest {
+  '@id': string
+  '@type': string
+  id: number
+  description: string
+}
+
+export interface IFractionDetails {
+  '@id': string
+  '@type': string
+  id: number
+  contactEmail: string
+  contactPhone: string
+  contactName: string
+  possiblePartner: boolean
+  possibleSponsor: boolean
+  fraction: IFraction
+  teamContact: string
+  interests: IFractionInterest[]
+  updatedBy: IUser
+  updatedAt: string
 }

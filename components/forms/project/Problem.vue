@@ -2,8 +2,8 @@
   <FormulateForm>
     <div class="space-y-6">
       <forms-form-section
-        :title="$t('forms.problems.title')"
-        :subtitle="$t('forms.problems.introduction')"
+        :title="$t('forms.problems.problems.title')"
+        :subtitle="$t('forms.problems.problems.introduction')"
       >
         <draggable
           :list="problems"
@@ -24,8 +24,12 @@
                 type="text"
                 element-class="inline-flex w-full"
                 validation="required"
-                :placeholder="$t('forms.problems.placeholder.description')"
-                :validation-name="$t('validation.problems.description')"
+                :placeholder="
+                  $t('forms.problems.problems.placeholder.description')
+                "
+                :validation-name="
+                  $t('validation.problems.problems.description')
+                "
                 @validation="validation = $event"
                 @focusout="updateProblem($event, problem.id)"
                 @delete="deleteProblem(problem.id)"
@@ -42,11 +46,8 @@
                     "
                   >
                     <outline-menu-alt-4-icon
-                      class="w-5 h-5"
+                      class="w-5 h-5 bg-white rounded-sm"
                     ></outline-menu-alt-4-icon>
-                    <outline-shield-exclamation-icon
-                      class="w-5 h-5"
-                    ></outline-shield-exclamation-icon>
                   </div>
                 </template>
               </forms-list-item-input>
@@ -55,8 +56,10 @@
         </draggable>
         <div class="border-t-2 pt-6">
           <FormulateForm
+            v-if="newProblemForm"
             ref="problemForm"
             v-model="createProblemForm"
+            class="flex items-center"
             @submit="createProblem()"
           >
             <FormulateInput
@@ -64,18 +67,50 @@
               type="text"
               name="description"
               validation="required"
-              :validation-name="$t('validation.problems.description')"
+              :validation-name="$t('validation.problems.problems.description')"
               error-behavior="submit"
-              input-class="list-input-text"
-              :placeholder="$t('forms.problems.placeholder.description')"
+              :placeholder="
+                $t('forms.problems.problems.placeholder.description')
+              "
             />
-            <FormulateInput type="submit">
-              <outline-thumb-down-icon class="h-5 w-5 text-red-500" />
-              <span class="text-red-500 pl-4">{{
-                $t('forms.problems.add')
-              }}</span>
-            </FormulateInput>
+            <button type="submit" class="w-12 mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-green-500 mx-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </button>
           </FormulateForm>
+          <base-button
+            v-if="!newProblemForm"
+            class="
+              bg-white
+              text-purple-500
+              border border-gray-400
+              flex
+              items-center
+              hover:text-white hover:bg-purple-500
+            "
+            @click="newProblemForm = true"
+          >
+            {{ $t('forms.problems.problems.add') }}</base-button
+          >
+          <div
+            v-if="newProblemForm"
+            class="text-red-500 text-sm cursor-pointer text-right"
+            @click="newProblemForm = false"
+          >
+            Abbrechen
+          </div>
         </div>
       </forms-form-section>
     </div>
@@ -158,11 +193,12 @@ export default defineComponent({
           payload
         ).then(() => {
           formKey.value++
+          newProblemForm.value = false
         })
       }
     }
     const deleteProblem = async (id: number | string) => {
-      // @ts-ignore
+      // @ts-ignore#
       await deleteProjectEntity('problems', id, problems.value)
     }
 
@@ -192,12 +228,14 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        store.dispatch('projects/updateProjectProperty', [
+        store.commit('projects/SET_PROJECT_PROPERTY', [
           'problems',
           res.map((e) => e.data),
         ])
       })
     }
+
+    const newProblemForm = ref(false)
     return {
       problems,
       formKey,
@@ -207,6 +245,7 @@ export default defineComponent({
       createProblem,
       updateProblem,
       updateProblemPriority,
+      newProblemForm,
     }
   },
 })

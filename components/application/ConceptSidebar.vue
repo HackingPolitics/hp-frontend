@@ -50,12 +50,12 @@ export default defineComponent({
           link: 'antraege-id-problem',
         },
         {
-          text: `3. ${this.$t('forms.fractioninterests.formTitle')}`,
-          link: 'antraege-id-fraktion-interessen',
+          text: `3. ${this.$t('forms.arguments.formTitle')}`,
+          link: 'antraege-id-argumente',
         },
         {
-          text: `4. ${this.$t('forms.arguments.formTitle')}`,
-          link: 'antraege-id-argumente',
+          text: `4. ${this.$t('forms.fractioninterests.formTitle')}`,
+          link: 'antraege-id-fraktion-interessen',
         },
         {
           text: `5. ${this.$t('forms.strategy.formTitle')}`,

@@ -41,15 +41,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useRoute } from '@nuxtjs/composition-api'
-import useProject from '~/composables/useProject'
+import {
+  computed,
+  defineComponent,
+  useRoute,
+  useStore,
+} from '@nuxtjs/composition-api'
+import { RootState } from '~/store'
 
 export default defineComponent({
   setup() {
     const route = useRoute()
-    const { project, isLoading } = useProject(route.value.params.id)
+    const store = useStore<RootState>()
 
-    return { project, isLoading, route }
+    store.dispatch('projects/fetchProject', route.value.params.id)
+
+    const project = computed(() => {
+      return store.state.projects.project
+    })
+
+    const isLoading = computed(() => {
+      return store.state.projects.isLoading
+    })
+
+    const error = computed(() => {
+      return store.state.projects.error
+    })
+
+    return { project, isLoading, route, error }
   },
 })
 </script>

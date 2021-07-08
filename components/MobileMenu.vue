@@ -112,7 +112,7 @@
               text-purple-200
               hover:text-white hover:bg-purple-400
             "
-            @click="$store.dispatch('auth/logout')"
+            @click="$auth.logout()"
           >
             {{ $t('common.auth.logout') }}
           </div>

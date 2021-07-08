@@ -1,3 +1,4 @@
+_
 <template>
   <li
     class="
@@ -100,7 +101,9 @@
             "
           >
             <span class="font-bold mr-2">{{
-              user.createdProjects.length
+              user.createdProjects && user.createdProjects.length
+                ? user.createdProjects.length
+                : 0
             }}</span>
             {{ $t('page.myproposals.proposals') }}
           </span>

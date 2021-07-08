@@ -28,8 +28,6 @@ import {
   defineComponent,
   onBeforeMount,
   ref,
-  useContext,
-  useRouter,
   useStore,
   watch,
 } from '@nuxtjs/composition-api'
@@ -48,35 +46,14 @@ export default defineComponent({
     const fetchProjects = async () => {
       projects.value = await store.dispatch('projects/fetchProjects')
     }
-    const router = useRouter()
-    const context = useContext()
-
-    const createdProject: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.createdProject
-    )
-
     const createdProjectMembership = computed(
       () => store.state.projects.createdProjectMembership
     )
 
-    const isLoggedIn: ComputedRef<IProject | null> = computed(
-      () => store.getters['auth/isLoggedIn']
+    const isLoggedIn: ComputedRef<boolean | null> = computed(
+      () => store.state.auth.loggedIn
     )
     onBeforeMount(async () => {
-      if (isLoggedIn.value && createdProject.value) {
-        try {
-          await store
-            .dispatch('projects/createProject', createdProject.value)
-            .then((res) => {
-              store.commit('projects/SET_CREATED_PROJECT', null)
-              router.push(
-                context.localePath('/antraege/' + res.data.id.toString())
-              )
-            })
-        } catch (error) {
-          console.log(error)
-        }
-      }
       if (isLoggedIn.value && createdProjectMembership.value) {
         try {
           const payload = {

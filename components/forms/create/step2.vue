@@ -33,7 +33,7 @@
         :help="$t('forms.proposal.forms.motivation.help')"
         type="text"
         name="motivation"
-        validation="required|min:9,length"
+        validation="required|min:12,length"
         :validation-messages="{
           required: `${$t(
             'forms.proposal.forms.motivation.name'
@@ -57,7 +57,7 @@
     <FormulateInput
       :aria-label="$t('forms.proposal.forms.category.label')"
       type="chipGroup"
-      name="category"
+      name="categories"
       limit="2"
       :label="$t('forms.proposal.forms.category.label')"
       :placeholder="$t('forms.proposal.forms.category.placeholder')"
@@ -74,28 +74,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
-import { useAxios } from '~/composables/useAxios'
+import {
+  defineComponent,
+  ref,
+  computed,
+  useStore,
+} from '@nuxtjs/composition-api'
+import { RootState } from '~/store'
 import { ICategory } from '~/types/apiSchema'
 
 export default defineComponent({
   setup() {
     const formData = ref(null)
 
-    const categories = ref<[]>([])
+    const store = useStore<RootState>()
+    const categories = computed(() => {
+      return store.state.categories.categories?.['hydra:member']
+    })
 
-    const $axios = useAxios()
-    const fetchCouncils = async () => {
-      try {
-        const response = await $axios.get('/categories')
-        categories.value = response.data['hydra:member']
-      } catch (error) {}
-    }
-
-    fetchCouncils()
+    store.dispatch('categories/fetchCategories')
 
     const categoryOptions = computed(() =>
-      categories.value.map((category: ICategory) => {
+      categories.value?.map((category: ICategory) => {
         return { value: category['@id'], label: category.name }
       })
     )

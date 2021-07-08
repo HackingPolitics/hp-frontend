@@ -25,6 +25,15 @@
         </div>
 
         <div class="mt-8">
+          <div v-if="errors">
+            <div
+              v-for="violation in errors.violations"
+              :key="violation.code"
+              class="text-red-500 mt-4 text-sm"
+            >
+              {{ violation.propertyPath }}: {{ violation.message }}
+            </div>
+          </div>
           <div class="mt-6">
             <FormulateForm
               v-slot="{ isLoading, hasErrors }"
@@ -200,6 +209,10 @@ export default defineComponent({
       () => store.state.projects.createdProjectMembership
     )
 
+    const errors = computed(() => {
+      return store.state.authentication.errors
+    })
+
     const createAccount = async () => {
       if (createdProject.value) {
         const projects: IProject[] = []
@@ -211,8 +224,14 @@ export default defineComponent({
         projectMemberships.push(createdProjectMembership.value)
         credentials.value.projectMemberships = projectMemberships
       }
-      const response = await store.dispatch('auth/register', credentials.value)
-      handleStatusErrors(response)
+      const response = await store.dispatch(
+        'authentication/register',
+        credentials.value
+      )
+      if (response.status === 201) {
+        formSent.value = true
+      }
+      handleStatusErrors(errors.value)
     }
     useMeta({ title: 'Account anlegen | HackingPolitics' })
     return {
@@ -222,6 +241,7 @@ export default defineComponent({
       formSent,
       inputErrors,
       formErrors,
+      errors,
     }
   },
   head: {},

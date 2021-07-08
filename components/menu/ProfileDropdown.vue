@@ -22,11 +22,7 @@
           @click="toggleDropdown"
         >
           <span class="sr-only">Open user menu</span>
-          <img
-            class="h-8 w-8 rounded-full"
-            src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixqx=XuwRpuUDYo&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-          />
+          <base-avatar :user="$store.state.auth.user"></base-avatar>
         </button>
       </div>
 
@@ -63,22 +59,24 @@
           tabindex="-1"
         >
           <!-- Active: "bg-gray-100", Not Active: "" -->
-          <a
+          <nuxt-link
             id="user-menu-item-0"
+            :to="localePath('/profil')"
             href="#"
             class="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabindex="-1"
-            >Profil</a
+            >Profil</nuxt-link
           >
 
-          <a
+          <nuxt-link
             id="user-menu-item-1"
+            :to="localePath('/einstellungen')"
             href="#"
             class="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabindex="-1"
-            >Einstellungen</a
+            >Einstellungen</nuxt-link
           >
 
           <div
@@ -86,7 +84,7 @@
             class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
             role="menuitem"
             tabindex="-1"
-            @click="$store.dispatch('auth/logout')"
+            @click="logout"
           >
             Ausloggen
           </div>
@@ -97,11 +95,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useContext,
+  useRouter,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ProfileDropdown',
   setup() {
+    const router = useRouter()
     const isDropdownOpen = ref(false)
     const toggleDropdown = (): void => {
       isDropdownOpen.value = !isDropdownOpen.value
@@ -109,10 +113,16 @@ export default defineComponent({
     const closeDropdown = (): void => {
       isDropdownOpen.value = false
     }
+    const context = useContext()
+    const logout = () => {
+      context.$auth.logout('local')
+      router.push('/')
+    }
     return {
       isDropdownOpen,
       closeDropdown,
       toggleDropdown,
+      logout,
     }
   },
 })

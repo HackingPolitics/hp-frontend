@@ -134,7 +134,10 @@ import {
   useStore,
   computed,
 } from '@nuxtjs/composition-api'
+import { sortAndMergeDeleteSet } from 'yjs/dist/src/internals'
+import { watch } from '@vue/runtime-core'
 import NavLink from './NavLink.vue'
+import { UserRole } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'MainNav',
@@ -157,6 +160,29 @@ export default defineComponent({
         to: '/faq',
       },
     ])
+    const isAdmin = computed(() => {
+      if (
+        store.state.auth &&
+        store.state.auth.user &&
+        store.state.auth.user.roles
+      ) {
+        return store.state.auth.user.roles.includes(UserRole.ProcessManager)
+      }
+      return false
+    })
+
+    watch(
+      () => isAdmin.value,
+      () => {
+        if (isAdmin.value) {
+          navLinks.value.push({
+            title: 'menu.admin',
+            to: '/admin/general',
+          })
+        }
+      },
+      { immediate: true }
+    )
 
     // Dropdown
     const isDropdownOpen = ref(false)
@@ -184,6 +210,7 @@ export default defineComponent({
       closeMobileDropdown,
       user,
       navLinks,
+      isAdmin,
     }
   },
 })

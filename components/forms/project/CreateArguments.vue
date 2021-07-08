@@ -1,52 +1,34 @@
 <template>
-  <FormulateForm v-model="formData" @submit="submit()">
+  <FormulateForm
+    v-model="formData"
+    class="flex items-center"
+    @submit="submit()"
+  >
     <FormulateInput
       :key="formKey"
       name="description"
       type="text"
       :placeholder="$t('forms.arguments.placeholder.description')"
       :validation-name="$t('validation.name.arguments.description')"
-      input-class="border-0 focus:ring-0  bg-gray-200 w-full"
       validation="required"
     >
     </FormulateInput>
-    <!--    <FormulateInput
-      type="group"
-      remove-position="after"
-      :repeatable="true"
-      minimum="1"
-    >
-      <template #addmore="{ addMore }">
-        <FormulateInput
-          input-class="flex space-x-2 items-center mt-4 text-purple-500"
-          type="button"
-          @click="addMore()"
-        >
-          <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
-          <span class="">{{
-            $t('forms.arguments.add_inspiration_source')
-          }}</span>
-        </FormulateInput>
-      </template>
-      <FormulateInput
-        name="source"
-        type="text"
-        element-class="inline-flex w-full items-center mt-2"
-        input-class="border-0 w-full"
-        outer-class="w-full"
-        :placeholder="$t('forms.arguments.placeholder.inspiration_source')"
+    <button type="submit" class="w-12 mb-4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-green-500 mx-auto"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
       >
-        <template #prefix>
-          <div class="inline-flex items-center space-x-2 px-4">
-            <outline-link-icon class="w-5 h-5"></outline-link-icon>
-          </div>
-        </template>
-      </FormulateInput>
-    </FormulateInput>-->
-    <FormulateInput type="submit">
-      <outline-thumb-up-icon class="h-5 w-5 text-green-500" />
-      <span class="text-green-500 pl-4">{{ $t('forms.arguments.add') }}</span>
-    </FormulateInput>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+    </button>
   </FormulateForm>
 </template>
 

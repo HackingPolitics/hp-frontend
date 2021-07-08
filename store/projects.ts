@@ -1,6 +1,6 @@
-import { ActionTree, MutationTree } from 'vuex'
-import { IProject, IProjectMembership } from '~/types/apiSchema'
+import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { set } from 'lodash'
+import { IProject, IProjectMembership } from '~/types/apiSchema'
 
 export interface ProjectsState {
   project: IProject
@@ -23,6 +23,21 @@ export const state = () => ({
 })
 
 export type RootState = ReturnType<typeof state>
+
+export const getters: GetterTree<RootState, RootState> = {
+  canEditProject: (_, __, rootState) => (projectId: number) => {
+    // @ts-ignore
+    if (rootState.auth?.user?.projectMemberships) {
+      // @ts-ignore
+      const check = rootState.auth.user.projectMemberships.find(
+        (el: IProject) => el.project.id === projectId
+      )
+
+      return !!check
+    }
+    return false
+  },
+}
 
 export const mutations: MutationTree<RootState> = {
   SET_PROJECT(state, project) {
@@ -50,39 +65,65 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async createProject({ commit }, data) {
+  async createProject({ commit, rootState }, data) {
     try {
       const response = await this.$api.projects.createProject(data)
+      // refetch user data if user is loggedIn
+      // @ts-ignore
+      if (rootState.auth.user) {
+        // reload user data
+        try {
+          // @ts-ignore
+          const user = await this.$axios.get(`/users/${rootState.auth.user.id}`)
+          this.$auth.setUser(user.data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
       // @ts-ignore
       // this.$notify({ title: 'Projekt erstellt', duration: 10000 })
       commit('SET_CREATED_PROJECT', null)
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async updateProject({ commit }, [id, data]) {
     try {
       const response = await this.$api.projects.updateProject(id, data)
       // @ts-ignore
-      this.$notify({ title: 'Änderungen gespeichert', duration: 500 })
+      this.$notify({
+        title: 'Änderungen gespeichert',
+        duration: 500,
+        type: 'success',
+      })
       commit('SET_PROJECT', response.data)
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async fetchProject({ commit }, id) {
+    commit('SET_ERROR', null)
     commit('SET_LOADING_FLAG', true)
     try {
       const response = await this.$api.projects.fetchProject(id)
+      commit('SET_LOADING_FLAG', false)
       commit('SET_PROJECT', response.data)
     } catch (e) {
+      // @ts-ignore
+      this.$notify({
+        title: 'Projekt konnte nicht geladen werden',
+        duration: 500,
+        type: 'warn',
+      })
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data.message)
+      commit('SET_ERROR', e.response.data)
     }
+  },
+
+  setProject({ commit }, payload) {
+    commit('SET_PROJECT', payload)
   },
   async fetchProjects({ commit }) {
     commit('SET_LOADING_FLAG', true)
@@ -92,7 +133,7 @@ export const actions: ActionTree<RootState, RootState> = {
       return response.data['hydra:member']
     } catch (e) {
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data.message)
+      commit('SET_ERROR', e.response.data)
     }
   },
   async applyForProject({ commit }, membership) {
@@ -108,11 +149,10 @@ export const actions: ActionTree<RootState, RootState> = {
         })
       return response
     } catch (e) {
-      // this.error = e.response.data.message
-      console.log(e)
+      commit('SET_ERROR', e.response.data)
     }
   },
-  async updateProjectMemberShip({ commit }, [id, data]) {
+  async updateProjectMemberShip(_, [id, data]) {
     try {
       const response = await this.$api.projectMemberships
         .update(id, data)
@@ -129,7 +169,7 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(e)
     }
   },
-  async deleteProjectMemberShip({ commit }, id) {
+  async deleteProjectMemberShip(_, id) {
     try {
       const response = await this.$api.projectMemberships
         .delete(id)
