@@ -35,7 +35,7 @@
         </div>
       </main>
     </div>
-
+    <base-footer></base-footer>
     <notification-toast />
   </div>
 </template>
