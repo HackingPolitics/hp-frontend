@@ -33,6 +33,7 @@
     "@nuxtjs/composition-api": "^0.24.5",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/jit": "^0.1.18",
+    "@tailwindcss/typography": "^0.4.1",
     "@tiptap/extension-character-count": "^2.0.0-beta.12",
     "@tiptap/extension-collaboration": "^2.0.0-beta.19",
     "@tiptap/extension-collaboration-cursor": "^2.0.0-beta.20",
