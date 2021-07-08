@@ -249,14 +249,32 @@ export default defineComponent({
           .t('page.application.arguments_counterarguments')
           .toString(),
         href: 'antraege-id-argumente',
+        step: {
+          total: 2,
+          done: project?.value?.arguments?.length
+            ? project?.value?.counterArguments?.length
+              ? 2
+              : 1
+            : project?.value?.counterArguments?.length
+            ? 1
+            : 0,
+        },
       },
       {
         title: context.i18n.t('page.application.fraction').toString(),
         href: 'antraege-id-fraktion-interessen',
+        step: {
+          total: 1,
+          done: project?.value?.fractionDetails?.length ? 1 : 0,
+        },
       },
       {
         title: context.i18n.t('page.application.strategy').toString(),
         href: 'antraege-id-strategie',
+        step: {
+          total: 1,
+          done: project?.value?.partners?.length ? 1 : 0,
+        },
       },
     ])
 
