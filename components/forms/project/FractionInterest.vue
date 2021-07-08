@@ -115,7 +115,6 @@ import {
   useStore,
   useRoute,
 } from '@nuxtjs/composition-api'
-import { ID } from 'yjs'
 import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
@@ -246,7 +245,7 @@ export default defineComponent({
       return null
     })
 
-    const updateInterest = async (event: FocusEvent, id: number | string) => {
+    const updateInterest = async (event: any, id: number | string) => {
       try {
         await axios.put(`/fraction_interests/${id}`, {
           description: event.target.value,
