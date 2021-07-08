@@ -170,6 +170,7 @@ import {
   useContext,
   useRoute,
   useStore,
+  useMeta,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 
@@ -321,6 +322,70 @@ export default defineComponent({
       return progress
     })
 
+    useMeta({
+      title: `${
+        project.value?.title ? project.value?.title : 'Antrag'
+      } | HackingPolitics`,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: project.value?.description
+            ? project.value?.description
+            : 'Antrag',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: project.value?.featureImage
+            ? project.value?.featureImage
+            : null,
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: project.value?.title ? project.value?.title : 'Antrag',
+        },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: project.value?.description
+            ? project.value?.description
+            : null,
+        },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: 'HackingPolitics',
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: project.value?.featureImage
+            ? project.value?.featureImage
+            : null,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: project.value?.description
+            ? project.value?.description
+            : null,
+        },
+        {
+          hid: 'twitter:card',
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'HackingPolitics',
+        },
+      ],
+    })
     return {
       applicationSteps,
       projectId,
@@ -339,5 +404,6 @@ export default defineComponent({
       routeBefore: null as null | string,
     }
   },
+  head: {},
 })
 </script>
