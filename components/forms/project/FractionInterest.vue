@@ -51,6 +51,7 @@
           :value="interest.description"
           :wrapper-class="['border-l-4']"
           type="textarea"
+          @focusout="updateInterest($event, interest.id)"
         >
         </FormulateInput>
       </div>
@@ -114,6 +115,7 @@ import {
   useStore,
   useRoute,
 } from '@nuxtjs/composition-api'
+import { ID } from 'yjs'
 import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
@@ -244,6 +246,28 @@ export default defineComponent({
       return null
     })
 
+    const updateInterest = async (event: FocusEvent, id: number | string) => {
+      try {
+        await axios.put(`/fraction_interests/${id}`, {
+          description: event.target.value,
+        })
+
+        // @ts-ignore
+        context.$notify({
+          title: 'Interesse aktualisierut',
+          duration: 300,
+          type: 'success',
+        })
+        store.dispatch('projects/fetchProject', route.value.params.id)
+      } catch (error) {
+        // @ts-ignore
+        context.$notify({
+          title: 'Interesse konnte nicht erstellt werden',
+          duration: 300,
+          type: 'warn',
+        })
+      }
+    }
     return {
       createFractionInterest,
       activeFraction,
@@ -251,6 +275,7 @@ export default defineComponent({
       fractionInterests,
       newInterestForm,
       activeFractionDetails,
+      updateInterest,
     }
   },
 })
