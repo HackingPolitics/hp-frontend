@@ -10,9 +10,9 @@
       "
     >
       <img
-        v-if="project.imageUrl"
+        v-if="project.featureImage"
         class="h-48 object-cover rounded-tl rounded-tr"
-        :src="project.imageUrl"
+        :src="project.featureImage"
       />
       <div
         v-else-if="rndInt === 1"
