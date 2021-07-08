@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <forms-form-section
       :title="$t('forms.topic.mainTitle')"
-      :subtitle="$t('forms.Title.mainTopicSubtitle')"
+      :subtitle="$t('forms.topic.mainTopicSubtitle')"
     >
       <FormulateInput
         v-model="title"
