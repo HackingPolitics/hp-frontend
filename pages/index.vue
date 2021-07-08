@@ -55,12 +55,15 @@ export default defineComponent({
     }
 
     const projects = computed<IProject[] | null>(() => {
+      // @ts-ignore
       return store.state.projects?.projects?.['hydra:member']
     })
 
     const totalItems = computed<number | null>(() => {
+      // @ts-ignore
       return store.state.projects?.projects?.['hydra:totalItems']
-        ? store.state.projects?.projects?.['hydra:totalItems']
+        ? // @ts-ignore
+          store.state.projects?.projects?.['hydra:totalItems']
         : 15
     })
 
