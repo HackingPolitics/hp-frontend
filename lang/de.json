@@ -42,19 +42,19 @@
     "forms": {
       "topic": {
         "formTitle": "Antragsthema & Kategorie",
-        "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
-        "mainTitle": "Titel eures Antrag?",
-        "mainTitleSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
-        "mainTopic": "Mit welchem Thema beschäftigt sich euer Antrag?",
+        "formDescription": "Worum gehts in diesem Antrag und was soll sein Ergebnis sein?",
+        "mainTitle": "Titel des Antrags",
+        "mainTitleSubtitle": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden.",
+        "mainTopic": "Mit welchem Thema beschäftigt sich der Antrag?",
         "mainTopicSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
-        "mainGoal": "Welches Ziel verfolgt euer Antrag?",
-        "mainGoalSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
+        "mainGoal": "Welches Ziel verfolgt der Antrag?",
+        "mainGoalSubtitle": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
         "category": "In welche Kategorien passt dieses Thema?",
         "categorySubtitle": "Wähle bis zu zwei Möglichkeiten aus"
       },
       "arguments": {
         "formTitle": "Argumente & Gegenargumente",
-        "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
+        "formDescription": "Was spricht für und was gegen diesen Antrag? Mit welchen Argumenten lassen sich Antragsgegner umstimmen?",
         "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
         "title": "Argumente",
         "add": "Argument hinzufügen",
@@ -134,20 +134,20 @@
         }
     },
         "fractioninterests": {
-          "formTitle": "Ratsmehrheit und Fraktionsinteressen",
-          "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
+          "formTitle": "Ratsmehrheit & Fraktionsinteressen",
+          "formDescription": "Mit welchen Verbündeten bekommst du deinen Antrag in und durch den Rat? Welche Fraktionen haben welches Interesse am Antrag? Welches Bündnis führt zu einer Mehrheit?",
           "fractions": "Fraktionen",
           "mandates": "Sitze/Stimmen",
           "parliamentProfileUpdatedAt": "Stand",
           "partnerMandates": "Partnerstimmen ausgewählt",
-          "votesCounter": "Noch {votes} für ein mehrheitliches Interesse",
+          "votesCounter": "Noch {votes} Stimmen fehlen zur Mehrheit",
           "enoughVotes":"Die Stimmen reichen für eine Mehrheit aus",
           "votes": "Stimmen",
           "interests": {
-              "title": "Eigeninteressen",
-              "description": "Wähle eine Fraktion aus, um die Eigeninteressen zu formulieren und anzuzeigen.",
-              "noInterests": "Noch keine Interessen für diese Fraktion angelegt",
-              "addInterest": "Interesse für {fraction} hinzufügen",
+              "title": "Eigeninteressen der Fraktionen",
+              "description": "Wähle eine Fraktion aus, um ihre Eigeninteressen zu sammeln und anzuzeigen.",
+              "noInterests": "Noch keine Eigeninteressen gefunden",
+              "addInterest": "Eigeninteresse für {fraction} hinzufügen",
               "newInterest": "Fraktionsinteresse hinzufügen"
           }
         },
@@ -167,7 +167,7 @@
         },
         "problems": {
           "formTitle": "Problem & Handlungsauftrag",
-          "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
+          "formDescription": "Welches Problem soll der Antrag lösen helfen? Wie lautet der Auftrag an die Oberbürgermeisterin, mit die Probleme adressiert werden sollen?",
           "problems": {
             "add": "Problem hinzufügen",
             "title": "Was ist das Problem, dass du angehen willst?",
@@ -178,16 +178,16 @@
           },
           "actionMandate": {
             "add": "Handlungsauftrag hinzufügen",
-            "title": "Was ist der Handlungsauftrag?",
-            "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
+            "title": "Was soll die Stadtverwaltung <b>tun</b>, um das Problem anzugehen?",
+            "introduction": "Der Stadtrat beauftragt die Oberbürgermeisterin...",
             "placeholder": {
-              "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
+              "description": "...zu prüfen, wie ___ ...ein Konzept zu erarbeiten, welches ___...___vorzubereiten und umzusetzen..."
             }
           }
         },
         "strategy": {
-          "formTitle": "Strategie",
-          "formDescription": "Was ist das Problem und was ist der Handlungsauftrag, dass du angehen und den du vergeben willst?",
+          "formTitle": "Partner & Strategie",
+          "formDescription": "Welche Partner könnten helfen, den Antrag durch den Rat zu kriegen? Wer kennt wen?",
           "possiblePartners": "Mögliche strategische Partner"
         }
 
@@ -278,9 +278,6 @@
           },
           "failure": {
             "accessBlocked": "Der Zugriff auf diese Funktion wurde wegen zu vieler Anfragen (von Deiner IP-Adresse oder deinem Benutzer) vorübergehend gesperrt, bitte versuche es später wieder.",
-            "fundApplication": {
-              "notFound": "Der angefragte Förderantrag wurde leider nicht gefunden."
-            },
             "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
             "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort.",
             "notLoggedIn": "Du bist nicht (mehr) eingeloggt!",
@@ -290,22 +287,6 @@
             }
           },
           "validate": {
-            "fund": {
-              "activationNotPossible": "Der Fördertopf konnte nicht aktiviert werden.<br />Dies kann mehrere Ursachen haben: <ul><li>der Fördertopf ist bereits aktiviert (oder abgeschlossen)</li><li>es ist keine Zuspitzung angegeben</li><li>der Antragszeitraum ist nicht vollständig konfiguriert oder liegt nicht in der Zukunft</li></ul>",
-              "duplicateName": "Dieser Name wird bereits verwendet."
-            },
-            "fundAppliation": {
-              "duplicateApplication": "Zu diesem Projekt existiert bereits ein Förderantrag auf diesen Fördertopf."
-            },
-            "fundConcretization": {
-              "duplicateQuestion": "Diese Zuspitzungs-Frage existiert bereits."
-            },
-            "juryCriterion": {
-              "duplicateName": "Dieser Name existiert bereits."
-            },
-            "fundSearch": {
-              "patternTooShort": "Min. 3 Zeichen notwendig"
-            },
             "general": {
               "notBlank": "Dies ist ein Pflichtfeld.",
               "noNumber": "Es sind nur Zahlen zulässig",
@@ -320,9 +301,6 @@
             },
             "process": {
               "duplicateName": "Ein Prozess mit diesem Name existiert bereits."
-            },
-            "project": {
-              "duplicatePackageNames": "Arbeitspakete müssen unterschiedliche Namen verwenden."
             },
             "projectMembership": {
               "cannotDowngradeLastCoordinator": "Es muss mindestens ein Koordinator im Projekt verbleiben, diese Änderung ist daher nicht möglich.",
