@@ -168,8 +168,13 @@
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500">
-                Wir haben an die angegebene Emailadresse eine Nachricht
-                geschickt. Bitte überprüfe deine Inbox.
+                Du kannst dich nun
+                <nuxt-link
+                  :to="localePath('/login')"
+                  class="font-medium text-purple-400 hover:text-purple-500"
+                >
+                  einloggen
+                </nuxt-link>
               </p>
             </div>
           </div>
