@@ -27,6 +27,7 @@
           @application-submitted="toggleModal()"
         />
       </modal>
+
       <div class="mt-6">
         <div class="flex justify-between rounded items-center">
           <div class="flex items-center">
@@ -221,8 +222,8 @@ export default defineComponent({
         title: context.i18n.t('page.application.topic').toString(),
         href: 'antraege-id-thema',
         step: {
-          total: 2,
-          done: project?.value?.categories
+          total: 4,
+          done: project?.value?.categories?.length
             ? project?.value?.topic
               ? 2
               : 1
@@ -232,6 +233,16 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.problems').toString(),
         href: 'antraege-id-problem',
+        step: {
+          total: 2,
+          done: project?.value?.actionMandate
+            ? project?.value?.problems
+              ? 2
+              : 1
+            : project?.value?.problems?.length
+            ? 1
+            : 0,
+        },
       },
       {
         title: context.i18n
