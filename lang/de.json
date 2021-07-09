@@ -167,7 +167,7 @@
         },
         "problems": {
           "formTitle": "Problem & Handlungsauftrag",
-          "formDescription": "Welches Problem soll der Antrag lösen helfen? Wie lautet der Auftrag an die Oberbürgermeisterin, mit die Probleme adressiert werden sollen?",
+          "formDescription": "Welches Problem soll der Antrag lösen helfen? Wie lautet der Auftrag an die Oberbürgermeisterin, mit dem die Probleme adressiert werden sollen?",
           "problems": {
             "add": "Problem hinzufügen",
             "title": "Was ist das Problem, dass du angehen willst?",
@@ -178,16 +178,16 @@
           },
           "actionMandate": {
             "add": "Handlungsauftrag hinzufügen",
-            "title": "Was soll die Stadtverwaltung <b>tun</b>, um das Problem anzugehen?",
-            "introduction": "Der Stadtrat beauftragt die Oberbürgermeisterin...",
+            "title": "Der Stadtrat beauftragt die Oberbürgermeisterin...",
+            "introduction": "Was soll die Stadtverwaltung tun, um das Problem anzugehen? Wenn nötig, liste mehrere aufeinander aufbauende Handlungen auf",
             "placeholder": {
               "description": "...zu prüfen, wie ___ ...ein Konzept zu erarbeiten, welches ___...___vorzubereiten und umzusetzen..."
             }
           },
           "impact": {
-            "name": "Wirkung auf das Problem",
-            "label": "Reflektiere, inwieweit die angegebenen Handlungsaufträge tatsächlich auf die vorgegebenen Probleme wirken",
-            "placeholder": "",
+            "name": "Warum hilft es, diese Punkte umzusetzen?",
+            "label": "Wie wirkt dieser Arbeitsauftrag auf das obige Problem?",
+            "placeholder": "Wenn alle Schüler einen Laptop haben, können sie besser arbeiten. Das Bildungsniveau steigt.",
             "help": ""
           }
         },
