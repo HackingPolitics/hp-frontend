@@ -54,7 +54,7 @@ import {
 import { parseISO } from 'date-fns'
 import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
-import { IProject } from '~/types/apiSchema'
+import { IProject, IProjectMembership } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'ApplicationsPage',
@@ -72,8 +72,8 @@ export default defineComponent({
     }
 
     const createdProjectsIds = computed(() => {
-      return store.state.auth?.user?.projectMemberships?.project?.id.map(
-        (project: IProject) => project.id
+      return store.state.auth?.user?.projectMemberships?.map(
+        (membership: IProjectMembership) => membership?.project?.id
       )
     })
 
