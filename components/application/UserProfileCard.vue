@@ -101,8 +101,8 @@ _
             "
           >
             <span class="font-bold mr-2">{{
-              user.createdProjects && user.createdProjects.length
-                ? user.createdProjects.length
+              user.createdProjects && user.projectMemberships.length
+                ? user.projectMemberships.length
                 : 0
             }}</span>
             {{ $t('page.myproposals.proposals') }}
