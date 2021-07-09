@@ -26,6 +26,7 @@
             sm:px-6
             lg:pb-16 lg:px-8
             grid grid-cols-3
+            relative
           "
         >
           <application-concept-sidebar></application-concept-sidebar>
