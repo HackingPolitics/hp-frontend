@@ -22,14 +22,14 @@
       @changePage="setCurrentPage"
     ></application-pagination>
   </div>
-  <div v-else-if="projects && projects.length === 0">
+  <div v-else-if="!isLoading && projects && projects.length === 0">
     <div class="flex flex-col text-center my-16">
       <div class="text-gray-400 mt-8 font-semibold text-lg">
         Keine Antragsprojekte vorhanden
       </div>
     </div>
   </div>
-  <div v-else>
+  <div v-else class="w-full py-16">
     <div class="flex flex-col text-center my-16">
       <loading-indicator v-if="isLoading"></loading-indicator>
       <div class="text-gray-400 mt-8 font-semibold text-lg">

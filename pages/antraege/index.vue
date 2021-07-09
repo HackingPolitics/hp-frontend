@@ -1,6 +1,6 @@
 <template>
   <layouts-header-title :title="$t('page.myproposals.title')">
-    <div class="sm:flex mt-4">
+    <div class="sm:flex mt-4 w-full">
       <ul
         class="
           sm:grid sm:grid-cols-2
@@ -36,6 +36,7 @@
         :projects="projects"
         :current-page="currentPage"
         :total-pages="totalPages"
+        :is-loading="isLoading"
         @changePage="changePage"
       ></application-grid>
     </div>
@@ -70,6 +71,14 @@ export default defineComponent({
       fetchUserProjects()
     }
 
+    const createdProjectsIds = computed(() => {
+      return store.state.auth?.user?.createdProjects.map(
+        (project: IProject) => project.id
+      )
+    })
+
+    const isLoading = ref(true)
+
     watch(
       () => currentPage.value,
       () => {
@@ -77,13 +86,17 @@ export default defineComponent({
       }
     )
 
+    watch(
+      () => user.value,
+      () => {
+        fetchUserProjects()
+      }
+    )
+
     const fetchUserProjects = async () => {
-      if (store.state.auth.user)
+      if (store.state.auth.user) {
+        isLoading.value = true
         try {
-          const createdProjectsIds: number[] =
-            store.state.auth.user.createdProjects.map(
-              (project: IProject) => project.id
-            )
           const response = await axios.get(
             `/projects?page=${currentPage.value}`,
             {
@@ -94,13 +107,25 @@ export default defineComponent({
           totalPages.value = Math.ceil(
             response.data['hydra:totalItems'] / itemsPerPage.value
           )
+          isLoading.value = false
         } catch (e) {
+          isLoading.value = false
           console.log(e)
         }
+      }
     }
 
     fetchUserProjects()
-    return { projects, user, parseISO, currentPage, changePage, totalPages }
+    return {
+      projects,
+      user,
+      parseISO,
+      currentPage,
+      changePage,
+      totalPages,
+      createdProjectsIds,
+      isLoading,
+    }
   },
 })
 </script>
