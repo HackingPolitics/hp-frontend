@@ -14,7 +14,6 @@
         type="text"
         name="zipArea"
         help="help"
-        validation="required"
         placeholder="Postleitzahl angeben"
       />
       <FormulateInput

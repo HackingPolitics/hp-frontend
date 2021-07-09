@@ -27,6 +27,7 @@
           @application-submitted="toggleModal()"
         />
       </modal>
+
       <div class="mt-6">
         <div class="flex justify-between rounded items-center">
           <div class="flex items-center">
@@ -34,7 +35,7 @@
               {{ $t('page.application.concept') }}
             </h3>
             <div class="flex ml-4">
-              <progress-bar progress="10"></progress-bar>
+              <progress-bar :progress="projectProgress"></progress-bar>
             </div>
           </div>
 
@@ -169,6 +170,7 @@ import {
   useContext,
   useRoute,
   useStore,
+  useMeta,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 
@@ -221,8 +223,8 @@ export default defineComponent({
         title: context.i18n.t('page.application.topic').toString(),
         href: 'antraege-id-thema',
         step: {
-          total: 2,
-          done: project?.value?.categories
+          total: 4,
+          done: project?.value?.categories?.length
             ? project?.value?.topic
               ? 2
               : 1
@@ -232,20 +234,48 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.problems').toString(),
         href: 'antraege-id-problem',
+        step: {
+          total: 2,
+          done: project?.value?.actionMandate
+            ? project?.value?.problems
+              ? 2
+              : 1
+            : project?.value?.problems?.length
+            ? 1
+            : 0,
+        },
       },
       {
         title: context.i18n
           .t('page.application.arguments_counterarguments')
           .toString(),
         href: 'antraege-id-argumente',
+        step: {
+          total: 2,
+          done: project?.value?.arguments?.length
+            ? project?.value?.counterArguments?.length
+              ? 2
+              : 1
+            : project?.value?.counterArguments?.length
+            ? 1
+            : 0,
+        },
       },
       {
         title: context.i18n.t('page.application.fraction').toString(),
         href: 'antraege-id-fraktion-interessen',
+        step: {
+          total: 1,
+          done: project?.value?.fractionDetails?.length ? 1 : 0,
+        },
       },
       {
         title: context.i18n.t('page.application.strategy').toString(),
         href: 'antraege-id-strategie',
+        step: {
+          total: 1,
+          done: project?.value?.partners?.length ? 1 : 0,
+        },
       },
     ])
 
@@ -257,6 +287,105 @@ export default defineComponent({
       projectMemberShipModal.value?.toggleModal()
     }
 
+    const projectProgress = computed(() => {
+      let progress = 0
+      if (project.value?.title) {
+        progress = progress + 10
+      }
+      if (project.value?.description) {
+        progress = progress + 10
+      }
+      if (project.value?.topic) {
+        progress = progress + 10
+      }
+      if (project.value?.categories?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.arguments?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.counterArguments?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.problems?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.actionMandates?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.partners?.length) {
+        progress = progress + 10
+      }
+      if (project.value?.fractionDetails?.length) {
+        progress = progress + 10
+      }
+      return progress
+    })
+
+    useMeta({
+      title: `${
+        project.value?.title ? project.value?.title : 'Antrag'
+      } | HackingPolitics`,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: project.value?.description
+            ? project.value?.description
+            : 'Antrag',
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: project.value?.featureImage
+            ? project.value?.featureImage
+            : null,
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: project.value?.title ? project.value?.title : 'Antrag',
+        },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: project.value?.description
+            ? project.value?.description
+            : null,
+        },
+        {
+          hid: 'og:site_name',
+          name: 'og:site_name',
+          content: 'HackingPolitics',
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: project.value?.featureImage
+            ? project.value?.featureImage
+            : null,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: project.value?.description
+            ? project.value?.description
+            : null,
+        },
+        {
+          hid: 'twitter:card',
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: 'HackingPolitics',
+        },
+      ],
+    })
     return {
       applicationSteps,
       projectId,
@@ -267,6 +396,7 @@ export default defineComponent({
       toggleModal,
       user,
       error,
+      projectProgress,
     }
   },
   data() {
@@ -274,5 +404,6 @@ export default defineComponent({
       routeBefore: null as null | string,
     }
   },
+  head: {},
 })
 </script>

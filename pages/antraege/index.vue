@@ -32,7 +32,12 @@
           </nuxt-link>
         </li>
       </ul>
-      <application-grid :projects="projects"></application-grid>
+      <application-grid
+        :projects="projects"
+        :current-page="currentPage"
+        :total-pages="totalPages"
+        @changePage="changePage"
+      ></application-grid>
     </div>
   </layouts-header-title>
 </template>
@@ -43,8 +48,10 @@ import {
   useStore,
   computed,
   ref,
+  watch,
 } from '@nuxtjs/composition-api'
 import { parseISO } from 'date-fns'
+import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
@@ -53,23 +60,47 @@ export default defineComponent({
   setup() {
     const projects = ref<IProject[]>([])
     const store = useStore<RootState>()
+    const axios = useAxios()
     const user = computed(() => store.state.auth.user)
-    return { projects, user, parseISO }
-  },
-  async fetch() {
-    if (this.$store.state.auth.user)
-      try {
-        const createdProjectsIds: number[] =
-          this.$store.state.auth.user.createdProjects.map(
-            (project: IProject) => project.id
-          )
-        const response = await this.$axios.get('/projects', {
-          params: { id: createdProjectsIds },
-        })
-        this.projects = response.data['hydra:member']
-      } catch (e) {
-        console.log(e)
+    const currentPage = ref(1)
+    const totalPages = ref(1)
+    const itemsPerPage = ref(15)
+    const changePage = (page: number) => {
+      currentPage.value = page
+      fetchUserProjects()
+    }
+
+    watch(
+      () => currentPage.value,
+      () => {
+        fetchUserProjects()
       }
+    )
+
+    const fetchUserProjects = async () => {
+      if (store.state.auth.user)
+        try {
+          const createdProjectsIds: number[] =
+            store.state.auth.user.createdProjects.map(
+              (project: IProject) => project.id
+            )
+          const response = await axios.get(
+            `/projects?page=${currentPage.value}`,
+            {
+              params: { id: createdProjectsIds },
+            }
+          )
+          projects.value = response.data['hydra:member']
+          totalPages.value = Math.ceil(
+            response.data['hydra:totalItems'] / itemsPerPage.value
+          )
+        } catch (e) {
+          console.log(e)
+        }
+    }
+
+    fetchUserProjects()
+    return { projects, user, parseISO, currentPage, changePage, totalPages }
   },
 })
 </script>

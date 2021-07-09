@@ -1,41 +1,44 @@
 <template>
-  <FormulateForm v-model="formData" @submit="$emit('submit', formData)">
-    <FormulateInput
-      :label="$t('forms.proposal.forms.title.label')"
-      :placeholder="$t('forms.proposal.forms.title.placeholder')"
-      :help="$t('forms.proposal.forms.title.help')"
-      type="text"
-      name="title"
-      validation="required"
-      :validation-messages="{
-        required: `${$t(
-          'forms.proposal.forms.title.name'
-        )} muss ausgefüllt sein`,
-      }"
-    />
-
-    <FormulateInput
-      :label="$t('forms.proposal.forms.parliament.label')"
-      :placeholder="$t('forms.proposal.forms.parliament.placeholder')"
-      :help="$t('forms.proposal.forms.parliament.help')"
-      type="select"
-      name="council"
-      :options="councilOptions"
-      validation="required"
-      :validation-messages="{
-        required: `${$t(
-          'forms.proposal.forms.parliament.name'
-        )} muss ausgefüllt sein`,
-      }"
-    />
-    <div class="w-full flex justify-end">
+  <div>
+    <FormulateForm v-model="formData" @submit="$emit('submit', formData)">
       <FormulateInput
-        type="submit"
-        class="mt-4"
-        :label="$t('forms.proposal.steps.next')"
-      ></FormulateInput>
-    </div>
-  </FormulateForm>
+        :label="$t('forms.proposal.forms.title.label')"
+        :placeholder="$t('forms.proposal.forms.title.placeholder')"
+        :help="$t('forms.proposal.forms.title.help')"
+        type="text"
+        name="title"
+        validation="required"
+        :validation-messages="{
+          required: `${$t(
+            'forms.proposal.forms.title.name'
+          )} muss ausgefüllt sein`,
+        }"
+      />
+
+      <FormulateInput
+        :label="$t('forms.proposal.forms.parliament.label')"
+        :placeholder="$t('forms.proposal.forms.parliament.placeholder')"
+        :help="$t('forms.proposal.forms.parliament.help')"
+        type="select"
+        name="council"
+        :options="councilOptions"
+        validation="required"
+        :validation-messages="{
+          required: `${$t(
+            'forms.proposal.forms.parliament.name'
+          )} muss ausgefüllt sein`,
+        }"
+      />
+      <image-chooser @selectImage="selectImage"></image-chooser>
+      <div class="w-full flex justify-end">
+        <FormulateInput
+          type="submit"
+          class="mt-4"
+          :label="$t('forms.proposal.steps.next')"
+        ></FormulateInput>
+      </div>
+    </FormulateForm>
+  </div>
 </template>
 
 <script lang="ts">
@@ -45,7 +48,10 @@ import { IParliament } from '~/types/apiSchema'
 
 export default defineComponent({
   setup() {
-    const formData = ref(null)
+    const formData = ref({
+      featureImage: '',
+    })
+
     const councils = ref<IParliament[]>([])
     const $axios = useAxios()
     const fetchCouncils = async () => {
@@ -61,9 +67,17 @@ export default defineComponent({
         return { value: parliament['@id'], label: parliament.title }
       })
     )
+
+    const selectImage = (image: any) => {
+      if (image?.urls?.regular) {
+        formData.value.featureImage = image?.urls?.regular
+      }
+    }
+
     return {
       councilOptions,
       formData,
+      selectImage,
     }
   },
 })

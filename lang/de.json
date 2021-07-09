@@ -183,6 +183,12 @@
             "placeholder": {
               "description": "...zu prüfen, wie ___ ...ein Konzept zu erarbeiten, welches ___...___vorzubereiten und umzusetzen..."
             }
+          },
+          "impact": {
+            "name": "Wirkung auf das Problem",
+            "label": "Reflektiere, inwieweit die angegebenen Handlungsaufträge tatsächlich auf die vorgegebenen Probleme wirken",
+            "placeholder": "",
+            "help": ""
           }
         },
         "strategy": {

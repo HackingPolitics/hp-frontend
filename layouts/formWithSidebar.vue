@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-200 relative">
-    <div class="relative">
+  <div class="min-h-screen bg-gray-200 relative flex flex-col justify-between">
+    <div class="relative flex-1">
       <div class="sticky">
         <menu-project-nav
           :title="project ? project.title : 'zurück'"
@@ -26,6 +26,7 @@
             sm:px-6
             lg:pb-16 lg:px-8
             grid grid-cols-3
+            relative
           "
         >
           <application-concept-sidebar></application-concept-sidebar>
@@ -35,7 +36,7 @@
         </div>
       </main>
     </div>
-
+    <base-footer></base-footer>
     <notification-toast />
   </div>
 </template>
