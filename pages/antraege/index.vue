@@ -72,7 +72,7 @@ export default defineComponent({
     }
 
     const createdProjectsIds = computed(() => {
-      return store.state.auth?.user?.createdProjects.map(
+      return store.state.auth?.user?.projectMemberships?.project?.id.map(
         (project: IProject) => project.id
       )
     })
@@ -100,7 +100,7 @@ export default defineComponent({
           const response = await axios.get(
             `/projects?page=${currentPage.value}`,
             {
-              params: { id: createdProjectsIds },
+              params: { id: createdProjectsIds.value },
             }
           )
           projects.value = response.data['hydra:member']
