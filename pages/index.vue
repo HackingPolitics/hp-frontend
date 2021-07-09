@@ -4,8 +4,14 @@
   >
     <div class="flex justify-between w-full items-baseline mt-16">
       <div class="font-semibold text-3xl flex relative overflow">
-        {{ projects && projects.length ? projects.length : 0 }} Anträge in
-        <inline-dropdown v-model="city" :options="options"></inline-dropdown>
+        {{ projects && projects.length ? projects.length : 0 }} Anträge
+        <span v-if="councilOptions" class="flex ml-1">
+          in
+          <inline-dropdown
+            v-model="city"
+            :options="councilOptions"
+          ></inline-dropdown>
+        </span>
       </div>
       <base-button @click="$router.push('/antraege/erstellen')"
         >Neuen Antrag erstellen</base-button
@@ -36,16 +42,14 @@ import {
 } from '@nuxtjs/composition-api'
 import { parseISO } from 'date-fns'
 import { RootState } from '~/store'
-import { IProject } from '~/types/apiSchema'
+import { IParliament, IProject } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'ApplicationsPage',
   setup() {
-    const city = ref<String | null>('Dresden')
-
+    const city = ref<any | null>(null)
     const store = useStore<RootState>()
     const user = computed(() => store.state.auth.user)
-    const options = ['Dresden', 'Berlin', 'München']
     const currentPage = ref(1)
     const totalPages = ref(1)
     const itemsPerPage = ref(15)
@@ -73,6 +77,28 @@ export default defineComponent({
         totalPages.value = Math.ceil(totalItems.value / itemsPerPage.value)
       }
     }
+
+    const councils = computed(() => {
+      return store.state.councils?.councils
+    })
+
+    const councilOptions = computed(() => {
+      return councils.value?.['hydra:member']?.map((council: IParliament) => {
+        return {
+          label: council.title,
+          value: { id: council.id, name: council.title },
+        }
+      })
+    })
+
+    watch(
+      () => councilOptions.value,
+      () => {
+        city.value = councilOptions.value?.[0]
+      }
+    )
+
+    store.dispatch('councils/fetchCouncils')
 
     const createdProjectMembership = computed(
       () => store.state.projects.createdProjectMembership
@@ -108,10 +134,10 @@ export default defineComponent({
 
     return {
       projects,
+      councilOptions,
       user,
       parseISO,
       city,
-      options,
       projectsLoading,
       currentPage,
       totalPages,
