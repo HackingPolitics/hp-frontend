@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-200 relative">
-    <div class="relative">
+  <div class="min-h-screen bg-gray-200 relative flex flex-col justify-between">
+    <div class="relative flex-1">
       <div class="sticky">
         <menu-project-nav
           :title="project ? project.title : 'zurück'"
