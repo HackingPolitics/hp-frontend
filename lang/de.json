@@ -183,6 +183,12 @@
             "placeholder": {
               "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
             }
+          },
+          "impact": {
+            "name": "Wirkung auf das Problem",
+            "label": "Reflektiere, inwieweit die angegebenen Handlungsaufträge tatsächlich auf die vorgegebenen Probleme wirken",
+            "placeholder": "",
+            "help": ""
           }
         },
         "strategy": {
