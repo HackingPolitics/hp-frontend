@@ -34,9 +34,9 @@
         "logout": "Ausloggen"
       },
       "roles": {
-          "coordinator": "Koordinator",
-          "writer": "Mitglieder",
-          "applicant": "Bewerber"
+          "coordinator": "KoordinatorIn",
+          "writer": "Mitglied",
+          "applicant": "BewerberIn"
       }
     },
     "forms": {
