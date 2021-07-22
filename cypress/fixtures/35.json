@@ -1,0 +1,3687 @@
+{
+  "@context": "/contexts/User",
+  "@id": "/users/35",
+  "@type": "User",
+  "username": "pm",
+  "email": "schumann@vrok.de",
+  "roles": ["ROLE_PROCESS_MANAGER", "ROLE_USER"],
+  "firstName": "",
+  "lastName": "",
+  "active": true,
+  "validated": true,
+  "createdAt": "2021-05-14T19:05:43+00:00",
+  "deletedAt": null,
+  "objectRoles": [],
+  "createdProjects": [
+    {
+      "@id": "/projects/61",
+      "@type": "Project",
+      "actionMandates": [
+        {
+          "@id": "/action_mandates/1",
+          "@type": "ActionMandate",
+          "updatedBy": "/users/35",
+          "id": 1
+        }
+      ],
+      "arguments": [
+        {
+          "@id": "/arguments/18",
+          "@type": "Argument",
+          "updatedBy": "/users/35",
+          "id": 18
+        },
+        {
+          "@id": "/arguments/20",
+          "@type": "Argument",
+          "updatedBy": "/users/35",
+          "id": 20
+        }
+      ],
+      "counterArguments": [
+        {
+          "@id": "/counter_arguments/78",
+          "@type": "CounterArgument",
+          "updatedBy": "/users/35",
+          "id": 78
+        },
+        {
+          "@id": "/counter_arguments/79",
+          "@type": "CounterArgument",
+          "updatedBy": "/users/35",
+          "id": 79
+        }
+      ],
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/32",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "id": 11
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/24",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 24
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 32
+        }
+      ],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=61;user=28",
+          "@type": "ProjectMembership",
+          "motivation": "alles, geiles Thema etc.",
+          "project": "/projects/61",
+          "role": "writer",
+          "skills": "Schreiben; netzwerken",
+          "user": {
+            "@id": "/users/28",
+            "@type": "User",
+            "username": "philipphp",
+            "email": "philipp+hacking@phmu.de",
+            "roles": ["ROLE_USER"],
+            "firstName": "Philipp",
+            "lastName": "Munzert Update",
+            "active": true,
+            "validated": true,
+            "createdAt": "2021-04-15T18:28:26+00:00",
+            "deletedAt": null,
+            "objectRoles": [],
+            "projectMemberships": [
+              {
+                "@id": "/project_memberships/project=2;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "sfsdfsdfsdfdsf",
+                "role": "applicant",
+                "skills": "sdfsfdsdfsdfsdf",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=42;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "sfsdfsdfsdfsdfsdfsdf",
+                "role": "coordinator",
+                "skills": "sdfsdfsdfsdfsdfdsf",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=43;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdadas asdasdas asdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=44;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasd asdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasd asdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=53;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasasdasdas",
+                "role": "coordinator",
+                "skills": "ASDASDASDASDASDASD",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=55;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdas",
+                "role": "coordinator",
+                "skills": "ASDASDASDASDASDASD",
+                "user": "/users/28"
+              },
+              "/project_memberships/project=61;user=28",
+              {
+                "@id": "/project_memberships/project=62;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asaSasaSasaSas",
+                "role": "writer",
+                "skills": "aSasasasaSasas",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=63;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                "role": "coordinator",
+                "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=64;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                "role": "coordinator",
+                "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=67;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasddasdasd",
+                "role": "coordinator",
+                "skills": "sadasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=68;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "adasdasdasdsadasdasdasd",
+                "role": "coordinator",
+                "skills": "asdsasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=69;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdas sadasdads asdasd ads asf",
+                "role": "coordinator",
+                "skills": "asdasdasd asdasdasdasdsa",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=70;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasasdasdasd",
+                "role": "coordinator",
+                "skills": "adasdasdasdadasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=71;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasasdasdasd",
+                "role": "coordinator",
+                "skills": "adasdasdasdadasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=84;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "sadasdasdasdasdasdasdasdsadasd",
+                "role": "coordinator",
+                "skills": "asdasdsadsadasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=85;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=86;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=87;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "ASDASDASDASDASDSADASD",
+                "role": "coordinator",
+                "skills": "SADASDASDASDASDASDASDASD",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=89;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "adasdasdasdasdasdsad",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=90;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdsad",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=91;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "adasdasdasdasdsadasdasd",
+                "role": "coordinator",
+                "skills": "adsasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=92;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=93;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasd",
+                "user": "/users/28"
+              }
+            ],
+            "id": 28
+          }
+        },
+        {
+          "@id": "/project_memberships/project=61;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ic beteilige mich gern",
+          "project": "/projects/61",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": "/users/35"
+        },
+        {
+          "@id": "/project_memberships/project=61;user=38",
+          "@type": "ProjectMembership",
+          "motivation": "Gestaltung",
+          "project": "/projects/61",
+          "role": "writer",
+          "skills": "Gestaltung",
+          "user": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "email": "tina@minthdesign.com",
+            "roles": ["ROLE_USER"],
+            "firstName": "",
+            "lastName": "",
+            "active": true,
+            "validated": true,
+            "createdAt": "2021-05-18T08:13:22+00:00",
+            "deletedAt": null,
+            "objectRoles": [],
+            "projectMemberships": [
+              "/project_memberships/project=61;user=38",
+              {
+                "@id": "/project_memberships/project=80;user=38",
+                "@type": "ProjectMembership",
+                "motivation": "Gestaltung Gestaltung",
+                "role": "coordinator",
+                "skills": "Gestaltung Gestaltung",
+                "user": "/users/38"
+              },
+              {
+                "@id": "/project_memberships/project=81;user=38",
+                "@type": "ProjectMembership",
+                "motivation": "Gestaltung Gestaltung",
+                "role": "coordinator",
+                "skills": "Gestaltung Gestaltung",
+                "user": "/users/38"
+              },
+              {
+                "@id": "/project_memberships/project=94;user=38",
+                "@type": "ProjectMembership",
+                "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                "role": "coordinator",
+                "skills": "Nutzungskonzepte",
+                "user": "/users/38"
+              }
+            ],
+            "id": 38
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [
+        {
+          "@id": "/problems/67",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 67
+        }
+      ],
+      "proposals": [],
+      "slug": "vom-analogen-beteiligungsverfahren-zur-digitalen-unterstutzungsplattform",
+      "state": "public",
+      "title": "Vom analogen Beteiligungsverfahren zur digitalen Unterstützungsplattform",
+      "id": 61
+    },
+    {
+      "@id": "/projects/62",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=62;user=28",
+          "@type": "ProjectMembership",
+          "motivation": "asaSasaSasaSas",
+          "project": "/projects/62",
+          "role": "writer",
+          "skills": "aSasasasaSasas",
+          "user": {
+            "@id": "/users/28",
+            "@type": "User",
+            "username": "philipphp",
+            "email": "philipp+hacking@phmu.de",
+            "roles": ["ROLE_USER"],
+            "firstName": "Philipp",
+            "lastName": "Munzert Update",
+            "active": true,
+            "validated": true,
+            "createdAt": "2021-04-15T18:28:26+00:00",
+            "deletedAt": null,
+            "objectRoles": [],
+            "projectMemberships": [
+              {
+                "@id": "/project_memberships/project=2;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "sfsdfsdfsdfdsf",
+                "role": "applicant",
+                "skills": "sdfsfdsdfsdfsdf",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=42;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "sfsdfsdfsdfsdfsdfsdf",
+                "role": "coordinator",
+                "skills": "sdfsdfsdfsdfsdfdsf",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=43;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdadas asdasdas asdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=44;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasd asdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasd asdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=53;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasasdasdas",
+                "role": "coordinator",
+                "skills": "ASDASDASDASDASDASD",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=55;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdas",
+                "role": "coordinator",
+                "skills": "ASDASDASDASDASDASD",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=61;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "alles, geiles Thema etc.",
+                "role": "writer",
+                "skills": "Schreiben; netzwerken",
+                "user": "/users/28"
+              },
+              "/project_memberships/project=62;user=28",
+              {
+                "@id": "/project_memberships/project=63;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                "role": "coordinator",
+                "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=64;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                "role": "coordinator",
+                "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=67;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasddasdasd",
+                "role": "coordinator",
+                "skills": "sadasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=68;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "adasdasdasdsadasdasdasd",
+                "role": "coordinator",
+                "skills": "asdsasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=69;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdas sadasdads asdasd ads asf",
+                "role": "coordinator",
+                "skills": "asdasdasd asdasdasdasdsa",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=70;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasasdasdasd",
+                "role": "coordinator",
+                "skills": "adasdasdasdadasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=71;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasasdasdasd",
+                "role": "coordinator",
+                "skills": "adasdasdasdadasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=84;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "sadasdasdasdasdasdasdasdsadasd",
+                "role": "coordinator",
+                "skills": "asdasdsadsadasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=85;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=86;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=87;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "ASDASDASDASDASDSADASD",
+                "role": "coordinator",
+                "skills": "SADASDASDASDASDASDASDASD",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=89;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "adasdasdasdasdasdsad",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=90;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdsad",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=91;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "adasdasdasdasdsadasdasd",
+                "role": "coordinator",
+                "skills": "adsasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=92;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasdasd",
+                "user": "/users/28"
+              },
+              {
+                "@id": "/project_memberships/project=93;user=28",
+                "@type": "ProjectMembership",
+                "motivation": "asdasdasdasd",
+                "role": "coordinator",
+                "skills": "asdasdasdasdasdasd",
+                "user": "/users/28"
+              }
+            ],
+            "id": 28
+          }
+        },
+        {
+          "@id": "/project_memberships/project=62;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ic beteilige mich gern",
+          "project": "/projects/62",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "vom-analogen-beteiligungsverfahren-zur-digitalen-unterstutzungsplattform-1",
+      "state": "public",
+      "title": "Vom analogen Beteiligungsverfahren zur digitalen Unterstützungsplattform",
+      "id": 62
+    },
+    {
+      "@id": "/projects/65",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=65;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "dwdadsaddsadsa",
+          "project": "/projects/65",
+          "role": "coordinator",
+          "skills": "sdsadsadasdasd",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "login-test",
+      "state": "private",
+      "title": "Login Test",
+      "id": 65
+    },
+    {
+      "@id": "/projects/66",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/6",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "id": 4
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/11",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 11
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 6
+        },
+        {
+          "@id": "/fraction_details/7",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "id": 7
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/12",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 12
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 7
+        },
+        {
+          "@id": "/fraction_details/8",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "id": 3
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/10",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 10
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 8
+        }
+      ],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=66;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "dwdadsaddsadsa",
+          "project": "/projects/66",
+          "role": "coordinator",
+          "skills": "sdsadsadasdasd",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [
+        {
+          "@id": "/partners/13",
+          "@type": "Partner",
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 13
+        },
+        {
+          "@id": "/partners/14",
+          "@type": "Partner",
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 14
+        }
+      ],
+      "problems": [
+        {
+          "@id": "/problems/68",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 68
+        },
+        {
+          "@id": "/problems/69",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 69
+        },
+        {
+          "@id": "/problems/70",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 70
+        },
+        {
+          "@id": "/problems/71",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 71
+        },
+        {
+          "@id": "/problems/72",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 72
+        }
+      ],
+      "proposals": [],
+      "slug": "login-test-1",
+      "state": "public",
+      "title": "Login Test",
+      "id": 66
+    },
+    {
+      "@id": "/projects/74",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=74;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "sdfsdfdsfsfdsfsdfsdf",
+          "project": "/projects/74",
+          "role": "coordinator",
+          "skills": "sdfsdfsdfsdfsdfsdfsdf",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "registertest-22-1",
+      "state": "private",
+      "title": "Registertest 22",
+      "id": 74
+    },
+    {
+      "@id": "/projects/75",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/9",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "id": 3
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 9
+        }
+      ],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=75;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "sdfsdfdsfsfdsfsdfsdf",
+          "project": "/projects/75",
+          "role": "coordinator",
+          "skills": "sdfsdfsdfsdfsdfsdfsdf",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "registertest-22-2",
+      "state": "private",
+      "title": "Registertest 22",
+      "id": 75
+    },
+    {
+      "@id": "/projects/76",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=76;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "asdasdasdsaasdasdasd",
+          "project": "/projects/76",
+          "role": "coordinator",
+          "skills": "asdasdasdasdasdasd",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "asdadsasdasdasd",
+      "state": "private",
+      "title": "asdadsasdasdasd",
+      "id": 76
+    },
+    {
+      "@id": "/projects/77",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/1",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "id": 9
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/1",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 1
+            },
+            {
+              "@id": "/fraction_interests/2",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 2
+            },
+            {
+              "@id": "/fraction_interests/3",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 3
+            },
+            {
+              "@id": "/fraction_interests/4",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 4
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 1
+        },
+        {
+          "@id": "/fraction_details/2",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "id": 10
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/5",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 5
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 2
+        },
+        {
+          "@id": "/fraction_details/3",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "id": 11
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/9",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 9
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 3
+        },
+        {
+          "@id": "/fraction_details/4",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "id": 12
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/6",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 6
+            },
+            {
+              "@id": "/fraction_interests/8",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 8
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 4
+        },
+        {
+          "@id": "/fraction_details/5",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "id": 13
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/7",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 7
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 5
+        }
+      ],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=77;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "asdasdasdasdasdasdsdadasd",
+          "project": "/projects/77",
+          "role": "coordinator",
+          "skills": "asdasdasdasdasdasdasdasd",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "fraktionschart-test",
+      "state": "private",
+      "title": "Fraktionschart Test",
+      "id": 77
+    },
+    {
+      "@id": "/projects/78",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=78;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ich telefoniere gern",
+          "project": "/projects/78",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "mobiltelefon-htc-desire-z",
+      "state": "private",
+      "title": "Mobiltelefon HTC Desire Z",
+      "id": 78
+    },
+    {
+      "@id": "/projects/79",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [
+        {
+          "@id": "/arguments/26",
+          "@type": "Argument",
+          "updatedBy": "/users/35",
+          "id": 26
+        },
+        {
+          "@id": "/arguments/27",
+          "@type": "Argument",
+          "updatedBy": "/users/35",
+          "id": 27
+        },
+        {
+          "@id": "/arguments/28",
+          "@type": "Argument",
+          "updatedBy": "/users/35",
+          "id": 28
+        }
+      ],
+      "counterArguments": [
+        {
+          "@id": "/counter_arguments/85",
+          "@type": "CounterArgument",
+          "updatedBy": "/users/35",
+          "id": 85
+        },
+        {
+          "@id": "/counter_arguments/86",
+          "@type": "CounterArgument",
+          "updatedBy": "/users/35",
+          "id": 86
+        }
+      ],
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/15",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "id": 10
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/17",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 17
+            },
+            {
+              "@id": "/fraction_interests/18",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 18
+            },
+            {
+              "@id": "/fraction_interests/19",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 19
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 15
+        },
+        {
+          "@id": "/fraction_details/16",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "id": 11
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 16
+        },
+        {
+          "@id": "/fraction_details/17",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "id": 12
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/15",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 15
+            },
+            {
+              "@id": "/fraction_interests/16",
+              "@type": "FractionInterest",
+              "updatedBy": "/users/35",
+              "id": 16
+            }
+          ],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 17
+        },
+        {
+          "@id": "/fraction_details/18",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "id": 13
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 18
+        },
+        {
+          "@id": "/fraction_details/19",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "id": 14
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 19
+        }
+      ],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=79;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ich telefoniere gern",
+          "project": "/projects/79",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [
+        {
+          "@id": "/partners/16",
+          "@type": "Partner",
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 16
+        }
+      ],
+      "problems": [
+        {
+          "@id": "/problems/74",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 74
+        },
+        {
+          "@id": "/problems/76",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 76
+        }
+      ],
+      "proposals": [],
+      "slug": "mobiltelefon-htc-desire-z-1",
+      "state": "private",
+      "title": "Mobiltelefon HTC Desire Z",
+      "id": 79
+    },
+    {
+      "@id": "/projects/88",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/28",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/16",
+            "@type": "Fraction",
+            "id": 16
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 28
+        },
+        {
+          "@id": "/fraction_details/29",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/20",
+            "@type": "Fraction",
+            "id": 20
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 29
+        },
+        {
+          "@id": "/fraction_details/30",
+          "@type": "FractionDetails",
+          "fraction": {
+            "@id": "/fractions/21",
+            "@type": "Fraction",
+            "id": 21
+          },
+          "interests": [],
+          "teamContact": null,
+          "updatedBy": "/users/35",
+          "id": 30
+        }
+      ],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=88;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "adassdasdasdasdsad",
+          "project": "/projects/88",
+          "role": "coordinator",
+          "skills": "asdasdadasdasdasdasd",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [
+        {
+          "@id": "/problems/79",
+          "@type": "Problem",
+          "updatedBy": "/users/35",
+          "id": 79
+        }
+      ],
+      "proposals": [],
+      "slug": "kategorientest",
+      "state": "private",
+      "title": "Kategorientest",
+      "id": 88
+    },
+    {
+      "@id": "/projects/95",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=95;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "test Motivation",
+          "project": "/projects/95",
+          "role": "coordinator",
+          "skills": "test Motivation",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "project-delete-test",
+      "state": "public",
+      "title": "Project delete test",
+      "id": 95
+    },
+    {
+      "@id": "/projects/96",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "counterArguments": [],
+      "fractionDetails": [],
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=96;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Meine Motivation ist...",
+          "project": "/projects/96",
+          "role": "coordinator",
+          "skills": "Ich habe Erfahrung mit....",
+          "user": "/users/35"
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "test-test-test",
+      "state": "private",
+      "title": "Test test test",
+      "id": 96
+    }
+  ],
+  "projectMemberships": [
+    {
+      "@id": "/project_memberships/project=49;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Ich will auch Katzenkaffee trinken und außerdem den Bewerbungsprozess testen.",
+      "project": {
+        "@id": "/projects/49",
+        "@type": "Project",
+        "slug": "katzencafes",
+        "state": "public",
+        "title": "Katzencafes",
+        "id": 49
+      },
+      "role": "applicant",
+      "skills": "Ich kann gut testen."
+    },
+    {
+      "@id": "/project_memberships/project=61;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Ic beteilige mich gern",
+      "project": {
+        "@id": "/projects/61",
+        "@type": "Project",
+        "actionMandates": [
+          {
+            "@id": "/action_mandates/1",
+            "@type": "ActionMandate",
+            "updatedBy": "/users/35",
+            "id": 1
+          }
+        ],
+        "arguments": [
+          {
+            "@id": "/arguments/18",
+            "@type": "Argument",
+            "updatedBy": "/users/35",
+            "id": 18
+          },
+          {
+            "@id": "/arguments/20",
+            "@type": "Argument",
+            "updatedBy": "/users/35",
+            "id": 20
+          }
+        ],
+        "counterArguments": [
+          {
+            "@id": "/counter_arguments/78",
+            "@type": "CounterArgument",
+            "updatedBy": "/users/35",
+            "id": 78
+          },
+          {
+            "@id": "/counter_arguments/79",
+            "@type": "CounterArgument",
+            "updatedBy": "/users/35",
+            "id": 79
+          }
+        ],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/32",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/11",
+              "@type": "Fraction",
+              "id": 11
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/24",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 24
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 32
+          }
+        ],
+        "locked": false,
+        "memberships": [
+          {
+            "@id": "/project_memberships/project=61;user=28",
+            "@type": "ProjectMembership",
+            "motivation": "alles, geiles Thema etc.",
+            "role": "writer",
+            "skills": "Schreiben; netzwerken",
+            "user": {
+              "@id": "/users/28",
+              "@type": "User",
+              "username": "philipphp",
+              "email": "philipp+hacking@phmu.de",
+              "roles": ["ROLE_USER"],
+              "firstName": "Philipp",
+              "lastName": "Munzert Update",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-04-15T18:28:26+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=2;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "sfsdfsdfsdfdsf",
+                  "role": "applicant",
+                  "skills": "sdfsfdsdfsdfsdf",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=42;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "sfsdfsdfsdfsdfsdfsdf",
+                  "role": "coordinator",
+                  "skills": "sdfsdfsdfsdfsdfdsf",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=43;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdadas asdasdas asdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=44;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasd asdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasd asdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=53;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasasdasdas",
+                  "role": "coordinator",
+                  "skills": "ASDASDASDASDASDASD",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=55;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdas",
+                  "role": "coordinator",
+                  "skills": "ASDASDASDASDASDASD",
+                  "user": "/users/28"
+                },
+                "/project_memberships/project=61;user=28",
+                {
+                  "@id": "/project_memberships/project=62;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asaSasaSasaSas",
+                  "role": "writer",
+                  "skills": "aSasasasaSasas",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=63;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                  "role": "coordinator",
+                  "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=64;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                  "role": "coordinator",
+                  "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=67;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasddasdasd",
+                  "role": "coordinator",
+                  "skills": "sadasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=68;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "adasdasdasdsadasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdsasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=69;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdas sadasdads asdasd ads asf",
+                  "role": "coordinator",
+                  "skills": "asdasdasd asdasdasdasdsa",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=70;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasasdasdasd",
+                  "role": "coordinator",
+                  "skills": "adasdasdasdadasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=71;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasasdasdasd",
+                  "role": "coordinator",
+                  "skills": "adasdasdasdadasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=84;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "sadasdasdasdasdasdasdasdsadasd",
+                  "role": "coordinator",
+                  "skills": "asdasdsadsadasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=85;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=86;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=87;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "ASDASDASDASDASDSADASD",
+                  "role": "coordinator",
+                  "skills": "SADASDASDASDASDASDASDASD",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=89;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "adasdasdasdasdasdsad",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=90;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdsad",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=91;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "adasdasdasdasdsadasdasd",
+                  "role": "coordinator",
+                  "skills": "adsasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=92;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=93;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasd",
+                  "user": "/users/28"
+                }
+              ],
+              "id": 28
+            }
+          },
+          "/project_memberships/project=61;user=35",
+          {
+            "@id": "/project_memberships/project=61;user=38",
+            "@type": "ProjectMembership",
+            "motivation": "Gestaltung",
+            "role": "writer",
+            "skills": "Gestaltung",
+            "user": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                "/project_memberships/project=61;user=38",
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            }
+          }
+        ],
+        "partners": [],
+        "problems": [
+          {
+            "@id": "/problems/67",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 67
+          }
+        ],
+        "proposals": [],
+        "slug": "vom-analogen-beteiligungsverfahren-zur-digitalen-unterstutzungsplattform",
+        "state": "public",
+        "title": "Vom analogen Beteiligungsverfahren zur digitalen Unterstützungsplattform",
+        "id": 61
+      },
+      "role": "coordinator",
+      "skills": "Ich gehe gern wählen"
+    },
+    {
+      "@id": "/project_memberships/project=62;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Ic beteilige mich gern",
+      "project": {
+        "@id": "/projects/62",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": [
+          {
+            "@id": "/project_memberships/project=62;user=28",
+            "@type": "ProjectMembership",
+            "motivation": "asaSasaSasaSas",
+            "role": "writer",
+            "skills": "aSasasasaSasas",
+            "user": {
+              "@id": "/users/28",
+              "@type": "User",
+              "username": "philipphp",
+              "email": "philipp+hacking@phmu.de",
+              "roles": ["ROLE_USER"],
+              "firstName": "Philipp",
+              "lastName": "Munzert Update",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-04-15T18:28:26+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=2;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "sfsdfsdfsdfdsf",
+                  "role": "applicant",
+                  "skills": "sdfsfdsdfsdfsdf",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=42;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "sfsdfsdfsdfsdfsdfsdf",
+                  "role": "coordinator",
+                  "skills": "sdfsdfsdfsdfsdfdsf",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=43;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdadas asdasdas asdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=44;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasd asdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasd asdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=53;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasasdasdas",
+                  "role": "coordinator",
+                  "skills": "ASDASDASDASDASDASD",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=55;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdas",
+                  "role": "coordinator",
+                  "skills": "ASDASDASDASDASDASD",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=61;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "alles, geiles Thema etc.",
+                  "role": "writer",
+                  "skills": "Schreiben; netzwerken",
+                  "user": "/users/28"
+                },
+                "/project_memberships/project=62;user=28",
+                {
+                  "@id": "/project_memberships/project=63;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                  "role": "coordinator",
+                  "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=64;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asfdsdfdsfsadf dsfsddfasfd",
+                  "role": "coordinator",
+                  "skills": "sdfsdfdsfgsd dsafsdfsdfsda",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=67;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasddasdasd",
+                  "role": "coordinator",
+                  "skills": "sadasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=68;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "adasdasdasdsadasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdsasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=69;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdas sadasdads asdasd ads asf",
+                  "role": "coordinator",
+                  "skills": "asdasdasd asdasdasdasdsa",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=70;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasasdasdasd",
+                  "role": "coordinator",
+                  "skills": "adasdasdasdadasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=71;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasasdasdasd",
+                  "role": "coordinator",
+                  "skills": "adasdasdasdadasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=84;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "sadasdasdasdasdasdasdasdsadasd",
+                  "role": "coordinator",
+                  "skills": "asdasdsadsadasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=85;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=86;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=87;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "ASDASDASDASDASDSADASD",
+                  "role": "coordinator",
+                  "skills": "SADASDASDASDASDASDASDASD",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=89;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "adasdasdasdasdasdsad",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=90;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdsad",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=91;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "adasdasdasdasdsadasdasd",
+                  "role": "coordinator",
+                  "skills": "adsasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=92;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasdasd",
+                  "user": "/users/28"
+                },
+                {
+                  "@id": "/project_memberships/project=93;user=28",
+                  "@type": "ProjectMembership",
+                  "motivation": "asdasdasdasd",
+                  "role": "coordinator",
+                  "skills": "asdasdasdasdasdasd",
+                  "user": "/users/28"
+                }
+              ],
+              "id": 28
+            }
+          },
+          "/project_memberships/project=62;user=35"
+        ],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "vom-analogen-beteiligungsverfahren-zur-digitalen-unterstutzungsplattform-1",
+        "state": "public",
+        "title": "Vom analogen Beteiligungsverfahren zur digitalen Unterstützungsplattform",
+        "id": 62
+      },
+      "role": "coordinator",
+      "skills": "Ich gehe gern wählen"
+    },
+    {
+      "@id": "/project_memberships/project=65;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "dwdadsaddsadsa",
+      "project": {
+        "@id": "/projects/65",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": ["/project_memberships/project=65;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "login-test",
+        "state": "private",
+        "title": "Login Test",
+        "id": 65
+      },
+      "role": "coordinator",
+      "skills": "sdsadsadasdasd"
+    },
+    {
+      "@id": "/project_memberships/project=66;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "dwdadsaddsadsa",
+      "project": {
+        "@id": "/projects/66",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/6",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/4",
+              "@type": "Fraction",
+              "id": 4
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/11",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 11
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 6
+          },
+          {
+            "@id": "/fraction_details/7",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/7",
+              "@type": "Fraction",
+              "id": 7
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/12",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 12
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 7
+          },
+          {
+            "@id": "/fraction_details/8",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/3",
+              "@type": "Fraction",
+              "id": 3
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/10",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 10
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 8
+          }
+        ],
+        "locked": false,
+        "memberships": ["/project_memberships/project=66;user=35"],
+        "partners": [
+          {
+            "@id": "/partners/13",
+            "@type": "Partner",
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 13
+          },
+          {
+            "@id": "/partners/14",
+            "@type": "Partner",
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 14
+          }
+        ],
+        "problems": [
+          {
+            "@id": "/problems/68",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 68
+          },
+          {
+            "@id": "/problems/69",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 69
+          },
+          {
+            "@id": "/problems/70",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 70
+          },
+          {
+            "@id": "/problems/71",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 71
+          },
+          {
+            "@id": "/problems/72",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 72
+          }
+        ],
+        "proposals": [],
+        "slug": "login-test-1",
+        "state": "public",
+        "title": "Login Test",
+        "id": 66
+      },
+      "role": "coordinator",
+      "skills": "sdsadsadasdasd"
+    },
+    {
+      "@id": "/project_memberships/project=74;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "sdfsdfdsfsfdsfsdfsdf",
+      "project": {
+        "@id": "/projects/74",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": ["/project_memberships/project=74;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "registertest-22-1",
+        "state": "private",
+        "title": "Registertest 22",
+        "id": 74
+      },
+      "role": "coordinator",
+      "skills": "sdfsdfsdfsdfsdfsdfsdf"
+    },
+    {
+      "@id": "/project_memberships/project=75;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "sdfsdfdsfsfdsfsdfsdf",
+      "project": {
+        "@id": "/projects/75",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/9",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/3",
+              "@type": "Fraction",
+              "id": 3
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 9
+          }
+        ],
+        "locked": false,
+        "memberships": ["/project_memberships/project=75;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "registertest-22-2",
+        "state": "private",
+        "title": "Registertest 22",
+        "id": 75
+      },
+      "role": "coordinator",
+      "skills": "sdfsdfsdfsdfsdfsdfsdf"
+    },
+    {
+      "@id": "/project_memberships/project=76;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "asdasdasdsaasdasdasd",
+      "project": {
+        "@id": "/projects/76",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": ["/project_memberships/project=76;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "asdadsasdasdasd",
+        "state": "private",
+        "title": "asdadsasdasdasd",
+        "id": 76
+      },
+      "role": "coordinator",
+      "skills": "asdasdasdasdasdasd"
+    },
+    {
+      "@id": "/project_memberships/project=77;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "asdasdasdasdasdasdsdadasd",
+      "project": {
+        "@id": "/projects/77",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/1",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/9",
+              "@type": "Fraction",
+              "id": 9
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/1",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 1
+              },
+              {
+                "@id": "/fraction_interests/2",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 2
+              },
+              {
+                "@id": "/fraction_interests/3",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 3
+              },
+              {
+                "@id": "/fraction_interests/4",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 4
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 1
+          },
+          {
+            "@id": "/fraction_details/2",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/10",
+              "@type": "Fraction",
+              "id": 10
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/5",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 5
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 2
+          },
+          {
+            "@id": "/fraction_details/3",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/11",
+              "@type": "Fraction",
+              "id": 11
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/9",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 9
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 3
+          },
+          {
+            "@id": "/fraction_details/4",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/12",
+              "@type": "Fraction",
+              "id": 12
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/6",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 6
+              },
+              {
+                "@id": "/fraction_interests/8",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 8
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 4
+          },
+          {
+            "@id": "/fraction_details/5",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/13",
+              "@type": "Fraction",
+              "id": 13
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/7",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 7
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 5
+          }
+        ],
+        "locked": false,
+        "memberships": ["/project_memberships/project=77;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "fraktionschart-test",
+        "state": "private",
+        "title": "Fraktionschart Test",
+        "id": 77
+      },
+      "role": "coordinator",
+      "skills": "asdasdasdasdasdasdasdasd"
+    },
+    {
+      "@id": "/project_memberships/project=78;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Ich telefoniere gern",
+      "project": {
+        "@id": "/projects/78",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": ["/project_memberships/project=78;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "mobiltelefon-htc-desire-z",
+        "state": "private",
+        "title": "Mobiltelefon HTC Desire Z",
+        "id": 78
+      },
+      "role": "coordinator",
+      "skills": "Ich gehe gern wählen"
+    },
+    {
+      "@id": "/project_memberships/project=79;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Ich telefoniere gern",
+      "project": {
+        "@id": "/projects/79",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [
+          {
+            "@id": "/arguments/26",
+            "@type": "Argument",
+            "updatedBy": "/users/35",
+            "id": 26
+          },
+          {
+            "@id": "/arguments/27",
+            "@type": "Argument",
+            "updatedBy": "/users/35",
+            "id": 27
+          },
+          {
+            "@id": "/arguments/28",
+            "@type": "Argument",
+            "updatedBy": "/users/35",
+            "id": 28
+          }
+        ],
+        "counterArguments": [
+          {
+            "@id": "/counter_arguments/85",
+            "@type": "CounterArgument",
+            "updatedBy": "/users/35",
+            "id": 85
+          },
+          {
+            "@id": "/counter_arguments/86",
+            "@type": "CounterArgument",
+            "updatedBy": "/users/35",
+            "id": 86
+          }
+        ],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/15",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/10",
+              "@type": "Fraction",
+              "id": 10
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/17",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 17
+              },
+              {
+                "@id": "/fraction_interests/18",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 18
+              },
+              {
+                "@id": "/fraction_interests/19",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 19
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 15
+          },
+          {
+            "@id": "/fraction_details/16",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/11",
+              "@type": "Fraction",
+              "id": 11
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 16
+          },
+          {
+            "@id": "/fraction_details/17",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/12",
+              "@type": "Fraction",
+              "id": 12
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/15",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 15
+              },
+              {
+                "@id": "/fraction_interests/16",
+                "@type": "FractionInterest",
+                "updatedBy": "/users/35",
+                "id": 16
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 17
+          },
+          {
+            "@id": "/fraction_details/18",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/13",
+              "@type": "Fraction",
+              "id": 13
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 18
+          },
+          {
+            "@id": "/fraction_details/19",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/14",
+              "@type": "Fraction",
+              "id": 14
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 19
+          }
+        ],
+        "locked": false,
+        "memberships": ["/project_memberships/project=79;user=35"],
+        "partners": [
+          {
+            "@id": "/partners/16",
+            "@type": "Partner",
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 16
+          }
+        ],
+        "problems": [
+          {
+            "@id": "/problems/74",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 74
+          },
+          {
+            "@id": "/problems/76",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 76
+          }
+        ],
+        "proposals": [],
+        "slug": "mobiltelefon-htc-desire-z-1",
+        "state": "private",
+        "title": "Mobiltelefon HTC Desire Z",
+        "id": 79
+      },
+      "role": "coordinator",
+      "skills": "Ich gehe gern wählen"
+    },
+    {
+      "@id": "/project_memberships/project=80;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Ich will auch Bus fahren! Und außerdem den Bewerbungsprozess testen!",
+      "project": {
+        "@id": "/projects/80",
+        "@type": "Project",
+        "actionMandates": [
+          {
+            "@id": "/action_mandates/2",
+            "@type": "ActionMandate",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 2
+          },
+          {
+            "@id": "/action_mandates/4",
+            "@type": "ActionMandate",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 4
+          }
+        ],
+        "arguments": [
+          {
+            "@id": "/arguments/29",
+            "@type": "Argument",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 29
+          },
+          {
+            "@id": "/arguments/30",
+            "@type": "Argument",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 30
+          }
+        ],
+        "counterArguments": [
+          {
+            "@id": "/counter_arguments/87",
+            "@type": "CounterArgument",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 87
+          },
+          {
+            "@id": "/counter_arguments/89",
+            "@type": "CounterArgument",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 89
+          }
+        ],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/20",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/10",
+              "@type": "Fraction",
+              "id": 10
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/20",
+                "@type": "FractionInterest",
+                "updatedBy": {
+                  "@id": "/users/38",
+                  "@type": "User",
+                  "username": "Tina",
+                  "email": "tina@minthdesign.com",
+                  "roles": ["ROLE_USER"],
+                  "firstName": "",
+                  "lastName": "",
+                  "active": true,
+                  "validated": true,
+                  "createdAt": "2021-05-18T08:13:22+00:00",
+                  "deletedAt": null,
+                  "objectRoles": [],
+                  "projectMemberships": [
+                    {
+                      "@id": "/project_memberships/project=61;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung",
+                      "role": "writer",
+                      "skills": "Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=80;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung Gestaltung",
+                      "role": "coordinator",
+                      "skills": "Gestaltung Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=81;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung Gestaltung",
+                      "role": "coordinator",
+                      "skills": "Gestaltung Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=94;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                      "role": "coordinator",
+                      "skills": "Nutzungskonzepte",
+                      "user": "/users/38"
+                    }
+                  ],
+                  "id": 38
+                },
+                "id": 20
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 20
+          },
+          {
+            "@id": "/fraction_details/21",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/11",
+              "@type": "Fraction",
+              "id": 11
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/21",
+                "@type": "FractionInterest",
+                "updatedBy": {
+                  "@id": "/users/38",
+                  "@type": "User",
+                  "username": "Tina",
+                  "email": "tina@minthdesign.com",
+                  "roles": ["ROLE_USER"],
+                  "firstName": "",
+                  "lastName": "",
+                  "active": true,
+                  "validated": true,
+                  "createdAt": "2021-05-18T08:13:22+00:00",
+                  "deletedAt": null,
+                  "objectRoles": [],
+                  "projectMemberships": [
+                    {
+                      "@id": "/project_memberships/project=61;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung",
+                      "role": "writer",
+                      "skills": "Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=80;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung Gestaltung",
+                      "role": "coordinator",
+                      "skills": "Gestaltung Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=81;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung Gestaltung",
+                      "role": "coordinator",
+                      "skills": "Gestaltung Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=94;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                      "role": "coordinator",
+                      "skills": "Nutzungskonzepte",
+                      "user": "/users/38"
+                    }
+                  ],
+                  "id": 38
+                },
+                "id": 21
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 21
+          },
+          {
+            "@id": "/fraction_details/22",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/13",
+              "@type": "Fraction",
+              "id": 13
+            },
+            "interests": [
+              {
+                "@id": "/fraction_interests/22",
+                "@type": "FractionInterest",
+                "updatedBy": {
+                  "@id": "/users/38",
+                  "@type": "User",
+                  "username": "Tina",
+                  "email": "tina@minthdesign.com",
+                  "roles": ["ROLE_USER"],
+                  "firstName": "",
+                  "lastName": "",
+                  "active": true,
+                  "validated": true,
+                  "createdAt": "2021-05-18T08:13:22+00:00",
+                  "deletedAt": null,
+                  "objectRoles": [],
+                  "projectMemberships": [
+                    {
+                      "@id": "/project_memberships/project=61;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung",
+                      "role": "writer",
+                      "skills": "Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=80;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung Gestaltung",
+                      "role": "coordinator",
+                      "skills": "Gestaltung Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=81;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "Gestaltung Gestaltung",
+                      "role": "coordinator",
+                      "skills": "Gestaltung Gestaltung",
+                      "user": "/users/38"
+                    },
+                    {
+                      "@id": "/project_memberships/project=94;user=38",
+                      "@type": "ProjectMembership",
+                      "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                      "role": "coordinator",
+                      "skills": "Nutzungskonzepte",
+                      "user": "/users/38"
+                    }
+                  ],
+                  "id": 38
+                },
+                "id": 22
+              }
+            ],
+            "teamContact": null,
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 22
+          },
+          {
+            "@id": "/fraction_details/23",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/14",
+              "@type": "Fraction",
+              "id": 14
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 23
+          },
+          {
+            "@id": "/fraction_details/24",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/12",
+              "@type": "Fraction",
+              "id": 12
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 24
+          }
+        ],
+        "locked": false,
+        "memberships": [
+          "/project_memberships/project=80;user=35",
+          {
+            "@id": "/project_memberships/project=80;user=38",
+            "@type": "ProjectMembership",
+            "motivation": "Gestaltung Gestaltung",
+            "role": "coordinator",
+            "skills": "Gestaltung Gestaltung",
+            "user": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                "/project_memberships/project=80;user=38",
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            }
+          }
+        ],
+        "partners": [
+          {
+            "@id": "/partners/17",
+            "@type": "Partner",
+            "teamContact": null,
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 17
+          }
+        ],
+        "problems": [
+          {
+            "@id": "/problems/77",
+            "@type": "Problem",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 77
+          },
+          {
+            "@id": "/problems/78",
+            "@type": "Problem",
+            "updatedBy": {
+              "@id": "/users/38",
+              "@type": "User",
+              "username": "Tina",
+              "email": "tina@minthdesign.com",
+              "roles": ["ROLE_USER"],
+              "firstName": "",
+              "lastName": "",
+              "active": true,
+              "validated": true,
+              "createdAt": "2021-05-18T08:13:22+00:00",
+              "deletedAt": null,
+              "objectRoles": [],
+              "projectMemberships": [
+                {
+                  "@id": "/project_memberships/project=61;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung",
+                  "role": "writer",
+                  "skills": "Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=80;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=81;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "Gestaltung Gestaltung",
+                  "role": "coordinator",
+                  "skills": "Gestaltung Gestaltung",
+                  "user": "/users/38"
+                },
+                {
+                  "@id": "/project_memberships/project=94;user=38",
+                  "@type": "ProjectMembership",
+                  "motivation": "etwas für die jüngeren unserer Gesellschaft bieten",
+                  "role": "coordinator",
+                  "skills": "Nutzungskonzepte",
+                  "user": "/users/38"
+                }
+              ],
+              "id": 38
+            },
+            "id": 78
+          }
+        ],
+        "proposals": [],
+        "slug": "bushaltestellen-als-ausstellungsraum",
+        "state": "public",
+        "title": "Bushaltestellen als Ausstellungsraum",
+        "id": 80
+      },
+      "role": "writer",
+      "skills": "Ich kann testen."
+    },
+    {
+      "@id": "/project_memberships/project=88;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "adassdasdasdasdsad",
+      "project": {
+        "@id": "/projects/88",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [
+          {
+            "@id": "/fraction_details/28",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/16",
+              "@type": "Fraction",
+              "id": 16
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 28
+          },
+          {
+            "@id": "/fraction_details/29",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/20",
+              "@type": "Fraction",
+              "id": 20
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 29
+          },
+          {
+            "@id": "/fraction_details/30",
+            "@type": "FractionDetails",
+            "fraction": {
+              "@id": "/fractions/21",
+              "@type": "Fraction",
+              "id": 21
+            },
+            "interests": [],
+            "teamContact": null,
+            "updatedBy": "/users/35",
+            "id": 30
+          }
+        ],
+        "locked": false,
+        "memberships": ["/project_memberships/project=88;user=35"],
+        "partners": [],
+        "problems": [
+          {
+            "@id": "/problems/79",
+            "@type": "Problem",
+            "updatedBy": "/users/35",
+            "id": 79
+          }
+        ],
+        "proposals": [],
+        "slug": "kategorientest",
+        "state": "private",
+        "title": "Kategorientest",
+        "id": 88
+      },
+      "role": "coordinator",
+      "skills": "asdasdadasdasdasdasd"
+    },
+    {
+      "@id": "/project_memberships/project=95;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "test Motivation",
+      "project": {
+        "@id": "/projects/95",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": ["/project_memberships/project=95;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "project-delete-test",
+        "state": "public",
+        "title": "Project delete test",
+        "id": 95
+      },
+      "role": "coordinator",
+      "skills": "test Motivation"
+    },
+    {
+      "@id": "/project_memberships/project=96;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Meine Motivation ist...",
+      "project": {
+        "@id": "/projects/96",
+        "@type": "Project",
+        "actionMandates": [],
+        "arguments": [],
+        "counterArguments": [],
+        "fractionDetails": [],
+        "locked": false,
+        "memberships": ["/project_memberships/project=96;user=35"],
+        "partners": [],
+        "problems": [],
+        "proposals": [],
+        "slug": "test-test-test",
+        "state": "private",
+        "title": "Test test test",
+        "id": 96
+      },
+      "role": "coordinator",
+      "skills": "Ich habe Erfahrung mit...."
+    }
+  ],
+  "id": 35
+}

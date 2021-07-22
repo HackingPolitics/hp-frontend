@@ -1,0 +1,119 @@
+{
+  "@context": "/contexts/Project",
+  "@id": "/projects/96",
+  "@type": "Project",
+  "actionMandates": [],
+  "arguments": [],
+  "categories": [
+    {
+      "@id": "/categories/6",
+      "@type": "Category",
+      "name": "Bauen & Wohnen",
+      "slug": "bauen-wohnen",
+      "id": 6
+    },
+    {
+      "@id": "/categories/10",
+      "@type": "Category",
+      "name": "Mobilität & Logistik",
+      "slug": "mobilitat-logistik",
+      "id": 10
+    }
+  ],
+  "council": {
+    "@id": "/councils/8",
+    "@type": "Council",
+    "active": true,
+    "fractions": [
+      {
+        "@id": "/fractions/27",
+        "@type": "Fraction",
+        "active": true,
+        "color": "ff0000",
+        "memberCount": 24,
+        "name": "SPD",
+        "url": "",
+        "id": 27
+      },
+      {
+        "@id": "/fractions/28",
+        "@type": "Fraction",
+        "active": false,
+        "color": "000000",
+        "memberCount": 12,
+        "name": "Philipp Munzert sadasd",
+        "url": "phmu.de",
+        "id": 28
+      }
+    ],
+    "federalState": {
+      "@id": "/federal_states/14",
+      "@type": "FederalState",
+      "id": 14
+    },
+    "headOfAdministration": "Oberbürgermeister",
+    "headOfAdministrationTitle": "Dirk Hilbert sdfsdf",
+    "location": "Dresden",
+    "slug": "stadtrat-test-222",
+    "title": "Stadtrat Test 222",
+    "updatedAt": "2021-07-12T12:04:56+00:00",
+    "updatedBy": {
+      "@id": "/users/35",
+      "@type": "User",
+      "username": "pm",
+      "firstName": "",
+      "lastName": "",
+      "validated": true,
+      "id": 35
+    },
+    "url": "",
+    "validatedAt": null,
+    "wikipediaUrl": "",
+    "zipArea": "01069",
+    "id": 8
+  },
+  "counterArguments": [],
+  "createdAt": "2021-07-17T11:56:09+00:00",
+  "createdBy": {
+    "@id": "/users/35",
+    "@type": "User",
+    "username": "pm",
+    "firstName": "",
+    "lastName": "",
+    "validated": true,
+    "id": 35
+  },
+  "deletedAt": null,
+  "description": "Am Ende sollen alle Schulkinder einen Laptop haben, um besser lernen zu können",
+  "featureImage": "https://images.unsplash.com/photo-1546188994-07c34f6e5e1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNDUxOTV8MHwxfHNlYXJjaHwyfHxmdXR1cmV8ZW58MHx8fHwxNjI2NTIyMDE4&ixlib=rb-1.2.1&q=80&w=1080",
+  "fractionDetails": [],
+  "impact": "",
+  "locked": false,
+  "memberships": [
+    {
+      "@id": "/project_memberships/project=96;user=35",
+      "@type": "ProjectMembership",
+      "motivation": "Meine Motivation ist...",
+      "role": "coordinator",
+      "skills": "Ich habe Erfahrung mit....",
+      "user": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      }
+    }
+  ],
+  "partners": [],
+  "problems": [],
+  "proposals": [],
+  "slug": "test-test-test",
+  "state": "private",
+  "title": "Test test test",
+  "topic": "Laptops für alle Schülerinnen und Schüler",
+  "updatedAt": "2021-07-17T11:56:09+00:00",
+  "id": 96
+}

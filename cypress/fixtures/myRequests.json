@@ -1,0 +1,4183 @@
+{
+  "@context": "/contexts/Project",
+  "@id": "/projects",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/projects/49",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [
+        {
+          "@id": "/categories/29",
+          "@type": "Category",
+          "name": "Soziales & Gesundheit",
+          "slug": "soziales-gesundheit",
+          "id": 29
+        }
+      ],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "id": 1
+      },
+      "counterArguments": [
+        {
+          "@id": "/counter_arguments/75",
+          "@type": "CounterArgument",
+          "description": "Tierschutzgesetze sind streng",
+          "negations": [],
+          "priority": 0,
+          "updatedAt": "2021-06-30T08:58:23+00:00",
+          "updatedBy": {
+            "@id": "/users/46",
+            "@type": "User",
+            "username": "Frieder",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 46
+          },
+          "usages": [],
+          "id": 75
+        }
+      ],
+      "createdAt": "2021-06-30T08:32:54+00:00",
+      "createdBy": {
+        "@id": "/users/46",
+        "@type": "User",
+        "username": "Frieder",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 46
+      },
+      "deletedAt": null,
+      "description": "ich habe überall in Dresden nicht mehr als 10 Minuten Fußweg zum nächsten Katzencafe",
+      "featureImage": "",
+      "fractionDetails": [],
+      "impact": "Testd",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=49;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ich will auch Katzenkaffee trinken und außerdem den Bewerbungsprozess testen.",
+          "role": "applicant",
+          "skills": "Ich kann gut testen.",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        },
+        {
+          "@id": "/project_memberships/project=49;user=46",
+          "@type": "ProjectMembership",
+          "motivation": "Kuschelnot",
+          "role": "coordinator",
+          "skills": "Katzen streicheln",
+          "user": {
+            "@id": "/users/46",
+            "@type": "User",
+            "username": "Frieder",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 46
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [
+        {
+          "@id": "/problems/54",
+          "@type": "Problem",
+          "description": "Menschen sind unterkuschelt",
+          "priority": 0,
+          "updatedAt": "2021-06-30T08:53:49+00:00",
+          "updatedBy": {
+            "@id": "/users/46",
+            "@type": "User",
+            "username": "Frieder",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 46
+          },
+          "usages": [],
+          "id": 54
+        },
+        {
+          "@id": "/problems/57",
+          "@type": "Problem",
+          "description": "es gibt viele einsame Katzen",
+          "priority": 0,
+          "updatedAt": "2021-06-30T09:02:01+00:00",
+          "updatedBy": {
+            "@id": "/users/46",
+            "@type": "User",
+            "username": "Frieder",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 46
+          },
+          "usages": [],
+          "id": 57
+        },
+        {
+          "@id": "/problems/58",
+          "@type": "Problem",
+          "description": "noch ein weiteres Problem",
+          "priority": 0,
+          "updatedAt": "2021-06-30T09:05:02+00:00",
+          "updatedBy": {
+            "@id": "/users/46",
+            "@type": "User",
+            "username": "Frieder",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 46
+          },
+          "usages": [],
+          "id": 58
+        }
+      ],
+      "proposals": [],
+      "slug": "katzencafes",
+      "state": "public",
+      "title": "Katzencafes",
+      "topic": "Flächendeckend Katzencafes im ganzen Stadtgebiet Dresdens",
+      "updatedAt": "2021-07-09T15:28:24+00:00",
+      "id": 49
+    },
+    {
+      "@id": "/projects/61",
+      "@type": "Project",
+      "actionMandates": [
+        {
+          "@id": "/action_mandates/1",
+          "@type": "ActionMandate",
+          "description": "test",
+          "priority": 0,
+          "updatedAt": "2021-07-07T17:43:14+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 1
+        }
+      ],
+      "arguments": [
+        {
+          "@id": "/arguments/18",
+          "@type": "Argument",
+          "description": "Ein weiteres Problem Update",
+          "priority": 0,
+          "updatedAt": "2021-07-05T15:09:21+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 18
+        },
+        {
+          "@id": "/arguments/20",
+          "@type": "Argument",
+          "description": "Alles geil",
+          "priority": 1,
+          "updatedAt": "2021-07-05T15:08:28+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 20
+        }
+      ],
+      "categories": [
+        {
+          "@id": "/categories/27",
+          "@type": "Category",
+          "name": "Stadtgrün & Stadtklima",
+          "slug": "stadtgrun-stadtklima",
+          "id": 27
+        },
+        {
+          "@id": "/categories/28",
+          "@type": "Category",
+          "name": "Bürgerbeteiligung & Verwaltung",
+          "slug": "burgerbeteiligung-verwaltung",
+          "id": 28
+        }
+      ],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          {
+            "@id": "/fractions/26",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2d9db9",
+            "memberCount": 4,
+            "name": "Dissidenten",
+            "url": "",
+            "id": 26
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "",
+        "title": "Stadtrat DD",
+        "updatedAt": "2021-07-05T13:49:45+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "www.dresden.de",
+        "validatedAt": null,
+        "wikipediaUrl": "",
+        "zipArea": "01259",
+        "id": 1
+      },
+      "counterArguments": [
+        {
+          "@id": "/counter_arguments/78",
+          "@type": "CounterArgument",
+          "description": "Ein neues Problem",
+          "negations": [
+            {
+              "@id": "/negations/112",
+              "@type": "Negation",
+              "description": "sdfsdfsdfsdfsdfsdfsdfsd",
+              "priority": 0,
+              "updatedAt": "2021-07-05T14:46:39+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 112
+            }
+          ],
+          "priority": 0,
+          "updatedAt": "2021-07-05T14:44:09+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 78
+        },
+        {
+          "@id": "/counter_arguments/79",
+          "@type": "CounterArgument",
+          "description": "Ein weiteres Problem",
+          "negations": [
+            {
+              "@id": "/negations/113",
+              "@type": "Negation",
+              "description": "qweqewqweqwe",
+              "priority": 0,
+              "updatedAt": "2021-07-05T14:47:06+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 113
+            },
+            {
+              "@id": "/negations/114",
+              "@type": "Negation",
+              "description": "uzizuizuizui",
+              "priority": 0,
+              "updatedAt": "2021-07-05T14:47:10+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 114
+            }
+          ],
+          "priority": 1,
+          "updatedAt": "2021-07-07T14:12:03+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 79
+        }
+      ],
+      "createdAt": "2021-07-05T04:11:17+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "Bürgerbeteiligung wird so einfach wie Essen kaufen",
+      "featureImage": "https://images.unsplash.com/photo-1485740112426-0c2549fa8c86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNDUxOTV8MHwxfHNlYXJjaHwxfHxmdXR1cmV8ZW58MHx8fHwxNjI1ODEwNTE1&ixlib=rb-1.2.1&q=80&w=1080",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/32",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/24",
+              "@type": "FractionInterest",
+              "description": "Liberalisierung der Wirtschaft",
+              "updatedAt": "2021-07-08T06:39:58+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 24
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-08T06:39:26+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 32
+        }
+      ],
+      "impact": "test impact asdadsasd updatex<yx<yx<yx<yx<y",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=61;user=28",
+          "@type": "ProjectMembership",
+          "motivation": "alles, geiles Thema etc.",
+          "role": "writer",
+          "skills": "Schreiben; netzwerken",
+          "user": {
+            "@id": "/users/28",
+            "@type": "User",
+            "username": "philipphp",
+            "firstName": "Philipp",
+            "lastName": "Munzert Update",
+            "validated": true,
+            "id": 28
+          }
+        },
+        {
+          "@id": "/project_memberships/project=61;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ic beteilige mich gern",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        },
+        {
+          "@id": "/project_memberships/project=61;user=38",
+          "@type": "ProjectMembership",
+          "motivation": "Gestaltung",
+          "role": "writer",
+          "skills": "Gestaltung",
+          "user": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [
+        {
+          "@id": "/problems/67",
+          "@type": "Problem",
+          "description": "Es gibt zu wenig Bürgerbeteiligung",
+          "priority": 0,
+          "updatedAt": "2021-07-05T09:15:19+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 67
+        }
+      ],
+      "proposals": [],
+      "slug": "vom-analogen-beteiligungsverfahren-zur-digitalen-unterstutzungsplattform",
+      "state": "public",
+      "title": "Vom analogen Beteiligungsverfahren zur digitalen Unterstützungsplattform",
+      "topic": "Irgendwas mit Bürgerbeteiligung",
+      "updatedAt": "2021-07-09T15:22:31+00:00",
+      "id": 61
+    },
+    {
+      "@id": "/projects/62",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          {
+            "@id": "/fractions/26",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2d9db9",
+            "memberCount": 4,
+            "name": "Dissidenten",
+            "url": "",
+            "id": 26
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "",
+        "title": "Stadtrat DD",
+        "updatedAt": "2021-07-05T13:49:45+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "www.dresden.de",
+        "validatedAt": null,
+        "wikipediaUrl": "",
+        "zipArea": "01259",
+        "id": 1
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T04:11:17+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "Bürgerbeteiligung wird so einfach wie Essen kaufen",
+      "featureImage": "https://images.unsplash.com/photo-1494172961521-33799ddd43a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNDUxOTV8MHwxfHNlYXJjaHwyfHx2b3RlfGVufDB8fHx8MTYyNTgyNTQzOA&ixlib=rb-1.2.1&q=80&w=1080",
+      "fractionDetails": [],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=62;user=28",
+          "@type": "ProjectMembership",
+          "motivation": "asaSasaSasaSas",
+          "role": "writer",
+          "skills": "aSasasasaSasas",
+          "user": {
+            "@id": "/users/28",
+            "@type": "User",
+            "username": "philipphp",
+            "firstName": "Philipp",
+            "lastName": "Munzert Update",
+            "validated": true,
+            "id": 28
+          }
+        },
+        {
+          "@id": "/project_memberships/project=62;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ic beteilige mich gern",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "vom-analogen-beteiligungsverfahren-zur-digitalen-unterstutzungsplattform-1",
+      "state": "public",
+      "title": "Vom analogen Beteiligungsverfahren zur digitalen Unterstützungsplattform",
+      "topic": "Irgendwas mit Bürgerbeteiligung",
+      "updatedAt": "2021-07-09T10:10:41+00:00",
+      "id": 62
+    },
+    {
+      "@id": "/projects/65",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/2",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          {
+            "@id": "/fractions/8",
+            "@type": "Fraction",
+            "active": true,
+            "color": "59de12",
+            "memberCount": 13,
+            "name": "Bündnis 90",
+            "url": "https://phmu.de/",
+            "id": 8
+          },
+          {
+            "@id": "/fractions/24",
+            "@type": "Fraction",
+            "active": true,
+            "color": "18469a",
+            "memberCount": 2,
+            "name": "BBF",
+            "url": "https://zukunftsstadt.de/",
+            "id": 24
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/8",
+          "@type": "FederalState",
+          "id": 8
+        },
+        "headOfAdministration": "Munzert",
+        "headOfAdministrationTitle": "Boss",
+        "location": "Dresden",
+        "slug": "stadtrat-test",
+        "title": "Stadtrat Test",
+        "updatedAt": "2021-07-07T13:17:24+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "phmu.de",
+        "validatedAt": null,
+        "wikipediaUrl": "asdasdas",
+        "zipArea": "01259",
+        "id": 2
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T08:09:52+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "dasdsad",
+      "featureImage": "",
+      "fractionDetails": [],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=65;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "dwdadsaddsadsa",
+          "role": "coordinator",
+          "skills": "sdsadsadasdasd",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "login-test",
+      "state": "private",
+      "title": "Login Test",
+      "topic": "sdasdsadas",
+      "updatedAt": "2021-07-05T08:09:52+00:00",
+      "id": 65
+    },
+    {
+      "@id": "/projects/66",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/2",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          {
+            "@id": "/fractions/8",
+            "@type": "Fraction",
+            "active": true,
+            "color": "59de12",
+            "memberCount": 13,
+            "name": "Bündnis 90",
+            "url": "https://phmu.de/",
+            "id": 8
+          },
+          {
+            "@id": "/fractions/24",
+            "@type": "Fraction",
+            "active": true,
+            "color": "18469a",
+            "memberCount": 2,
+            "name": "BBF",
+            "url": "https://zukunftsstadt.de/",
+            "id": 24
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/8",
+          "@type": "FederalState",
+          "id": 8
+        },
+        "headOfAdministration": "Munzert",
+        "headOfAdministrationTitle": "Boss",
+        "location": "Dresden",
+        "slug": "stadtrat-test",
+        "title": "Stadtrat Test",
+        "updatedAt": "2021-07-07T13:17:24+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "phmu.de",
+        "validatedAt": null,
+        "wikipediaUrl": "asdasdas",
+        "zipArea": "01259",
+        "id": 2
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T08:09:52+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "dasdsad",
+      "featureImage": "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNDUxOTV8MHwxfHNlYXJjaHwxMHx8dGVzdHxlbnwwfHx8fDE2MjU4MjU0NTI&ixlib=rb-1.2.1&q=80&w=1080",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/6",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/11",
+              "@type": "FractionInterest",
+              "description": "asdasdasd",
+              "updatedAt": "2021-07-06T13:38:21+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 11
+            }
+          ],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:38:10+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 6
+        },
+        {
+          "@id": "/fraction_details/7",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/12",
+              "@type": "FractionInterest",
+              "description": "asdasd",
+              "updatedAt": "2021-07-06T13:38:25+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 12
+            }
+          ],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:38:30+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 7
+        },
+        {
+          "@id": "/fraction_details/8",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/10",
+              "@type": "FractionInterest",
+              "description": "sdasdasd",
+              "updatedAt": "2021-07-06T13:38:18+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 10
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:38:03+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 8
+        }
+      ],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=66;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "dwdadsaddsadsa",
+          "role": "coordinator",
+          "skills": "sdsadsadasdasd",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [
+        {
+          "@id": "/partners/13",
+          "@type": "Partner",
+          "contactEmail": "philipp@phmu.de",
+          "contactName": "Philipp Munzert",
+          "contactPhone": "017631536172",
+          "name": "asdsa",
+          "role": "",
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:40:08+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "url": "",
+          "id": 13
+        },
+        {
+          "@id": "/partners/14",
+          "@type": "Partner",
+          "contactEmail": "philipp@phmu.de",
+          "contactName": "Philipp Munzert",
+          "contactPhone": "017631536172",
+          "name": "Die Grünen",
+          "role": "",
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:40:23+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "url": "",
+          "id": 14
+        }
+      ],
+      "problems": [
+        {
+          "@id": "/problems/68",
+          "@type": "Problem",
+          "description": "Ein neues Problem",
+          "priority": 1,
+          "updatedAt": "2021-07-05T15:28:27+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 68
+        },
+        {
+          "@id": "/problems/69",
+          "@type": "Problem",
+          "description": "Ein weiteres Problem",
+          "priority": 0,
+          "updatedAt": "2021-07-05T15:28:19+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 69
+        },
+        {
+          "@id": "/problems/70",
+          "@type": "Problem",
+          "description": "Ein weiteres Problem",
+          "priority": 2,
+          "updatedAt": "2021-07-05T15:28:27+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 70
+        },
+        {
+          "@id": "/problems/71",
+          "@type": "Problem",
+          "description": "Ein neues Problem",
+          "priority": 0,
+          "updatedAt": "2021-07-05T15:28:32+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 71
+        },
+        {
+          "@id": "/problems/72",
+          "@type": "Problem",
+          "description": "Ein weiteres Problem",
+          "priority": 0,
+          "updatedAt": "2021-07-05T15:29:00+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 72
+        }
+      ],
+      "proposals": [],
+      "slug": "login-test-1",
+      "state": "public",
+      "title": "Login Test",
+      "topic": "sdasdsadas",
+      "updatedAt": "2021-07-09T10:10:55+00:00",
+      "id": 66
+    },
+    {
+      "@id": "/projects/74",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/2",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          {
+            "@id": "/fractions/8",
+            "@type": "Fraction",
+            "active": true,
+            "color": "59de12",
+            "memberCount": 13,
+            "name": "Bündnis 90",
+            "url": "https://phmu.de/",
+            "id": 8
+          },
+          {
+            "@id": "/fractions/24",
+            "@type": "Fraction",
+            "active": true,
+            "color": "18469a",
+            "memberCount": 2,
+            "name": "BBF",
+            "url": "https://zukunftsstadt.de/",
+            "id": 24
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/8",
+          "@type": "FederalState",
+          "id": 8
+        },
+        "headOfAdministration": "Munzert",
+        "headOfAdministrationTitle": "Boss",
+        "location": "Dresden",
+        "slug": "stadtrat-test",
+        "title": "Stadtrat Test",
+        "updatedAt": "2021-07-07T13:17:24+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "phmu.de",
+        "validatedAt": null,
+        "wikipediaUrl": "asdasdas",
+        "zipArea": "01259",
+        "id": 2
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T09:09:26+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "sdfsdafsdfsdfsadfasdfasddf",
+      "featureImage": "",
+      "fractionDetails": [],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=74;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "sdfsdfdsfsfdsfsdfsdf",
+          "role": "coordinator",
+          "skills": "sdfsdfsdfsdfsdfsdfsdf",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "registertest-22-1",
+      "state": "private",
+      "title": "Registertest 22",
+      "topic": "fdsfdsfsdfsddfsdfsdfdsfdasfs",
+      "updatedAt": "2021-07-05T09:09:26+00:00",
+      "id": 74
+    },
+    {
+      "@id": "/projects/75",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/2",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          {
+            "@id": "/fractions/8",
+            "@type": "Fraction",
+            "active": true,
+            "color": "59de12",
+            "memberCount": 13,
+            "name": "Bündnis 90",
+            "url": "https://phmu.de/",
+            "id": 8
+          },
+          {
+            "@id": "/fractions/24",
+            "@type": "Fraction",
+            "active": true,
+            "color": "18469a",
+            "memberCount": 2,
+            "name": "BBF",
+            "url": "https://zukunftsstadt.de/",
+            "id": 24
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/8",
+          "@type": "FederalState",
+          "id": 8
+        },
+        "headOfAdministration": "Munzert",
+        "headOfAdministrationTitle": "Boss",
+        "location": "Dresden",
+        "slug": "stadtrat-test",
+        "title": "Stadtrat Test",
+        "updatedAt": "2021-07-07T13:17:24+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "phmu.de",
+        "validatedAt": null,
+        "wikipediaUrl": "asdasdas",
+        "zipArea": "01259",
+        "id": 2
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T09:09:27+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "sdfsdafsdfsdfsadfasdfasddf",
+      "featureImage": "",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/9",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          "interests": [],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:47:32+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 9
+        }
+      ],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=75;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "sdfsdfdsfsfdsfsdfsdf",
+          "role": "coordinator",
+          "skills": "sdfsdfsdfsdfsdfsdfsdf",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "registertest-22-2",
+      "state": "private",
+      "title": "Registertest 22",
+      "topic": "fdsfdsfsdfsddfsdfsdfdsfdasfs",
+      "updatedAt": "2021-07-06T13:47:32+00:00",
+      "id": 75
+    },
+    {
+      "@id": "/projects/76",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/2",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          {
+            "@id": "/fractions/8",
+            "@type": "Fraction",
+            "active": true,
+            "color": "59de12",
+            "memberCount": 13,
+            "name": "Bündnis 90",
+            "url": "https://phmu.de/",
+            "id": 8
+          },
+          {
+            "@id": "/fractions/24",
+            "@type": "Fraction",
+            "active": true,
+            "color": "18469a",
+            "memberCount": 2,
+            "name": "BBF",
+            "url": "https://zukunftsstadt.de/",
+            "id": 24
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/8",
+          "@type": "FederalState",
+          "id": 8
+        },
+        "headOfAdministration": "Munzert",
+        "headOfAdministrationTitle": "Boss",
+        "location": "Dresden",
+        "slug": "stadtrat-test",
+        "title": "Stadtrat Test",
+        "updatedAt": "2021-07-07T13:17:24+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "phmu.de",
+        "validatedAt": null,
+        "wikipediaUrl": "asdasdas",
+        "zipArea": "01259",
+        "id": 2
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T12:25:32+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "asdasdasdasdasd",
+      "featureImage": "",
+      "fractionDetails": [],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=76;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "asdasdasdsaasdasdasd",
+          "role": "coordinator",
+          "skills": "asdasdasdasdasdasd",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "asdadsasdasdasd",
+      "state": "private",
+      "title": "asdadsasdasdasd",
+      "topic": "asasdasdasdasdasdasdasdasd",
+      "updatedAt": "2021-07-05T12:25:32+00:00",
+      "id": 76
+    },
+    {
+      "@id": "/projects/77",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          {
+            "@id": "/fractions/26",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2d9db9",
+            "memberCount": 4,
+            "name": "Dissidenten",
+            "url": "",
+            "id": 26
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "",
+        "title": "Stadtrat DD",
+        "updatedAt": "2021-07-05T13:49:45+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "www.dresden.de",
+        "validatedAt": null,
+        "wikipediaUrl": "",
+        "zipArea": "01259",
+        "id": 1
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-05T15:59:14+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "sadasdasdasdasdasdasd",
+      "featureImage": "",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/1",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "Udo Möller",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/1",
+              "@type": "FractionInterest",
+              "description": "Test",
+              "updatedAt": "2021-07-06T11:53:22+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 1
+            },
+            {
+              "@id": "/fraction_interests/2",
+              "@type": "FractionInterest",
+              "description": "Noch eins",
+              "updatedAt": "2021-07-06T12:22:01+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 2
+            },
+            {
+              "@id": "/fraction_interests/3",
+              "@type": "FractionInterest",
+              "description": "Da geht mehr",
+              "updatedAt": "2021-07-06T12:25:01+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 3
+            },
+            {
+              "@id": "/fraction_interests/4",
+              "@type": "FractionInterest",
+              "description": "viel mehr",
+              "updatedAt": "2021-07-06T12:25:07+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 4
+            }
+          ],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:33:13+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 1
+        },
+        {
+          "@id": "/fraction_details/2",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "Udo Möller",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/5",
+              "@type": "FractionInterest",
+              "description": "CDUUUU",
+              "updatedAt": "2021-07-06T12:29:10+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 5
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:33:03+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 2
+        },
+        {
+          "@id": "/fraction_details/3",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/9",
+              "@type": "FractionInterest",
+              "description": "asdasd",
+              "updatedAt": "2021-07-06T12:33:59+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 9
+            }
+          ],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:33:14+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 3
+        },
+        {
+          "@id": "/fraction_details/4",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/6",
+              "@type": "FractionInterest",
+              "description": "SPDDDD",
+              "updatedAt": "2021-07-06T12:31:06+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 6
+            },
+            {
+              "@id": "/fraction_interests/8",
+              "@type": "FractionInterest",
+              "description": "asdasdasd",
+              "updatedAt": "2021-07-06T12:33:55+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 8
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:33:04+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 4
+        },
+        {
+          "@id": "/fraction_details/5",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/7",
+              "@type": "FractionInterest",
+              "description": "TEST again",
+              "updatedAt": "2021-07-06T12:31:19+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 7
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-06T13:27:06+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 5
+        }
+      ],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=77;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "asdasdasdasdasdasdsdadasd",
+          "role": "coordinator",
+          "skills": "asdasdasdasdasdasdasdasd",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "fraktionschart-test",
+      "state": "private",
+      "title": "Fraktionschart Test",
+      "topic": "asdadasdaasdasdasdsadsadasdasd",
+      "updatedAt": "2021-07-06T13:33:14+00:00",
+      "id": 77
+    },
+    {
+      "@id": "/projects/78",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          {
+            "@id": "/fractions/26",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2d9db9",
+            "memberCount": 4,
+            "name": "Dissidenten",
+            "url": "",
+            "id": 26
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "",
+        "title": "Stadtrat DD",
+        "updatedAt": "2021-07-05T13:49:45+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "www.dresden.de",
+        "validatedAt": null,
+        "wikipediaUrl": "",
+        "zipArea": "01259",
+        "id": 1
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-07T12:30:07+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "Am Ende haben alle ein Mobiltefelon",
+      "featureImage": "",
+      "fractionDetails": [],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=78;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ich telefoniere gern",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "mobiltelefon-htc-desire-z",
+      "state": "private",
+      "title": "Mobiltelefon HTC Desire Z",
+      "topic": "Mobiltelefone für alle",
+      "updatedAt": "2021-07-07T12:30:07+00:00",
+      "id": 78
+    },
+    {
+      "@id": "/projects/79",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [
+        {
+          "@id": "/arguments/26",
+          "@type": "Argument",
+          "description": "Es wäre doch toll, wenn alle telefonierne könnten!",
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:57:45+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 26
+        },
+        {
+          "@id": "/arguments/27",
+          "@type": "Argument",
+          "description": "Leipzig macht das auch!",
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:57:53+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 27
+        },
+        {
+          "@id": "/arguments/28",
+          "@type": "Argument",
+          "description": "Und jetzt noch tin Test mit einem langen Text, damit ich sehe, ob lange Texte angezeigt werdenoder nicht und bla und bla und langer Text und bla.",
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:58:27+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 28
+        }
+      ],
+      "categories": [
+        {
+          "@id": "/categories/8",
+          "@type": "Category",
+          "name": "Kunst & Kultur",
+          "slug": "kunst-kultur",
+          "id": 8
+        },
+        {
+          "@id": "/categories/29",
+          "@type": "Category",
+          "name": "Soziales & Gesundheit",
+          "slug": "soziales-gesundheit",
+          "id": 29
+        }
+      ],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          {
+            "@id": "/fractions/26",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2d9db9",
+            "memberCount": 4,
+            "name": "Dissidenten",
+            "url": "",
+            "id": 26
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "",
+        "title": "Stadtrat DD",
+        "updatedAt": "2021-07-05T13:49:45+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "www.dresden.de",
+        "validatedAt": null,
+        "wikipediaUrl": "",
+        "zipArea": "01259",
+        "id": 1
+      },
+      "counterArguments": [
+        {
+          "@id": "/counter_arguments/85",
+          "@type": "CounterArgument",
+          "description": "zu teuer!",
+          "negations": [
+            {
+              "@id": "/negations/119",
+              "@type": "Negation",
+              "description": "Geld spielt keine Rolle!",
+              "priority": 0,
+              "updatedAt": "2021-07-07T12:52:02+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 119
+            },
+            {
+              "@id": "/negations/120",
+              "@type": "Negation",
+              "description": "Geld spielt keine Rolle!",
+              "priority": 0,
+              "updatedAt": "2021-07-07T12:53:00+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 120
+            },
+            {
+              "@id": "/negations/121",
+              "@type": "Negation",
+              "description": "Geld spielt keine Rolle!",
+              "priority": 0,
+              "updatedAt": "2021-07-07T12:53:17+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 121
+            },
+            {
+              "@id": "/negations/122",
+              "@type": "Negation",
+              "description": "Geld spielt keine Rolle!",
+              "priority": 0,
+              "updatedAt": "2021-07-07T12:53:33+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 122
+            },
+            {
+              "@id": "/negations/123",
+              "@type": "Negation",
+              "description": "Geld spielt keine Rolle!",
+              "priority": 0,
+              "updatedAt": "2021-07-07T12:54:35+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 123
+            }
+          ],
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:48:54+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 85
+        },
+        {
+          "@id": "/counter_arguments/86",
+          "@type": "CounterArgument",
+          "description": "Es gibt schon so viele Handys!",
+          "negations": [],
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:54:46+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 86
+        }
+      ],
+      "createdAt": "2021-07-07T12:30:07+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "Am Ende haben alle ein Mobiltefelon",
+      "featureImage": "",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/15",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/17",
+              "@type": "FractionInterest",
+              "description": "Die haben an sowas kein Interesse!",
+              "updatedAt": "2021-07-07T13:04:40+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 17
+            },
+            {
+              "@id": "/fraction_interests/18",
+              "@type": "FractionInterest",
+              "description": "Testetst",
+              "updatedAt": "2021-07-07T13:04:49+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 18
+            },
+            {
+              "@id": "/fraction_interests/19",
+              "@type": "FractionInterest",
+              "description": "test",
+              "updatedAt": "2021-07-07T13:05:01+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 19
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T13:10:22+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 15
+        },
+        {
+          "@id": "/fraction_details/16",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          "interests": [],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T13:06:54+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 16
+        },
+        {
+          "@id": "/fraction_details/17",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/15",
+              "@type": "FractionInterest",
+              "description": "Wenn es für Soziales ist, sind die dabei",
+              "updatedAt": "2021-07-07T13:02:36+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 15
+            },
+            {
+              "@id": "/fraction_interests/16",
+              "@type": "FractionInterest",
+              "description": "Wenn es um Mobiltelefone geht, sind sie dabei!",
+              "updatedAt": "2021-07-07T13:02:51+00:00",
+              "updatedBy": {
+                "@id": "/users/35",
+                "@type": "User",
+                "username": "pm",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 35
+              },
+              "usages": [],
+              "id": 16
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T13:07:01+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 17
+        },
+        {
+          "@id": "/fraction_details/18",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          "interests": [],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T13:01:52+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 18
+        },
+        {
+          "@id": "/fraction_details/19",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          "interests": [],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T13:01:51+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 19
+        }
+      ],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=79;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ich telefoniere gern",
+          "role": "coordinator",
+          "skills": "Ich gehe gern wählen",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [
+        {
+          "@id": "/partners/16",
+          "@type": "Partner",
+          "contactEmail": "norbert.rost@regionalentwicklung.de",
+          "contactName": "Norbert Rost",
+          "contactPhone": "015253951140",
+          "name": "Lokale Agenda für Dresden e.V.",
+          "role": "",
+          "teamContact": null,
+          "updatedAt": "2021-07-07T13:08:38+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "url": "",
+          "id": 16
+        }
+      ],
+      "problems": [
+        {
+          "@id": "/problems/74",
+          "@type": "Problem",
+          "description": "Wir haben alle. einfach viel zu wenige Mobiltelefone, also will ich, dass es mehr, mehr, mehr, mehr, mehr und noch viel mehr mehr mehr werden",
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:41:46+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 74
+        },
+        {
+          "@id": "/problems/76",
+          "@type": "Problem",
+          "description": "Es gibt zu wenig Bürgerbeteiligung",
+          "priority": 0,
+          "updatedAt": "2021-07-07T12:45:19+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 76
+        }
+      ],
+      "proposals": [],
+      "slug": "mobiltelefon-htc-desire-z-1",
+      "state": "private",
+      "title": "Mobiltelefon HTC Desire Z",
+      "topic": "Mobiltelefone für alle - dies ist ein Test, ob die Änderung übernommen wird",
+      "updatedAt": "2021-07-07T13:10:22+00:00",
+      "id": 79
+    },
+    {
+      "@id": "/projects/80",
+      "@type": "Project",
+      "actionMandates": [
+        {
+          "@id": "/action_mandates/2",
+          "@type": "ActionMandate",
+          "description": "Number 1",
+          "priority": 0,
+          "updatedAt": "2021-07-08T13:08:54+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 2
+        },
+        {
+          "@id": "/action_mandates/4",
+          "@type": "ActionMandate",
+          "description": "argument 1",
+          "priority": 0,
+          "updatedAt": "2021-07-09T05:48:52+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 4
+        }
+      ],
+      "arguments": [
+        {
+          "@id": "/arguments/29",
+          "@type": "Argument",
+          "description": "argument 1",
+          "priority": 0,
+          "updatedAt": "2021-07-07T14:14:16+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 29
+        },
+        {
+          "@id": "/arguments/30",
+          "@type": "Argument",
+          "description": "argument 2",
+          "priority": 1,
+          "updatedAt": "2021-07-07T14:14:23+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 30
+        }
+      ],
+      "categories": [
+        {
+          "@id": "/categories/8",
+          "@type": "Category",
+          "name": "Kunst & Kultur",
+          "slug": "kunst-kultur",
+          "id": 8
+        },
+        {
+          "@id": "/categories/10",
+          "@type": "Category",
+          "name": "Mobilität & Logistik",
+          "slug": "mobilitat-logistik",
+          "id": 10
+        }
+      ],
+      "council": {
+        "@id": "/councils/1",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/9",
+            "@type": "Fraction",
+            "active": false,
+            "color": "6385d4",
+            "memberCount": 15,
+            "name": "AfD",
+            "url": "https://www.afdsachsen.de/",
+            "id": 9
+          },
+          {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          {
+            "@id": "/fractions/26",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2d9db9",
+            "memberCount": 4,
+            "name": "Dissidenten",
+            "url": "",
+            "id": 26
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "",
+        "title": "Stadtrat DD",
+        "updatedAt": "2021-07-05T13:49:45+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "www.dresden.de",
+        "validatedAt": null,
+        "wikipediaUrl": "",
+        "zipArea": "01259",
+        "id": 1
+      },
+      "counterArguments": [
+        {
+          "@id": "/counter_arguments/87",
+          "@type": "CounterArgument",
+          "description": "Number 1",
+          "negations": [
+            {
+              "@id": "/negations/124",
+              "@type": "Negation",
+              "description": "argument 1",
+              "priority": 0,
+              "updatedAt": "2021-07-07T14:14:02+00:00",
+              "updatedBy": {
+                "@id": "/users/38",
+                "@type": "User",
+                "username": "Tina",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 38
+              },
+              "usages": [],
+              "id": 124
+            }
+          ],
+          "priority": 0,
+          "updatedAt": "2021-07-07T14:13:50+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 87
+        },
+        {
+          "@id": "/counter_arguments/89",
+          "@type": "CounterArgument",
+          "description": "argument 1",
+          "negations": [
+            {
+              "@id": "/negations/125",
+              "@type": "Negation",
+              "description": "Number 1",
+              "priority": 0,
+              "updatedAt": "2021-07-08T13:09:24+00:00",
+              "updatedBy": {
+                "@id": "/users/38",
+                "@type": "User",
+                "username": "Tina",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 38
+              },
+              "usages": [],
+              "id": 125
+            }
+          ],
+          "priority": 1,
+          "updatedAt": "2021-07-08T13:09:33+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 89
+        }
+      ],
+      "createdAt": "2021-07-07T13:43:42+00:00",
+      "createdBy": {
+        "@id": "/users/38",
+        "@type": "User",
+        "username": "Tina",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 38
+      },
+      "deletedAt": null,
+      "description": "Ausstellungsraum",
+      "featureImage": "https://images.unsplash.com/photo-1622495506467-86a4840011c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNDUxOTV8MXwxfHNlYXJjaHwxfHxjaXR5fGVufDB8fHx8MTYyNTgwOTEwNQ&ixlib=rb-1.2.1&q=80&w=1080",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/20",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/10",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.cdu-sachsen.de/",
+            "id": 10
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/20",
+              "@type": "FractionInterest",
+              "description": "Wir sind die CDU und haben folgende Position...",
+              "updatedAt": "2021-07-07T14:14:52+00:00",
+              "updatedBy": {
+                "@id": "/users/38",
+                "@type": "User",
+                "username": "Tina",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 38
+              },
+              "usages": [],
+              "id": 20
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T14:58:32+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "id": 20
+        },
+        {
+          "@id": "/fraction_details/21",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/11",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ffee00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.fdp-sachsen.de/",
+            "id": 11
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/21",
+              "@type": "FractionInterest",
+              "description": "Wir sind einer Meinung mit der CDU...nur sind wir jünger und kennen mehr Thomase, check!",
+              "updatedAt": "2021-07-07T14:16:25+00:00",
+              "updatedBy": {
+                "@id": "/users/38",
+                "@type": "User",
+                "username": "Tina",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 38
+              },
+              "usages": [],
+              "id": 21
+            }
+          ],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-08T13:09:44+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "id": 21
+        },
+        {
+          "@id": "/fraction_details/22",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/13",
+            "@type": "Fraction",
+            "active": true,
+            "color": "5a9a22",
+            "memberCount": 15,
+            "name": "Bündnis 90/ Die Grüne",
+            "url": "https://www.gruene-sachsen.de/",
+            "id": 13
+          },
+          "interests": [
+            {
+              "@id": "/fraction_interests/22",
+              "@type": "FractionInterest",
+              "description": "Nehmt uns! Wir haben es fast in die Mitte geschafft und eure Projekte sind unsere PR.",
+              "updatedAt": "2021-07-07T14:19:43+00:00",
+              "updatedBy": {
+                "@id": "/users/38",
+                "@type": "User",
+                "username": "Tina",
+                "firstName": "",
+                "lastName": "",
+                "validated": true,
+                "id": 38
+              },
+              "usages": [],
+              "id": 22
+            }
+          ],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T14:58:20+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "id": 22
+        },
+        {
+          "@id": "/fraction_details/23",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/14",
+            "@type": "Fraction",
+            "active": true,
+            "color": "2c2c",
+            "memberCount": 2,
+            "name": "Piraten",
+            "url": "http://piraten.de",
+            "id": 14
+          },
+          "interests": [],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T14:58:26+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "id": 23
+        },
+        {
+          "@id": "/fraction_details/24",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/12",
+            "@type": "Fraction",
+            "active": true,
+            "color": "e0001a",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.spd-sachsen.de/",
+            "id": 12
+          },
+          "interests": [],
+          "possiblePartner": false,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-08T13:09:42+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "id": 24
+        }
+      ],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=80;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "Ich will auch Bus fahren! Und außerdem den Bewerbungsprozess testen!",
+          "role": "writer",
+          "skills": "Ich kann testen.",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        },
+        {
+          "@id": "/project_memberships/project=80;user=38",
+          "@type": "ProjectMembership",
+          "motivation": "Gestaltung Gestaltung",
+          "role": "coordinator",
+          "skills": "Gestaltung Gestaltung",
+          "user": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          }
+        }
+      ],
+      "partners": [
+        {
+          "@id": "/partners/17",
+          "@type": "Partner",
+          "contactEmail": "top@tippitoppi.com",
+          "contactName": "Tip Top",
+          "contactPhone": "",
+          "name": "TippiToppi",
+          "role": "",
+          "teamContact": null,
+          "updatedAt": "2021-07-07T14:20:32+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "url": "",
+          "id": 17
+        }
+      ],
+      "problems": [
+        {
+          "@id": "/problems/77",
+          "@type": "Problem",
+          "description": "argument 1",
+          "priority": 0,
+          "updatedAt": "2021-07-07T14:13:22+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 77
+        },
+        {
+          "@id": "/problems/78",
+          "@type": "Problem",
+          "description": "argument 2",
+          "priority": 1,
+          "updatedAt": "2021-07-07T14:13:31+00:00",
+          "updatedBy": {
+            "@id": "/users/38",
+            "@type": "User",
+            "username": "Tina",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 38
+          },
+          "usages": [],
+          "id": 78
+        }
+      ],
+      "proposals": [],
+      "slug": "bushaltestellen-als-ausstellungsraum",
+      "state": "public",
+      "title": "Bushaltestellen als Ausstellungsraum",
+      "topic": "Bushaltestellen",
+      "updatedAt": "2021-07-09T05:49:24+00:00",
+      "id": 80
+    },
+    {
+      "@id": "/projects/88",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [
+        {
+          "@id": "/categories/5",
+          "@type": "Category",
+          "name": "Bildung & Forschung",
+          "slug": "bildung-forschung",
+          "id": 5
+        },
+        {
+          "@id": "/categories/6",
+          "@type": "Category",
+          "name": "Bauen & Wohnen",
+          "slug": "bauen-wohnen",
+          "id": 6
+        }
+      ],
+      "council": {
+        "@id": "/councils/6",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/15",
+            "@type": "Fraction",
+            "active": true,
+            "color": "55eef3",
+            "memberCount": 12,
+            "name": "AfD",
+            "url": "https://afd-fraktion-dresden.de/",
+            "id": 15
+          },
+          {
+            "@id": "/fractions/16",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/cdu.php",
+            "id": 16
+          },
+          {
+            "@id": "/fractions/17",
+            "@type": "Fraction",
+            "active": true,
+            "color": "cfcfcf",
+            "memberCount": 4,
+            "name": "Freie Wähler",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/freie-waehler.php",
+            "id": 17
+          },
+          {
+            "@id": "/fractions/18",
+            "@type": "Fraction",
+            "active": true,
+            "color": "fcef00",
+            "memberCount": 5,
+            "name": "FDP",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/fdp.php",
+            "id": 18
+          },
+          {
+            "@id": "/fractions/20",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ff7c00",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/spd.php",
+            "id": 20
+          },
+          {
+            "@id": "/fractions/21",
+            "@type": "Fraction",
+            "active": true,
+            "color": "bcff00",
+            "memberCount": 13,
+            "name": "Grüne",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/gruene.php",
+            "id": 21
+          },
+          {
+            "@id": "/fractions/22",
+            "@type": "Fraction",
+            "active": true,
+            "color": "cb0101",
+            "memberCount": 12,
+            "name": "DIE Linke",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/die-linke.php",
+            "id": 22
+          },
+          {
+            "@id": "/fractions/23",
+            "@type": "Fraction",
+            "active": true,
+            "color": "c4c400",
+            "memberCount": 4,
+            "name": "Dissidenten-Fraktion",
+            "url": "https://dissidenten-fraktion.de/",
+            "id": 23
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/13",
+          "@type": "FederalState",
+          "id": 13
+        },
+        "headOfAdministration": "Oberbürgermeister",
+        "headOfAdministrationTitle": "Dirk Hilbert",
+        "location": "Dresden",
+        "slug": "stadtrat-dresden",
+        "title": "Stadtrat Dresden",
+        "updatedAt": "2021-07-07T08:05:58+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "https://www.dresden.de/index_de.php",
+        "validatedAt": null,
+        "wikipediaUrl": "https://de.wikipedia.org/wiki/Dresden",
+        "zipArea": "01259",
+        "id": 6
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-07T17:12:11+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "asdasdasdasdasdsadadasdasdas",
+      "featureImage": "",
+      "fractionDetails": [
+        {
+          "@id": "/fraction_details/28",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/16",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 14,
+            "name": "CDU",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/cdu.php",
+            "id": 16
+          },
+          "interests": [],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T17:29:55+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 28
+        },
+        {
+          "@id": "/fraction_details/29",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/20",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ff7c00",
+            "memberCount": 6,
+            "name": "SPD",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/spd.php",
+            "id": 20
+          },
+          "interests": [],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T17:29:58+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 29
+        },
+        {
+          "@id": "/fraction_details/30",
+          "@type": "FractionDetails",
+          "contactEmail": "",
+          "contactName": "",
+          "contactPhone": "",
+          "fraction": {
+            "@id": "/fractions/21",
+            "@type": "Fraction",
+            "active": true,
+            "color": "bcff00",
+            "memberCount": 13,
+            "name": "Grüne",
+            "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/gruene.php",
+            "id": 21
+          },
+          "interests": [],
+          "possiblePartner": true,
+          "possibleSponsor": false,
+          "teamContact": null,
+          "updatedAt": "2021-07-07T17:30:01+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "id": 30
+        }
+      ],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=88;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "adassdasdasdasdsad",
+          "role": "coordinator",
+          "skills": "asdasdadasdasdasdasd",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [
+        {
+          "@id": "/problems/79",
+          "@type": "Problem",
+          "description": "Ein neues Problem",
+          "priority": 0,
+          "updatedAt": "2021-07-07T17:28:58+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          },
+          "usages": [],
+          "id": 79
+        }
+      ],
+      "proposals": [],
+      "slug": "kategorientest",
+      "state": "private",
+      "title": "Kategorientest",
+      "topic": "dsadasdasdasdasdasd",
+      "updatedAt": "2021-07-07T17:30:01+00:00",
+      "id": 88
+    },
+    {
+      "@id": "/projects/95",
+      "@type": "Project",
+      "actionMandates": [],
+      "arguments": [],
+      "categories": [
+        {
+          "@id": "/categories/5",
+          "@type": "Category",
+          "name": "Bildung & Forschung",
+          "slug": "bildung-forschung",
+          "id": 5
+        },
+        {
+          "@id": "/categories/6",
+          "@type": "Category",
+          "name": "Bauen & Wohnen",
+          "slug": "bauen-wohnen",
+          "id": 6
+        }
+      ],
+      "council": {
+        "@id": "/councils/2",
+        "@type": "Council",
+        "active": true,
+        "fractions": [
+          {
+            "@id": "/fractions/3",
+            "@type": "Fraction",
+            "active": false,
+            "color": "00000",
+            "memberCount": 32,
+            "name": "SPD",
+            "url": "https://phmu.de/",
+            "id": 3
+          },
+          {
+            "@id": "/fractions/4",
+            "@type": "Fraction",
+            "active": true,
+            "color": "000000",
+            "memberCount": 7,
+            "name": "Grüne",
+            "url": "gruene-ff.de",
+            "id": 4
+          },
+          {
+            "@id": "/fractions/7",
+            "@type": "Fraction",
+            "active": true,
+            "color": "ec0e0e",
+            "memberCount": 25,
+            "name": "SPD neu",
+            "url": "phmu.de",
+            "id": 7
+          },
+          {
+            "@id": "/fractions/8",
+            "@type": "Fraction",
+            "active": true,
+            "color": "59de12",
+            "memberCount": 13,
+            "name": "Bündnis 90",
+            "url": "https://phmu.de/",
+            "id": 8
+          },
+          {
+            "@id": "/fractions/24",
+            "@type": "Fraction",
+            "active": true,
+            "color": "18469a",
+            "memberCount": 2,
+            "name": "BBF",
+            "url": "https://zukunftsstadt.de/",
+            "id": 24
+          }
+        ],
+        "federalState": {
+          "@id": "/federal_states/8",
+          "@type": "FederalState",
+          "id": 8
+        },
+        "headOfAdministration": "Munzert",
+        "headOfAdministrationTitle": "Boss",
+        "location": "Dresden",
+        "slug": "stadtrat-test",
+        "title": "Stadtrat Test",
+        "updatedAt": "2021-07-07T13:17:24+00:00",
+        "updatedBy": {
+          "@id": "/users/35",
+          "@type": "User",
+          "username": "pm",
+          "firstName": "",
+          "lastName": "",
+          "validated": true,
+          "id": 35
+        },
+        "url": "phmu.de",
+        "validatedAt": null,
+        "wikipediaUrl": "asdasdas",
+        "zipArea": "01259",
+        "id": 2
+      },
+      "counterArguments": [],
+      "createdAt": "2021-07-15T08:26:41+00:00",
+      "createdBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "username": "pm",
+        "firstName": "",
+        "lastName": "",
+        "validated": true,
+        "id": 35
+      },
+      "deletedAt": null,
+      "description": "Test",
+      "featureImage": "https://images.unsplash.com/photo-1573767291321-c0af2eaf5266?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNDUxOTV8MHwxfHNlYXJjaHwxMHx8ZnV0dXJlfGVufDB8fHx8MTYyNjMzNzQ2Nw&ixlib=rb-1.2.1&q=80&w=1080",
+      "fractionDetails": [],
+      "impact": "",
+      "locked": false,
+      "memberships": [
+        {
+          "@id": "/project_memberships/project=95;user=35",
+          "@type": "ProjectMembership",
+          "motivation": "test Motivation",
+          "role": "coordinator",
+          "skills": "test Motivation",
+          "user": {
+            "@id": "/users/35",
+            "@type": "User",
+            "username": "pm",
+            "firstName": "",
+            "lastName": "",
+            "validated": true,
+            "id": 35
+          }
+        }
+      ],
+      "partners": [],
+      "problems": [],
+      "proposals": [],
+      "slug": "project-delete-test",
+      "state": "public",
+      "title": "Project delete test",
+      "topic": "Admin can delete a selected project",
+      "updatedAt": "2021-07-15T08:27:11+00:00",
+      "id": 95
+    }
+  ],
+  "hydra:totalItems": 14,
+  "hydra:view": {
+    "@id": "/projects?id%5B%5D=49&id%5B%5D=61&id%5B%5D=62&id%5B%5D=65&id%5B%5D=66&id%5B%5D=74&id%5B%5D=75&id%5B%5D=76&id%5B%5D=77&id%5B%5D=78&id%5B%5D=79&id%5B%5D=80&id%5B%5D=88&id%5B%5D=95",
+    "@type": "hydra:PartialCollectionView"
+  },
+  "hydra:search": {
+    "@type": "hydra:IriTemplate",
+    "hydra:template": "/projects{?locked,exists[deletedAt],id,id[],council,council[],title,slug,slug[],state,state[],pattern,order[id],order[title],order[updatedAt],order[createdAt]}",
+    "hydra:variableRepresentation": "BasicRepresentation",
+    "hydra:mapping": [
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "locked",
+        "property": "locked",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "exists[deletedAt]",
+        "property": "deletedAt",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "id",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "id[]",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "council",
+        "property": "council",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "council[]",
+        "property": "council",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "title",
+        "property": "title",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "slug",
+        "property": "slug",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "slug[]",
+        "property": "slug",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "state",
+        "property": "state",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "state[]",
+        "property": "state",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "pattern",
+        "property": "description, impact, topic, title",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "order[id]",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "order[title]",
+        "property": "title",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "order[updatedAt]",
+        "property": "updatedAt",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "order[createdAt]",
+        "property": "createdAt",
+        "required": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,667 @@
+{
+  "@context": "/contexts/Council",
+  "@id": "/councils",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/councils/1",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/10",
+          "@type": "Fraction",
+          "active": true,
+          "color": "000000",
+          "memberCount": 14,
+          "name": "CDU",
+          "url": "https://www.cdu-sachsen.de/",
+          "updatedAt": "2021-07-09T08:21:38+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 10
+        },
+        {
+          "@id": "/fractions/11",
+          "@type": "Fraction",
+          "active": true,
+          "color": "ffee00",
+          "memberCount": 5,
+          "name": "FDP",
+          "url": "https://www.fdp-sachsen.de/",
+          "updatedAt": "2021-07-05T15:56:02+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 11
+        },
+        {
+          "@id": "/fractions/12",
+          "@type": "Fraction",
+          "active": true,
+          "color": "e0001a",
+          "memberCount": 6,
+          "name": "SPD",
+          "url": "https://www.spd-sachsen.de/",
+          "updatedAt": "2021-07-05T15:56:29+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 12
+        },
+        {
+          "@id": "/fractions/13",
+          "@type": "Fraction",
+          "active": true,
+          "color": "5a9a22",
+          "memberCount": 15,
+          "name": "Bündnis 90/ Die Grüne",
+          "url": "https://www.gruene-sachsen.de/",
+          "updatedAt": "2021-07-05T15:57:08+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 13
+        },
+        {
+          "@id": "/fractions/14",
+          "@type": "Fraction",
+          "active": true,
+          "color": "2c2c",
+          "memberCount": 2,
+          "name": "Piraten",
+          "url": "http://piraten.de",
+          "updatedAt": "2021-07-09T06:47:35+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 14
+        },
+        {
+          "@id": "/fractions/26",
+          "@type": "Fraction",
+          "active": true,
+          "color": "2d9db9",
+          "memberCount": 4,
+          "name": "Dissidenten",
+          "url": "",
+          "updatedAt": "2021-07-09T06:49:01+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 26
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/13",
+        "@type": "FederalState",
+        "name": "Sachsen",
+        "slug": "sachsen",
+        "id": 13
+      },
+      "headOfAdministration": "Oberbürgermeister",
+      "headOfAdministrationTitle": "Dirk Hilbert",
+      "location": "Dresden",
+      "slug": "",
+      "title": "Stadtrat DD",
+      "updatedAt": "2021-07-05T13:49:45+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "www.dresden.de",
+      "validatedAt": null,
+      "wikipediaUrl": "",
+      "zipArea": "01259",
+      "id": 1
+    },
+    {
+      "@id": "/councils/2",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/4",
+          "@type": "Fraction",
+          "active": true,
+          "color": "000000",
+          "memberCount": 7,
+          "name": "Grüne",
+          "url": "gruene-ff.de",
+          "updatedAt": "2021-07-02T12:56:48+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 4
+        },
+        {
+          "@id": "/fractions/7",
+          "@type": "Fraction",
+          "active": true,
+          "color": "ec0e0e",
+          "memberCount": 25,
+          "name": "SPD neu",
+          "url": "phmu.de",
+          "updatedAt": "2021-07-05T15:43:09+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 7
+        },
+        {
+          "@id": "/fractions/8",
+          "@type": "Fraction",
+          "active": true,
+          "color": "59de12",
+          "memberCount": 13,
+          "name": "Bündnis 90",
+          "url": "https://phmu.de/",
+          "updatedAt": "2021-07-05T15:44:12+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 8
+        },
+        {
+          "@id": "/fractions/24",
+          "@type": "Fraction",
+          "active": true,
+          "color": "18469a",
+          "memberCount": 2,
+          "name": "BBF",
+          "url": "https://zukunftsstadt.de/",
+          "updatedAt": "2021-07-07T13:17:09+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 24
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/8",
+        "@type": "FederalState",
+        "name": "Mecklenburg-Vorpommern",
+        "slug": "mecklenburg-vorpommern",
+        "id": 8
+      },
+      "headOfAdministration": "Munzert",
+      "headOfAdministrationTitle": "Boss",
+      "location": "Dresden",
+      "slug": "stadtrat-test",
+      "title": "Stadtrat Test",
+      "updatedAt": "2021-07-07T13:17:24+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "phmu.de",
+      "validatedAt": null,
+      "wikipediaUrl": "asdasdas",
+      "zipArea": "01259",
+      "id": 2
+    },
+    {
+      "@id": "/councils/3",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/19",
+          "@type": "Fraction",
+          "active": true,
+          "color": "832121",
+          "memberCount": 13,
+          "name": "Piraten",
+          "url": "piraten.de",
+          "updatedAt": "2021-07-07T08:09:31+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 19
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/6",
+        "@type": "FederalState",
+        "name": "Hamburg",
+        "slug": "hamburg",
+        "id": 6
+      },
+      "headOfAdministration": "Munzert",
+      "headOfAdministrationTitle": "Boss",
+      "location": "Dresden",
+      "slug": "matrix-test",
+      "title": "Matrix Test",
+      "updatedAt": "2021-07-02T08:25:39+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "phmu.de",
+      "validatedAt": null,
+      "wikipediaUrl": "asdasdas",
+      "zipArea": "01259",
+      "id": 3
+    },
+    {
+      "@id": "/councils/4",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/2",
+          "@type": "Fraction",
+          "active": true,
+          "color": "000000",
+          "memberCount": 25,
+          "name": "Die Grünen",
+          "url": "www.de",
+          "updatedAt": "2021-07-02T10:38:16+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 2
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/4",
+        "@type": "FederalState",
+        "name": "Brandenburg",
+        "slug": "brandenburg",
+        "id": 4
+      },
+      "headOfAdministration": "Munzert",
+      "headOfAdministrationTitle": "Boss",
+      "location": "Dresden",
+      "slug": "matrix-test-2",
+      "title": "Matrix Test 2",
+      "updatedAt": "2021-07-02T08:40:35+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "phmu.de",
+      "validatedAt": null,
+      "wikipediaUrl": "asdasdas",
+      "zipArea": "01259",
+      "id": 4
+    },
+    {
+      "@id": "/councils/5",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/6",
+          "@type": "Fraction",
+          "active": true,
+          "color": "c1731a",
+          "memberCount": 7,
+          "name": "Philipp Munzert",
+          "url": "phmu.de",
+          "updatedAt": "2021-07-07T08:46:00+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 6
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/5",
+        "@type": "FederalState",
+        "name": "Bremen",
+        "slug": "bremen",
+        "id": 5
+      },
+      "headOfAdministration": "Munzert",
+      "headOfAdministrationTitle": "Boss",
+      "location": "Dresden",
+      "slug": "neuer-kurs",
+      "title": "Neuer Kurs",
+      "updatedAt": "2021-07-02T08:42:28+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "phmu.de",
+      "validatedAt": null,
+      "wikipediaUrl": "asdasdas",
+      "zipArea": "01259",
+      "id": 5
+    },
+    {
+      "@id": "/councils/6",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/15",
+          "@type": "Fraction",
+          "active": true,
+          "color": "55eef3",
+          "memberCount": 12,
+          "name": "AfD",
+          "url": "https://afd-fraktion-dresden.de/",
+          "updatedAt": "2021-07-07T08:07:29+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 15
+        },
+        {
+          "@id": "/fractions/16",
+          "@type": "Fraction",
+          "active": true,
+          "color": "000000",
+          "memberCount": 14,
+          "name": "CDU",
+          "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/cdu.php",
+          "updatedAt": "2021-07-07T08:08:02+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 16
+        },
+        {
+          "@id": "/fractions/17",
+          "@type": "Fraction",
+          "active": true,
+          "color": "cfcfcf",
+          "memberCount": 4,
+          "name": "Freie Wähler",
+          "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/freie-waehler.php",
+          "updatedAt": "2021-07-07T08:08:44+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 17
+        },
+        {
+          "@id": "/fractions/18",
+          "@type": "Fraction",
+          "active": true,
+          "color": "fcef00",
+          "memberCount": 5,
+          "name": "FDP",
+          "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/fdp.php",
+          "updatedAt": "2021-07-07T08:09:14+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 18
+        },
+        {
+          "@id": "/fractions/20",
+          "@type": "Fraction",
+          "active": true,
+          "color": "ff7c00",
+          "memberCount": 6,
+          "name": "SPD",
+          "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/spd.php",
+          "updatedAt": "2021-07-07T08:09:57+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 20
+        },
+        {
+          "@id": "/fractions/21",
+          "@type": "Fraction",
+          "active": true,
+          "color": "bcff00",
+          "memberCount": 13,
+          "name": "Grüne",
+          "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/gruene.php",
+          "updatedAt": "2021-07-07T08:10:30+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 21
+        },
+        {
+          "@id": "/fractions/22",
+          "@type": "Fraction",
+          "active": true,
+          "color": "cb0101",
+          "memberCount": 12,
+          "name": "DIE Linke",
+          "url": "https://www.dresden.de/de/rathaus/politik/stadtrat/fraktionen/die-linke.php",
+          "updatedAt": "2021-07-07T08:11:12+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 22
+        },
+        {
+          "@id": "/fractions/23",
+          "@type": "Fraction",
+          "active": true,
+          "color": "c4c400",
+          "memberCount": 4,
+          "name": "Dissidenten-Fraktion",
+          "url": "https://dissidenten-fraktion.de/",
+          "updatedAt": "2021-07-07T08:11:43+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 23
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/13",
+        "@type": "FederalState",
+        "name": "Sachsen",
+        "slug": "sachsen",
+        "id": 13
+      },
+      "headOfAdministration": "Oberbürgermeister",
+      "headOfAdministrationTitle": "Dirk Hilbert",
+      "location": "Dresden",
+      "slug": "stadtrat-dresden",
+      "title": "Stadtrat Dresden",
+      "updatedAt": "2021-07-07T08:05:58+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "https://www.dresden.de/index_de.php",
+      "validatedAt": null,
+      "wikipediaUrl": "https://de.wikipedia.org/wiki/Dresden",
+      "zipArea": "01259",
+      "id": 6
+    },
+    {
+      "@id": "/councils/7",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/25",
+          "@type": "Fraction",
+          "active": true,
+          "color": "000000",
+          "memberCount": 13,
+          "name": "CDU",
+          "url": "asdadasd",
+          "updatedAt": "2021-07-09T05:55:26+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 25
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/16",
+        "@type": "FederalState",
+        "name": "Thüringen",
+        "slug": "thuringen",
+        "id": 16
+      },
+      "headOfAdministration": "Uwe",
+      "headOfAdministrationTitle": "Bürgermeister",
+      "location": "Neuhaus am Rennweg",
+      "slug": "stadtrat",
+      "title": "Stadtrat",
+      "updatedAt": "2021-07-09T05:54:52+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "",
+      "validatedAt": null,
+      "wikipediaUrl": "",
+      "zipArea": "98724",
+      "id": 7
+    },
+    {
+      "@id": "/councils/8",
+      "@type": "Council",
+      "active": true,
+      "deletedAt": null,
+      "fractions": [
+        {
+          "@id": "/fractions/27",
+          "@type": "Fraction",
+          "active": true,
+          "color": "ff0000",
+          "memberCount": 24,
+          "name": "SPD",
+          "url": "",
+          "updatedAt": "2021-07-09T09:32:08+00:00",
+          "updatedBy": {
+            "@id": "/users/35",
+            "@type": "User",
+            "id": 35
+          },
+          "id": 27
+        }
+      ],
+      "federalState": {
+        "@id": "/federal_states/14",
+        "@type": "FederalState",
+        "name": "Sachsen-Anhalt",
+        "slug": "sachsen-anhalt",
+        "id": 14
+      },
+      "headOfAdministration": "Oberbürgermeister",
+      "headOfAdministrationTitle": "Dirk Hilbert sdfsdf",
+      "location": "Dresden",
+      "slug": "stadtrat-test-222",
+      "title": "Stadtrat Test 222",
+      "updatedAt": "2021-07-12T12:04:56+00:00",
+      "updatedBy": {
+        "@id": "/users/35",
+        "@type": "User",
+        "id": 35
+      },
+      "url": "",
+      "validatedAt": null,
+      "wikipediaUrl": "",
+      "zipArea": "01069",
+      "id": 8
+    }
+  ],
+  "hydra:totalItems": 8,
+  "hydra:search": {
+    "@type": "hydra:IriTemplate",
+    "hydra:template": "/councils{?exists[deletedAt],id,id[],title,slug,slug[]}",
+    "hydra:variableRepresentation": "BasicRepresentation",
+    "hydra:mapping": [
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "exists[deletedAt]",
+        "property": "deletedAt",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "id",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "id[]",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "title",
+        "property": "title",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "slug",
+        "property": "slug",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "slug[]",
+        "property": "slug",
+        "required": false
+      }
+    ]
+  }
+}

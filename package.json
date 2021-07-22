@@ -10,7 +10,8 @@
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
-    "test": "jest"
+    "test": "jest",
+    "e2e": "cypress open --browser chrome"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
@@ -25,6 +26,8 @@
   "dependencies": {
     "@braid/vue-formulate": "^2.5.2",
     "@braid/vue-formulate-i18n": "^1.16.0",
+    "@cypress/vue": "^3.0.0-beta.3",
+    "@cypress/webpack-dev-server": "^1.4.0",
     "@heroicons/vue": "^1.0.1",
     "@nuxt-hero-icons/outline": "^1.0.1",
     "@nuxt-hero-icons/solid": "^1.0.1",
@@ -81,6 +84,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.0.6",
+    "cypress": "^7.7.0",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",

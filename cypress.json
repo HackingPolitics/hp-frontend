@@ -1,0 +1,16 @@
+{
+  "projectId": "???",
+  "baseUrl": "http://localhost:3000",
+  "fixturesFolder": "cypress/fixtures",
+  "integrationFolder": "tests/e2e",
+  "pluginsFile": "cypress/plugins/index.js",
+  "screenshotsFolder": "cypress/screenshots",
+  "supportFile": "cypress/support/index.js",
+
+  "video": false,
+
+  "viewportWidth": 1500,
+  "viewportHeight": 1200,
+
+  "experimentalStudio": true
+}

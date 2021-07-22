@@ -1,0 +1,115 @@
+{
+  "@context": "/contexts/Category",
+  "@id": "/categories",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/categories/5",
+      "@type": "Category",
+      "name": "Bildung & Forschung",
+      "slug": "bildung-forschung",
+      "id": 5
+    },
+    {
+      "@id": "/categories/6",
+      "@type": "Category",
+      "name": "Bauen & Wohnen",
+      "slug": "bauen-wohnen",
+      "id": 6
+    },
+    {
+      "@id": "/categories/8",
+      "@type": "Category",
+      "name": "Kunst & Kultur",
+      "slug": "kunst-kultur",
+      "id": 8
+    },
+    {
+      "@id": "/categories/9",
+      "@type": "Category",
+      "name": "Energie & Versorgung",
+      "slug": "energie-versorgung",
+      "id": 9
+    },
+    {
+      "@id": "/categories/10",
+      "@type": "Category",
+      "name": "Mobilität & Logistik",
+      "slug": "mobilitat-logistik",
+      "id": 10
+    },
+    {
+      "@id": "/categories/27",
+      "@type": "Category",
+      "name": "Stadtgrün & Stadtklima",
+      "slug": "stadtgrun-stadtklima",
+      "id": 27
+    },
+    {
+      "@id": "/categories/28",
+      "@type": "Category",
+      "name": "Bürgerbeteiligung & Verwaltung",
+      "slug": "burgerbeteiligung-verwaltung",
+      "id": 28
+    },
+    {
+      "@id": "/categories/29",
+      "@type": "Category",
+      "name": "Soziales & Gesundheit",
+      "slug": "soziales-gesundheit",
+      "id": 29
+    },
+    {
+      "@id": "/categories/30",
+      "@type": "Category",
+      "name": "Wirtschaft & Rohstoffe",
+      "slug": "wirtschaft-rohstoffe",
+      "id": 30
+    },
+    {
+      "@id": "/categories/31",
+      "@type": "Category",
+      "name": "Sonstiges",
+      "slug": "sonstiges",
+      "id": 31
+    }
+  ],
+  "hydra:totalItems": 10,
+  "hydra:search": {
+    "@type": "hydra:IriTemplate",
+    "hydra:template": "/categories{?id,id[],name,slug,slug[]}",
+    "hydra:variableRepresentation": "BasicRepresentation",
+    "hydra:mapping": [
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "id",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "id[]",
+        "property": "id",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "name",
+        "property": "name",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "slug",
+        "property": "slug",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "slug[]",
+        "property": "slug",
+        "required": false
+      }
+    ]
+  }
+}

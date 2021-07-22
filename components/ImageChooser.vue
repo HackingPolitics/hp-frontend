@@ -28,7 +28,7 @@
       v-else-if="
         !isLoading && images && images.results && images.results.length
       "
-      class="grid grid-cols-5 gap-4 mt-4"
+      class="grid grid-cols-5 gap-4 mt-4 cy_imgs"
     >
       <div
         v-for="image in images.results"

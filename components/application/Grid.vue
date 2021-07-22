@@ -1,6 +1,6 @@
 <template>
   <div v-if="projects && projects.length > 0 && !isLoading" class="w-full">
-    <ul class="w-full grid gap-4" :class="getCols()">
+    <ul class="w-full grid gap-4 cy_grid" :class="getCols()">
       <li
         v-for="(project, index) in projects"
         :key="index"

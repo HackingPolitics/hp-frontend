@@ -91,6 +91,7 @@
               text-purple-500
               bg-white
               hover:bg-gray-50
+              cy_myRequests
             "
           >
             Meine Anträge
