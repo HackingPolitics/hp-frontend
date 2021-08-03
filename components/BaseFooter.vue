@@ -12,6 +12,8 @@
       "
     >
       <div class="flex justify-center space-x-6 md:order-2">
+        <nuxt-link to="/impressum">Impressum</nuxt-link>
+        <nuxt-link to="/datenschutz">Datenschutz</nuxt-link>
         <p class="text-center text-base text-gray-400">
           &copy; 2021 HackingPolitics Gbr. All rights reserved. Version
           {{ version }}

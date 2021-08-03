@@ -91,6 +91,7 @@ export default {
     'nuxt-i18n',
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxt/content',
   ],
 
   axios: {
