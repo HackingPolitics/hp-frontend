@@ -33,7 +33,7 @@
       :subtitle="$t('forms.topic.mainGoalSubtitle')"
     >
       <FormulateInput
-        v-model="description"
+        v-model="goal"
         type="textarea"
         rows="5"
         validation="required"
@@ -82,7 +82,7 @@ export default defineComponent({
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const topic = ref<String | undefined>('')
-    const description = ref<String | undefined>('')
+    const goal = ref<String | undefined>('')
     const title = ref<String | undefined>('')
     const categories = ref<string[]>([])
 
@@ -101,7 +101,7 @@ export default defineComponent({
     onBeforeMount(() => {
       topic.value = project.value?.topic
       title.value = project.value?.title
-      description.value = project.value?.description
+      goal.value = project.value?.goal
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
@@ -115,7 +115,7 @@ export default defineComponent({
             title: title.value,
             topic: topic.value,
             categories: categories.value,
-            description: description.value,
+            goal: goal.value,
           },
         ])
       }
@@ -124,7 +124,7 @@ export default defineComponent({
       formData,
       title,
       topic,
-      description,
+      goal,
       categories,
       categoryOptions,
       validation,

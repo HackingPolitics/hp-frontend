@@ -34,7 +34,7 @@
         </div>
       </li>
     </ul>
-    <div v-if="applicants && applicants.length">
+    <div v-if="applicants && applicants.length && userIsCoordinator">
       <div class="mt-16">Bewerbungen</div>
       <ul class="divide-y divide-gray-200 mt-4">
         <li v-for="member in applicants" :key="member.id">
@@ -61,14 +61,12 @@
 
               <div class="flex space-x-2">
                 <FormulateInput
-                  v-show="member.role === 'applicant'"
                   type="button"
                   @click="acceptApplication(member.user.id)"
                 >
                   Annehmen
                 </FormulateInput>
                 <FormulateInput
-                  v-show="member.role !== 'coordinator'"
                   type="button"
                   @click="deleteApplication(member.user.id)"
                 >
@@ -109,6 +107,10 @@ export default defineComponent({
       type: [String, Number],
       default: '',
     },
+    userIsCoordinator: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const store = useStore<RootState>()
@@ -137,7 +139,7 @@ export default defineComponent({
 
     const activeMembers = computed(() => {
       const members = cloneDeep(props.memberships)
-      return members.filter((el) => el.role != 'applicant')
+      return members.filter((el) => el.role !== 'applicant')
     })
 
     return {
