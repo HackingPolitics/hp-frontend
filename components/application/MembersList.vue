@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden sm:rounded-md">
+  <div v-if="!editModalIsOpen" class="overflow-hidden sm:rounded-md">
     <ul class="divide-y divide-gray-200 mt-4">
       <li v-for="member in activeMembers" :key="member.id">
         <div v-if="member.user" class="flex items-center py-4 relative">
@@ -20,6 +20,7 @@
               </div>
             </div>
             <div
+              v-if="!userIsCoordinator"
               class="
                 rounded-full
                 text-sm text-gray-600
@@ -30,6 +31,18 @@
             >
               {{ $t(`common.roles.${member.role}`) }}
             </div>
+            <mouse-over-button v-else @click="editMembership(member)">
+              <template #default>
+                {{ $t(`common.roles.${member.role}`) }}
+              </template>
+              <template #hover="{ hover }">
+                {{
+                  hover && userIsCoordinator
+                    ? 'Bearbeiten'
+                    : $t(`common.roles.${member.role}`)
+                }}
+              </template>
+            </mouse-over-button>
           </div>
         </div>
       </li>
@@ -83,6 +96,14 @@
       </ul>
     </div>
   </div>
+  <div v-else>
+    <forms-application-edit-membership
+      :membership="selectedMembership"
+      :project-id="projectId"
+      @delete-membership="deleteApplication"
+      @close="editModalIsOpen = false"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -91,6 +112,7 @@ import {
   useStore,
   PropType,
   computed,
+  ref,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
 import { RootState } from '~/store'
@@ -114,6 +136,9 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore<RootState>()
+
+    const editModalIsOpen = ref(false)
+    const selectedMembership = ref(null)
 
     const acceptApplication = (userId: string) => {
       const payload = {
@@ -142,11 +167,19 @@ export default defineComponent({
       return members.filter((el) => el.role !== 'applicant')
     })
 
+    const editMembership = (member) => {
+      editModalIsOpen.value = true
+      selectedMembership.value = member
+    }
+
     return {
       acceptApplication,
       deleteApplication,
       applicants,
       activeMembers,
+      editMembership,
+      editModalIsOpen,
+      selectedMembership,
     }
   },
 })

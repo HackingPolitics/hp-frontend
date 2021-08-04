@@ -36,7 +36,8 @@
       "roles": {
           "coordinator": "KoordinatorIn",
           "writer": "Mitglied",
-          "applicant": "BewerberIn"
+          "applicant": "BewerberIn",
+        "observer": "BeobachterIn"
       }
     },
     "forms": {
