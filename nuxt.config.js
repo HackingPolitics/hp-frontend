@@ -91,7 +91,13 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', 'nuxt-i18n', '@nuxtjs/axios', '@nuxtjs/auth-next'],
+  modules: [
+    '@nuxtjs/axios',
+    'nuxt-i18n',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxt/content',
+  ],
 
   axios: {
     baseUrl: process.env.API_URL,

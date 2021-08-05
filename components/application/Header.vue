@@ -96,7 +96,9 @@
                 </div>
                 <div
                   v-if="
-                    hasActiveApplications && hasActiveApplications.length > 0
+                    hasActiveApplications &&
+                    hasActiveApplications.length &&
+                    userIsCoordinator > 0
                   "
                   class="
                     text-purple-500 text-sm
@@ -143,7 +145,7 @@
         </div>
         <div class="flex flex-col">
           <toggle-visability-button
-            v-if="isCoordinator"
+            v-if="userIsCoordinator"
             :state="project.state === 'public' ? true : false"
             @toggle="changeProjectState"
           ></toggle-visability-button>
@@ -160,6 +162,7 @@
           x
         </div>
         <application-members-list
+          :user-is-coordinator="userIsCoordinator"
           :memberships="project.memberships"
           :project-id="project.id"
         ></application-members-list>
@@ -215,7 +218,7 @@ export default defineComponent({
       editMode.value = false
     }
 
-    const isCoordinator = computed(() => {
+    const userIsCoordinator = computed(() => {
       if (project.value.memberships) {
         const check = project.value.memberships.find(
           (member: IProjectMembership) =>
@@ -280,7 +283,7 @@ export default defineComponent({
       hideProject,
       userMembershipRole,
       hasActiveApplications,
-      isCoordinator,
+      userIsCoordinator,
       changeProjectState,
       addUser,
       isModalOpen,

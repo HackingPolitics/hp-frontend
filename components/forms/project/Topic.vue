@@ -1,11 +1,39 @@
 <template>
   <div class="space-y-4">
     <forms-form-section
+      :title="$t('forms.topic.mainTitle')"
+      :subtitle="$t('forms.topic.mainTitleSubtitle')"
+    >
+      <FormulateInput
+        v-model="title"
+        type="text"
+        validation="required"
+        @validation="validation = $event"
+        @focusout="updateProject()"
+      >
+      </FormulateInput>
+    </forms-form-section>
+    <forms-form-section
       :title="$t('forms.topic.mainTopic')"
       :subtitle="$t('forms.topic.mainTopicSubtitle')"
     >
       <FormulateInput
         v-model="topic"
+        type="textarea"
+        rows="5"
+        validation="required"
+        @validation="validation = $event"
+        @focusout="updateProject()"
+      >
+      </FormulateInput>
+    </forms-form-section>
+
+    <forms-form-section
+      :title="$t('forms.topic.mainGoal')"
+      :subtitle="$t('forms.topic.mainGoalSubtitle')"
+    >
+      <FormulateInput
+        v-model="goal"
         type="textarea"
         rows="5"
         validation="required"
@@ -54,6 +82,8 @@ export default defineComponent({
   setup() {
     const formData = ref<TopicForm>({ topic: '' })
     const topic = ref<String | undefined>('')
+    const goal = ref<String | undefined>('')
+    const title = ref<String | undefined>('')
     const categories = ref<string[]>([])
 
     const store = useStore<RootState>()
@@ -70,6 +100,8 @@ export default defineComponent({
 
     onBeforeMount(() => {
       topic.value = project.value?.topic
+      title.value = project.value?.title
+      goal.value = project.value?.goal
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
@@ -79,13 +111,20 @@ export default defineComponent({
       if (!validation.value.hasErrors) {
         store.dispatch('projects/updateProject', [
           project.value?.id,
-          { topic: topic.value, categories: categories.value },
+          {
+            title: title.value,
+            topic: topic.value,
+            categories: categories.value,
+            goal: goal.value,
+          },
         ])
       }
     }
     return {
       formData,
+      title,
       topic,
+      goal,
       categories,
       categoryOptions,
       validation,

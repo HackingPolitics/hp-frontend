@@ -46,7 +46,6 @@
         label="Website"
         class="col-span-5"
         type="text"
-        validation="required"
         name="url"
         :value="fraction ? fraction.url : null"
       />

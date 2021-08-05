@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-    <div v-if="parliament" class="w-full flex justify-between">
+    <div v-if="council" class="w-full flex justify-between">
       <nuxt-link
         :to="localePath({ name: 'admin-parliaments' })"
         class="
@@ -35,13 +35,13 @@
 
     <loading-indicator v-if="isLoading"></loading-indicator>
 
-    <section v-if="parliament" aria-labelledby="parliament_heading">
+    <section v-if="council" aria-labelledby="council_heading">
       <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
         <FormulateForm v-model="formData" @submit="updateParliament">
           <div class="py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Parlament: {{ parliament.title }}
+                Parlament: {{ council.title }}
               </h3>
               <p class="mt-1 text-sm text-gray-500">
                 Daten für das Parlament bearbeiten
@@ -68,7 +68,7 @@
       </div>
     </section>
 
-    <section v-if="parliament" aria-labelledby="parliament_heading">
+    <section v-if="council" aria-labelledby="parliament_heading">
       <div class="bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden">
         <div class="py-6 px-4 space-y-6 sm:p-6">
           <div>
@@ -78,9 +78,9 @@
             <p class="mt-1 text-sm text-gray-500">Fraktionen bearbeiten</p>
           </div>
         </div>
-        <div v-if="parliament.fractions && parliament.fractions.length">
+        <div v-if="council.fractions && council.fractions.length">
           <admin-fraction-list
-            :fractions="parliament.fractions"
+            :fractions="council.fractions"
             @update-fraction="updateFraction($event)"
           ></admin-fraction-list>
           <div class="py-6 px-4 space-y-6 sm:p-6">
@@ -96,8 +96,8 @@
           <div
             v-if="
               !newFraktionForm &&
-              parliament.fractions &&
-              parliament.fractions.length === 0
+              council.fractions &&
+              council.fractions.length === 0
             "
             class="text-center flex flex-col items-center py-6"
           >
@@ -142,68 +142,55 @@ import {
   useContext,
   useRoute,
   useStore,
+  computed,
+  watch,
 } from '@nuxtjs/composition-api'
+import { cloneDeep } from 'lodash'
 import { useAxios } from '~/composables/useAxios'
+import { RootState } from '~/store'
 import { IFraction, IParliament } from '~/types/apiSchema'
 
 export default defineComponent({
   name: 'AdminParlaments',
   layout: 'admin',
   setup() {
-    const formData = ref(null)
+    const formData = ref<IParliament | null>(null)
     const axios = useAxios()
-    const parliament = ref<IParliament | null>(null)
-    const isLoading = ref(false)
 
-    const store = useStore()
+    const isLoading = computed(() => {
+      return store.state.councils.isLoading
+    })
 
+    const store = useStore<RootState>()
     const route = useRoute()
-    const fetchData = async () => {
-      isLoading.value = true
-      try {
-        const response = await axios.get(`/councils/${route.value.params.id}`)
-        console.log(response)
 
-        parliament.value = response.data
-        formData.value = response.data
-        // @ts-ignore
-        if (formData?.value && formData?.value?.federalState) {
+    const council = computed(() => {
+      return store.state.councils.council
+    })
+
+    store.dispatch('councils/getCouncilById', route.value.params.id)
+
+    watch(
+      () => council.value,
+      () => {
+        if (council.value) {
+          const copy = cloneDeep(council.value)
+          formData.value = copy
           // @ts-ignore
-          formData.value.federalState = response.data.federalState['@id']
+          formData.value.federalState = copy.federalState['@id']
         }
-        isLoading.value = false
-      } catch (error) {
-        isLoading.value = false
-      }
-    }
-    fetchData()
+      },
+      { immediate: true }
+    )
 
     const context = useContext()
 
     const updateParliament = async () => {
-      isLoading.value = true
-      try {
-        await axios.put(`/councils/${route.value.params.id}`, formData.value)
-        fetchData()
-
-        // @ts-ignore
-        context.$notify({
-          title: 'Parlament aktualisiert',
-          duration: 300,
-          type: 'success',
-        })
-        isLoading.value = false
-      } catch (error) {
-        isLoading.value = false
-        // @ts-ignore
-        context.$notify({
-          title: 'Parlament konnte nicht aktualisiert werden',
-          duration: 300,
-          type: 'warn',
-        })
-      }
-
-      console.log(formData.value)
+      await store.dispatch('councils/updateCouncil', {
+        id: route.value.params.id,
+        payload: formData.value,
+      })
+      store.dispatch('councils/getCouncilById', route.value.params.id)
     }
 
     const newFraktionForm = ref(false)
@@ -217,14 +204,14 @@ export default defineComponent({
           memberCount: fractionFormData.value
             ? parseInt(fractionFormData.value.memberCount)
             : 0,
-          council: parliament.value ? parliament.value['@id'] : null,
+          council: council.value ? council.value['@id'] : null,
           color: fractionFormData.value
             ? fractionFormData.value.color.slice(1)
             : '000000',
         }
         await axios.post('/fractions', payload)
         newFraktionForm.value = false
-        fetchData()
+        store.dispatch('councils/getCouncilById', route.value.params.id)
         // @ts-ignore
         context.$notify({
           title: 'Fraktion erstellt',
@@ -244,13 +231,13 @@ export default defineComponent({
 
     const updateFraction = async (el: { id: string; payload: IFraction }) => {
       await store.dispatch('fractions/updateFraction', { ...el }).then(() => {
-        fetchData()
+        store.dispatch('councils/getCouncilById', route.value.params.id)
       })
     }
 
     return {
       errors,
-      parliament,
+      council,
       isLoading,
       formData,
       updateParliament,

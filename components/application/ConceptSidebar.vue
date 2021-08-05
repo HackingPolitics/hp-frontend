@@ -1,6 +1,6 @@
 <template>
-  <div class="py-12">
-    <nav class="concept-sidebar" aria-label="sidebar-menu">
+  <div class="py-12 relative">
+    <nav class="concept-sidebar sticky top-6" aria-label="sidebar-menu">
       <ol class="space-y-8">
         <li v-for="(concept, index) in concepts" :key="index" class="mb-8">
           <nuxt-link

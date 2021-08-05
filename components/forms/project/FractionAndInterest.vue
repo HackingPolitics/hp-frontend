@@ -38,13 +38,20 @@
       <div class="flex mt-12 justify-center items-center space-x-12">
         <div class="w-1/2 flex flex-col justify-center">
           <charts-base-pie-chart :data="data"></charts-base-pie-chart>
-          <div v-if="neededVotes > 0" class="w-56 py-8 text-center mx-auto">
-            Noch
-            <span class="text-green-500 text-xl"
-              >{{ neededVotes }} {{ $t('forms.fractioninterests.votes') }}</span
-            >
-            für ein mehrheitliches Interesse
-          </div>
+
+          <i18n
+            v-if="neededVotes > 0"
+            path="forms.fractioninterests.votesCounter"
+            tag="div"
+            class="w-56 py-8 text-center mx-auto"
+          >
+            <template #votes>
+              <span class="text-green-500 text-xl"
+                >{{ neededVotes }}
+                {{ $t('forms.fractioninterests.votes') }}</span
+              >
+            </template>
+          </i18n>
           <div v-else class="w-56 py-8 text-center mx-auto">
             Die Stimmen reichen für eine Mehrheit aus
           </div>

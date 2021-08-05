@@ -4,6 +4,7 @@ import { IProject, IProjectMembership } from '~/types/apiSchema'
 
 export interface ProjectsState {
   project: IProject
+  projects: IProject[] | null
   createdProject: IProject | null
   createdProjectMembership: IProjectMembership | null
   isLoading: false
@@ -12,6 +13,7 @@ export interface ProjectsState {
 
 const defaultProjectsState: ProjectsState = {
   project: {},
+  projects: null,
   createdProject: null,
   createdProjectMembership: null,
   isLoading: false,
@@ -42,6 +44,9 @@ export const getters: GetterTree<RootState, RootState> = {
 export const mutations: MutationTree<RootState> = {
   SET_PROJECT(state, project) {
     state.project = project
+  },
+  SET_PROJECTS(state, projects) {
+    state.projects = projects
   },
   SET_CREATED_PROJECT_MEMBERSHIP(state, projectMembership) {
     state.createdProjectMembership = projectMembership
@@ -125,10 +130,12 @@ export const actions: ActionTree<RootState, RootState> = {
   setProject({ commit }, payload) {
     commit('SET_PROJECT', payload)
   },
-  async fetchProjects({ commit }) {
+  async fetchProjects({ commit }, page = 1) {
+    console.log(page)
     commit('SET_LOADING_FLAG', true)
     try {
-      const response = await this.$api.projects.fetchProjects()
+      const response = await this.$axios.get(`/projects?page=${page}`)
+      commit('SET_PROJECTS', response.data)
       commit('SET_LOADING_FLAG', false)
       return response.data['hydra:member']
     } catch (e) {

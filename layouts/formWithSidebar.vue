@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-200 relative">
-    <div class="relative">
+  <div class="min-h-screen bg-gray-200 relative flex flex-col justify-between">
+    <div class="relative flex-1">
       <div class="sticky">
         <menu-project-nav
           :title="project ? project.title : 'zurück'"
@@ -11,8 +11,8 @@
         ></menu-project-nav>
       </div>
 
-      <main class="relative">
-        <header class="relative py-12 bg-purple-800">
+      <main>
+        <header class="py-12 bg-purple-800">
           <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-normal text-white max-w-2xl">Konzept</h1>
           </div>
@@ -26,6 +26,7 @@
             sm:px-6
             lg:pb-16 lg:px-8
             grid grid-cols-3
+            relative
           "
         >
           <application-concept-sidebar></application-concept-sidebar>
@@ -35,7 +36,7 @@
         </div>
       </main>
     </div>
-
+    <base-footer></base-footer>
     <notification-toast />
   </div>
 </template>

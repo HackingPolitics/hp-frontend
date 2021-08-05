@@ -63,20 +63,23 @@
                     'Benutzernamen müssen mit einem Buchstaben beginnen; dürfen nur Buchstaben, Ziffern, Punkte, Bindestriche und Unterstriche enthalten.',
                 }"
               />
-              <FormulateInput
-                label="Vorname"
-                placeholder="Vorname eingeben"
-                name="firstname"
-                validation-name="Vorname"
-                validation="required"
-              />
-              <FormulateInput
-                label="Nachname"
-                placeholder="Nachname eingeben"
-                name="lastname"
-                validation-name="Nachname"
-                validation="required"
-              />
+              <div class="sm:grid grid-cols-2 gap-4">
+                <FormulateInput
+                  label="Vorname"
+                  placeholder="Vorname eingeben"
+                  name="firstname"
+                  validation-name="Vorname"
+                  validation="required"
+                />
+
+                <FormulateInput
+                  label="Nachname"
+                  placeholder="Nachname eingeben"
+                  name="lastname"
+                  validation-name="Nachname"
+                  validation="required"
+                />
+              </div>
               <FormulateInput
                 label="E-Mail-Adresse"
                 placeholder="E-Mail-Adresse eingeben"
@@ -168,14 +171,31 @@
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500">
-                Wir haben an die angegebene Emailadresse eine Nachricht
-                geschickt. Bitte überprüfe deine Inbox.
+                Du kannst dich nun
+                <nuxt-link
+                  :to="localePath('/login')"
+                  class="font-medium text-purple-400 hover:text-purple-500"
+                >
+                  einloggen
+                </nuxt-link>
               </p>
             </div>
           </div>
         </div>
       </div>
     </transition>
+    <div class="flex items-center">
+      <img
+        src="https://i0.wp.com/blog.okfn.org/files/2017/12/22137279_1679687182104997_6759961652435307500_o.jpg"
+        alt="Gefördert durch BMBF"
+        class="h-14"
+      />
+      <img
+        src="https://zukunftsstadt.de/wp-content/uploads/2019/12/BMBF_gefo%CC%88rdert-vom_deutsch.jpg"
+        alt="Gefördert durch BMBF"
+        class="h-28"
+      />
+    </div>
   </div>
 </template>
 
@@ -228,7 +248,6 @@ export default defineComponent({
         'authentication/register',
         credentials.value
       )
-      console.log(response, errors.value)
       if (response.status === 201) {
         formSent.value = true
       }

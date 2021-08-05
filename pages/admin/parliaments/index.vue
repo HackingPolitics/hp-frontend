@@ -1,6 +1,5 @@
 <template>
   <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-    <!-- Billing history -->
     <div class="w-full flex justify-between">
       <div></div>
       <base-button @click="openModal">Neues Parlament</base-button>
@@ -170,9 +169,27 @@
                               },
                             })
                           "
-                          class="text-purple-600 hover:text-purple-900"
-                          >Bearbeiten</nuxt-link
                         >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="
+                              h-4
+                              w-4
+                              text-gray-500
+                              hover:text-purple-500
+                              cursor-pointer
+                            "
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            /></svg
+                        ></nuxt-link>
                       </td>
                     </tr>
 

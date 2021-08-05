@@ -211,6 +211,7 @@ export interface IFraction {
   color: string
   name: string
   memberCount: number
+  url: string
 }
 
 export interface IFractionInterest {

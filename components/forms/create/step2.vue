@@ -57,7 +57,7 @@
     <FormulateInput
       :aria-label="$t('forms.proposal.forms.category.label')"
       type="chipGroup"
-      name="category"
+      name="categories"
       limit="2"
       :label="$t('forms.proposal.forms.category.label')"
       :placeholder="$t('forms.proposal.forms.category.placeholder')"

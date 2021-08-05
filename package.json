@@ -1,6 +1,6 @@
 {
   "name": "hacking-politics-client",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -28,11 +28,14 @@
     "@heroicons/vue": "^1.0.1",
     "@nuxt-hero-icons/outline": "^1.0.1",
     "@nuxt-hero-icons/solid": "^1.0.1",
+    "@nuxt/content": "^1.14.0",
     "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.24.5",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/jit": "^0.1.18",
+    "@tailwindcss/typography": "^0.4.1",
     "@tiptap/extension-character-count": "^2.0.0-beta.12",
     "@tiptap/extension-collaboration": "^2.0.0-beta.19",
     "@tiptap/extension-collaboration-cursor": "^2.0.0-beta.20",

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-gray-200 flex flex-col">
+  <div class="min-h-screen bg-gray-200 flex flex-col justify-between">
     <div class="flex-1 overflow-scroll relative">
       <Nuxt />
     </div>

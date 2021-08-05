@@ -17,6 +17,9 @@
       class="mt-8"
       :projects="projects"
       :is-loading="projectsLoading"
+      :current-page="currentPage"
+      :total-pages="totalPages"
+      @changePage="changePage"
     ></application-grid>
   </layouts-header-title>
 </template>
@@ -28,8 +31,6 @@ import {
   defineComponent,
   onBeforeMount,
   ref,
-  useContext,
-  useRouter,
   useStore,
   watch,
 } from '@nuxtjs/composition-api'
@@ -41,19 +42,37 @@ export default defineComponent({
   name: 'ApplicationsPage',
   setup() {
     const city = ref<String | null>('Dresden')
-    const projects = ref<IProject[]>([])
+
     const store = useStore<RootState>()
     const user = computed(() => store.state.auth.user)
     const options = ['Dresden', 'Berlin', 'München']
-    const fetchProjects = async () => {
-      projects.value = await store.dispatch('projects/fetchProjects')
+    const currentPage = ref(1)
+    const totalPages = ref(1)
+    const itemsPerPage = ref(15)
+    const changePage = (page: number) => {
+      currentPage.value = page
+      fetchProjects()
     }
-    const router = useRouter()
-    const context = useContext()
 
-    const createdProject: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.createdProject
-    )
+    const projects = computed<IProject[] | null>(() => {
+      // @ts-ignore
+      return store.state.projects?.projects?.['hydra:member']
+    })
+
+    const totalItems = computed<number | null>(() => {
+      // @ts-ignore
+      return store.state.projects?.projects?.['hydra:totalItems']
+        ? // @ts-ignore
+          store.state.projects?.projects?.['hydra:totalItems']
+        : 15
+    })
+
+    const fetchProjects = async () => {
+      await store.dispatch('projects/fetchProjects', currentPage.value)
+      if (totalItems.value) {
+        totalPages.value = Math.ceil(totalItems.value / itemsPerPage.value)
+      }
+    }
 
     const createdProjectMembership = computed(
       () => store.state.projects.createdProjectMembership
@@ -63,20 +82,6 @@ export default defineComponent({
       () => store.state.auth.loggedIn
     )
     onBeforeMount(async () => {
-      if (isLoggedIn.value && createdProject.value) {
-        try {
-          await store
-            .dispatch('projects/createProject', createdProject.value)
-            .then((res) => {
-              store.commit('projects/SET_CREATED_PROJECT', null)
-              router.push(
-                context.localePath('/antraege/' + res.data.id.toString())
-              )
-            })
-        } catch (error) {
-          console.log(error)
-        }
-      }
       if (isLoggedIn.value && createdProjectMembership.value) {
         try {
           const payload = {
@@ -108,6 +113,10 @@ export default defineComponent({
       city,
       options,
       projectsLoading,
+      currentPage,
+      totalPages,
+      itemsPerPage,
+      changePage,
     }
   },
 })
