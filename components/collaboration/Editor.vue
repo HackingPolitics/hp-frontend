@@ -151,6 +151,7 @@ const getRandomElement = (list) => {
   return list[Math.floor(Math.random() * list.length)]
 }
 
+// @todo Philipp ggf refactoren, verschieben, umbenennen, ...
 const reduceStates = (clients) => {
   const areas = {}
   const fields = {}
@@ -209,10 +210,6 @@ const reduceStates = (clients) => {
   return { areas, fields, users }
 }
 
-// @todo Philipp: der Provider muss weiter oben in der Hierarchie angesiedelt werden damit er
-// seitenübergreifend tracken kann welche Teammitglieder online und welche Formulare(lemente)
-// gesperrt sind.
-// Er muss dann samt ydoc, zu verwendendem Fieldnamen und currentUser zum Editor durchgereicht werden.
 export default defineComponent({
   components: {
     EditorContent,
@@ -233,9 +230,6 @@ export default defineComponent({
         lockedSince: null,
         area: null,
       },
-
-      // demo property to sync form is locked/yes no
-      formLocked: false,
 
       provider: null,
       yDoc: null,
@@ -272,6 +266,11 @@ export default defineComponent({
       this.savedAt = this.syncState.get('savedAt')
     })
 
+    // @todo Philipp: Aufteilen auf 2 Provider, einen mit project-X für den Awareness-State
+    // für alle user, bereiche und gesperrte Formfields der dauerhaft in der App gemounted ist auch
+    // bei Seitenwechsel. Und einen für das jeweilige proposal-x das bearbeitet werden soll, dort
+    // sollten nur die Editoren dranhängen, kann also hier auf der  Seite bleiben wenn das
+    // die Antragstext-Seite ist.
     this.provider = new HocuspocusProvider({
       url: this.$config.WS_URL,
       name: 'proposal-1', // @todo replace "1" with the real project ID
@@ -312,7 +311,6 @@ export default defineComponent({
         this.areas = reduced.areas
         this.lockedFields = reduced.fields
         this.onlineUsers = reduced.users
-        console.log(this.lockedFields)
       },
     })
 
@@ -356,12 +354,13 @@ export default defineComponent({
       ],
     })
 
-    // @todo how can we listen to token changes instead of polling?
+    // @todo Philipp: how can we listen to token changes instead of polling?
     // * localStorage eventListener only triggers when the change occured in another tab
     // * $auth.$storage.watchState() did not trigger in tests (with: token, _token, _token.local, auth._token.local as key)
     this.timer = setTimeout(this.sendTokenUpdate.bind(this), 5000)
 
-    // this.setAwarenessState()
+    // damit schon mal alle die Userdaten bekommen und nicht nur den leeren User ("not logged in")
+    this.setAwarenessState()
   },
 
   beforeDestroy() {
