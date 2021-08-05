@@ -94,7 +94,7 @@
     "postcss": "^8.3.5",
     "prettier": "^2.3.2",
     "remixicon": "^2.5.0",
-    "sass": "^1.35.1",
+    "sass": "^1.37.5",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
