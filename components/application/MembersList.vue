@@ -138,7 +138,7 @@ export default defineComponent({
     const store = useStore<RootState>()
 
     const editModalIsOpen = ref(false)
-    const selectedMembership = ref(null)
+    const selectedMembership = ref({})
 
     const acceptApplication = (userId: string) => {
       const payload = {
@@ -167,7 +167,7 @@ export default defineComponent({
       return members.filter((el) => el.role !== 'applicant')
     })
 
-    const editMembership = (member) => {
+    const editMembership = (member: IProjectMembership) => {
       editModalIsOpen.value = true
       selectedMembership.value = member
     }
