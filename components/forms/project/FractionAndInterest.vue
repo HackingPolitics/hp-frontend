@@ -85,6 +85,7 @@ import {
   ref,
   computed,
   useStore,
+  useContext,
   watch,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
@@ -106,6 +107,7 @@ export default defineComponent({
     const formData = ref(null)
 
     const store = useStore<RootState>()
+    const context = useContext()
 
     const councilId = computed(() => {
       return store.state.projects.project?.council?.id
@@ -165,10 +167,12 @@ export default defineComponent({
     const createFractionDetail = async () => {
       if (projectId.value && fractions.value) {
         try {
-          const response = await axios.post('/fraction_details', {
-            project: projectId.value,
-            fraction: '/fractions/10',
-          })
+          const response =
+            // @ts-ignore
+            await context.$api.fractionDetails.createFractionDetails({
+              project: projectId.value,
+              fraction: '/fractions/10',
+            })
 
           console.log(response)
         } catch (error) {}
