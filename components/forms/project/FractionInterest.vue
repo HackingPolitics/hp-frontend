@@ -160,6 +160,7 @@ export default defineComponent({
       if (projectId.value && activeFraction.value) {
         try {
           const response =
+            // @ts-ignore
             await context.$api.fractionDetails.createFractionDetails({
               project: projectId.value,
               fraction: activeFraction.value?.['@id'],
@@ -230,7 +231,7 @@ export default defineComponent({
     const activeFractionDetails = computed(() => {
       if (activeFraction && activeFraction.value && props.fractionDetails) {
         return props.fractionDetails.find((detail: IFractionDetails) => {
-          if (activeFraction && activeFraction.value) {
+          if (activeFraction && activeFraction.value && detail?.fraction) {
             return activeFraction.value.id === detail.fraction.id
           }
           return undefined

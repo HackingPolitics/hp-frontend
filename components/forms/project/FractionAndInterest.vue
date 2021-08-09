@@ -156,7 +156,7 @@ export default defineComponent({
             return {
               ...el.fraction,
               memberCount: fractions.value?.find(
-                (fraction) => fraction.id === el.fraction.id
+                (fraction) => fraction.id === el?.fraction?.id
               )?.memberCount,
             }
           })
@@ -218,7 +218,7 @@ export default defineComponent({
 
     const getFractioDetails = (fraction: IFraction) => {
       return fractionDetails.value.find(
-        (el: IFractionDetails) => fraction.id === el.fraction.id
+        (el: IFractionDetails) => fraction.id === el?.fraction?.id
       )
     }
 

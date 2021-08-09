@@ -171,7 +171,7 @@ export enum MemberShipsRoles {
 export interface IProjectMembership extends IModel {
   motivation?: string
   project?: IProject
-  role: MemberShipsRoles
+  role?: MemberShipsRoles
   skills?: string
   user?: IUser
 }
