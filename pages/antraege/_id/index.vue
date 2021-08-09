@@ -286,7 +286,7 @@ export default defineComponent({
     const user = computed(() => store.state.auth.user)
 
     const userMembershipRole = computed((): string | undefined => {
-      if (user.value.projectMemberships) {
+      if (user.value?.projectMemberships) {
         return user.value.projectMemberships?.find(
           (membership: IProjectMembership) =>
             membership?.project?.id === parseInt(projectId.value)
