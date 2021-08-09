@@ -159,10 +159,11 @@ export default defineComponent({
     const createFractionDetail = async () => {
       if (projectId.value && activeFraction.value) {
         try {
-          const response = await axios.post('/fraction_details', {
-            project: projectId.value,
-            fraction: activeFraction.value?.['@id'],
-          })
+          const response =
+            await context.$api.fractionDetails.createFractionDetails({
+              project: projectId.value,
+              fraction: activeFraction.value?.['@id'],
+            })
 
           console.log(response)
           return response

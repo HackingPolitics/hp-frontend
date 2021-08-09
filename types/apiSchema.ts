@@ -222,17 +222,17 @@ export interface IFractionInterest {
 }
 
 export interface IFractionDetails {
-  '@id': string
-  '@type': string
-  id: number
-  contactEmail: string
-  contactPhone: string
-  contactName: string
-  possiblePartner: boolean
-  possibleSponsor: boolean
-  fraction: IFraction
-  teamContact: string
-  interests: IFractionInterest[]
-  updatedBy: IUser
-  updatedAt: string
+  '@id'?: string
+  '@type'?: string
+  id?: number
+  contactEmail?: string
+  contactPhone?: string
+  contactName?: string
+  possiblePartner?: boolean
+  possibleSponsor?: boolean
+  fraction?: IFraction
+  teamContact?: string
+  interests?: IFractionInterest[]
+  updatedBy?: IUser
+  updatedAt?: string
 }
