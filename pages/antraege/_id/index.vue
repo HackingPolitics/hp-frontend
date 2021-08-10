@@ -332,9 +332,10 @@ export default defineComponent({
     })
 
     const onlineUsers = computed(() => {
-      return store.state.collaboration.awarenessStates.map(
-        (state) => state.user
-      )
+      if (store.state.collaboration?.awarenessStates)
+        return store.state.collaboration.awarenessStates.map(
+          (state) => state.user
+        )
     })
 
     useMeta({

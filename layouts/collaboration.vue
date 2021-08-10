@@ -22,12 +22,15 @@ import {
 } from '@nuxtjs/composition-api'
 import * as Y from 'yjs'
 import { cloneDeep } from 'lodash'
+import jwtDecode from 'jwt-decode'
+import { useAxios } from '~/composables/useAxios'
 import {
   HocuspocusProvider,
   WebSocketStatus,
 } from '~/services/hocuspocus/HocuspocusProvider'
 import { RootState } from '~/store'
 import { TokenUpdateMessage } from '~/services/hocuspocus/OutgoingMessages/TokenUpdateMessage'
+import { JwtPayloadWithUser } from '~/store/authentication'
 
 export default defineComponent({
   name: 'Collaboration',
@@ -41,6 +44,7 @@ export default defineComponent({
   setup() {
     const context = useContext()
     const store = useStore<RootState>()
+    const axios = useAxios()
 
     const route = useRoute()
 
@@ -48,20 +52,39 @@ export default defineComponent({
 
     const status = ref('not connected')
     const provider = ref(null)
-    const yDoc = ref(null)
+    const yDoc = ref({})
     const areas = ref({})
     const onlineUsers = ref({})
-    const syncState = ref(null)
+
     const savedAt = ref(-1)
     const awarenessStates = ref([])
     const timer = ref(null)
+    const syncState = ref(null)
+
     const currentUser = ref({
       name: context.$auth.user?.username || '[not logged in]',
-      id: context.$auth.user?.id | 0,
+      id: context.$auth.user?.id || 0,
       lockedField: null,
       lockedSince: null,
       area: null,
     })
+
+    const fetchUser = async () => {
+      // @ts-ignore
+      const token = context.$auth.strategy.token.get()
+
+      const decoded = jwtDecode<JwtPayloadWithUser>(token)
+      if (token) {
+        try {
+          const user = await axios.get(`/users/${decoded.id}`)
+          context.$auth.setUser(user.data)
+          console.log(user)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+    fetchUser()
 
     const currentArea = computed(() => {
       return store.state.collaboration.currentArea
@@ -117,6 +140,8 @@ export default defineComponent({
           store.commit('collaboration/SET_AWARENESS_STATES', states)
         },
       })
+      timer.value = setTimeout(sendTokenUpdate.bind(this), 5000)
+
       setAwarenessState()
     })
 
@@ -130,7 +155,6 @@ export default defineComponent({
     watch(
       () => awarenessStates.value,
       (newVal) => {
-        console.log(newVal)
         store.commit('collaboration/SET_AWARENESS_STATES', cloneDeep(newVal))
       }
     )
@@ -212,7 +236,7 @@ export default defineComponent({
     }
 
     onBeforeUnmount(() => {
-      if (provider?.value) provider.value.destroy()
+      provider?.value?.destroy()
     })
 
     return {
