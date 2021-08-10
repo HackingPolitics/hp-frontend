@@ -444,7 +444,7 @@ export default defineComponent({
         ...this.currentUser,
         ...values,
       }
-
+      console.log(this.currentUser)
       this.provider.setAwarenessField('user', this.currentUser)
     },
 

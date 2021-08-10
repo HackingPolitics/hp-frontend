@@ -87,6 +87,8 @@
                 :application-step="applicationStep"
                 :project-id="projectId"
                 :step-number="index + 1"
+                :online-users="onlineUsers"
+                :area="applicationStep.area"
               />
             </nuxt-link>
             <application-edit-progress-card
@@ -172,6 +174,7 @@ import {
   useStore,
   useMeta,
 } from '@nuxtjs/composition-api'
+import { cloneDeep } from 'lodash'
 import { RootState } from '~/store'
 
 // only mockup interface for rendering and testing
@@ -192,6 +195,7 @@ export default defineComponent({
       vm.routeBefore = previousRoute
     })
   },
+  layout: 'collaboration',
   setup() {
     const route = useRoute()
 
@@ -222,6 +226,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.topic').toString(),
         href: 'antraege-id-thema',
+        area: 'Thema',
         step: {
           total: 4,
           done: project?.value?.categories?.length
@@ -234,6 +239,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.problems').toString(),
         href: 'antraege-id-problem',
+        area: 'Problem',
         step: {
           total: 2,
           done: project?.value?.actionMandate
@@ -250,6 +256,7 @@ export default defineComponent({
           .t('page.application.arguments_counterarguments')
           .toString(),
         href: 'antraege-id-argumente',
+        area: 'Argument',
         step: {
           total: 2,
           done: project?.value?.arguments?.length
@@ -264,6 +271,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.fraction').toString(),
         href: 'antraege-id-fraktion-interessen',
+        area: 'Fraktion',
         step: {
           total: 1,
           done: project?.value?.fractionDetails?.length ? 1 : 0,
@@ -272,6 +280,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.strategy').toString(),
         href: 'antraege-id-strategie',
+        area: 'Strategie',
         step: {
           total: 1,
           done: project?.value?.partners?.length ? 1 : 0,
@@ -320,6 +329,12 @@ export default defineComponent({
         progress = progress + 10
       }
       return progress
+    })
+
+    const onlineUsers = computed(() => {
+      return store.state.collaboration.awarenessStates.map(
+        (state) => state.user
+      )
     })
 
     useMeta({
@@ -386,6 +401,7 @@ export default defineComponent({
         },
       ],
     })
+
     return {
       applicationSteps,
       projectId,
@@ -397,6 +413,7 @@ export default defineComponent({
       user,
       error,
       projectProgress,
+      onlineUsers,
     }
   },
   data() {

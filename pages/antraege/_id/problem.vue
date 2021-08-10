@@ -1,30 +1,32 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-normal text-gray-900 mb-4">
-      {{ $t('forms.problems.formTitle') }}
-    </h1>
-    <p class="text-lg font-normal text-gray-600 mb-2 leading-6">
-      {{ $t('forms.problems.formDescription') }}
-    </p>
-    <forms-project-problem></forms-project-problem>
-    <forms-project-action-mandate></forms-project-action-mandate>
-    <forms-form-section
-      :title="$t('forms.problems.impact.name')"
-      :subtitle="$t('forms.problems.impact.label')"
-    >
-      <FormulateInput
-        v-model="impact"
-        type="textarea"
-        rows="5"
-        :help="$t('forms.problems.impact.help')"
-        :placeholder="$t('forms.problems.impact.placeholder')"
-        validation="required"
-        @validation="validation = $event"
-        @focusout="updateProject()"
+  <layouts-form-with-sidebar>
+    <div>
+      <h1 class="text-3xl font-normal text-gray-900 mb-4">
+        {{ $t('forms.problems.formTitle') }}
+      </h1>
+      <p class="text-lg font-normal text-gray-600 mb-2 leading-6">
+        {{ $t('forms.problems.formDescription') }}
+      </p>
+      <forms-project-problem></forms-project-problem>
+      <forms-project-action-mandate></forms-project-action-mandate>
+      <forms-form-section
+        :title="$t('forms.problems.impact.name')"
+        :subtitle="$t('forms.problems.impact.label')"
       >
-      </FormulateInput>
-    </forms-form-section>
-  </div>
+        <FormulateInput
+          v-model="impact"
+          type="textarea"
+          rows="5"
+          :help="$t('forms.problems.impact.help')"
+          :placeholder="$t('forms.problems.impact.placeholder')"
+          validation="required"
+          @validation="validation = $event"
+          @focusout="updateProject()"
+        >
+        </FormulateInput>
+      </forms-form-section>
+    </div>
+  </layouts-form-with-sidebar>
 </template>
 
 <script lang="ts">
@@ -42,8 +44,11 @@ import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'Problem',
-  layout: 'formWithSidebar',
-  middleware: 'isProjectMember',
+  meta: {
+    area: 'Problem',
+  },
+  layout: 'collaboration',
+  middleware: ['isProjectMember', 'getCurrentArea'],
   setup() {
     const impact = ref<String | undefined>('')
     const store = useStore<RootState>()
