@@ -159,10 +159,12 @@ export default defineComponent({
     const createFractionDetail = async () => {
       if (projectId.value && activeFraction.value) {
         try {
-          const response = await axios.post('/fraction_details', {
-            project: projectId.value,
-            fraction: activeFraction.value?.['@id'],
-          })
+          const response =
+            // @ts-ignore
+            await context.$api.fractionDetails.createFractionDetails({
+              project: projectId.value,
+              fraction: activeFraction.value?.['@id'],
+            })
 
           console.log(response)
           return response
@@ -229,7 +231,7 @@ export default defineComponent({
     const activeFractionDetails = computed(() => {
       if (activeFraction && activeFraction.value && props.fractionDetails) {
         return props.fractionDetails.find((detail: IFractionDetails) => {
-          if (activeFraction && activeFraction.value) {
+          if (activeFraction && activeFraction.value && detail?.fraction) {
             return activeFraction.value.id === detail.fraction.id
           }
           return undefined

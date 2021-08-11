@@ -18,6 +18,8 @@
       ease-in-out
     "
     @click="$emit('click')"
+    @mouseover="$emit('mouseover')"
+    @mouseleave="$emit('mouseleave')"
   >
     <slot />
   </button>
