@@ -65,7 +65,9 @@ export default defineComponent({
           const user = await axios.get(`/users/${decoded.id}`)
           context.$auth.setUser(user.data)
           currentUser.value = {
+            // @ts-ignore#
             name: context.$auth.user?.username || '[not logged in]',
+            // @ts-ignore#
             id: context.$auth.user?.id || 0,
             area: null,
           }
