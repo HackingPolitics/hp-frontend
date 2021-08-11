@@ -20,7 +20,6 @@ import {
   useStore,
   watch,
 } from '@nuxtjs/composition-api'
-import * as Y from 'yjs'
 import { cloneDeep } from 'lodash'
 import jwtDecode from 'jwt-decode'
 import { useAxios } from '~/composables/useAxios'
@@ -31,6 +30,7 @@ import {
 import { RootState } from '~/store'
 import { TokenUpdateMessage } from '~/services/hocuspocus/OutgoingMessages/TokenUpdateMessage'
 import { JwtPayloadWithUser } from '~/store/authentication'
+import { AwarenessState, StateUser } from '~/types/collaborations'
 
 export default defineComponent({
   name: 'Collaboration',
@@ -48,24 +48,17 @@ export default defineComponent({
 
     const route = useRoute()
 
-    const projectId = ref(route.value.params.id)
+    const projectId = ref<String>(route.value.params.id)
 
-    const status = ref('not connected')
-    const provider = ref(null)
-    const yDoc = ref({})
-    const areas = ref({})
-    const onlineUsers = ref({})
+    const status = ref<String>('not connected')
+    const provider = ref<any>(null)
 
-    const savedAt = ref(-1)
-    const awarenessStates = ref([])
-    const timer = ref(null)
-    const syncState = ref(null)
+    const awarenessStates = ref<AwarenessState[]>([])
 
-    const currentUser = ref({
+    // @ts-ignore#
+    const currentUser = ref<StateUser>({
       name: context.$auth.user?.username || '[not logged in]',
       id: context.$auth.user?.id || 0,
-      lockedField: null,
-      lockedSince: null,
       area: null,
     })
 
@@ -91,17 +84,9 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      yDoc.value = new Y.Doc()
-      syncState.value = yDoc.value.getMap('syncState')
-
-      yDoc.value.on('update', () => {
-        savedAt.value = syncState.value.get('savedAt')
-      })
-
       provider.value = new HocuspocusProvider({
         url: context.$config.WS_URL,
         name: 'project-' + projectId.value,
-        document: yDoc.value,
         parameters: { authToken: getToken() },
         onConnect: () => {
           status.value = 'connected'
@@ -110,7 +95,7 @@ export default defineComponent({
           // any document update is applied *after* this hook
           // console.log(`[message] ◀️ ${message.name}`, event)
         },
-        onOutgoingMessage: ({ _message }) => {
+        onOutgoingMessage: () => {
           // console.info(`[message] ▶️ ${message.name} (${message.description})`)
         },
         onClose: ({ event }) => {
@@ -134,13 +119,9 @@ export default defineComponent({
         },
         onAwarenessChange: ({ states }) => {
           awarenessStates.value = states
-          const reduced = reduceStates(states)
-          areas.value = reduced.areas
-          onlineUsers.value = reduced.users
-          store.commit('collaboration/SET_AWARENESS_STATES', states)
         },
       })
-      timer.value = setTimeout(sendTokenUpdate.bind(this), 5000)
+      setTimeout(sendTokenUpdate.bind(this), 5000)
 
       setAwarenessState()
     })
@@ -160,14 +141,16 @@ export default defineComponent({
     )
 
     const getToken = () => {
+      // @ts-ignore
       const prefixed = cloneDeep(context.$auth.strategy.token.get()) || ''
       return prefixed.replace(
+        // @ts-ignore
         `${context.$auth.strategy.options.token.type} `,
         ''
       )
     }
 
-    const changeArea = (e) => {
+    const changeArea = (e: string | null) => {
       currentUser.value.area = e
       provider.value.setAwarenessField('user', currentUser.value)
     }
@@ -180,37 +163,11 @@ export default defineComponent({
       provider.value.setAwarenessField('user', currentUser.value)
     }
 
-    const reduceStates = (clients) => {
-      const users = {}
-      const areas = {}
-
-      for (const client of clients) {
-        // ein Benutzer kann mit mehreren Clients online sein -> reduce
-        if (!users[client.user.id]) {
-          users[client.user.id] = client.user.name
-        }
-
-        if (client.user.area) {
-          // Bereich wurde noch nie benutzt, erstmal anlegen...
-          if (!areas[client.user.area]) {
-            areas[client.user.area] = {}
-          }
-
-          // ein Benutzer kann mit mehreren Clients online & im gleichen Bereich sein -> reduce
-          if (!areas[client.user.area][client.user.id]) {
-            areas[client.user.area][client.user.id] = client.user.name
-          }
-        }
-      }
-
-      return { users, areas }
-    }
-
     const sendTokenUpdate = () => {
       // @todo how can we listen to token changes instead of polling?
       // * localStorage eventListener only triggers when the change occured in another tab
       // * $auth.$storage.watchState() did not trigger in tests (with: token, _token, _token.local, auth._token.local as key)
-      timer.value = setTimeout(sendTokenUpdate.bind(this), 5000)
+      setTimeout(sendTokenUpdate.bind(this), 5000)
 
       const current = getToken()
       if (provider.value.options.parameters.authToken === current) {
@@ -243,7 +200,6 @@ export default defineComponent({
       currentUser,
       awarenessStates,
       status,
-      onlineUsers,
       currentArea,
     }
   },

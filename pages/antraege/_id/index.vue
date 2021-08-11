@@ -174,8 +174,8 @@ import {
   useStore,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { cloneDeep } from 'lodash'
 import { RootState } from '~/store'
+import { AwarenessState } from '~/types/collaborations'
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -195,10 +195,13 @@ export default defineComponent({
       vm.routeBefore = previousRoute
     })
   },
+  meta: {
+    area: 'Dashboard',
+  },
   layout: 'collaboration',
+  middleware: ['getCurrentArea'],
   setup() {
     const route = useRoute()
-
     const projectId = ref<string>(route.value.params.id)
 
     const store = useStore<RootState>()
@@ -256,7 +259,7 @@ export default defineComponent({
           .t('page.application.arguments_counterarguments')
           .toString(),
         href: 'antraege-id-argumente',
-        area: 'Argument',
+        area: 'Argumente',
         step: {
           total: 2,
           done: project?.value?.arguments?.length
@@ -333,7 +336,7 @@ export default defineComponent({
 
     const onlineUsers = computed(() => {
       return store.state.collaboration.awarenessStates.map(
-        (state) => state.user
+        (state: AwarenessState) => state.user
       )
     })
 

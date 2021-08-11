@@ -1,14 +1,15 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { set } from 'lodash'
+import { AwarenessState } from '~/types/collaborations'
 
 export interface CollaborationState {
-  awarenessStates: null
+  awarenessStates: AwarenessState[]
   currentArea: null
   onlineUsers: null
 }
 
 const defaultProjectsState: CollaborationState = {
-  awarenessStates: null,
+  awarenessStates: [],
   currentArea: null,
   onlineUsers: null,
 }

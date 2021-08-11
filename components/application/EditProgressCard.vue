@@ -30,9 +30,9 @@
     <div
       v-for="user in onlineUsers"
       :key="user.id"
-      class="text-gray-500 mt-4 flex flex-1"
+      class="text-gray-500 mt-4 inline-flex"
     >
-      <div v-if="user.area === area">
+      <div v-if="user.area === area" class="mr-1">
         <base-avatar :user="user"></base-avatar>
       </div>
     </div>
