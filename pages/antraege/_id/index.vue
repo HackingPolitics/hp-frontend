@@ -18,7 +18,10 @@
       v-if="!isLoading && project && !error"
       :title="project.title"
     >
-      <application-header :project="project"></application-header>
+      <application-header
+        :project="project"
+        :user-membership-role="userMembershipRole"
+      ></application-header>
       <modal ref="projectMemberShipModal">
         <project-memberships-apply-project-form
           :project="project"
@@ -176,6 +179,8 @@ import {
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 import { AwarenessState } from '~/types/collaborations'
+import { IProjectMembership } from '~/types/apiSchema'
+
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -292,6 +297,15 @@ export default defineComponent({
     ])
 
     const user = computed(() => store.state.auth.user)
+
+    const userMembershipRole = computed((): string | undefined => {
+      if (user.value?.projectMemberships) {
+        return user.value.projectMemberships?.find(
+          (membership: IProjectMembership) =>
+            membership?.project?.id === parseInt(projectId.value)
+        )?.role
+      }
+    })
 
     const projectMemberShipModal = ref()
 
@@ -417,6 +431,7 @@ export default defineComponent({
       error,
       projectProgress,
       onlineUsers,
+      userMembershipRole,
     }
   },
   data() {

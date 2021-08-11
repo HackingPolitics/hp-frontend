@@ -58,12 +58,12 @@
 
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   PropType,
-  //   ref,
-  useStore,
+  useContext,
   useRoute,
-  computed,
+  useStore,
 } from '@nuxtjs/composition-api'
 import { useAxios } from '~/composables/useAxios'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
@@ -89,42 +89,54 @@ export default defineComponent({
       return false
     })
 
-    const axios = useAxios()
     const store = useStore<RootState>()
     const route = useRoute()
+    const context = useContext()
 
     const projectId = computed(() => {
       return store.state.projects.project?.['@id']
     })
 
     const createFractionDetail = async () => {
-      if (projectId.value && props.fraction) {
+      if (
+        typeof projectId.value !== 'undefined' &&
+        projectId.value !== null &&
+        props.fraction
+      ) {
         try {
-          const response = await axios.post('/fraction_details', {
+          // @ts-ignore
+          return await context.$api.fractionDetails.createFractionDetails({
             project: projectId.value,
             fraction: props.fraction?.['@id'],
           })
-          return response
         } catch (error) {}
       }
     }
 
     const togglePartnerStatus = async () => {
-      if (props.fractionDetails) {
+      if (props.fractionDetails?.possiblePartner) {
         try {
-          await axios.put(`/fraction_details/${props.fractionDetails.id}`, {
-            possiblePartner: !props.fractionDetails.possiblePartner,
-          })
-          store.dispatch('projects/fetchProject', route.value.params.id)
+          // @ts-ignore
+          await context.$api.fractionDetails.updateFractionDetails(
+            props.fractionDetails.id,
+            {
+              possiblePartner: !props.fractionDetails.possiblePartner,
+            }
+          )
+          await store.dispatch('projects/fetchProject', route.value.params.id)
         } catch (error) {}
       } else {
         try {
           // create fraction details
           const response = await createFractionDetail()
-          await axios.put(`/fraction_details/${response?.data.id}`, {
-            possiblePartner: true,
-          })
-          store.dispatch('projects/fetchProject', route.value.params.id)
+          // @ts-ignore
+          await context.$api.fractionDetails.updateFractionDetails(
+            response?.data.id,
+            {
+              possiblePartner: true,
+            }
+          )
+          await store.dispatch('projects/fetchProject', route.value.params.id)
         } catch (error) {}
       }
     }
