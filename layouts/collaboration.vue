@@ -55,13 +55,6 @@ export default defineComponent({
 
     const awarenessStates = ref<AwarenessState[]>([])
 
-    // @ts-ignore#
-    const currentUser = ref<StateUser>({
-      name: context.$auth.user?.username || '[not logged in]',
-      id: context.$auth.user?.id || 0,
-      area: null,
-    })
-
     const fetchUser = async () => {
       // @ts-ignore
       const token = context.$auth.strategy.token.get()
@@ -71,13 +64,24 @@ export default defineComponent({
         try {
           const user = await axios.get(`/users/${decoded.id}`)
           context.$auth.setUser(user.data)
-          console.log(user)
+          currentUser.value = {
+            name: context.$auth.user?.username || '[not logged in]',
+            id: context.$auth.user?.id || 0,
+            area: null,
+          }
         } catch (error) {
           console.log(error)
         }
       }
     }
     fetchUser()
+
+    // @ts-ignore#
+    const currentUser = ref<StateUser>({
+      name: context.$auth.user?.username || '[not logged in]',
+      id: context.$auth.user?.id || 0,
+      area: null,
+    })
 
     const currentArea = computed(() => {
       return store.state.collaboration.currentArea
