@@ -16,7 +16,13 @@
     "
     :class="getAvatarSize(size)"
   >
-    {{ user && user.username ? user.username.slice(0, 1) : 'k.a.' }}
+    {{
+      user && user.username
+        ? user.username.slice(0, 1)
+        : user && user.name
+        ? user.name.slice(0, 1)
+        : 'k.a.'
+    }}
   </span>
 </template>
 <script lang="ts">
