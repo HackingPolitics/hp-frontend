@@ -1,17 +1,23 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import { set } from 'lodash'
-import { AwarenessState } from '~/types/collaborations'
+import { AwarenessState, StateUser } from '~/types/collaborations'
 
 export interface CollaborationState {
   awarenessStates: AwarenessState[]
-  currentArea: null
-  onlineUsers: null
+  currentArea: string | null
+  onlineUsers: StateUser[] | null
+  lockedField: string | null
+  lockedSince: Date | null
+  projectSaved: Date | null
 }
 
 const defaultProjectsState: CollaborationState = {
   awarenessStates: [],
   currentArea: null,
   onlineUsers: null,
+  lockedField: null,
+  lockedSince: null,
+  projectSaved: null,
 }
 
 export const state = () => ({
@@ -29,5 +35,14 @@ export const mutations: MutationTree<RootState> = {
   },
   SET_AWARENESS_STATES(state, val) {
     state.awarenessStates = val
+  },
+  SET_LOCKED_FIELD(state, val) {
+    state.lockedField = val
+  },
+  SET_LOCKED_SINCE(state, date) {
+    state.lockedSince = date
+  },
+  SET_PROJECT_SAVED(state, date) {
+    state.projectSaved = date
   },
 }

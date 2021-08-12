@@ -26,8 +26,8 @@
             }}</span>
           </nuxt-link>
           <div
-            v-for="user in onlineUsers"
-            :key="user.id"
+            v-for="(user, i) in onlineUsers"
+            :key="i"
             class="text-gray-500 mt-4 inline-flex"
           >
             <div

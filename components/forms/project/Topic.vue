@@ -10,6 +10,7 @@
         validation="required"
         @validation="validation = $event"
         @focusout="updateProject()"
+        @focus="setLockedField('applicationTitle')"
       >
       </FormulateInput>
     </forms-form-section>
@@ -98,6 +99,12 @@ export default defineComponent({
 
     const validation = ref<IValidation>({ hasErrors: false })
 
+    /*
+     *const lockFiled  (welches Field wird gerade lokal bearbeitet)
+     *beim update wird werden die neue Daten au fetch Project geholt
+     *Das Feld, was sich nicht ändert wird nicht beschrieben
+     * */
+
     onBeforeMount(() => {
       topic.value = project.value?.topic
       title.value = project.value?.title
@@ -106,6 +113,11 @@ export default defineComponent({
         if (category['@id']) categories?.value?.push(category['@id'])
       })
     })
+
+    const setLockedField = (fieldName: string) => {
+      store.commit('collaboration/SET_LOCKED_FIELD', fieldName)
+      store.commit('collaboration/SET_LOCKED_SINCE', Date.now())
+    }
 
     const updateProject = () => {
       if (!validation.value.hasErrors) {
@@ -118,6 +130,7 @@ export default defineComponent({
             goal: goal.value,
           },
         ])
+        store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
       }
     }
     return {
@@ -129,6 +142,7 @@ export default defineComponent({
       categoryOptions,
       validation,
       updateProject,
+      setLockedField,
     }
   },
 })
