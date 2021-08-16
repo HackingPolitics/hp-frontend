@@ -7,8 +7,10 @@ export interface CollaborationState {
   currentArea: string | null
   onlineUsers: StateUser[] | null
   lockedField: string | null
+  lockedFields: string[] | null
   lockedSince: Date | null
   projectSaved: Date | null
+  recentProjectSaved: Date | null
 }
 
 const defaultProjectsState: CollaborationState = {
@@ -16,8 +18,10 @@ const defaultProjectsState: CollaborationState = {
   currentArea: null,
   onlineUsers: null,
   lockedField: null,
+  lockedFields: null,
   lockedSince: null,
   projectSaved: null,
+  recentProjectSaved: Date | null,
 }
 
 export const state = () => ({
@@ -39,10 +43,16 @@ export const mutations: MutationTree<RootState> = {
   SET_LOCKED_FIELD(state, val) {
     state.lockedField = val
   },
+  SET_LOCKED_FIELDS(state, val) {
+    state.lockedFields = val
+  },
   SET_LOCKED_SINCE(state, date) {
     state.lockedSince = date
   },
   SET_PROJECT_SAVED(state, date) {
     state.projectSaved = date
+  },
+  SET_RECENT_PROJECT_SAVED(state, date) {
+    state.recentProjectSaved = date
   },
 }

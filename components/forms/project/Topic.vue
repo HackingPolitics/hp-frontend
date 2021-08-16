@@ -8,6 +8,7 @@
         v-model="title"
         type="text"
         validation="required"
+        :disabled="checkLockedField('applicationTitle')"
         @validation="validation = $event"
         @focusout="updateProject()"
         @focus="setLockedField('applicationTitle')"
@@ -23,8 +24,10 @@
         type="textarea"
         rows="5"
         validation="required"
+        :disabled="checkLockedField('applicationTopic')"
         @validation="validation = $event"
         @focusout="updateProject()"
+        @focus="setLockedField('applicationTopic')"
       >
       </FormulateInput>
     </forms-form-section>
@@ -65,10 +68,12 @@
 import {
   defineComponent,
   useStore,
+  useRoute,
   ref,
   computed,
   ComputedRef,
   onBeforeMount,
+  watch,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
@@ -93,6 +98,39 @@ export default defineComponent({
       return store.getters['categories/categoryOptions']
     })
 
+    // Collab
+    const route = useRoute()
+    const projectId = ref<string>(route.value.params.id)
+
+    const userName = computed(() => {
+      return store.state.auth.user.username
+    })
+
+    const recentProjectSaved = computed(() => {
+      return store.state.collaboration.recentProjectSaved
+    })
+
+    const projectSaved = computed(() => {
+      return store.state.collaboration.projectSaved
+    })
+
+    watch(
+      () => recentProjectSaved.value,
+      (newVal) => {
+        if (newVal > (projectSaved.value ?? 0)) {
+          console.log('update')
+          store.dispatch('projects/fetchProject', projectId.value).then(() => {
+            fillForm()
+          })
+        }
+      }
+    )
+
+    const lockedFields = computed(() => {
+      return store.state.collaboration.lockedFields
+    })
+    //
+
     const project: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.project
     )
@@ -106,17 +144,34 @@ export default defineComponent({
      * */
 
     onBeforeMount(() => {
+      fillForm()
+    })
+
+    const fillForm = () => {
       topic.value = project.value?.topic
       title.value = project.value?.title
       goal.value = project.value?.goal
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
-    })
+    }
 
-    const setLockedField = (fieldName: string) => {
+    const setLockedField = (fieldName: string | null) => {
       store.commit('collaboration/SET_LOCKED_FIELD', fieldName)
       store.commit('collaboration/SET_LOCKED_SINCE', Date.now())
+    }
+
+    const checkLockedField = (fieldName: string) => {
+      if (
+        lockedFields.value[fieldName]?.locked &&
+        lockedFields.value[fieldName].by === userName.value
+      ) {
+        return false
+      }
+      return !!(
+        lockedFields.value[fieldName]?.locked &&
+        lockedFields.value[fieldName].by !== userName.value
+      )
     }
 
     const updateProject = () => {
@@ -130,6 +185,7 @@ export default defineComponent({
             goal: goal.value,
           },
         ])
+        store.commit('collaboration/SET_LOCKED_FIELD', null)
         store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
       }
     }
@@ -141,8 +197,12 @@ export default defineComponent({
       categories,
       categoryOptions,
       validation,
+      lockedFields,
       updateProject,
       setLockedField,
+      userName,
+      checkLockedField,
+      recentProjectSaved,
     }
   },
 })

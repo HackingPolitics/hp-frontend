@@ -146,6 +146,18 @@ export default defineComponent({
           awarenessStates.value = states
           const reduced = reduceStates(states)
           lockedFields.value = reduced.fields
+          store.commit(
+            'collaboration/SET_LOCKED_FIELDS',
+            cloneDeep(lockedFields.value)
+          )
+          store.commit(
+            'collaboration/SET_AWARENESS_STATES',
+            cloneDeep(awarenessStates.value)
+          )
+          store.commit(
+            'collaboration/SET_RECENT_PROJECT_SAVED',
+            cloneDeep(reduced.recentProjectSaved)
+          )
         },
       })
       setTimeout(sendTokenUpdate.bind(this), 5000)
@@ -156,31 +168,24 @@ export default defineComponent({
     watch(
       () => currentArea.value,
       (newVal) => {
-        changeArea(newVal)
-      }
-    )
-
-    watch(
-      () => awarenessStates.value,
-      (newVal) => {
-        store.commit('collaboration/SET_AWARENESS_STATES', cloneDeep(newVal))
+        setAwarenessState({ area: newVal })
       }
     )
 
     watch(
       () => lockedField.value,
       (newVal) => {
-        currentUser.value.lockedField = newVal.name
-        currentUser.value.lockedSince = newVal.lockedSince
-        provider.value.setAwarenessField('user', currentUser.value)
+        setAwarenessState({
+          lockedField: newVal.name,
+          lockedSince: newVal.lockedSince,
+        })
       }
     )
 
     watch(
       () => projectSaved.value,
       (newVal) => {
-        currentUser.value.projectSaved = newVal
-        provider.value.setAwarenessField('projectSaved', newVal)
+        setAwarenessState({ projectSaved: newVal })
       }
     )
 
@@ -192,11 +197,6 @@ export default defineComponent({
         `${context.$auth.strategy.options.token.type} `,
         ''
       )
-    }
-
-    const changeArea = (e: string | null) => {
-      currentUser.value.area = e
-      provider.value.setAwarenessField('user', currentUser.value)
     }
 
     const setAwarenessState = (values = {}) => {
@@ -291,7 +291,11 @@ export default defineComponent({
         }
       }
 
-      return { areas, fields, users }
+      const recentProjectSaved = Math.max(
+        ...clients.map((client) => client.user.projectSaved ?? 0)
+      )
+
+      return { areas, fields, users, recentProjectSaved }
     }
 
     onBeforeUnmount(() => {
