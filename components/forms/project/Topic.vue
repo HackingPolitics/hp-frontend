@@ -8,7 +8,8 @@
         v-model="title"
         type="text"
         validation="required"
-        :disabled="checkLockedField('applicationTitle')"
+        :disabled="fieldIsLocked('applicationTitle')"
+        :help="setLockedFieldText('applicationTitle')"
         @validation="validation = $event"
         @focusout="updateProject()"
         @focus="setLockedField('applicationTitle')"
@@ -24,7 +25,8 @@
         type="textarea"
         rows="5"
         validation="required"
-        :disabled="checkLockedField('applicationTopic')"
+        :disabled="fieldIsLocked('applicationTopic')"
+        :help="setLockedFieldText('applicationTopic')"
         @validation="validation = $event"
         @focusout="updateProject()"
         @focus="setLockedField('applicationTopic')"
@@ -41,6 +43,9 @@
         type="textarea"
         rows="5"
         validation="required"
+        :disabled="fieldIsLocked('applicationGoal')"
+        :help="setLockedFieldText('applicationGoal')"
+        @focus="setLockedField('applicationGoal')"
         @validation="validation = $event"
         @focusout="updateProject()"
       >
@@ -79,6 +84,8 @@ import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 import { IValidation } from '~/types/vueFormulate'
 
+import collaborations from '~/composables/collaborations'
+
 interface TopicForm {
   topic: string
 }
@@ -92,44 +99,35 @@ export default defineComponent({
     const title = ref<String | undefined>('')
     const categories = ref<string[]>([])
 
+    const {
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+    } = collaborations()
+
     const store = useStore<RootState>()
     store.dispatch('categories/fetchCategories')
     const categoryOptions = computed(() => {
       return store.getters['categories/categoryOptions']
     })
 
-    // Collab
     const route = useRoute()
     const projectId = ref<string>(route.value.params.id)
 
-    const userName = computed(() => {
-      return store.state.auth.user.username
-    })
-
-    const recentProjectSaved = computed(() => {
-      return store.state.collaboration.recentProjectSaved
-    })
-
-    const projectSaved = computed(() => {
-      return store.state.collaboration.projectSaved
-    })
-
     watch(
       () => recentProjectSaved.value,
-      (newVal) => {
-        if (newVal > (projectSaved.value ?? 0)) {
-          console.log('update')
-          store.dispatch('projects/fetchProject', projectId.value).then(() => {
-            fillForm()
-          })
+      async (newVal) => {
+        if (newVal ?? (projectSaved.value ?? 0) < 0) {
+          await store
+            .dispatch('projects/fetchProject', projectId.value)
+            .then(() => {
+              fillForm()
+            })
         }
       }
     )
-
-    const lockedFields = computed(() => {
-      return store.state.collaboration.lockedFields
-    })
-    //
 
     const project: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.project
@@ -151,27 +149,10 @@ export default defineComponent({
       topic.value = project.value?.topic
       title.value = project.value?.title
       goal.value = project.value?.goal
+      categories.value = []
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
-    }
-
-    const setLockedField = (fieldName: string | null) => {
-      store.commit('collaboration/SET_LOCKED_FIELD', fieldName)
-      store.commit('collaboration/SET_LOCKED_SINCE', Date.now())
-    }
-
-    const checkLockedField = (fieldName: string) => {
-      if (
-        lockedFields.value[fieldName]?.locked &&
-        lockedFields.value[fieldName].by === userName.value
-      ) {
-        return false
-      }
-      return !!(
-        lockedFields.value[fieldName]?.locked &&
-        lockedFields.value[fieldName].by !== userName.value
-      )
     }
 
     const updateProject = () => {
@@ -197,12 +178,11 @@ export default defineComponent({
       categories,
       categoryOptions,
       validation,
-      lockedFields,
       updateProject,
       setLockedField,
-      userName,
-      checkLockedField,
+      fieldIsLocked,
       recentProjectSaved,
+      setLockedFieldText,
     }
   },
 })

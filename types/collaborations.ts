@@ -3,8 +3,8 @@ export interface StateUser {
   area: string | null
   id: string | number
   lockedField: string | null
-  lockedSince: Date | null
-  projectSaved: Date | null
+  lockedSince: number | null
+  projectSaved: number | null
 }
 
 export interface AwarenessState {

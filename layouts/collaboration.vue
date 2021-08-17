@@ -55,7 +55,7 @@ export default defineComponent({
 
     const awarenessStates = ref<AwarenessState[]>([])
 
-    const lockedFields = ref(null)
+    const lockedFields = ref({})
 
     const fetchUser = async () => {
       // @ts-ignore
@@ -236,10 +236,10 @@ export default defineComponent({
       provider.value.send(TokenUpdateMessage, { token: current })
     }
 
-    const reduceStates = (clients) => {
-      const areas = {}
-      const fields = {}
-      const users = {}
+    const reduceStates = (clients: AwarenessState[]) => {
+      const areas: any = {}
+      const fields: any = {}
+      const users: any = {}
 
       for (const client of clients) {
         // ein Benutzer kann mit mehreren Clients online sein -> reduce
@@ -280,7 +280,10 @@ export default defineComponent({
             // oder der aktuelle client hat es später gelocked (um User rausschmeissen zu können
             // die längere Zeit inaktiv sind, aktive Clients sollten ihren eigenen lockedSince-Stempel
             // regelmässig aktualisieren, bspw mittels debounce wenn im Feld getippt wird)
-            fields[client.user.lockedField].since < client.user.lockedSince
+            fields[client.user.lockedField].since <
+              (client.user.lockedSince ?? 0)
+              ? client.user.lockedSince
+              : 0
           ) {
             fields[client.user.lockedField] = {
               locked: true,
@@ -292,7 +295,9 @@ export default defineComponent({
       }
 
       const recentProjectSaved = Math.max(
-        ...clients.map((client) => client.user.projectSaved ?? 0)
+        ...clients.map((client: AwarenessState) =>
+          client?.user?.projectSaved ? client.user.projectSaved : 0
+        )
       )
 
       return { areas, fields, users, recentProjectSaved }
