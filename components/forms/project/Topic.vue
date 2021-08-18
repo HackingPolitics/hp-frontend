@@ -8,8 +8,11 @@
         v-model="title"
         type="text"
         validation="required"
+        :disabled="fieldIsLocked('applicationTitle')"
+        :help="setLockedFieldText('applicationTitle')"
         @validation="validation = $event"
         @focusout="updateProject()"
+        @focus="setLockedField('applicationTitle')"
       >
       </FormulateInput>
     </forms-form-section>
@@ -22,8 +25,11 @@
         type="textarea"
         rows="5"
         validation="required"
+        :disabled="fieldIsLocked('applicationTopic')"
+        :help="setLockedFieldText('applicationTopic')"
         @validation="validation = $event"
         @focusout="updateProject()"
+        @focus="setLockedField('applicationTopic')"
       >
       </FormulateInput>
     </forms-form-section>
@@ -37,6 +43,9 @@
         type="textarea"
         rows="5"
         validation="required"
+        :disabled="fieldIsLocked('applicationGoal')"
+        :help="setLockedFieldText('applicationGoal')"
+        @focus="setLockedField('applicationGoal')"
         @validation="validation = $event"
         @focusout="updateProject()"
       >
@@ -64,14 +73,18 @@
 import {
   defineComponent,
   useStore,
+  useRoute,
   ref,
   computed,
   ComputedRef,
   onBeforeMount,
+  watch,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 import { IValidation } from '~/types/vueFormulate'
+
+import collaborations from '~/composables/collaborations'
 
 interface TopicForm {
   topic: string
@@ -86,11 +99,35 @@ export default defineComponent({
     const title = ref<String | undefined>('')
     const categories = ref<string[]>([])
 
+    const {
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+    } = collaborations()
+
     const store = useStore<RootState>()
     store.dispatch('categories/fetchCategories')
     const categoryOptions = computed(() => {
       return store.getters['categories/categoryOptions']
     })
+
+    const route = useRoute()
+    const projectId = ref<string>(route.value.params.id)
+
+    watch(
+      () => recentProjectSaved.value,
+      async (newVal) => {
+        if (newVal ?? (projectSaved.value ?? 0) < 0) {
+          await store
+            .dispatch('projects/fetchProject', projectId.value)
+            .then(() => {
+              fillForm()
+            })
+        }
+      }
+    )
 
     const project: ComputedRef<IProject | null> = computed(
       (): IProject | null => store.state.projects.project
@@ -98,14 +135,25 @@ export default defineComponent({
 
     const validation = ref<IValidation>({ hasErrors: false })
 
+    /*
+     *const lockFiled  (welches Field wird gerade lokal bearbeitet)
+     *beim update wird werden die neue Daten au fetch Project geholt
+     *Das Feld, was sich nicht ändert wird nicht beschrieben
+     * */
+
     onBeforeMount(() => {
+      fillForm()
+    })
+
+    const fillForm = () => {
       topic.value = project.value?.topic
       title.value = project.value?.title
       goal.value = project.value?.goal
+      categories.value = []
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
-    })
+    }
 
     const updateProject = () => {
       if (!validation.value.hasErrors) {
@@ -118,6 +166,8 @@ export default defineComponent({
             goal: goal.value,
           },
         ])
+        store.commit('collaboration/SET_LOCKED_FIELD', null)
+        store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
       }
     }
     return {
@@ -129,6 +179,10 @@ export default defineComponent({
       categoryOptions,
       validation,
       updateProject,
+      setLockedField,
+      fieldIsLocked,
+      recentProjectSaved,
+      setLockedFieldText,
     }
   },
 })

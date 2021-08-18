@@ -28,8 +28,8 @@
       <h3 class="text-xl font-medium mt-2">{{ applicationStep.title }}</h3>
     </div>
     <div
-      v-for="user in onlineUsers"
-      :key="user.id"
+      v-for="(user, index) in onlineUsers"
+      :key="index"
       class="text-gray-500 mt-4 inline-flex"
     >
       <div v-if="user.area === area" class="mr-1">

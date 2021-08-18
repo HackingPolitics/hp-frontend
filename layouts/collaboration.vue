@@ -55,6 +55,8 @@ export default defineComponent({
 
     const awarenessStates = ref<AwarenessState[]>([])
 
+    const lockedFields = ref({})
+
     const fetchUser = async () => {
       // @ts-ignore
       const token = context.$auth.strategy.token.get()
@@ -70,6 +72,9 @@ export default defineComponent({
             // @ts-ignore#
             id: context.$auth.user?.id || 0,
             area: null,
+            lockedField: null,
+            lockedSince: null,
+            projectSaved: null,
           }
         } catch (error) {
           console.log(error)
@@ -83,10 +88,24 @@ export default defineComponent({
       name: context.$auth.user?.username || '[not logged in]',
       id: context.$auth.user?.id || 0,
       area: null,
+      lockedField: null,
+      lockedSince: null,
+      projectSaved: null,
     })
 
     const currentArea = computed(() => {
       return store.state.collaboration.currentArea
+    })
+
+    const lockedField = computed(() => {
+      return {
+        name: store.state.collaboration.lockedField,
+        lockedSince: store.state.collaboration.lockedSince,
+      }
+    })
+
+    const projectSaved = computed(() => {
+      return store.state.collaboration.projectSaved
     })
 
     onMounted(() => {
@@ -125,6 +144,20 @@ export default defineComponent({
         },
         onAwarenessChange: ({ states }) => {
           awarenessStates.value = states
+          const reduced = reduceStates(states)
+          lockedFields.value = reduced.fields
+          store.commit(
+            'collaboration/SET_LOCKED_FIELDS',
+            cloneDeep(lockedFields.value)
+          )
+          store.commit(
+            'collaboration/SET_AWARENESS_STATES',
+            cloneDeep(awarenessStates.value)
+          )
+          store.commit(
+            'collaboration/SET_RECENT_PROJECT_SAVED',
+            cloneDeep(reduced.recentProjectSaved)
+          )
         },
       })
       setTimeout(sendTokenUpdate.bind(this), 5000)
@@ -135,14 +168,24 @@ export default defineComponent({
     watch(
       () => currentArea.value,
       (newVal) => {
-        changeArea(newVal)
+        setAwarenessState({ area: newVal })
       }
     )
 
     watch(
-      () => awarenessStates.value,
+      () => lockedField.value,
       (newVal) => {
-        store.commit('collaboration/SET_AWARENESS_STATES', cloneDeep(newVal))
+        setAwarenessState({
+          lockedField: newVal.name,
+          lockedSince: newVal.lockedSince,
+        })
+      }
+    )
+
+    watch(
+      () => projectSaved.value,
+      (newVal) => {
+        setAwarenessState({ projectSaved: newVal })
       }
     )
 
@@ -154,11 +197,6 @@ export default defineComponent({
         `${context.$auth.strategy.options.token.type} `,
         ''
       )
-    }
-
-    const changeArea = (e: string | null) => {
-      currentUser.value.area = e
-      provider.value.setAwarenessField('user', currentUser.value)
     }
 
     const setAwarenessState = (values = {}) => {
@@ -198,6 +236,73 @@ export default defineComponent({
       provider.value.send(TokenUpdateMessage, { token: current })
     }
 
+    const reduceStates = (clients: AwarenessState[]) => {
+      const areas: any = {}
+      const fields: any = {}
+      const users: any = {}
+
+      for (const client of clients) {
+        // ein Benutzer kann mit mehreren Clients online sein -> reduce
+        if (!users[client.user.id]) {
+          users[client.user.id] = client.user.name
+        }
+
+        // Ein Benutzer muss nicht zwingend in einem (relevanten) Bereich sein,
+        // ausserdem kann ein Benutzer mit mehreren Clients online sein und daher in
+        // mehreren Bereichen auftauchen
+        if (client.user.area) {
+          // Bereich wurde noch nie benutzt, erstmal anlegen...
+          if (!areas[client.user.area]) {
+            areas[client.user.area] = {}
+          }
+
+          // ein Benutzer kann mit mehreren Clients online & im gleichen Bereich sein -> reduce
+          if (!areas[client.user.area][client.user.id]) {
+            areas[client.user.area][client.user.id] = client.user.name
+          }
+        }
+
+        // Ein Benutzer kann mit mehreren Clients online sein, jeder Client kann aber immer nur ein
+        // Feld sperren -> der User kann nur mit dem Cursor in einem Feld sein etc., oder aber in keinem
+        if (client.user.lockedField) {
+          // Feld wurde noch nie benutzt, erstmal anlegen...
+          if (!fields[client.user.lockedField]) {
+            fields[client.user.lockedField] = {
+              locked: false,
+              since: null,
+              by: null,
+            }
+          }
+
+          if (
+            // es ist bisher nicht gesperrt
+            !fields[client.user.lockedField].locked ||
+            // oder der aktuelle client hat es später gelocked (um User rausschmeissen zu können
+            // die längere Zeit inaktiv sind, aktive Clients sollten ihren eigenen lockedSince-Stempel
+            // regelmässig aktualisieren, bspw mittels debounce wenn im Feld getippt wird)
+            fields[client.user.lockedField].since <
+              (client.user.lockedSince ?? 0)
+              ? client.user.lockedSince
+              : 0
+          ) {
+            fields[client.user.lockedField] = {
+              locked: true,
+              since: client.user.lockedSince,
+              by: client.user.name,
+            }
+          }
+        }
+      }
+
+      const recentProjectSaved = Math.max(
+        ...clients.map((client: AwarenessState) =>
+          client?.user?.projectSaved ? client.user.projectSaved : 0
+        )
+      )
+
+      return { areas, fields, users, recentProjectSaved }
+    }
+
     onBeforeUnmount(() => {
       provider?.value?.destroy()
     })
@@ -207,6 +312,8 @@ export default defineComponent({
       awarenessStates,
       status,
       currentArea,
+      lockedField,
+      projectSaved,
     }
   },
 })

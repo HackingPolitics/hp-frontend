@@ -366,5 +366,10 @@
         "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Zurücksetzung deines Passworts erneut!</li></ol>"
       }
     }
+  },
+  "collaborations": {
+    "field": {
+      "usedBy": "arbeitet gerade an dieses Feld ..."
+    }
   }
 }
