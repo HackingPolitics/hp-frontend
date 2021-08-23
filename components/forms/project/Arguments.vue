@@ -5,6 +5,8 @@
       <forms-form-section
         :title="$t('forms.counter_arguments.question')"
         :subtitle="$t('forms.counter_arguments.help')"
+        :locked="fieldIsLocked('counter_arguments')"
+        :locked-text="setLockedFieldText('counter_arguments')"
       >
         <draggable
           :list="counterArguments"
@@ -12,6 +14,7 @@
           ghost-class="ghost"
           handle=".handle"
           @update="updatePriority(counterArguments, 'counter_arguments')"
+          @start="setLockedField('counter_arguments')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
@@ -33,6 +36,7 @@
                 "
                 validation="required"
                 @validation="validationCounterArguments = $event"
+                @focus="setLockedField('counter_arguments')"
                 @focusout="
                   !validationCounterArguments.hasErrors
                     ? updateEntity(
@@ -110,6 +114,7 @@
                     "
                     validation="required"
                     @validation="validationNegations = $event"
+                    @focus="setLockedField('counter_arguments')"
                     @focusout="
                       !validationNegations.hasErrors
                         ? createOrUpdateNegations(
@@ -168,27 +173,15 @@
               items-center
               hover:text-white hover:bg-red-500
             "
-            @click="newCounterArgumentForm = true"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 mr-2 transform rotate-180"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-              />
-            </svg>
+            @click="openForm('newCounterArgumentForm')"
+          >
+            <outline-thumb-down-icon class="h-4 w-4 mr-2" />
             Gegenargument hinzufügen</base-button
           >
           <div
             v-if="newCounterArgumentForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newCounterArgumentForm = false"
+            @click="closeForm('newCounterArgumentForm')"
           >
             Abbrechen
           </div>
@@ -196,13 +189,18 @@
       </forms-form-section>
 
       <!-- Arguments -->
-      <forms-form-section :title="$t('forms.arguments.question')">
+      <forms-form-section
+        :title="$t('forms.arguments.question')"
+        :locked="fieldIsLocked('arguments')"
+        :locked-text="setLockedFieldText('arguments')"
+      >
         <draggable
           :list="argumentations"
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
           @update="updatePriority(argumentations, 'arguments')"
+          @start="setLockedField('arguments')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
@@ -226,6 +224,7 @@
                       )
                     : {}
                 "
+                @focus="setLockedField('arguments')"
                 @delete="
                   deleteEntity('arguments', argumentation.id, argumentations)
                 "
@@ -272,27 +271,15 @@
               items-center
               hover:text-white hover:bg-green-500
             "
-            @click="newArgumentForm = true"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-              />
-            </svg>
-            Argument hinzufügen</base-button
+            @click="openForm('newArgumentForm')"
+          >
+            <outline-thumb-up-icon class="h-4 w-4 mr-2" /> Argument
+            hinzufügen</base-button
           >
           <div
             v-if="newArgumentForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newArgumentForm = false"
+            @click="closeForm('newArgumentForm')"
           >
             Abbrechen
           </div>
@@ -318,6 +305,7 @@ import { IArgument, ICounterArgument, IProposal } from '~/types/apiSchema'
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
 import { RootState } from '~/store'
+import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   name: 'Arguments',
@@ -340,6 +328,16 @@ export default defineComponent({
       updateProjectEntity,
       project,
     } = editApplication()
+
+    const {
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+    } = collaborations()
 
     onMounted(() => {
       if (project.value?.arguments) {
@@ -399,6 +397,7 @@ export default defineComponent({
         ).then((res) => {
           formKey.value++
           newArgumentForm.value = false
+          setFieldUpdated()
           return res
         })
       }
@@ -418,7 +417,9 @@ export default defineComponent({
           endpoint,
           id,
           payload
-        )
+        ).then(() => {
+          setFieldUpdated()
+        })
       }
     }
 
@@ -458,6 +459,7 @@ export default defineComponent({
           camelCase(endpoint),
           res.map((e) => e.data),
         ])
+        setFieldUpdated()
       })
     }
 
@@ -492,6 +494,7 @@ export default defineComponent({
             `counterArguments[${counterArgumentIndex}].negations[${negationIndex}]`,
             res.data,
           ])
+          setFieldUpdated()
         })
       } else {
         // @ts-ignore
@@ -502,12 +505,35 @@ export default defineComponent({
             `counterArguments[${counterArgumentIndex}].negations`,
             data,
           ])
+          setFieldUpdated()
         })
       }
     }
 
     const newArgumentForm = ref(false)
     const newCounterArgumentForm = ref(false)
+
+    const openForm = (form: string) => {
+      if (form === 'newArgumentForm') {
+        setLockedField('arguments')
+        newArgumentForm.value = true
+      }
+      if (form === 'newCounterArgumentForm') {
+        setLockedField('counter_arguments')
+        newCounterArgumentForm.value = true
+      }
+    }
+
+    const closeForm = (form: string) => {
+      if (form === 'newArgumentForm') {
+        resetLockedField()
+        newArgumentForm.value = false
+      }
+      if (form === 'newCounterArgumentForm') {
+        resetLockedField()
+        newCounterArgumentForm.value = false
+      }
+    }
 
     return {
       argumentations,
@@ -525,6 +551,15 @@ export default defineComponent({
       createOrUpdateNegations,
       newArgumentForm,
       newCounterArgumentForm,
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+      openForm,
+      closeForm,
     }
   },
 })

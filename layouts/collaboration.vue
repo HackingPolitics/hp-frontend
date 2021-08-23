@@ -31,6 +31,7 @@ import { RootState } from '~/store'
 import { TokenUpdateMessage } from '~/services/hocuspocus/OutgoingMessages/TokenUpdateMessage'
 import { JwtPayloadWithUser } from '~/store/authentication'
 import { AwarenessState, StateUser } from '~/types/collaborations'
+import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   name: 'Collaboration',
@@ -106,6 +107,10 @@ export default defineComponent({
 
     const projectSaved = computed(() => {
       return store.state.collaboration.projectSaved
+    })
+
+    const recentProjectSaved = computed(() => {
+      return store.state.collaboration.recentProjectSaved
     })
 
     onMounted(() => {
@@ -186,6 +191,15 @@ export default defineComponent({
       () => projectSaved.value,
       (newVal) => {
         setAwarenessState({ projectSaved: newVal })
+      }
+    )
+
+    watch(
+      () => recentProjectSaved.value,
+      async (newVal) => {
+        if (newVal ?? (projectSaved.value ?? 0) < 0) {
+          await store.dispatch('projects/fetchProject', projectId.value)
+        }
       }
     )
 
