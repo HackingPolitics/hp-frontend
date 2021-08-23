@@ -129,6 +129,7 @@ export default defineComponent({
     }
 
     const deletePartner = async (id: string | number) => {
+      // @ts-ignore
       await deleteProjectEntity('partners', id, props.partners)
     }
 
