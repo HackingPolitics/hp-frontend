@@ -39,6 +39,7 @@ export default function () {
       lockedFields.value[fieldName].by !== userName.value
     )
   }
+
   const setLockedFieldText = (fieldName: string) => {
     return fieldIsLocked(fieldName)
       ? lockedFields.value &&
@@ -46,6 +47,15 @@ export default function () {
             ' ' +
             context.i18n.t('collaborations.field.usedBy')
       : null
+  }
+
+  const setFieldUpdated = () => {
+    store.commit('collaboration/SET_LOCKED_FIELD', null)
+    store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
+  }
+
+  const resetLockedField = () => {
+    store.commit('collaboration/SET_LOCKED_FIELD', null)
   }
 
   //
@@ -57,5 +67,7 @@ export default function () {
     setLockedFieldText,
     setLockedField,
     fieldIsLocked,
+    setFieldUpdated,
+    resetLockedField,
   }
 }

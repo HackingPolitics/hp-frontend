@@ -6,6 +6,7 @@
     outer-class="list-input-outer"
     @validation="$emit('validation', $event)"
     @focusout="$emit('focusout', $event.target.value)"
+    @focus="$emit('focus')"
   >
     <template #prefix>
       <div class="inline-flex items-center space-x-2 pr-4 handle cursor-move">

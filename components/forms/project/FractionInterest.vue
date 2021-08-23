@@ -1,11 +1,10 @@
 <template>
-  <div class="mt-8">
-    <h3 class="font-semibold text-gray-800 text-xl">
-      {{ $t('forms.fractioninterests.interests.title') }}
-    </h3>
-    <p class="text-sm text-gray-500 mt-2">
-      {{ $t('forms.fractioninterests.interests.description') }}
-    </p>
+  <forms-form-section
+    :title="$t('forms.fractioninterests.interests.title')"
+    :subtitle="$t('forms.fractioninterests.interests.description')"
+    :locked="fieldIsLocked('fraction-interest')"
+    :locked-text="setLockedFieldText('fraction-interest')"
+  >
     <div class="mt-4">
       <div class="sm:hidden">
         <label for="tabs" class="sr-only">Select a tab</label>
@@ -52,6 +51,7 @@
           :wrapper-class="['border-l-4']"
           type="textarea"
           @focusout="updateInterest($event, interest.id)"
+          @focus="setLockedField('fraction-interest')"
         >
         </FormulateInput>
       </div>
@@ -90,18 +90,18 @@
         items-center
         hover:text-white hover:bg-purple-500
       "
-      @click="newInterestForm = true"
+      @click="openFractionInterestForm"
     >
       {{ $t('forms.fractioninterests.interests.newInterest') }}</base-button
     >
     <div
       v-if="newInterestForm"
       class="text-red-500 text-sm cursor-pointer text-right"
-      @click="newInterestForm = false"
+      @click="closeFractionInterestForm"
     >
       {{ $t('cancel') }}
     </div>
-  </div>
+  </forms-form-section>
 </template>
 
 <script lang="ts">
@@ -118,6 +118,7 @@ import {
 import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
+import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   props: {
@@ -156,6 +157,16 @@ export default defineComponent({
       return store.state.projects.project?.['@id']
     })
 
+    const {
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+    } = collaborations()
+
     const createFractionDetail = async () => {
       if (projectId.value && activeFraction.value) {
         try {
@@ -165,10 +176,10 @@ export default defineComponent({
               project: projectId.value,
               fraction: activeFraction.value?.['@id'],
             })
-
-          console.log(response)
           return response
-        } catch (error) {}
+        } catch (error) {
+          resetLockedField()
+        }
       }
     }
 
@@ -176,10 +187,14 @@ export default defineComponent({
       if (activeFractionDetails.value) {
         if (activeFraction.value) {
           try {
-            await axios.post('/fraction_interests', {
-              description: formData?.value?.description,
-              fractionDetails: activeFractionDetails.value?.['@id'],
-            })
+            await axios
+              .post('/fraction_interests', {
+                description: formData?.value?.description,
+                fractionDetails: activeFractionDetails.value?.['@id'],
+              })
+              .then(() => {
+                resetLockedField()
+              })
 
             // @ts-ignore
             context.$notify({
@@ -191,6 +206,7 @@ export default defineComponent({
             newInterestForm.value = false
             store.dispatch('projects/fetchProject', route.value.params.id)
           } catch (error) {
+            resetLockedField()
             // @ts-ignore
             context.$notify({
               title: 'Interesse konnte nicht erstellt werden',
@@ -203,10 +219,14 @@ export default defineComponent({
         const fractionDetails = await createFractionDetail()
         // create new details and add interest
         try {
-          await axios.post('/fraction_interests', {
-            description: formData?.value?.description,
-            fractionDetails: fractionDetails?.data?.['@id'],
-          })
+          await axios
+            .post('/fraction_interests', {
+              description: formData?.value?.description,
+              fractionDetails: fractionDetails?.data?.['@id'],
+            })
+            .then(() => {
+              resetLockedField()
+            })
 
           // @ts-ignore
           context.$notify({
@@ -249,9 +269,13 @@ export default defineComponent({
 
     const updateInterest = async (event: any, id: number | string) => {
       try {
-        await axios.put(`/fraction_interests/${id}`, {
-          description: event.target.value,
-        })
+        await axios
+          .put(`/fraction_interests/${id}`, {
+            description: event.target.value,
+          })
+          .then(() => {
+            resetLockedField()
+          })
 
         // @ts-ignore
         context.$notify({
@@ -261,6 +285,7 @@ export default defineComponent({
         })
         store.dispatch('projects/fetchProject', route.value.params.id)
       } catch (error) {
+        resetLockedField()
         // @ts-ignore
         context.$notify({
           title: 'Interesse konnte nicht erstellt werden',
@@ -269,6 +294,17 @@ export default defineComponent({
         })
       }
     }
+
+    const openFractionInterestForm = () => {
+      setLockedField('fraction-interest')
+      newInterestForm.value = true
+    }
+
+    const closeFractionInterestForm = () => {
+      resetLockedField()
+      newInterestForm.value = false
+    }
+
     return {
       createFractionInterest,
       activeFraction,
@@ -277,6 +313,13 @@ export default defineComponent({
       newInterestForm,
       activeFractionDetails,
       updateInterest,
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      openFractionInterestForm,
+      closeFractionInterestForm,
     }
   },
 })

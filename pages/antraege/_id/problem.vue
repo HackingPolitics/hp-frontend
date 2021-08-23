@@ -17,9 +17,11 @@
           v-model="impact"
           type="textarea"
           rows="5"
-          :help="$t('forms.problems.impact.help')"
           :placeholder="$t('forms.problems.impact.placeholder')"
           validation="required"
+          :disabled="fieldIsLocked('problem-impact')"
+          :help="setLockedFieldText('problem-impact')"
+          @focus="setLockedField('problem-impact')"
           @validation="validation = $event"
           @focusout="updateProject()"
         >
@@ -41,6 +43,7 @@ import { watch } from '@vue/runtime-core'
 import { IProject } from '~/types/apiSchema'
 import { IValidation } from '~/types/vueFormulate'
 import { RootState } from '~/store'
+import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   name: 'Problem',
@@ -57,15 +60,14 @@ export default defineComponent({
       (): IProject | null => store.state.projects.project
     )
 
-    watch(
-      () => project.value,
-      () => {
-        if (project.value) {
-          impact.value = project.value?.impact
-        }
-      },
-      { immediate: true }
-    )
+    const {
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      setFieldUpdated,
+    } = collaborations()
 
     const validation = ref<IValidation>({ hasErrors: false })
 
@@ -77,9 +79,33 @@ export default defineComponent({
             impact: impact.value,
           },
         ])
+        setFieldUpdated()
       }
     }
-    return { impact, updateProject, validation }
+
+    watch(
+      () => project.value?.impact,
+      (newVal, oldVal) => {
+        console.log(newVal, oldVal)
+        impact.value = newVal
+      },
+      {
+        deep: true,
+        immediate: true,
+      }
+    )
+
+    return {
+      impact,
+      project,
+      updateProject,
+      validation,
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+    }
   },
 })
 </script>

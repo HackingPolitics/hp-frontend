@@ -4,6 +4,8 @@
       <forms-form-section
         :title="$t('forms.problems.problems.title')"
         :subtitle="$t('forms.problems.problems.introduction')"
+        :locked="fieldIsLocked('problems')"
+        :locked-text="setLockedFieldText('problems')"
       >
         <draggable
           :list="problems"
@@ -11,6 +13,7 @@
           ghost-class="ghost"
           handle=".handle"
           @update="updateProblemPriority($event)"
+          @start="setLockedField('problems')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
@@ -30,6 +33,7 @@
                 :validation-name="
                   $t('validation.problems.problems.description')
                 "
+                @focus="setLockedField('problems')"
                 @validation="validation = $event"
                 @focusout="updateProblem($event, problem.id)"
                 @delete="deleteProblem(problem.id)"
@@ -100,14 +104,14 @@
               items-center
               hover:text-white hover:bg-purple-500
             "
-            @click="newProblemForm = true"
+            @click="openProblemForm"
           >
             {{ $t('forms.problems.problems.add') }}</base-button
           >
           <div
             v-if="newProblemForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newProblemForm = false"
+            @click="closeProblemForm"
           >
             Abbrechen
           </div>
@@ -120,7 +124,6 @@
 <script lang="ts">
 import {
   defineComponent,
-  onMounted,
   watch,
   ref,
   useStore,
@@ -132,6 +135,7 @@ import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
+import collaborations from '~/composables/collaborations'
 
 interface ProblemForm {
   problems?: IProblem[]
@@ -154,6 +158,14 @@ export default defineComponent({
 
     const context = useContext()
 
+    const {
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+    } = collaborations()
+
     /*
      workaround for resetting form and validation because
      $formulate plugin is not support for vue 3 now
@@ -163,13 +175,6 @@ export default defineComponent({
 
     const store = useStore<RootState>()
 
-    onMounted(() => {
-      if (project.value?.problems) {
-        problems.value = cloneDeep(project.value.problems)
-        problems.value.sort((a, b) => b.priority - a.priority)
-      }
-    })
-
     watch(
       project,
       (currentValue) => {
@@ -177,7 +182,8 @@ export default defineComponent({
         problems.value.sort((a, b) => b.priority - a.priority)
       },
       {
-        deep: true, // immediate: true
+        deep: true,
+        immediate: true,
       }
     )
 
@@ -194,6 +200,7 @@ export default defineComponent({
         ).then(() => {
           formKey.value++
           newProblemForm.value = false
+          setFieldUpdated()
         })
       }
     }
@@ -207,7 +214,11 @@ export default defineComponent({
         const payload = {
           description: desc,
         }
-        await updateProjectEntity<IProblem>('problems', id, payload)
+        await updateProjectEntity<IProblem>('problems', id, payload).then(
+          () => {
+            setFieldUpdated()
+          }
+        )
       }
     }
 
@@ -232,7 +243,18 @@ export default defineComponent({
           'problems',
           res.map((e) => e.data),
         ])
+        setFieldUpdated()
       })
+    }
+
+    const openProblemForm = () => {
+      setLockedField('problems')
+      newProblemForm.value = true
+    }
+
+    const closeProblemForm = () => {
+      resetLockedField()
+      newProblemForm.value = false
     }
 
     const newProblemForm = ref(false)
@@ -246,6 +268,12 @@ export default defineComponent({
       updateProblem,
       updateProblemPriority,
       newProblemForm,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      openProblemForm,
+      closeProblemForm,
+      resetLockedField,
     }
   },
 })

@@ -4,6 +4,8 @@
       <forms-form-section
         :title="$t('forms.problems.actionMandate.title')"
         :subtitle="$t('forms.problems.actionMandate.introduction')"
+        :locked="fieldIsLocked('problem_action_mandate')"
+        :locked-text="setLockedFieldText('problem_action_mandate')"
       >
         <draggable
           :list="actionMandates"
@@ -11,6 +13,7 @@
           ghost-class="ghost"
           handle=".handle"
           @update="updateProblemPriority($event)"
+          @start="setLockedField('problem_action_mandate')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
@@ -32,6 +35,7 @@
                 "
                 @validation="validation = $event"
                 @focusout="updateProblem($event, problem.id)"
+                @focus="setLockedField('problem_action_mandate')"
                 @delete="deleteProblem(problem.id)"
               >
                 <template #prefix>
@@ -56,7 +60,7 @@
         </draggable>
         <div class="border-t-2 pt-6">
           <FormulateForm
-            v-if="newProblemForm"
+            v-if="newActionMandateForm"
             ref="problemForm"
             v-model="createProblemForm"
             class="flex items-center"
@@ -93,7 +97,7 @@
             </button>
           </FormulateForm>
           <base-button
-            v-if="!newProblemForm"
+            v-if="!newActionMandateForm"
             class="
               bg-white
               text-purple-500
@@ -102,14 +106,14 @@
               items-center
               hover:text-white hover:bg-purple-500
             "
-            @click="newProblemForm = true"
+            @click="openActionMandateForm"
           >
             {{ $t('forms.problems.actionMandate.add') }}</base-button
           >
           <div
-            v-if="newProblemForm"
+            v-if="newActionMandateForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newProblemForm = false"
+            @click="closeActionMandateForm"
           >
             Abbrechen
           </div>
@@ -134,6 +138,7 @@ import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
+import collaborations from '~/composables/collaborations'
 
 interface MandateForm {
   problems?: IProblem[]
@@ -155,6 +160,16 @@ export default defineComponent({
     const createProblemForm = ref<MandateForm>({})
 
     const context = useContext()
+
+    const {
+      recentProjectSaved,
+      projectSaved,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+    } = collaborations()
 
     /*
      workaround for resetting form and validation because
@@ -195,7 +210,8 @@ export default defineComponent({
           payload
         ).then(() => {
           formKey.value++
-          newProblemForm.value = false
+          newActionMandateForm.value = false
+          setFieldUpdated()
         })
       }
     }
@@ -209,7 +225,13 @@ export default defineComponent({
         const payload = {
           description: desc,
         }
-        await updateProjectEntity<IProblem>('action_mandates', id, payload)
+        await updateProjectEntity<IProblem>(
+          'action_mandates',
+          id,
+          payload
+        ).then(() => {
+          setFieldUpdated()
+        })
       }
     }
 
@@ -234,10 +256,22 @@ export default defineComponent({
           'actionMandates',
           res.map((e) => e.data),
         ])
+        setFieldUpdated()
       })
     }
 
-    const newProblemForm = ref(false)
+    const newActionMandateForm = ref(false)
+
+    const openActionMandateForm = () => {
+      setLockedField('problem_action_mandate')
+      newActionMandateForm.value = true
+    }
+
+    const closeActionMandateForm = () => {
+      resetLockedField()
+      newActionMandateForm.value = false
+    }
+
     return {
       actionMandates,
       formKey,
@@ -247,7 +281,13 @@ export default defineComponent({
       createProblem,
       updateProblem,
       updateProblemPriority,
-      newProblemForm,
+      newActionMandateForm,
+      openActionMandateForm,
+      closeActionMandateForm,
+      fieldIsLocked,
+      setLockedField,
+      resetLockedField,
+      setLockedFieldText,
     }
   },
 })
