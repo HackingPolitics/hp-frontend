@@ -25,7 +25,7 @@
               class="flex flex-col w-full justify-center items-center mb-8"
             >
               <forms-list-item-input
-                :value="counterArgument.description"
+                :model="counterArgumentDescriptions[counterArgumentIndex]"
                 name="description"
                 type="text"
                 :placeholder="
@@ -41,7 +41,7 @@
                   !validationCounterArguments.hasErrors
                     ? updateEntity(
                         'counter_arguments',
-                        { description: $event },
+                        { description: $event.target.value },
                         counterArgument.id
                       )
                     : {}
@@ -77,81 +77,98 @@
                   </div>
                 </template>
               </forms-list-item-input>
-              <FormulateInput
-                type="group"
-                remove-position="after"
-                :repeatable="true"
-                minimum="1"
-                add-label="Konter-Argument hinzufügen"
-                :value="counterArgument.negations"
+
+              <forms-list-item-input
+                v-for="(negation, index) in counterArgument.negations"
+                :key="negation.id"
+                :input-type="2"
+                :model="negation.description"
+                name="description"
+                type="text"
+                :validation-name="$t('validation.name.arguments.negations')"
+                :placeholder="
+                  $t('forms.counter_arguments.placeholder.negations')
+                "
+                validation="required"
+                @validation="validationNegations = $event"
+                @focus="setLockedField('counter_arguments')"
+                @focusout="
+                  !validationNegations.hasErrors
+                    ? createOrUpdateNegations(
+                        counterArgument.negations &&
+                          counterArgument.negations[index]
+                          ? counterArgument.negations[index].id
+                          : null,
+                        counterArgumentIndex,
+                        counterArgument,
+                        index,
+                        $event.target.value
+                      )
+                    : {}
+                "
+                @delete="
+                  deleteNegation(
+                    negation.id,
+                    counterArgumentIndex,
+                    counterArgument.negations
+                  )
+                "
               >
-                <template #addmore="{ addMore }">
-                  <FormulateInput
-                    input-class="flex space-x-2 items-center mt-4 text-purple-500"
-                    type="button"
-                    @click="addMore()"
-                  >
-                    <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
-                    <span class="">{{
-                      $t('forms.counter_arguments.add_counter')
-                    }}</span>
-                  </FormulateInput>
+                <template #prefix>
+                  <div class="inline-flex items-center space-x-2 px-4">
+                    <outline-chat-alt-2-icon
+                      class="w-5 h-5"
+                    ></outline-chat-alt-2-icon>
+                  </div>
                 </template>
-                <template #default="{ index }">
-                  <FormulateInput
-                    :value="
-                      counterArgument.negations &&
-                      counterArgument.negations[index] &&
-                      counterArgument.negations[index].description
-                    "
-                    name="description"
-                    type="text"
-                    :validation-name="$t('validation.name.arguments.negations')"
-                    element-class="inline-flex w-full items-center"
-                    input-class="border-0 w-full"
-                    :placeholder="
-                      $t('forms.counter_arguments.placeholder.negations')
-                    "
-                    validation="required"
+              </forms-list-item-input>
+              <forms-list-item-input
+                v-if="newNegationForm"
+                :input-type="2"
+                name="description"
+                type="text"
+                :validation-name="$t('validation.name.arguments.negations')"
+                :placeholder="
+                  $t('forms.counter_arguments.placeholder.negations')
+                "
+                validation="required"
+              >
+                <!--
+               inline-flex@focusout="
+                 !validationNegations.hasErrors
+                   ? createOrUpdateNegations(
+                       counterArgument.negations &&
+                         counterArgument.negations[index]
+                         ? counterArgument.negations[index].id
+                         : null,
+                       counterArgumentIndex,
+                       counterArgument,
+                       index,
+                       $event.target.value
+                     )
+                   : {}-->
+
+                <template #prefix>
+                  <div
+                    class="items-center space-x-2 px-4"
                     @validation="validationNegations = $event"
                     @focus="setLockedField('counter_arguments')"
-                    @focusout="
-                      !validationNegations.hasErrors
-                        ? createOrUpdateNegations(
-                            counterArgument.negations &&
-                              counterArgument.negations[index]
-                              ? counterArgument.negations[index].id
-                              : null,
-                            counterArgumentIndex,
-                            counterArgument,
-                            index,
-                            $event.target.value
-                          )
-                        : {}
-                    "
                   >
-                    <template #prefix>
-                      <div class="inline-flex items-center space-x-2 px-4">
-                        <outline-chat-alt-2-icon
-                          class="w-5 h-5"
-                        ></outline-chat-alt-2-icon>
-                      </div>
-                    </template>
-                  </FormulateInput>
+                    <outline-chat-alt-2-icon
+                      class="w-5 h-5"
+                    ></outline-chat-alt-2-icon>
+                  </div>
                 </template>
-                <template #remove="{ index, removeItem }">
-                  <remove-button
-                    v-if="counterArgument.negations.length > 1"
-                    @click="
-                      removeItem()
-                      deleteNegation(
-                        counterArgument.negations[index].id,
-                        counterArgumentIndex,
-                        counterArgument.negations
-                      )
-                    "
-                  />
-                </template>
+              </forms-list-item-input>
+              <FormulateInput
+                input-class="flex space-x-2  mt-4 text-purple-500"
+                type="button"
+                @click="openForm('newNegationForm')"
+              >
+                <outline-plus-icon class="w-6 h-6"></outline-plus-icon>
+                <span class="">{{
+                  $t('forms.counter_arguments.add_counter')
+                }}</span>
               </FormulateInput>
             </li>
           </transition-group>
@@ -204,12 +221,12 @@
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="argumentation in argumentations"
+              v-for="(argumentation, index) in argumentations"
               :key="argumentation.id"
               class="flex flex-col w-full justify-center items-center"
             >
               <forms-list-item-input
-                :value="argumentation.description"
+                :model="argumentDescription[index]"
                 name="description"
                 type="text"
                 :validation-name="$t('validation.name.arguments.description')"
@@ -219,7 +236,7 @@
                   !validationArguments.hasErrors
                     ? updateEntity(
                         'arguments',
-                        { description: $event },
+                        { description: $event.target.value },
                         argumentation.id
                       )
                     : {}
@@ -293,7 +310,6 @@
 import {
   defineComponent,
   ref,
-  onMounted,
   watch,
   useStore,
   useContext,
@@ -322,6 +338,9 @@ export default defineComponent({
     const store = useStore<RootState>()
     const context = useContext()
 
+    const counterArgumentDescriptions = ref([])
+    const argumentDescription = ref([])
+
     const {
       createProjectEntity,
       deleteProjectEntity,
@@ -339,30 +358,23 @@ export default defineComponent({
       setFieldUpdated,
     } = collaborations()
 
-    onMounted(() => {
-      if (project.value?.arguments) {
-        argumentations.value = cloneDeep(project.value.arguments)
-        // @ts-ignore
-        argumentations.value.sort((a, b) => b.priority - a.priority)
-      }
-      if (project.value?.counterArguments) {
-        counterArguments.value = cloneDeep(project.value.counterArguments)
-        // @ts-ignore
-        counterArguments.value.sort((a, b) => b?.priority - a.priority)
-      }
-    })
-
     watch(
       project,
       (currentValue) => {
         argumentations.value = cloneDeep(currentValue?.arguments || [])
         // @ts-ignore
         argumentations.value.sort((a, b) => b.priority - a.priority)
+        argumentDescription.value = argumentations.value.map(
+          (argument) => argument.description
+        )
         counterArguments.value = cloneDeep(currentValue?.counterArguments || [])
         // @ts-ignore
         counterArguments.value.sort((a, b) => b.priority - a.priority)
+        counterArgumentDescriptions.value = counterArguments.value.map(
+          (counterArgument) => counterArgument.description
+        )
       },
-      { deep: true }
+      { deep: true, immediate: true }
     )
 
     const validationArguments = ref<IValidation>({ hasErrors: false })
@@ -376,7 +388,7 @@ export default defineComponent({
         'counter_arguments',
         counterArguments.value,
         formData
-      )
+      ).then(() => setFieldUpdated())
       newCounterArgumentForm.value = false
     }
 
@@ -433,7 +445,9 @@ export default defineComponent({
         endpoint,
         id,
         projectProperty
-      )
+      ).then(() => {
+        setFieldUpdated()
+      })
     }
 
     const updatePriority = async (
@@ -464,16 +478,9 @@ export default defineComponent({
     }
 
     // @ts-ignore
-    const deleteNegation = async (id, counterArgumentIndex, negations) => {
+    const deleteNegation = async (id) => {
       // @ts-ignore
-      await context.$api.negations.delete(id).then(() => {
-        // @ts-ignore
-        const data = negations.filter((e) => e.id !== id)
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          `counterArguments[${counterArgumentIndex}].negations`,
-          data,
-        ])
-      })
+      await context.$api.negations.delete(id).then(() => setFieldUpdated())
     }
 
     const createOrUpdateNegations = async (
@@ -489,29 +496,36 @@ export default defineComponent({
       }
       if (id) {
         // @ts-ignore
-        await context.$api.negations.update(id, payload).then((res) => {
-          store.commit('projects/SET_PROJECT_PROPERTY', [
-            `counterArguments[${counterArgumentIndex}].negations[${negationIndex}]`,
-            res.data,
-          ])
-          setFieldUpdated()
-        })
+        await context.$api.negations
+          .update(id, payload)
+          .then((res) => {
+            store.commit('projects/SET_PROJECT_PROPERTY', [
+              `counterArguments[${counterArgumentIndex}].negations[${negationIndex}]`,
+              res.data,
+            ])
+          })
+          .then(() => setFieldUpdated())
       } else {
         // @ts-ignore
-        await context.$api.negations.create(payload).then((res) => {
-          counterArguments.value[counterArgumentIndex].negations.push(res.data)
-          const data = counterArguments.value[counterArgumentIndex].negations
-          store.commit('projects/SET_PROJECT_PROPERTY', [
-            `counterArguments[${counterArgumentIndex}].negations`,
-            data,
-          ])
-          setFieldUpdated()
-        })
+        await context.$api.negations
+          .create(payload)
+          .then((res) => {
+            counterArguments.value[counterArgumentIndex].negations.push(
+              res.data
+            )
+            const data = counterArguments.value[counterArgumentIndex].negations
+            store.commit('projects/SET_PROJECT_PROPERTY', [
+              `counterArguments[${counterArgumentIndex}].negations`,
+              data,
+            ])
+          })
+          .then(() => setFieldUpdated())
       }
     }
 
     const newArgumentForm = ref(false)
     const newCounterArgumentForm = ref(false)
+    const newNegationForm = ref(false)
 
     const openForm = (form: string) => {
       if (form === 'newArgumentForm') {
@@ -521,6 +535,10 @@ export default defineComponent({
       if (form === 'newCounterArgumentForm') {
         setLockedField('counter_arguments')
         newCounterArgumentForm.value = true
+      }
+      if (form === 'newNegationForm') {
+        setLockedField('counter_arguments')
+        newNegationForm.value = true
       }
     }
 
@@ -532,6 +550,10 @@ export default defineComponent({
       if (form === 'newCounterArgumentForm') {
         resetLockedField()
         newCounterArgumentForm.value = false
+      }
+      if (form === 'newNegationForm') {
+        resetLockedField()
+        newNegationForm.value = false
       }
     }
 
@@ -551,6 +573,7 @@ export default defineComponent({
       createOrUpdateNegations,
       newArgumentForm,
       newCounterArgumentForm,
+      newNegationForm,
       recentProjectSaved,
       projectSaved,
       setLockedField,
@@ -560,6 +583,8 @@ export default defineComponent({
       setFieldUpdated,
       openForm,
       closeForm,
+      counterArgumentDescriptions,
+      argumentDescription,
     }
   },
 })

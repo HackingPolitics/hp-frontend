@@ -17,25 +17,21 @@
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="problem in problems"
+              v-for="(problem, index) in problems"
               :key="problem.id"
               class="inline-flex w-full justify-center cursor-move"
             >
               <forms-list-item-input
-                :value="problem.description"
-                name="description"
+                :model="problemDescriptions[index]"
                 type="text"
-                element-class="inline-flex w-full"
                 validation="required"
                 :placeholder="
                   $t('forms.problems.problems.placeholder.description')
                 "
-                :validation-name="
-                  $t('validation.problems.problems.description')
-                "
+                :validation-name="$t('validation.problems.description')"
                 @focus="setLockedField('problems')"
                 @validation="validation = $event"
-                @focusout="updateProblem($event, problem.id)"
+                @focusout="updateProblem($event.target.value, problem.id)"
                 @delete="deleteProblem(problem.id)"
               >
                 <template #prefix>
@@ -71,7 +67,7 @@
               type="text"
               name="description"
               validation="required"
-              :validation-name="$t('validation.problems.problems.description')"
+              :validation-name="$t('validation.problems.description')"
               error-behavior="submit"
               :placeholder="
                 $t('forms.problems.problems.placeholder.description')
@@ -158,6 +154,9 @@ export default defineComponent({
 
     const context = useContext()
 
+    // v-model values for problem descriptions
+    const problemDescriptions = ref([])
+
     const {
       setLockedField,
       fieldIsLocked,
@@ -178,8 +177,12 @@ export default defineComponent({
     watch(
       project,
       (currentValue) => {
+        console.log(currentValue)
         problems.value = cloneDeep(currentValue?.problems || [])
         problems.value.sort((a, b) => b.priority - a.priority)
+        problemDescriptions.value = problems.value.map(
+          (problem) => problem.description
+        )
       },
       {
         deep: true,
@@ -193,20 +196,22 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>(
-          'problems',
-          problems.value,
-          payload
-        ).then(() => {
-          formKey.value++
-          newProblemForm.value = false
-          setFieldUpdated()
-        })
+        await createProjectEntity<IProblem>('problems', problems.value, payload)
+          .then(() => {
+            formKey.value++
+            newProblemForm.value = false
+            setFieldUpdated()
+          })
+          .catch(() => {
+            resetLockedField()
+          })
       }
     }
     const deleteProblem = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('problems', id, problems.value)
+      await deleteProjectEntity('problems', id, problems.value).then(() => {
+        setFieldUpdated()
+      })
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
@@ -238,13 +243,17 @@ export default defineComponent({
           .finally()
         allAsyncResults.push(asyncResult)
       }
-      await Promise.all(allAsyncResults).then((res) => {
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          'problems',
-          res.map((e) => e.data),
-        ])
-        setFieldUpdated()
-      })
+      await Promise.all(allAsyncResults)
+        .then((res) => {
+          store.commit('projects/SET_PROJECT_PROPERTY', [
+            'problems',
+            res.map((e) => e.data),
+          ])
+          setFieldUpdated()
+        })
+        .catch(() => {
+          resetLockedField()
+        })
     }
 
     const openProblemForm = () => {
@@ -262,6 +271,7 @@ export default defineComponent({
       problems,
       formKey,
       createProblemForm,
+      problemDescriptions,
       validation,
       deleteProblem,
       createProblem,

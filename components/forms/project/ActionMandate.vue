@@ -12,20 +12,19 @@
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
-          @update="updateProblemPriority($event)"
+          @update="updateActionMandatePriority($event)"
           @start="setLockedField('problem_action_mandate')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="problem in actionMandates"
-              :key="problem.id"
+              v-for="(actionMandate, index) in actionMandates"
+              :key="actionMandate.id"
               class="inline-flex w-full justify-center cursor-move"
             >
               <forms-list-item-input
-                :value="problem.description"
+                :model="actionMandateDescriptions[index]"
                 name="description"
                 type="text"
-                element-class="inline-flex w-full"
                 validation="required"
                 :placeholder="
                   $t('forms.problems.actionMandate.placeholder.description')
@@ -34,9 +33,11 @@
                   $t('validation.problems.actionMandate.description')
                 "
                 @validation="validation = $event"
-                @focusout="updateProblem($event, problem.id)"
+                @focusout="
+                  updateActionMandate($event.target.value, actionMandate.id)
+                "
                 @focus="setLockedField('problem_action_mandate')"
-                @delete="deleteProblem(problem.id)"
+                @delete="deleteActionMandate(actionMandate.id)"
               >
                 <template #prefix>
                   <div
@@ -159,11 +160,11 @@ export default defineComponent({
     const actionMandates = ref<IProblem[]>([])
     const createProblemForm = ref<MandateForm>({})
 
+    const actionMandateDescriptions = ref([])
+
     const context = useContext()
 
     const {
-      recentProjectSaved,
-      projectSaved,
       setLockedField,
       fieldIsLocked,
       setLockedFieldText,
@@ -192,9 +193,13 @@ export default defineComponent({
       (currentValue) => {
         actionMandates.value = cloneDeep(currentValue?.actionMandates || [])
         actionMandates.value.sort((a, b) => b.priority - a.priority)
+        actionMandateDescriptions.value = actionMandates.value.map(
+          (e) => e.description
+        )
       },
       {
-        deep: true, // immediate: true
+        immediate: true,
+        deep: true,
       }
     )
 
@@ -215,12 +220,18 @@ export default defineComponent({
         })
       }
     }
-    const deleteProblem = async (id: number | string) => {
+    const deleteActionMandate = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('action_mandates', id, actionMandates.value)
+      await deleteProjectEntity(
+        'action_mandates',
+        id,
+        actionMandates.value
+      ).then(() => {
+        setFieldUpdated()
+      })
     }
 
-    const updateProblem = async (desc: string, id: number | string) => {
+    const updateActionMandate = async (desc: string, id: number | string) => {
       if (!validation.value.hasErrors) {
         const payload = {
           description: desc,
@@ -235,7 +246,7 @@ export default defineComponent({
       }
     }
 
-    const updateProblemPriority = async () => {
+    const updateActionMandatePriority = async () => {
       const allAsyncResults: Promise<any>[] = []
 
       for (let index = 0; index < actionMandates.value.length; index++) {
@@ -277,10 +288,10 @@ export default defineComponent({
       formKey,
       createProblemForm,
       validation,
-      deleteProblem,
+      deleteActionMandate,
       createProblem,
-      updateProblem,
-      updateProblemPriority,
+      updateActionMandate,
+      updateActionMandatePriority,
       newActionMandateForm,
       openActionMandateForm,
       closeActionMandateForm,
@@ -288,6 +299,7 @@ export default defineComponent({
       setLockedField,
       resetLockedField,
       setLockedFieldText,
+      actionMandateDescriptions,
     }
   },
 })

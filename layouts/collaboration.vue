@@ -197,7 +197,7 @@ export default defineComponent({
     watch(
       () => recentProjectSaved.value,
       async (newVal) => {
-        if (newVal ?? (projectSaved.value ?? 0) < 0) {
+        if (newVal && newVal > (projectSaved.value ?? 0)) {
           await store.dispatch('projects/fetchProject', projectId.value)
         }
       }

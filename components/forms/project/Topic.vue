@@ -73,11 +73,9 @@
 import {
   defineComponent,
   useStore,
-  useRoute,
   ref,
   computed,
   ComputedRef,
-  onBeforeMount,
   watch,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
@@ -100,11 +98,11 @@ export default defineComponent({
     const categories = ref<string[]>([])
 
     const {
-      recentProjectSaved,
-      projectSaved,
       setLockedField,
       fieldIsLocked,
       setLockedFieldText,
+      setFieldUpdated,
+      resetLockedField,
     } = collaborations()
 
     const store = useStore<RootState>()
@@ -113,24 +111,10 @@ export default defineComponent({
       return store.getters['categories/categoryOptions']
     })
 
-    const route = useRoute()
-    const projectId = ref<string>(route.value.params.id)
-
-    watch(
-      () => recentProjectSaved.value,
-      async (newVal) => {
-        if (newVal ?? (projectSaved.value ?? 0) < 0) {
-          await store
-            .dispatch('projects/fetchProject', projectId.value)
-            .then(() => {
-              fillForm()
-            })
-        }
-      }
-    )
-
     const project: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.project
+      (): IProject | null => {
+        return store.state.projects.project
+      }
     )
 
     const validation = ref<IValidation>({ hasErrors: false })
@@ -140,36 +124,50 @@ export default defineComponent({
      *beim update wird werden die neue Daten au fetch Project geholt
      *Das Feld, was sich nicht ändert wird nicht beschrieben
      * */
-
-    onBeforeMount(() => {
-      fillForm()
-    })
-
     const fillForm = () => {
-      topic.value = project.value?.topic
-      title.value = project.value?.title
-      goal.value = project.value?.goal
+      if (topic.value !== project.value?.topic)
+        topic.value = project.value?.topic
+      if (title.value !== project.value?.title)
+        title.value = project.value?.title
+      if (goal.value !== project.value?.goal) goal.value = project.value?.goal
       categories.value = []
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
     }
 
-    const updateProject = () => {
+    watch(
+      () => project.value,
+      () => {
+        fillForm()
+      },
+      {
+        deep: true,
+        immediate: true,
+      }
+    )
+
+    const updateProject = async () => {
       if (!validation.value.hasErrors) {
-        store.dispatch('projects/updateProject', [
-          project.value?.id,
-          {
-            title: title.value,
-            topic: topic.value,
-            categories: categories.value,
-            goal: goal.value,
-          },
-        ])
-        store.commit('collaboration/SET_LOCKED_FIELD', null)
-        store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
+        await store
+          .dispatch('projects/updateProject', [
+            project.value?.id,
+            {
+              title: title.value,
+              topic: topic.value,
+              categories: categories.value,
+              goal: goal.value,
+            },
+          ])
+          .then(() => {
+            setFieldUpdated()
+          })
+          .catch(() => {
+            resetLockedField()
+          })
       }
     }
+
     return {
       formData,
       title,
@@ -181,7 +179,6 @@ export default defineComponent({
       updateProject,
       setLockedField,
       fieldIsLocked,
-      recentProjectSaved,
       setLockedFieldText,
     }
   },

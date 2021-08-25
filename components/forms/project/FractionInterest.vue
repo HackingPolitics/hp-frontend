@@ -45,9 +45,9 @@
     <div class="mt-4">
       <div v-if="fractionInterests && fractionInterests.length">
         <FormulateInput
-          v-for="interest in fractionInterests"
+          v-for="(interest, index) in fractionInterests"
           :key="interest.id"
-          :value="interest.description"
+          v-model="interestDescription[index]"
           :wrapper-class="['border-l-4']"
           type="textarea"
           @focusout="updateInterest($event, interest.id)"
@@ -148,6 +148,7 @@ export default defineComponent({
     const axios = useAxios()
 
     const newInterestForm = ref(false)
+    const interestDescription = ref([])
 
     const context = useContext()
     const store = useStore<RootState>()
@@ -193,7 +194,7 @@ export default defineComponent({
                 fractionDetails: activeFractionDetails.value?.['@id'],
               })
               .then(() => {
-                resetLockedField()
+                setFieldUpdated()
               })
 
             // @ts-ignore
@@ -262,6 +263,9 @@ export default defineComponent({
 
     const fractionInterests = computed(() => {
       if (activeFractionDetails.value) {
+        interestDescription.value = activeFractionDetails.value?.interests?.map(
+          (interest) => interest.description
+        )
         return activeFractionDetails.value?.interests
       }
       return null
@@ -274,7 +278,7 @@ export default defineComponent({
             description: event.target.value,
           })
           .then(() => {
-            resetLockedField()
+            setFieldUpdated()
           })
 
         // @ts-ignore
@@ -320,6 +324,7 @@ export default defineComponent({
       setLockedFieldText,
       openFractionInterestForm,
       closeFractionInterestForm,
+      interestDescription,
     }
   },
 })

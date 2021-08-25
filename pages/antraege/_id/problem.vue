@@ -53,12 +53,8 @@ export default defineComponent({
   layout: 'collaboration',
   middleware: ['isProjectMember', 'getCurrentArea'],
   setup() {
-    const impact = ref<String | undefined>('')
+    const impact = ref('')
     const store = useStore<RootState>()
-
-    const project: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.project
-    )
 
     const {
       recentProjectSaved,
@@ -71,6 +67,27 @@ export default defineComponent({
 
     const validation = ref<IValidation>({ hasErrors: false })
 
+    const project: ComputedRef<IProject | null> = computed(
+      (): IProject | null => {
+        return store.state.projects.project
+      }
+    )
+
+    const fillForm = () => {
+      impact.value = project.value.impact
+    }
+
+    watch(
+      () => project.value,
+      () => {
+        fillForm()
+      },
+      {
+        deep: true,
+        immediate: true,
+      }
+    )
+
     const updateProject = () => {
       if (!validation.value.hasErrors) {
         store.dispatch('projects/updateProject', [
@@ -82,18 +99,6 @@ export default defineComponent({
         setFieldUpdated()
       }
     }
-
-    watch(
-      () => project.value?.impact,
-      (newVal, oldVal) => {
-        console.log(newVal, oldVal)
-        impact.value = newVal
-      },
-      {
-        deep: true,
-        immediate: true,
-      }
-    )
 
     return {
       impact,
