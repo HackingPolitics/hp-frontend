@@ -254,7 +254,10 @@
       }
     },
     "problems": {
-      "description": "Problembeschreibung"
+      "description": "Problembeschreibung",
+      "actionMandate": {
+        "description": "Mandatbeschreibung"
+      }
     }
   },
   "back": "Zurück",

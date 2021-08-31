@@ -12,20 +12,20 @@
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
-          @update="updateProblemPriority($event)"
+          @update="updateActionMandatePriority($event)"
           @start="setLockedField('problem_action_mandate')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="problem in actionMandates"
-              :key="problem.id"
+              v-for="actionMandate in actionMandates"
+              :key="actionMandate.id"
               class="inline-flex w-full justify-center cursor-move"
             >
-              <forms-list-item-input
-                :value="problem.description"
+              <forms-collaboration-input
+                :model="actionMandate.description"
                 name="description"
                 type="text"
-                element-class="inline-flex w-full"
+                :input-type="2"
                 validation="required"
                 :placeholder="
                   $t('forms.problems.actionMandate.placeholder.description')
@@ -34,9 +34,11 @@
                   $t('validation.problems.actionMandate.description')
                 "
                 @validation="validation = $event"
-                @focusout="updateProblem($event, problem.id)"
+                @focusout="
+                  updateActionMandate($event.target.value, actionMandate.id)
+                "
                 @focus="setLockedField('problem_action_mandate')"
-                @delete="deleteProblem(problem.id)"
+                @delete="deleteActionMandate(actionMandate.id)"
               >
                 <template #prefix>
                   <div
@@ -54,7 +56,7 @@
                     ></outline-menu-alt-4-icon>
                   </div>
                 </template>
-              </forms-list-item-input>
+              </forms-collaboration-input>
             </li>
           </transition-group>
         </draggable>
@@ -159,11 +161,11 @@ export default defineComponent({
     const actionMandates = ref<IProblem[]>([])
     const createProblemForm = ref<MandateForm>({})
 
+    const actionMandateDescriptions = ref([])
+
     const context = useContext()
 
     const {
-      recentProjectSaved,
-      projectSaved,
       setLockedField,
       fieldIsLocked,
       setLockedFieldText,
@@ -177,8 +179,6 @@ export default defineComponent({
      */
     const validation = ref<IValidation>({ hasErrors: false })
     const formKey = ref(1)
-
-    const store = useStore<RootState>()
 
     onMounted(() => {
       if (project.value?.actionMandates) {
@@ -194,7 +194,8 @@ export default defineComponent({
         actionMandates.value.sort((a, b) => b.priority - a.priority)
       },
       {
-        deep: true, // immediate: true
+        immediate: true,
+        deep: true,
       }
     )
 
@@ -204,23 +205,23 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>(
-          'action_mandates',
-          actionMandates.value,
-          payload
-        ).then(() => {
-          formKey.value++
-          newActionMandateForm.value = false
-          setFieldUpdated()
-        })
+        await createProjectEntity<IProblem>('action_mandates', payload).then(
+          () => {
+            formKey.value++
+            newActionMandateForm.value = false
+            setFieldUpdated()
+          }
+        )
       }
     }
-    const deleteProblem = async (id: number | string) => {
+    const deleteActionMandate = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('action_mandates', id, actionMandates.value)
+      await deleteProjectEntity('action_mandates', id).then(() => {
+        setFieldUpdated()
+      })
     }
 
-    const updateProblem = async (desc: string, id: number | string) => {
+    const updateActionMandate = async (desc: string, id: number | string) => {
       if (!validation.value.hasErrors) {
         const payload = {
           description: desc,
@@ -235,7 +236,7 @@ export default defineComponent({
       }
     }
 
-    const updateProblemPriority = async () => {
+    const updateActionMandatePriority = async () => {
       const allAsyncResults: Promise<any>[] = []
 
       for (let index = 0; index < actionMandates.value.length; index++) {
@@ -252,10 +253,6 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          'actionMandates',
-          res.map((e) => e.data),
-        ])
         setFieldUpdated()
       })
     }
@@ -277,10 +274,10 @@ export default defineComponent({
       formKey,
       createProblemForm,
       validation,
-      deleteProblem,
+      deleteActionMandate,
       createProblem,
-      updateProblem,
-      updateProblemPriority,
+      updateActionMandate,
+      updateActionMandatePriority,
       newActionMandateForm,
       openActionMandateForm,
       closeActionMandateForm,
@@ -288,6 +285,7 @@ export default defineComponent({
       setLockedField,
       resetLockedField,
       setLockedFieldText,
+      actionMandateDescriptions,
     }
   },
 })

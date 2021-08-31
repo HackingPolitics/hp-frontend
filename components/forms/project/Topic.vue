@@ -4,42 +4,42 @@
       :title="$t('forms.topic.mainTitle')"
       :subtitle="$t('forms.topic.mainTitleSubtitle')"
     >
-      <FormulateInput
-        v-model="title"
+      <forms-collaboration-input
+        :model="project.title"
         type="text"
         validation="required"
         :disabled="fieldIsLocked('applicationTitle')"
         :help="setLockedFieldText('applicationTitle')"
         @validation="validation = $event"
-        @focusout="updateProject()"
+        @focusout="updateProject({ title: $event.target.value })"
         @focus="setLockedField('applicationTitle')"
       >
-      </FormulateInput>
+      </forms-collaboration-input>
     </forms-form-section>
     <forms-form-section
       :title="$t('forms.topic.mainTopic')"
       :subtitle="$t('forms.topic.mainTopicSubtitle')"
     >
-      <FormulateInput
-        v-model="topic"
+      <forms-collaboration-input
+        :model="project.topic"
         type="textarea"
         rows="5"
         validation="required"
         :disabled="fieldIsLocked('applicationTopic')"
         :help="setLockedFieldText('applicationTopic')"
         @validation="validation = $event"
-        @focusout="updateProject()"
+        @focusout="updateProject({ topic: $event.target.value })"
         @focus="setLockedField('applicationTopic')"
       >
-      </FormulateInput>
+      </forms-collaboration-input>
     </forms-form-section>
 
     <forms-form-section
       :title="$t('forms.topic.mainGoal')"
       :subtitle="$t('forms.topic.mainGoalSubtitle')"
     >
-      <FormulateInput
-        v-model="goal"
+      <forms-collaboration-input
+        :model="project.goal"
         type="textarea"
         rows="5"
         validation="required"
@@ -47,9 +47,9 @@
         :help="setLockedFieldText('applicationGoal')"
         @focus="setLockedField('applicationGoal')"
         @validation="validation = $event"
-        @focusout="updateProject()"
+        @focusout="updateProject({ goal: $event.target.value })"
       >
-      </FormulateInput>
+      </forms-collaboration-input>
     </forms-form-section>
 
     <forms-form-section
@@ -73,11 +73,9 @@
 import {
   defineComponent,
   useStore,
-  useRoute,
   ref,
   computed,
   ComputedRef,
-  onBeforeMount,
   watch,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
@@ -86,25 +84,23 @@ import { IValidation } from '~/types/vueFormulate'
 
 import collaborations from '~/composables/collaborations'
 
-interface TopicForm {
-  topic: string
+interface TopicFormData {
+  topic?: string
+  title: string
+  goal: string
 }
 
 export default defineComponent({
   name: 'TopicForm',
   setup() {
-    const formData = ref<TopicForm>({ topic: '' })
-    const topic = ref<String | undefined>('')
-    const goal = ref<String | undefined>('')
-    const title = ref<String | undefined>('')
     const categories = ref<string[]>([])
 
     const {
-      recentProjectSaved,
-      projectSaved,
       setLockedField,
       fieldIsLocked,
       setLockedFieldText,
+      setFieldUpdated,
+      resetLockedField,
     } = collaborations()
 
     const store = useStore<RootState>()
@@ -113,24 +109,10 @@ export default defineComponent({
       return store.getters['categories/categoryOptions']
     })
 
-    const route = useRoute()
-    const projectId = ref<string>(route.value.params.id)
-
-    watch(
-      () => recentProjectSaved.value,
-      async (newVal) => {
-        if (newVal ?? (projectSaved.value ?? 0) < 0) {
-          await store
-            .dispatch('projects/fetchProject', projectId.value)
-            .then(() => {
-              fillForm()
-            })
-        }
-      }
-    )
-
     const project: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.project
+      (): IProject | null => {
+        return store.state.projects.project
+      }
     )
 
     const validation = ref<IValidation>({ hasErrors: false })
@@ -140,48 +122,44 @@ export default defineComponent({
      *beim update wird werden die neue Daten au fetch Project geholt
      *Das Feld, was sich nicht ändert wird nicht beschrieben
      * */
-
-    onBeforeMount(() => {
-      fillForm()
-    })
-
     const fillForm = () => {
-      topic.value = project.value?.topic
-      title.value = project.value?.title
-      goal.value = project.value?.goal
-      categories.value = []
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
     }
 
-    const updateProject = () => {
-      if (!validation.value.hasErrors) {
-        store.dispatch('projects/updateProject', [
-          project.value?.id,
-          {
-            title: title.value,
-            topic: topic.value,
-            categories: categories.value,
-            goal: goal.value,
-          },
-        ])
-        store.commit('collaboration/SET_LOCKED_FIELD', null)
-        store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
+    watch(
+      () => project.value,
+      () => {
+        fillForm()
+      },
+      {
+        deep: true,
+        immediate: true,
+      }
+    )
+
+    const updateProject = async (payload: any) => {
+      if (!validation.value.hasErrors && project.value) {
+        await store
+          .dispatch('projects/updateProject', [project.value?.id, payload])
+          .then(() => {
+            setFieldUpdated()
+          })
+          .catch(() => {
+            resetLockedField()
+          })
       }
     }
+
     return {
-      formData,
-      title,
-      topic,
-      goal,
       categories,
       categoryOptions,
       validation,
+      project,
       updateProject,
       setLockedField,
       fieldIsLocked,
-      recentProjectSaved,
       setLockedFieldText,
     }
   },

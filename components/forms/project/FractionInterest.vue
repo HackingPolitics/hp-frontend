@@ -44,16 +44,16 @@
     </div>
     <div class="mt-4">
       <div v-if="fractionInterests && fractionInterests.length">
-        <FormulateInput
-          v-for="interest in fractionInterests"
+        <forms-collaboration-input
+          v-for="(interest, index) in fractionInterests"
           :key="interest.id"
-          :value="interest.description"
+          :model="interest.description"
           :wrapper-class="['border-l-4']"
           type="textarea"
           @focusout="updateInterest($event, interest.id)"
           @focus="setLockedField('fraction-interest')"
         >
-        </FormulateInput>
+        </forms-collaboration-input>
       </div>
       <div v-else class="w-full text-center text-gray-500 py-6">
         {{ $t('forms.fractioninterests.interests.noInterests') }}
@@ -193,7 +193,7 @@ export default defineComponent({
                 fractionDetails: activeFractionDetails.value?.['@id'],
               })
               .then(() => {
-                resetLockedField()
+                setFieldUpdated()
               })
 
             // @ts-ignore
@@ -204,7 +204,6 @@ export default defineComponent({
             })
             formData.value.description = null
             newInterestForm.value = false
-            store.dispatch('projects/fetchProject', route.value.params.id)
           } catch (error) {
             resetLockedField()
             // @ts-ignore
@@ -274,16 +273,14 @@ export default defineComponent({
             description: event.target.value,
           })
           .then(() => {
-            resetLockedField()
+            setFieldUpdated()
+            // @ts-ignore
+            context.$notify({
+              title: 'Interesse aktualisierut',
+              duration: 300,
+              type: 'success',
+            })
           })
-
-        // @ts-ignore
-        context.$notify({
-          title: 'Interesse aktualisierut',
-          duration: 300,
-          type: 'success',
-        })
-        store.dispatch('projects/fetchProject', route.value.params.id)
       } catch (error) {
         resetLockedField()
         // @ts-ignore

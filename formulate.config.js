@@ -14,7 +14,7 @@ export default {
         case 'file':
           return ''
         case 'text':
-          return 'mb-4 flex-1'
+          return 'mb-4 flex-1 border-0'
         case 'textarea':
           return 'mb-4 flex-1'
         case 'group':

@@ -1,5 +1,11 @@
-import { computed, useContext, useStore } from '@nuxtjs/composition-api'
+import {
+  computed,
+  ComputedRef,
+  useContext,
+  useStore,
+} from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
+import { IProject } from '~/types/apiSchema'
 
 export default function () {
   const store = useStore<RootState>()

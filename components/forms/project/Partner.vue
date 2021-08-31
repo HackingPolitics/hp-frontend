@@ -5,41 +5,41 @@
     @submit="updatePartner(partner.id)"
   >
     <div class="flex flex-wrap">
-      <FormulateInput
-        outer-class="w-1/2 pr-4 pb-4"
+      <forms-collaboration-input
+        outer-class="w-1/2 pr-4 pb-4 border-0"
         type="text"
-        :value="partner.name"
+        :model="partner.name"
         name="name"
         validation="required"
         :disabled="!editPartnerFormIsOpen"
         label="Name der Organisation"
       />
-      <FormulateInput
-        outer-class="w-1/2 pr-4 pb-4"
+      <forms-collaboration-input
+        outer-class="w-1/2 pr-4 pb-4 border-0"
         type="text"
-        :value="partner.contactName"
+        :model="partner.contactName"
         :disabled="!editPartnerFormIsOpen"
         name="contactName"
         label="Ansprechpartner"
       />
-      <FormulateInput
-        outer-class="w-1/2 pr-4 pb-4"
+      <forms-collaboration-input
+        outer-class="w-1/2 pr-4 pb-4 border-0"
         type="text"
-        :value="partner.contactEmail"
+        :model="partner.contactEmail"
         :disabled="!editPartnerFormIsOpen"
         name="contactEmail"
         label="Email"
       />
-      <FormulateInput
-        outer-class="w-1/2 pr-4 pb-4"
+      <forms-collaboration-input
+        outer-class="w-1/2 pr-4 pb-4 border-0"
         type="text"
-        :value="partner.contactPhone"
+        :model="partner.contactPhone"
         :disabled="!editPartnerFormIsOpen"
         name="contactPhone"
         label="Telefonnummer"
       />
       <FormulateInput
-        outer-class="py-4 mr-2"
+        outer-class="absolute top-0 right-2 py-4 mr-2 border-0"
         type="button"
         @click="deletePartner(partner.id)"
       >
@@ -122,6 +122,7 @@ export default defineComponent({
         }
         ;(await updateProjectEntity)<IPartner>('partners', id, payload).then(
           () => {
+            togglePartnerForm()
             setFieldUpdated()
           }
         )
@@ -130,19 +131,24 @@ export default defineComponent({
 
     const deletePartner = async (id: string | number) => {
       // @ts-ignore
-      await deleteProjectEntity('partners', id, props.partners)
+      await deleteProjectEntity('partners', id, props.partners).then(() =>
+        setFieldUpdated()
+      )
     }
 
     const editPartnerFormIsOpen = ref(false)
 
+    const togglePartnerForm = () =>
+      (editPartnerFormIsOpen.value = !editPartnerFormIsOpen.value)
+
     const openEditPartnerForm = (id: string | number) => {
       setLockedField('strategy_' + id)
-      editPartnerFormIsOpen.value = true
+      togglePartnerForm()
     }
 
     const closeEditPartnerForm = () => {
       resetLockedField()
-      editPartnerFormIsOpen.value = false
+      togglePartnerForm()
     }
 
     return {

@@ -21,21 +21,18 @@
               :key="problem.id"
               class="inline-flex w-full justify-center cursor-move"
             >
-              <forms-list-item-input
-                :value="problem.description"
-                name="description"
+              <forms-collaboration-input
+                :model="problem.description"
                 type="text"
-                element-class="inline-flex w-full"
                 validation="required"
+                :input-type="2"
                 :placeholder="
                   $t('forms.problems.problems.placeholder.description')
                 "
-                :validation-name="
-                  $t('validation.problems.problems.description')
-                "
+                :validation-name="$t('validation.problems.description')"
                 @focus="setLockedField('problems')"
                 @validation="validation = $event"
-                @focusout="updateProblem($event, problem.id)"
+                @focusout="updateProblem($event.target.value, problem.id)"
                 @delete="deleteProblem(problem.id)"
               >
                 <template #prefix>
@@ -54,7 +51,7 @@
                     ></outline-menu-alt-4-icon>
                   </div>
                 </template>
-              </forms-list-item-input>
+              </forms-collaboration-input>
             </li>
           </transition-group>
         </draggable>
@@ -71,7 +68,7 @@
               type="text"
               name="description"
               validation="required"
-              :validation-name="$t('validation.problems.problems.description')"
+              :validation-name="$t('validation.problems.description')"
               error-behavior="submit"
               :placeholder="
                 $t('forms.problems.problems.placeholder.description')
@@ -126,19 +123,16 @@ import {
   defineComponent,
   watch,
   ref,
-  useStore,
   useContext,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
 import { IProblem } from '~/types/apiSchema'
-import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
 import collaborations from '~/composables/collaborations'
 
 interface ProblemForm {
-  problems?: IProblem[]
   description?: string
   project?: string
 }
@@ -173,8 +167,6 @@ export default defineComponent({
     const validation = ref<IValidation>({ hasErrors: false })
     const formKey = ref(1)
 
-    const store = useStore<RootState>()
-
     watch(
       project,
       (currentValue) => {
@@ -193,20 +185,22 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>(
-          'problems',
-          problems.value,
-          payload
-        ).then(() => {
-          formKey.value++
-          newProblemForm.value = false
-          setFieldUpdated()
-        })
+        await createProjectEntity<IProblem>('problems', payload)
+          .then(() => {
+            formKey.value++
+            newProblemForm.value = false
+            setFieldUpdated()
+          })
+          .catch(() => {
+            resetLockedField()
+          })
       }
     }
     const deleteProblem = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('problems', id, problems.value)
+      await deleteProjectEntity('problems', id, problems.value).then(() => {
+        setFieldUpdated()
+      })
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
@@ -238,13 +232,13 @@ export default defineComponent({
           .finally()
         allAsyncResults.push(asyncResult)
       }
-      await Promise.all(allAsyncResults).then((res) => {
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          'problems',
-          res.map((e) => e.data),
-        ])
-        setFieldUpdated()
-      })
+      await Promise.all(allAsyncResults)
+        .then(() => {
+          setFieldUpdated()
+        })
+        .catch(() => {
+          resetLockedField()
+        })
     }
 
     const openProblemForm = () => {

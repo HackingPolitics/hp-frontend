@@ -1,6 +1,6 @@
 <template>
   <FormulateForm>
-    <div class="space-y-4">
+    <div class="space-y-4 relative">
       <forms-form-section
         v-for="partner in partners"
         :key="partner.id"
@@ -18,6 +18,7 @@
         :locked-text="setLockedFieldText('strategy')"
       >
         <FormulateForm
+          :key="formKey"
           v-model="createPartnerFormData"
           @submit="createPartner()"
         >
@@ -61,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch } from '@nuxtjs/composition-api'
+import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
 import editApplication from '~/composables/editApplication'
 import { IPartner } from '~/types/apiSchema'
@@ -81,15 +82,16 @@ export default defineComponent({
     const createPartnerFormData = ref<CreatePartnerForm>({ name: '' })
     const partners = ref([])
 
+    const formKey = ref(1)
+
     const { createProjectEntity, project } = editApplication()
 
-    const { setLockedField, fieldIsLocked, setLockedFieldText } =
-      collaborations()
-
-    onMounted(() => {
-      if (project.value?.partners)
-        partners.value = cloneDeep(project.value.partners)
-    })
+    const {
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      setFieldUpdated,
+    } = collaborations()
 
     watch(
       project,
@@ -98,6 +100,7 @@ export default defineComponent({
       },
       {
         deep: true,
+        immediate: true,
       }
     )
 
@@ -107,17 +110,17 @@ export default defineComponent({
           ...createPartnerFormData.value,
           project: project.value['@id'],
         }
-        await createProjectEntity<IPartner>(
-          'partners',
-          partners.value,
-          payload
-        ).then(() => (createPartnerFormData.value = { name: '' }))
+        await createProjectEntity<IPartner>('partners', payload).then(() => {
+          formKey.value++
+          setFieldUpdated()
+        })
       }
     }
 
     return {
       createPartnerFormData,
       partners,
+      formKey,
       createPartner,
       fieldIsLocked,
       setLockedField,

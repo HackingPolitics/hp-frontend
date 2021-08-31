@@ -189,7 +189,8 @@ export default defineComponent({
 
     watch(
       () => projectSaved.value,
-      (newVal) => {
+      async (newVal) => {
+        await store.dispatch('projects/fetchProject', projectId.value)
         setAwarenessState({ projectSaved: newVal })
       }
     )
@@ -197,7 +198,7 @@ export default defineComponent({
     watch(
       () => recentProjectSaved.value,
       async (newVal) => {
-        if (newVal ?? (projectSaved.value ?? 0) < 0) {
+        if (newVal && newVal > (projectSaved.value ?? 0)) {
           await store.dispatch('projects/fetchProject', projectId.value)
         }
       }

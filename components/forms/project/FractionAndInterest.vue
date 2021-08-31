@@ -114,6 +114,7 @@ export default defineComponent({
     })
 
     const project = computed(() => {
+      console.log(store.state.projects?.project)
       return store.state.projects?.project
     })
 

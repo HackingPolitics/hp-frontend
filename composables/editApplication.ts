@@ -18,9 +18,7 @@ export default function () {
 
   const createProjectEntity = async <T>(
     endpoint: string,
-    entityData: T[],
     payload: T,
-    projectKey: string | null = null,
     notificationOptions: {
       title?: string
       duration?: number
@@ -32,12 +30,6 @@ export default function () {
     }
   ) => {
     return await context.$axios.post(endpoint, payload).then((res) => {
-      const payload = cloneDeep(entityData)
-      payload.push(res.data)
-      store.commit('projects/SET_PROJECT_PROPERTY', [
-        projectKey || camelCase(endpoint),
-        payload,
-      ])
       // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
@@ -63,11 +55,6 @@ export default function () {
     }
   ) => {
     await context.$axios.delete(endpoint + '/' + id).then(() => {
-      const payload = entityData.filter((e: T) => e.id !== id)
-      store.commit('projects/SET_PROJECT_PROPERTY', [
-        camelCase(endpoint),
-        payload,
-      ])
       // @ts-ignore
       context.$notify({
         title: notificationOptions.title,
@@ -92,7 +79,6 @@ export default function () {
     }
   ) => {
     await context.$axios.put(endpoint + '/' + id, payload).then(() => {
-      store.dispatch('projects/fetchProject', project.value?.id)
       // @ts-ignore
       context.$notify({
         title: notificationOptions.title,

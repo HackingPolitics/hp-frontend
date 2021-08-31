@@ -297,7 +297,6 @@ export default defineComponent({
     }
 
     const hasActiveApplications = computed(() => {
-      console.log(project.value)
       const applications = cloneDeep(project.value.memberships ?? [])
       return applications.filter(
         (el: IProjectMembership) => el.role === 'applicant'

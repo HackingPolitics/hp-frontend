@@ -13,8 +13,8 @@
         :title="$t('forms.problems.impact.name')"
         :subtitle="$t('forms.problems.impact.label')"
       >
-        <FormulateInput
-          v-model="impact"
+        <forms-collaboration-input
+          :model="project.impact"
           type="textarea"
           rows="5"
           :placeholder="$t('forms.problems.impact.placeholder')"
@@ -23,9 +23,9 @@
           :help="setLockedFieldText('problem-impact')"
           @focus="setLockedField('problem-impact')"
           @validation="validation = $event"
-          @focusout="updateProject()"
+          @focusout="updateProject($event.target.value)"
         >
-        </FormulateInput>
+        </forms-collaboration-input>
       </forms-form-section>
     </div>
   </layouts-form-with-sidebar>
@@ -53,12 +53,7 @@ export default defineComponent({
   layout: 'collaboration',
   middleware: ['isProjectMember', 'getCurrentArea'],
   setup() {
-    const impact = ref<String | undefined>('')
     const store = useStore<RootState>()
-
-    const project: ComputedRef<IProject | null> = computed(
-      (): IProject | null => store.state.projects.project
-    )
 
     const {
       recentProjectSaved,
@@ -71,32 +66,25 @@ export default defineComponent({
 
     const validation = ref<IValidation>({ hasErrors: false })
 
-    const updateProject = () => {
+    const project: ComputedRef<IProject | null> = computed(
+      (): IProject | null => {
+        return store.state.projects.project
+      }
+    )
+
+    const updateProject = (val: string) => {
       if (!validation.value.hasErrors) {
         store.dispatch('projects/updateProject', [
           project.value?.id,
           {
-            impact: impact.value,
+            impact: val,
           },
         ])
         setFieldUpdated()
       }
     }
 
-    watch(
-      () => project.value?.impact,
-      (newVal, oldVal) => {
-        console.log(newVal, oldVal)
-        impact.value = newVal
-      },
-      {
-        deep: true,
-        immediate: true,
-      }
-    )
-
     return {
-      impact,
       project,
       updateProject,
       validation,
