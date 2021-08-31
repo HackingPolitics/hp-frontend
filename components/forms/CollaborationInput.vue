@@ -4,7 +4,6 @@
     v-model="inputModel"
     v-bind="$attrs"
     validation="required"
-    outer-class="mb-4 border-0"
     v-on="$listeners"
   >
   </FormulateInput>
@@ -85,7 +84,7 @@ export default defineComponent({
     watch(
       () => props.model,
       (newVal) => {
-        inputModel.value = newVal
+        inputModel.value = newVal.toString()
       },
       {
         deep: true,

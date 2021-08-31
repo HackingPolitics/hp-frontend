@@ -123,12 +123,10 @@ import {
   defineComponent,
   watch,
   ref,
-  useStore,
   useContext,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
 import { IProblem } from '~/types/apiSchema'
-import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
