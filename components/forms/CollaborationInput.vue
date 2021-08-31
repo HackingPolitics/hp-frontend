@@ -3,6 +3,16 @@
     v-if="inputType === 1"
     v-model="inputModel"
     v-bind="$attrs"
+    validation="required"
+    outer-class="mb-4 border-0"
+    v-on="$listeners"
+  >
+  </FormulateInput>
+
+  <FormulateInput
+    v-else-if="inputType === 2"
+    v-model="inputModel"
+    v-bind="$attrs"
     element-class="inline-flex w-full  items-center"
     input-class="list-input-text"
     outer-class="list-input-outer"
@@ -25,7 +35,7 @@
   </FormulateInput>
 
   <FormulateInput
-    v-else-if="inputType === 2"
+    v-else-if="inputType === 3"
     v-model="inputModel"
     v-bind="$attrs"
     element-class="inline-flex w-full items-center"

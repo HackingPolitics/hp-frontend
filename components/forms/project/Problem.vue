@@ -17,14 +17,15 @@
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="(problem, index) in problems"
+              v-for="problem in problems"
               :key="problem.id"
               class="inline-flex w-full justify-center cursor-move"
             >
-              <forms-list-item-input
-                :model="problemDescriptions[index]"
+              <forms-collaboration-input
+                :model="problem.description"
                 type="text"
                 validation="required"
+                :input-type="2"
                 :placeholder="
                   $t('forms.problems.problems.placeholder.description')
                 "
@@ -50,7 +51,7 @@
                     ></outline-menu-alt-4-icon>
                   </div>
                 </template>
-              </forms-list-item-input>
+              </forms-collaboration-input>
             </li>
           </transition-group>
         </draggable>
@@ -134,7 +135,6 @@ import { IValidation } from '~/types/vueFormulate'
 import collaborations from '~/composables/collaborations'
 
 interface ProblemForm {
-  problems?: IProblem[]
   description?: string
   project?: string
 }
@@ -154,9 +154,6 @@ export default defineComponent({
 
     const context = useContext()
 
-    // v-model values for problem descriptions
-    const problemDescriptions = ref([])
-
     const {
       setLockedField,
       fieldIsLocked,
@@ -172,17 +169,11 @@ export default defineComponent({
     const validation = ref<IValidation>({ hasErrors: false })
     const formKey = ref(1)
 
-    const store = useStore<RootState>()
-
     watch(
       project,
       (currentValue) => {
-        console.log(currentValue)
         problems.value = cloneDeep(currentValue?.problems || [])
         problems.value.sort((a, b) => b.priority - a.priority)
-        problemDescriptions.value = problems.value.map(
-          (problem) => problem.description
-        )
       },
       {
         deep: true,
@@ -196,7 +187,7 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>('problems', problems.value, payload)
+        await createProjectEntity<IProblem>('problems', payload)
           .then(() => {
             formKey.value++
             newProblemForm.value = false
@@ -244,11 +235,7 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults)
-        .then((res) => {
-          store.commit('projects/SET_PROJECT_PROPERTY', [
-            'problems',
-            res.map((e) => e.data),
-          ])
+        .then(() => {
           setFieldUpdated()
         })
         .catch(() => {
@@ -271,7 +258,6 @@ export default defineComponent({
       problems,
       formKey,
       createProblemForm,
-      problemDescriptions,
       validation,
       deleteProblem,
       createProblem,

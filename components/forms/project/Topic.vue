@@ -4,42 +4,42 @@
       :title="$t('forms.topic.mainTitle')"
       :subtitle="$t('forms.topic.mainTitleSubtitle')"
     >
-      <FormulateInput
-        v-model="title"
+      <forms-collaboration-input
+        :model="project.title"
         type="text"
         validation="required"
         :disabled="fieldIsLocked('applicationTitle')"
         :help="setLockedFieldText('applicationTitle')"
         @validation="validation = $event"
-        @focusout="updateProject()"
+        @focusout="updateProject({ title: $event.target.value })"
         @focus="setLockedField('applicationTitle')"
       >
-      </FormulateInput>
+      </forms-collaboration-input>
     </forms-form-section>
     <forms-form-section
       :title="$t('forms.topic.mainTopic')"
       :subtitle="$t('forms.topic.mainTopicSubtitle')"
     >
-      <FormulateInput
-        v-model="topic"
+      <forms-collaboration-input
+        :model="project.topic"
         type="textarea"
         rows="5"
         validation="required"
         :disabled="fieldIsLocked('applicationTopic')"
         :help="setLockedFieldText('applicationTopic')"
         @validation="validation = $event"
-        @focusout="updateProject()"
+        @focusout="updateProject({ topic: $event.target.value })"
         @focus="setLockedField('applicationTopic')"
       >
-      </FormulateInput>
+      </forms-collaboration-input>
     </forms-form-section>
 
     <forms-form-section
       :title="$t('forms.topic.mainGoal')"
       :subtitle="$t('forms.topic.mainGoalSubtitle')"
     >
-      <FormulateInput
-        v-model="goal"
+      <forms-collaboration-input
+        :model="project.goal"
         type="textarea"
         rows="5"
         validation="required"
@@ -47,9 +47,9 @@
         :help="setLockedFieldText('applicationGoal')"
         @focus="setLockedField('applicationGoal')"
         @validation="validation = $event"
-        @focusout="updateProject()"
+        @focusout="updateProject({ goal: $event.target.value })"
       >
-      </FormulateInput>
+      </forms-collaboration-input>
     </forms-form-section>
 
     <forms-form-section
@@ -84,17 +84,15 @@ import { IValidation } from '~/types/vueFormulate'
 
 import collaborations from '~/composables/collaborations'
 
-interface TopicForm {
-  topic: string
+interface TopicFormData {
+  topic?: string
+  title: string
+  goal: string
 }
 
 export default defineComponent({
   name: 'TopicForm',
   setup() {
-    const formData = ref<TopicForm>({ topic: '' })
-    const topic = ref<String | undefined>('')
-    const goal = ref<String | undefined>('')
-    const title = ref<String | undefined>('')
     const categories = ref<string[]>([])
 
     const {
@@ -125,12 +123,6 @@ export default defineComponent({
      *Das Feld, was sich nicht ändert wird nicht beschrieben
      * */
     const fillForm = () => {
-      if (topic.value !== project.value?.topic)
-        topic.value = project.value?.topic
-      if (title.value !== project.value?.title)
-        title.value = project.value?.title
-      if (goal.value !== project.value?.goal) goal.value = project.value?.goal
-      categories.value = []
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })
@@ -147,18 +139,10 @@ export default defineComponent({
       }
     )
 
-    const updateProject = async () => {
-      if (!validation.value.hasErrors) {
+    const updateProject = async (payload: any) => {
+      if (!validation.value.hasErrors && project.value) {
         await store
-          .dispatch('projects/updateProject', [
-            project.value?.id,
-            {
-              title: title.value,
-              topic: topic.value,
-              categories: categories.value,
-              goal: goal.value,
-            },
-          ])
+          .dispatch('projects/updateProject', [project.value?.id, payload])
           .then(() => {
             setFieldUpdated()
           })
@@ -169,13 +153,10 @@ export default defineComponent({
     }
 
     return {
-      formData,
-      title,
-      topic,
-      goal,
       categories,
       categoryOptions,
       validation,
+      project,
       updateProject,
       setLockedField,
       fieldIsLocked,

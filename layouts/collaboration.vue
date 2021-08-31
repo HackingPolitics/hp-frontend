@@ -189,7 +189,8 @@ export default defineComponent({
 
     watch(
       () => projectSaved.value,
-      (newVal) => {
+      async (newVal) => {
+        await store.dispatch('projects/fetchProject', projectId.value)
         setAwarenessState({ projectSaved: newVal })
       }
     )

@@ -17,14 +17,15 @@
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="(actionMandate, index) in actionMandates"
+              v-for="actionMandate in actionMandates"
               :key="actionMandate.id"
               class="inline-flex w-full justify-center cursor-move"
             >
-              <forms-list-item-input
-                :model="actionMandateDescriptions[index]"
+              <forms-collaboration-input
+                :model="actionMandate.description"
                 name="description"
                 type="text"
+                :input-type="2"
                 validation="required"
                 :placeholder="
                   $t('forms.problems.actionMandate.placeholder.description')
@@ -55,7 +56,7 @@
                     ></outline-menu-alt-4-icon>
                   </div>
                 </template>
-              </forms-list-item-input>
+              </forms-collaboration-input>
             </li>
           </transition-group>
         </draggable>
@@ -179,8 +180,6 @@ export default defineComponent({
     const validation = ref<IValidation>({ hasErrors: false })
     const formKey = ref(1)
 
-    const store = useStore<RootState>()
-
     onMounted(() => {
       if (project.value?.actionMandates) {
         actionMandates.value = cloneDeep(project.value.actionMandates)
@@ -193,9 +192,6 @@ export default defineComponent({
       (currentValue) => {
         actionMandates.value = cloneDeep(currentValue?.actionMandates || [])
         actionMandates.value.sort((a, b) => b.priority - a.priority)
-        actionMandateDescriptions.value = actionMandates.value.map(
-          (e) => e.description
-        )
       },
       {
         immediate: true,
@@ -209,24 +205,18 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>(
-          'action_mandates',
-          actionMandates.value,
-          payload
-        ).then(() => {
-          formKey.value++
-          newActionMandateForm.value = false
-          setFieldUpdated()
-        })
+        await createProjectEntity<IProblem>('action_mandates', payload).then(
+          () => {
+            formKey.value++
+            newActionMandateForm.value = false
+            setFieldUpdated()
+          }
+        )
       }
     }
     const deleteActionMandate = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity(
-        'action_mandates',
-        id,
-        actionMandates.value
-      ).then(() => {
+      await deleteProjectEntity('action_mandates', id).then(() => {
         setFieldUpdated()
       })
     }
@@ -263,10 +253,6 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          'actionMandates',
-          res.map((e) => e.data),
-        ])
         setFieldUpdated()
       })
     }
