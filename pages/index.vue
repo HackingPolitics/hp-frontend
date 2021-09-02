@@ -4,7 +4,7 @@
   >
     <div class="flex justify-between w-full items-baseline mt-16">
       <div class="font-semibold text-3xl flex relative overflow">
-        {{ projects && projects.length ? projects.length : 0 }} Anträge
+        {{ totalItems ? totalItems : 0 }} Anträge
         <span v-if="councilOptions" class="flex ml-1">
           in
           <inline-dropdown
@@ -68,7 +68,7 @@ export default defineComponent({
       return store.state.projects?.projects?.['hydra:totalItems']
         ? // @ts-ignore
           store.state.projects?.projects?.['hydra:totalItems']
-        : 15
+        : null
     })
 
     const fetchProjects = async () => {
@@ -149,6 +149,7 @@ export default defineComponent({
       currentPage,
       totalPages,
       itemsPerPage,
+      totalItems,
       changePage,
     }
   },
