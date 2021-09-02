@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-white flex rounded h-full">
+  <div class="p-4 bg-white flex-col rounded h-full">
     <div class="flex-col">
       <div class="inline-flex mb-2 items-center">
         <div
@@ -27,21 +27,14 @@
       </div>
       <h3 class="text-xl font-medium mt-2">{{ applicationStep.title }}</h3>
     </div>
-    <div v-if="false" class="text-gray-500 mt-6">
-      <span
-        class="
-          inline-flex
-          items-center
-          justify-center
-          h-8
-          w-8
-          rounded-full
-          bg-gray-500
-        "
-      >
-        <span class="font-medium leading-none text-white">TW</span>
-      </span>
-      {{ $t('currentActive') }}
+    <div
+      v-for="(user, index) in onlineUsers"
+      :key="index"
+      class="text-gray-500 mt-4 inline-flex"
+    >
+      <div v-if="user.area === area" class="mr-1">
+        <base-avatar :user="user"></base-avatar>
+      </div>
     </div>
   </div>
 </template>
@@ -68,6 +61,14 @@ export default defineComponent({
     canEdit: {
       type: Boolean,
       default: false,
+    },
+    onlineUsers: {
+      type: Array,
+      default: () => [],
+    },
+    area: {
+      type: String,
+      default: '',
     },
   },
   setup() {

@@ -184,18 +184,7 @@
         </div>
       </div>
     </transition>
-    <div class="flex items-center">
-      <img
-        src="https://i0.wp.com/blog.okfn.org/files/2017/12/22137279_1679687182104997_6759961652435307500_o.jpg"
-        alt="Gefördert durch BMBF"
-        class="h-14"
-      />
-      <img
-        src="https://zukunftsstadt.de/wp-content/uploads/2019/12/BMBF_gefo%CC%88rdert-vom_deutsch.jpg"
-        alt="Gefördert durch BMBF"
-        class="h-28"
-      />
-    </div>
+    <supporter-logos></supporter-logos>
   </div>
 </template>
 

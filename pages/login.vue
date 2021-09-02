@@ -73,18 +73,7 @@
             />
           </div>
         </FormulateForm>
-        <div class="flex items-center">
-          <img
-            src="https://i0.wp.com/blog.okfn.org/files/2017/12/22137279_1679687182104997_6759961652435307500_o.jpg"
-            alt="Gefördert durch BMBF"
-            class="h-14"
-          />
-          <img
-            src="https://zukunftsstadt.de/wp-content/uploads/2019/12/BMBF_gefo%CC%88rdert-vom_deutsch.jpg"
-            alt="Gefördert durch BMBF"
-            class="h-28"
-          />
-        </div>
+        <supporter-logos></supporter-logos>
       </div>
     </div>
   </div>
@@ -110,7 +99,7 @@ export default defineComponent({
   name: 'LoginPage',
   layout: 'auth',
   setup() {
-    const { formErrors, inputErrors, handleStatusErrors } = formErrorsHandling()
+    const { formErrors, inputErrors } = formErrorsHandling()
 
     const credentials = ref(null)
     const accountIsActivated = ref(false)
@@ -128,6 +117,7 @@ export default defineComponent({
         const response = await context.$auth.loginWith('local', {
           data: credentials.value,
         })
+        // @todo Philipp: remove debug, try/catch around jwtDecode
         console.log(response)
         // @ts-ignore
         const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)

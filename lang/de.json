@@ -1,360 +1,378 @@
 {
-    "actionMandate": "Handlungsauftrag",
-    "comment": "Kommentar",
-    "contact": {
-      "email": "Kontakt-Email"
-    },
-    "email": "Email",
-    "introduction": "Einführung",
-    "of": "von",
-    "currentActive": "gerade aktiv",
-    "done": "erledigt",
-    "cancel": "abbrechen",
-    "share": "Teilen",
-    "pdfPreview": "PDF-Vorschau",
-    "proposal": {
-      "createProposal": "Antrag hinzufügen",
-      "form": {
-        "header": "Neuen Antrag erstellen",
-        "title": {
-          "help": "Du bist dabei, ein neues Antragsprojekt zu starten! Lass dich durch einige Fragen führen.",
-          "label": "",
-          "name": "Projekttitel"
-        }
-      },
-      "myProposals": "Meine Anträge"
-    },
-    "reasoning": "Grund",
-    "sponsor": "Sponsor",
-    "step": "Schritt",
-    "title": "Titel",
-    "url": "Url",
-    "common": {
-      "auth": {
-        "logout": "Ausloggen"
-      },
-      "roles": {
-          "coordinator": "KoordinatorIn",
-          "writer": "Mitglied",
-          "applicant": "BewerberIn"
+  "actionMandate": "Handlungsauftrag",
+  "comment": "Kommentar",
+  "contact": {
+    "email": "Kontakt-Email"
+  },
+  "email": "Email",
+  "introduction": "Einführung",
+  "of": "von",
+  "currentActive": "gerade aktiv",
+  "done": "erledigt",
+  "cancel": "abbrechen",
+  "share": "Teilen",
+  "pdfPreview": "PDF-Vorschau",
+  "proposal": {
+    "createProposal": "Antrag hinzufügen",
+    "form": {
+      "header": "Neuen Antrag erstellen",
+      "title": {
+        "help": "Du bist dabei, ein neues Antragsprojekt zu starten! Lass dich durch einige Fragen führen.",
+        "label": "",
+        "name": "Projekttitel"
       }
     },
-    "forms": {
-      "topic": {
-        "formTitle": "Antragsthema & Kategorie",
-        "formDescription": "Worum gehts in diesem Antrag und was soll sein Ergebnis sein?",
-        "mainTitle": "Titel des Antrags",
-        "mainTitleSubtitle": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden.",
-        "mainTopic": "Mit welchem Thema beschäftigt sich der Antrag?",
-        "mainTopicSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
-        "mainGoal": "Welches Ziel verfolgt der Antrag?",
-        "mainGoalSubtitle": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
-        "category": "In welche Kategorien passt dieses Thema?",
-        "categorySubtitle": "Wähle bis zu zwei Möglichkeiten aus"
+    "myProposals": "Meine Anträge"
+  },
+  "reasoning": "Grund",
+  "sponsor": "Sponsor",
+  "step": "Schritt",
+  "title": "Titel",
+  "url": "Url",
+  "common": {
+    "auth": {
+      "logout": "Ausloggen"
+    },
+    "roles": {
+      "coordinator": "KoordinatorIn",
+      "writer": "Mitglied",
+      "applicant": "BewerberIn",
+      "observer": "BeobachterIn"
+    }
+  },
+  "forms": {
+    "topic": {
+      "formTitle": "Antragsthema & Kategorie",
+      "formDescription": "Worum gehts in diesem Antrag und was soll sein Ergebnis sein?",
+      "mainTitle": "Titel des Antrags",
+      "mainTitleSubtitle": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden.",
+      "mainTopic": "Mit welchem Thema beschäftigt sich der Antrag?",
+      "mainTopicSubtitle": "Kinderbetreuung, Gemeinschaftsgärten, Verkehrsprobleme? Worum geht es grob in dieser politischen Initiative?",
+      "mainGoal": "Welches Ziel verfolgt der Antrag?",
+      "mainGoalSubtitle": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
+      "category": "In welche Kategorien passt dieses Thema?",
+      "categorySubtitle": "Wähle bis zu zwei Möglichkeiten aus"
+    },
+    "arguments": {
+      "formTitle": "Argumente & Gegenargumente",
+      "formDescription": "Was spricht für und was gegen diesen Antrag? Mit welchen Argumenten lassen sich Antragsgegner umstimmen?",
+      "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
+      "title": "Argumente",
+      "add": "Argument hinzufügen",
+      "add_inspiration_source": "Quelle hinzufügen",
+      "placeholder": {
+        "description": "Welches starke Argument unterstützt dein Vorhaben?",
+        "inspiration_source": "Hast du ein Vorbild oder Fakten? Dann ergänze hier eine passende Quelle"
+      }
+    },
+    "counter_arguments": {
+      "question": "Advocatus Diaboli: Nehmen Sie jetzt die Rolle eines Skeptikers ein, der Ihr Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er Ihr Vorhaben angreifen?",
+      "help": "Formuliere mindestens ein Gegenargument mit passenden Trotzdem-Begründungen. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
+      "add": "Gegenargument hinzufügen",
+      "add_counter": "Trotzdem-Begründung hinzufügen",
+      "placeholder": {
+        "description": "...zu teuer, Widerstand der Anwohner, ...",
+        "negations": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
       },
-      "arguments": {
-        "formTitle": "Argumente & Gegenargumente",
-        "formDescription": "Was spricht für und was gegen diesen Antrag? Mit welchen Argumenten lassen sich Antragsgegner umstimmen?",
-        "question": "Welche starken Argumente fallen dir für dein Vorhaben ein? Vielleicht gibt es andere Projekte oder Vorbilder, die deine Argumentation stärken.",
-        "title": "Argumente",
-        "add": "Argument hinzufügen",
-        "add_inspiration_source": "Quelle hinzufügen",
-        "placeholder": {
-          "description": "Welches starke Argument unterstützt dein Vorhaben?",
-          "inspiration_source": "Hast du ein Vorbild oder Fakten? Dann ergänze hier eine passende Quelle"
+      "cons": "Contra"
+    },
+    "proposal": {
+      "steps": {
+        "step1": {
+          "title": "Titel & Parlament",
+          "description": "Wie dürfen wir dein Antragsprojekt nennen? Und für welches Parlament willst du es vorbereiten?"
+        },
+        "step2": {
+          "title": "Antragsidee präzisieren",
+          "description": "Um welches Thema dreht sich dein Antrag? Weißt du schon, welches Ziel du mit ihm erreichen willst? Was motiviert dich, an diesem zu arbeiten?"
+        },
+        "next": "weiter",
+        "submitProject": "Projekt erstellen"
+      },
+      "forms": {
+        "category": {
+          "name": "Kategorien",
+          "label": "Welchen (ein bis zwei) Kategorien läßt sich das Thema zuordnen?",
+          "placeholder": "In diesem Stadtratsantrag geht es um...",
+          "help": "Wähle maximal zwei Kategorien."
+        },
+        "description": {
+          "name": "Beschreibung",
+          "label": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
+          "placeholder": "Am Ende sollen alle Schulkinder einen Laptop haben, um besser lernen zu können",
+          "help": ""
+        },
+        "motivation": {
+          "name": "Motivation",
+          "label": "Deine Motivation: Was treibt dich an, dieses Thema zu verfolgen?",
+          "placeholder": "Meine Motivation ist...",
+          "help": ""
+        },
+        "skills": {
+          "name": "Fähigkeiten",
+          "label": "Welche Fähigkeiten bringst du in diese Antragserstellung ein?",
+          "placeholder": "Ich habe Erfahrung mit...",
+          "help": ""
+        },
+        "title": {
+          "name": "Titel",
+          "label": "Gib deinem Antragsprojekt einen Titel",
+          "placeholder": "Gemeinschaftsgartenflächen in Musterstadt bereitstellen",
+          "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kann später geändert werden."
+        },
+        "topic": {
+          "name": "Thema",
+          "label": "Kannst du das Thema eingrenzen, mit dem sich der Antrag befassen wird?",
+          "placeholder": "Laptops für alle Schülerinnen und Schüler",
+          "help": ""
+        },
+        "parliament": {
+          "name": "Parlament",
+          "label": "Für welches Parlament ist der Antrag vorgesehen?",
+          "placeholder": "Bitte wählen",
+          "help": "Dein Parlament ist nicht dabei? Kontaktiere uns, um es hinzuzufügen. Wähle vorerst ein anderes Parlament aus, um weiterzukommen."
         }
+      }
+    },
+    "fractioninterests": {
+      "formTitle": "Ratsmehrheit & Fraktionsinteressen",
+      "formDescription": "Mit welchen Verbündeten bekommst du deinen Antrag in und durch den Rat? Welche Fraktionen haben welches Interesse am Antrag? Welches Bündnis führt zu einer Mehrheit?",
+      "fractions": "Fraktionen",
+      "mandates": "Sitze/Stimmen",
+      "parliamentProfileUpdatedAt": "Stand",
+      "partnerMandates": "Partnerstimmen ausgewählt",
+      "votesCounter": "Noch {votes} Stimmen fehlen zur Mehrheit",
+      "enoughVotes": "Die Stimmen reichen für eine Mehrheit aus",
+      "votes": "Stimmen",
+      "interests": {
+        "title": "Eigeninteressen der Fraktionen",
+        "description": "Wähle eine Fraktion aus, um ihre Eigeninteressen zu sammeln und anzuzeigen.",
+        "noInterests": "Noch keine Eigeninteressen gefunden",
+        "addInterest": "Eigeninteresse für {fraction} hinzufügen",
+        "newInterest": "Fraktionsinteresse hinzufügen"
+      }
+    },
+    "proposals": {
+      "add": "Vorschlag hinzufügen",
+      "title": "Vorschläge"
+    },
+    "project_memberships": {
+      "motivation": "Motivation",
+      "skills": "Fähigkeiten",
+      "placeholder": {
+        "motivation": "Was motiviert dich, an diesem Thema zu arbeiten?",
+        "skills": "Welche Fähigkeiten bringst du mit, die für dieses Antragsvorhaben hilfreich sein können?"
+      },
+      "send_apply": "Bewerbung abschicken",
+      "title": "Bewerbung für das Projekt"
+    },
+    "problems": {
+      "formTitle": "Problem & Handlungsauftrag",
+      "formDescription": "Welches Problem soll der Antrag lösen helfen? Wie lautet der Auftrag an die Oberbürgermeisterin, mit dem die Probleme adressiert werden sollen?",
+      "problems": {
+        "add": "Problem hinzufügen",
+        "title": "Was ist das Problem, dass du angehen willst?",
+        "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
+        "placeholder": {
+          "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
+        }
+      },
+      "actionMandate": {
+        "add": "Handlungsauftrag hinzufügen",
+        "title": "Der Stadtrat beauftragt die Oberbürgermeisterin...",
+        "introduction": "Was soll die Stadtverwaltung tun, um das Problem anzugehen? Wenn nötig, liste mehrere aufeinander aufbauende Handlungen auf",
+        "placeholder": {
+          "description": "...zu prüfen, wie ___ ...ein Konzept zu erarbeiten, welches ___...___vorzubereiten und umzusetzen..."
+        }
+      },
+      "impact": {
+        "name": "Warum hilft es, diese Punkte umzusetzen?",
+        "label": "Wie wirkt dieser Arbeitsauftrag auf das obige Problem?",
+        "placeholder": "Wenn alle Schüler einen Laptop haben, können sie besser arbeiten. Das Bildungsniveau steigt.",
+        "help": ""
+      }
+    },
+    "strategy": {
+      "formTitle": "Partner & Strategie",
+      "formDescription": "Welche Partner könnten helfen, den Antrag durch den Rat zu kriegen? Wer kennt wen?",
+      "possiblePartners": "Mögliche strategische Partner"
+    }
+  },
+  "goto": {
+    "createProposal": "Antragsprojekt starten",
+    "myProposals": "Meine Antragsprojekte",
+    "userProfile": "Benutzerprofil"
+  },
+  "menu": {
+    "collaboration": "Kollaboration",
+    "faq": "FAQ",
+    "overview": "Alle Antragsprojekte",
+    "admin": "Admin"
+  },
+  "page": {
+    "proposal": {
+      "createProposal": "Antragsprojekt starten"
+    },
+    "application": {
+      "concept": "Denkarbeit am Antrag",
+      "write": "Schreibarbeit zum Antrag",
+      "problems": "Problem & Handlungsauftrag",
+      "topic": "Antragsthema & Kategorie",
+      "fraction": "Ratsmehrheiten & Fraktionsinteressen",
+      "arguments_counterarguments": "Argumente & Gegenargumente",
+      "strategy": "Partner & Strategie",
+      "publish": "Projekt veröffentlicht",
+      "not_published": "Projekt unveröffentlicht",
+      "publishing": "Projekt veröffentlichen",
+      "hide": "Projekt verstecken",
+      "apply_project": "Beim Antrag mitmachen?",
+      "reject_application": "Ablehnen",
+      "delete_membership": "Löschen",
+      "project_member": "Projekt-Team",
+      "cancelApplication": "Bewerbung zurückziehen"
+    },
+    "myproposals": {
+      "heading": "Du arbeitest an folgenden Antragsprojekten mit",
+      "proposals": "Anträge",
+      "registeredSince": "registriert seit",
+      "title": "Meine Antragsprojekte",
+      "openApplication": "Offene Bewerbungen",
+      "myProjects": "Meine Projekte"
+    }
+  },
+  "user": {
+    "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
+  },
+  "validation": {
+    "name": {
+      "arguments": {
+        "description": "Argumentbeschreibung",
+        "negations": "Konter-Argument"
       },
       "counter_arguments": {
-        "question": "Advocatus Diaboli: Nehmen Sie jetzt die Rolle eines Skeptikers ein, der Ihr Ansinnen stark hinterfragt oder sogar ablehnt. Mit welchen Gegenargumenten wird er Ihr Vorhaben angreifen?",
-        "help": "Formuliere mindestens ein Gegenargument mit passenden Trotzdem-Begründungen. Ändere die Reihenfolge, um ihnen eine Gewichtung zu geben.",
-        "add": "Gegenargument hinzufügen",
-        "add_counter": "Trotzdem-Begründung hinzufügen",
-        "placeholder": {
-          "description": "...zu teuer, Widerstand der Anwohner, ...",
-          "negations": "Warum sollte das Vorhaben trotzdem umgesetzt werden?"
-        },
-        "cons": "Contra"
-      },
-      "proposal": {
-        "steps": {
-          "step1": {
-            "title": "Titel & Parlament",
-            "description": "Wie dürfen wir dein Antragsprojekt nennen? Und für welches Parlament willst du es vorbereiten?"
-          },
-          "step2": {
-            "title": "Antragsidee präzisieren",
-            "description": "Um welches Thema dreht sich dein Antrag? Weißt du schon, welches Ziel du mit ihm erreichen willst? Was motiviert dich, an diesem zu arbeiten?"
-          },
-          "next": "weiter",
-          "submitProject": "Projekt erstellen"
-        },
-        "forms": {
-          "category": {
-            "name": "Kategorien",
-            "label": "Welchen (ein bis zwei) Kategorien läßt sich das Thema zuordnen?",
-            "placeholder": "In diesem Stadtratsantrag geht es um...",
-            "help": "Wähle maximal zwei Kategorien."
-          },
-          "description": {
-            "name": "Beschreibung",
-            "label": "Was ist das Ziel des entstehenden Antrags? Welches Ergebnis soll sichtbar werden, wenn der Antrag erfolgreich beschlossen und umgesetzt wurde?",
-            "placeholder": "Am Ende sollen alle Schulkinder einen Laptop haben, um besser lernen zu können",
-            "help": ""
-          },
-          "motivation": {
-            "name": "Motivation",
-            "label": "Deine Motivation: Was treibt dich an, dieses Thema zu verfolgen?",
-            "placeholder": "Meine Motivation ist...",
-            "help": ""
-          },
-          "skills": {
-            "name": "Fähigkeiten",
-            "label": "Welche Fähigkeiten bringst du in diese Antragserstellung ein?",
-            "placeholder": "Ich habe Erfahrung mit...",
-            "help": ""
-          },
-          "title": {
-            "name": "Titel",
-            "label": "Gib deinem Antragsprojekt einen Titel",
-            "placeholder": "Gemeinschaftsgartenflächen in Musterstadt bereitstellen",
-            "help": "Der Titel dient dazu, dein Antragsprojekt von anderen Antragsprojekten zu unterscheiden. Er kann später geändert werden."
-          },
-          "topic": {
-            "name": "Thema",
-            "label": "Kannst du das Thema eingrenzen, mit dem sich der Antrag befassen wird?",
-            "placeholder": "Laptops für alle Schülerinnen und Schüler",
-            "help": ""
-          },
-          "parliament": {
-            "name": "Parlament",
-            "label": "Für welches Parlament ist der Antrag vorgesehen?",
-            "placeholder": "Bitte wählen",
-            "help": "Dein Parlament ist nicht dabei? Kontaktiere uns, um es hinzuzufügen. Wähle vorerst ein anderes Parlament aus, um weiterzukommen."
-          }
-        }
-    },
-        "fractioninterests": {
-          "formTitle": "Ratsmehrheit & Fraktionsinteressen",
-          "formDescription": "Mit welchen Verbündeten bekommst du deinen Antrag in und durch den Rat? Welche Fraktionen haben welches Interesse am Antrag? Welches Bündnis führt zu einer Mehrheit?",
-          "fractions": "Fraktionen",
-          "mandates": "Sitze/Stimmen",
-          "parliamentProfileUpdatedAt": "Stand",
-          "partnerMandates": "Partnerstimmen ausgewählt",
-          "votesCounter": "Noch {votes} Stimmen fehlen zur Mehrheit",
-          "enoughVotes":"Die Stimmen reichen für eine Mehrheit aus",
-          "votes": "Stimmen",
-          "interests": {
-              "title": "Eigeninteressen der Fraktionen",
-              "description": "Wähle eine Fraktion aus, um ihre Eigeninteressen zu sammeln und anzuzeigen.",
-              "noInterests": "Noch keine Eigeninteressen gefunden",
-              "addInterest": "Eigeninteresse für {fraction} hinzufügen",
-              "newInterest": "Fraktionsinteresse hinzufügen"
-          }
-        },
-        "proposals": {
-          "add": "Vorschlag hinzufügen",
-          "title": "Vorschläge"
-        },
-        "project_memberships": {
-          "motivation": "Motivation",
-          "skills": "Fähigkeiten",
-          "placeholder": {
-            "motivation": "Was motiviert dich, an diesem Thema zu arbeiten?",
-            "skills": "Welche Fähigkeiten bringst du mit, die für dieses Antragsvorhaben hilfreich sein können?"
-          },
-          "send_apply": "Bewerbung abschicken",
-          "title": "Bewerbung für das Projekt"
-        },
-        "problems": {
-          "formTitle": "Problem & Handlungsauftrag",
-          "formDescription": "Welches Problem soll der Antrag lösen helfen? Wie lautet der Auftrag an die Oberbürgermeisterin, mit dem die Probleme adressiert werden sollen?",
-          "problems": {
-            "add": "Problem hinzufügen",
-            "title": "Was ist das Problem, dass du angehen willst?",
-            "introduction": "Gewichte die Probleme, indem du ihre Reihenfolge änderst.",
-            "placeholder": {
-              "description": "...zuviel Feinstaub, zu wenig Raum, zu schlechte Verkehrswege..."
-            }
-          },
-          "actionMandate": {
-            "add": "Handlungsauftrag hinzufügen",
-            "title": "Der Stadtrat beauftragt die Oberbürgermeisterin...",
-            "introduction": "Was soll die Stadtverwaltung tun, um das Problem anzugehen? Wenn nötig, liste mehrere aufeinander aufbauende Handlungen auf",
-            "placeholder": {
-              "description": "...zu prüfen, wie ___ ...ein Konzept zu erarbeiten, welches ___...___vorzubereiten und umzusetzen..."
-            }
-          },
-          "impact": {
-            "name": "Warum hilft es, diese Punkte umzusetzen?",
-            "label": "Wie wirkt dieser Arbeitsauftrag auf das obige Problem?",
-            "placeholder": "Wenn alle Schüler einen Laptop haben, können sie besser arbeiten. Das Bildungsniveau steigt.",
-            "help": ""
-          }
-        },
-        "strategy": {
-          "formTitle": "Partner & Strategie",
-          "formDescription": "Welche Partner könnten helfen, den Antrag durch den Rat zu kriegen? Wer kennt wen?",
-          "possiblePartners": "Mögliche strategische Partner"
-        }
-
-    },
-    "goto": {
-      "createProposal": "Antragsprojekt starten",
-      "myProposals": "Meine Antragsprojekte",
-      "userProfile": "Benutzerprofil"
-    },
-    "menu": {
-      "collaboration": "Kollaboration",
-      "faq": "FAQ",
-      "overview": "Alle Antragsprojekte",
-      "admin": "Admin"
-    },
-    "page": {
-      "proposal": {
-        "createProposal": "Antragsprojekt starten"
-      },
-      "application": {
-        "concept": "Denkarbeit am Antrag",
-        "write": "Schreibarbeit zum Antrag",
-        "problems": "Problem & Handlungsauftrag",
-        "topic": "Antragsthema & Kategorie",
-        "fraction": "Ratsmehrheiten & Fraktionsinteressen",
-        "arguments_counterarguments": "Argumente & Gegenargumente",
-        "strategy": "Partner & Strategie",
-        "publish": "Projekt veröffentlicht",
-        "not_published": "Projekt unveröffentlicht",
-        "publishing": "Projekt veröffentlichen",
-        "hide": "Projekt verstecken",
-        "apply_project": "Beim Antrag mitmachen?",
-        "reject_application": "Ablehnen",
-        "delete_membership": "Löschen",
-        "project_member": "Projekt-Team"
-      },
-      "myproposals": {
-        "heading": "Du arbeitest an folgenden Antragsprojekten mit",
-        "proposals": "Anträge",
-        "registeredSince": "registriert seit",
-        "title": "Meine Antragsprojekte"
-      }
-    },
-    "user": {
-      "notValidated": "Deine Mailadresse wurde noch nicht bestätigt. Bitte schau in deinem Postfach nach der Bestätigungsmail und klicke den Bestätigungslink!"
-    },
-    "validation": {
-      "name": {
-        "arguments": {
-          "description": "Argumentbeschreibung",
-          "negations": "Konter-Argument"
-        },
-        "counter_arguments": {
-          "description": "Problembeschreibung"
-        }
-      },
-      "problems": {
         "description": "Problembeschreibung"
       }
     },
-    "back": "Zurück",
-    "notifications": {
-      "project_memberships": {
-        "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
+    "problems": {
+      "description": "Problembeschreibung",
+      "actionMandate": {
+        "description": "Mandatbeschreibung"
+      }
+    }
+  },
+  "back": "Zurück",
+  "notifications": {
+    "project_memberships": {
+      "application_submitted": "Deine Bewerbung wurde verschickt, bitte bis du angenommen wirst"
+    }
+  },
+  "login": "Login",
+  "register": "Registrieren",
+  "save": "Speichern",
+  "confirm": "Bestätigen",
+  "faq": {
+    "content": "<p>Politik machen ist leichter, wenn man weiß, wie es geht. Dazu haben wir in einem Wiki eine Liste wiederkehrender Fragen gesammelt, das politische System Deutschlands erläutert, häufige Begriffe in einem Glossar zusammengetragen und Tips & Tricks in einen politischen Werkzeugkoffer gepackt:</p><ul><li><a href='http://hackingpolitics.zukunftsstadt.de/'>FAQ/Wiki hacking politics</a></li><li><a href='http://hackingpolitics.zukunftsstadt.de/index.php?title=Glossar_Kommunalpolitik'>Glossar zur Kommunalpolitik</a></li><li><a href='http://hackingpolitics.zukunftsstadt.de/index.php?title=Politischer_Werkzeugkasten'>Politischer Werkzeugkasten</a></li></ul>"
+  },
+  "alert": {
+    "cancelApplication": {
+      "title": "Bewerbung zurückziehen",
+      "message": "Bist du dir sicher dass du deine Bewerbung für dieses Projekt zurückziehen willst?"
+    }
+  },
+  "errors": {
+    "page": {
+      "notFound": "Seite nicht gefunden!"
+    },
+    "title": {
+      "400": "400 Ungültige Anfrage",
+      "403": "403 Zugriff verweigert",
+      "404": "404 Nicht gefunden",
+      "500": "500 Interner Fehler"
+    },
+    "explanation": {
+      "400": "Die Anfrage bzw. angegebene URL ist ungültig, bitte prüfen.",
+      "403": "Du hast keine Berechtigung für die angefragte Seite oder den Inhalt. Bist du mit dem richtigen Benutzerkonto eingeloggt?",
+      "404": "Die angefragte Seite oder der Inhalt wurde nicht gefunden. Bitte kontaktiere <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn du denkst etwas ist kaputt.",
+      "500": "Es ist ein interner Fehler aufgetreten. Bitte <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn das Problem weiter besteht."
+    },
+    "failure": {
+      "accessBlocked": "Der Zugriff auf diese Funktion wurde wegen zu vieler Anfragen (von Deiner IP-Adresse oder deinem Benutzer) vorübergehend gesperrt, bitte versuche es später wieder.",
+      "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
+      "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort.",
+      "notLoggedIn": "Du bist nicht (mehr) eingeloggt!",
+      "sendingRequest": "Beim Senden einer Netzwerkanfrage ist leider etwas schiefgegangen.",
+      "user": {
+        "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden."
       }
     },
-    "login": "Login",
-    "register": "Registrieren",
-    "save": "Speichern",
-    "faq": {
-        "content": "<p>Politik machen ist leichter, wenn man weiß, wie es geht. Dazu haben wir in einem Wiki eine Liste wiederkehrender Fragen gesammelt, das politische System Deutschlands erläutert, häufige Begriffe in einem Glossar zusammengetragen und Tips & Tricks in einen politischen Werkzeugkoffer gepackt:</p><ul><li><a href='http://hackingpolitics.zukunftsstadt.de/'>FAQ/Wiki hacking politics</a></li><li><a href='http://hackingpolitics.zukunftsstadt.de/index.php?title=Glossar_Kommunalpolitik'>Glossar zur Kommunalpolitik</a></li><li><a href='http://hackingpolitics.zukunftsstadt.de/index.php?title=Politischer_Werkzeugkasten'>Politischer Werkzeugkasten</a></li></ul>"
-    },
-    "errors": {
-        "page": {
-            "notFound": "Seite nicht gefunden!"
+    "validate": {
+      "general": {
+        "notBlank": "Dies ist ein Pflichtfeld.",
+        "noNumber": "Es sind nur Zahlen zulässig",
+        "outOfRange": "Der Wert liegt ausserhalb des zulässigen Bereichs.",
+        "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
+        "tooLong": "Der eingegebene Text ist zu lang.",
+        "tooShort": "Der eingegebene Text ist zu kurz."
+      },
+      "image": {
+        "tooBig": "Die Auflösung des gewählten Bildes ist zu hoch, bitte kleineres Bild wählen!",
+        "tooSmall": "Die Auflösung des gewählten Bildes ist zu gering, bitte anderes Bild wählen!"
+      },
+      "process": {
+        "duplicateName": "Ein Prozess mit diesem Name existiert bereits."
+      },
+      "projectMembership": {
+        "cannotDowngradeLastCoordinator": "Es muss mindestens ein Koordinator im Projekt verbleiben, diese Änderung ist daher nicht möglich.",
+        "duplicateMembership": "Eine Mitgliedschaft oder Bewerbung existiert bereits!",
+        "invalidRequest": "Die angefragte Änderung ist leider nicht zulässig!"
+      },
+      "projectSearch": {
+        "patternTooShort": "Min. 3 Zeichen notwendig"
+      },
+      "registration": {
+        "acceptTerms": "Ohne Zustimmung ist leider keine Registrierung möglich."
+      },
+      "user": {
+        "duplicateEmail": "Zu dieser E-Mail-Adresse existiert bereits ein Account.",
+        "duplicateUsername": "Dieser Nutzername wird bereits verwendet.",
+        "email": {
+          "notValid": "Ungültige Mailadresse!"
         },
-        "title": {
-            "400": "400 Ungültige Anfrage",
-            "403": "403 Zugriff verweigert",
-            "404": "404 Nicht gefunden",
-            "500": "500 Interner Fehler"
-          },
-          "explanation": {
-            "400": "Die Anfrage bzw. angegebene URL ist ungültig, bitte prüfen.",
-            "403": "Du hast keine Berechtigung für die angefragte Seite oder den Inhalt. Bist du mit dem richtigen Benutzerkonto eingeloggt?",
-            "404": "Die angefragte Seite oder der Inhalt wurde nicht gefunden. Bitte kontaktiere <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn du denkst etwas ist kaputt.",
-            "500": "Es ist ein interner Fehler aufgetreten. Bitte <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn das Problem weiter besteht."
-          },
-          "failure": {
-            "accessBlocked": "Der Zugriff auf diese Funktion wurde wegen zu vieler Anfragen (von Deiner IP-Adresse oder deinem Benutzer) vorübergehend gesperrt, bitte versuche es später wieder.",
-            "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
-            "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort.",
-            "notLoggedIn": "Du bist nicht (mehr) eingeloggt!",
-            "sendingRequest": "Beim Senden einer Netzwerkanfrage ist leider etwas schiefgegangen.",
-            "user": {
-              "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden."
-            }
-          },
-          "validate": {
-            "general": {
-              "notBlank": "Dies ist ein Pflichtfeld.",
-              "noNumber": "Es sind nur Zahlen zulässig",
-              "outOfRange": "Der Wert liegt ausserhalb des zulässigen Bereichs.",
-              "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
-              "tooLong": "Der eingegebene Text ist zu lang.",
-              "tooShort": "Der eingegebene Text ist zu kurz."
-            },
-            "image": {
-              "tooBig": "Die Auflösung des gewählten Bildes ist zu hoch, bitte kleineres Bild wählen!",
-              "tooSmall": "Die Auflösung des gewählten Bildes ist zu gering, bitte anderes Bild wählen!"
-            },
-            "process": {
-              "duplicateName": "Ein Prozess mit diesem Name existiert bereits."
-            },
-            "projectMembership": {
-              "cannotDowngradeLastCoordinator": "Es muss mindestens ein Koordinator im Projekt verbleiben, diese Änderung ist daher nicht möglich.",
-              "duplicateMembership": "Eine Mitgliedschaft oder Bewerbung existiert bereits!",
-              "invalidRequest": "Die angefragte Änderung ist leider nicht zulässig!"
-            },
-            "projectSearch": {
-              "patternTooShort": "Min. 3 Zeichen notwendig"
-            },
-            "registration": {
-              "acceptTerms": "Ohne Zustimmung ist leider keine Registrierung möglich."
-            },
-            "user": {
-              "duplicateEmail": "Zu dieser E-Mail-Adresse existiert bereits ein Account.",
-              "duplicateUsername": "Dieser Nutzername wird bereits verwendet.",
-              "email": {
-                "notValid": "Ungültige Mailadresse!"
-              },
-              "password": {
-                "compromised": "Dieses Passwort wurde schon einmal bei einem Datenleck gefunden, bitte verwende ein anderes Passwort.",
-                "tooWeak": "Bitte verwende ein sicheres Passwort! (Groß-/Kleinschreibung, Ziffern, Sonderzeichen)"
-              },
-              "repeatPassword": {
-                "notMatching": "Die Passwörter stimmen nicht überein."
-              },
-              "username": {
-                "notValid": "Dieser Benutzername ist nicht zulässig."
-              }
-            },
-            "userSearch": {
-              "patternTooShort": "Min. 3 Zeichen notwendig"
-            }
-          },
-          "user": {
-            "invalidCredentials": "Das Passwort ist falsch oder der angegebene Benutzername/die Emailadresse ist unbekannt.",
-            "notActivated": "Das Benutzerkonto ist nicht aktiviert, ein Login ist leider derzeit nicht möglich.",
-            "notValidated": "Das Benutzerkonto wurde noch nicht bestätigt.<br />Bitte klicke den Link in der Bestätigungsemail."
-          },
-          "validation": {
-            "account": {
-              "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte registriere dich erneut!</li></ol>"
-            },
-            "changeEmail": {
-              "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Änderung erneut!</li></ol>"
-            },
-            "resetPassword": {
-              "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Zurücksetzung deines Passworts erneut!</li></ol>"
-            }
-          }
+        "password": {
+          "compromised": "Dieses Passwort wurde schon einmal bei einem Datenleck gefunden, bitte verwende ein anderes Passwort.",
+          "tooWeak": "Bitte verwende ein sicheres Passwort! (Groß-/Kleinschreibung, Ziffern, Sonderzeichen)"
+        },
+        "repeatPassword": {
+          "notMatching": "Die Passwörter stimmen nicht überein."
+        },
+        "username": {
+          "notValid": "Dieser Benutzername ist nicht zulässig."
+        }
+      },
+      "userSearch": {
+        "patternTooShort": "Min. 3 Zeichen notwendig"
+      }
+    },
+    "user": {
+      "invalidCredentials": "Das Passwort ist falsch oder der angegebene Benutzername/die Emailadresse ist unbekannt.",
+      "notActivated": "Das Benutzerkonto ist nicht aktiviert, ein Login ist leider derzeit nicht möglich.",
+      "notValidated": "Das Benutzerkonto wurde noch nicht bestätigt.<br />Bitte klicke den Link in der Bestätigungsemail."
+    },
+    "validation": {
+      "account": {
+        "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte registriere dich erneut!</li></ol>"
+      },
+      "changeEmail": {
+        "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Änderung erneut!</li></ol>"
+      },
+      "resetPassword": {
+        "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Zurücksetzung deines Passworts erneut!</li></ol>"
+      }
+    }
+  },
+  "collaborations": {
+    "field": {
+      "usedBy": "arbeitet gerade an dieses Feld ..."
     }
   }
+}

@@ -105,7 +105,13 @@ export const actions: ActionTree<RootState, RootState> = {
       commit('SET_PROJECT', response.data)
       return response
     } catch (e) {
-      commit('SET_ERROR', e.response.data)
+      // @ts-ignore
+      this.$notify({
+        title: 'Projekt konnte nicht gespeichert werden',
+        duration: 500,
+        type: 'warn',
+      })
+      commit('SET_ERROR', e.response?.data ? e.response.data : e)
     }
   },
   async fetchProject({ commit }, id) {
@@ -123,7 +129,7 @@ export const actions: ActionTree<RootState, RootState> = {
         type: 'warn',
       })
       commit('SET_LOADING_FLAG', false)
-      commit('SET_ERROR', e.response.data)
+      commit('SET_ERROR', e.response?.data ? e.response.data : e)
     }
   },
 

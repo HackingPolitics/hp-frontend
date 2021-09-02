@@ -18,7 +18,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, Ref, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  onMounted,
+  Ref,
+  ref,
+  watch,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ChipGroup',
@@ -37,18 +43,28 @@ export default defineComponent({
       }
     })
 
+    watch(
+      () => props.context.model,
+      (newVal) => {
+        selectedValues.value = newVal
+      }
+    )
+
     const setValue = (value: string): void => {
       if (selectedValues.value.find((v) => v === value)) {
         selectedValues.value.splice(selectedValues.value.indexOf(value), 1) // unselect
+        // eslint-disable-next-line
+        props.context.model = selectedValues.value
+        context.emit('change')
       } else if (
         !props.context.limit ||
         selectedValues.value.length < props.context.limit
       ) {
         selectedValues.value.push(value)
+        // eslint-disable-next-line
+        props.context.model = selectedValues.value
+        context.emit('change')
       }
-      // eslint-disable-next-line
-      props.context.model = selectedValues.value
-      context.emit('change')
     }
 
     function setActiveClass(value: string | number): string {

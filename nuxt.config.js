@@ -45,6 +45,12 @@ export default {
 
   env: {
     version: require('./package.json').version,
+    // @todo Philipp: Warum ist das nicht in den Vue Componentes als process.env.WS_URL verfügbar?
+    // mit der publicRuntimeConfig bekomm ich's zumindest in this.$conf
+    WS_URL: process.env.WS_URL,
+  },
+  publicRuntimeConfig: {
+    WS_URL: process.env.WS_URL,
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -87,10 +93,10 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    'nuxt-socket-io',
     'nuxt-i18n',
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxt/content',
   ],
 
   axios: {
@@ -103,7 +109,7 @@ export default {
         scheme: 'refresh',
         token: {
           property: 'token',
-          maxAge: 840,
+          maxAge: 300, // nuxt-auth-auto-refresh ignores this and refreshes at 75% TTL
           global: true,
           type: 'Bearer',
         },
@@ -122,13 +128,10 @@ export default {
         // autoLogout: false
       },
     },
-  },
-
-  io: {
-    sockets: [
-      {
-        url: process.env.WS_URL, // IO server lives here
-      },
+    plugins: [
+      // without this nuxt/auth would only refresh on (axios) requests which would lead to
+      // disconnects from the WS server, who needs a valid token too
+      { src: 'node_modules/nuxt-auth-auto-refresh/dist/index.js', ssr: false },
     ],
   },
 
