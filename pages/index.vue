@@ -72,7 +72,10 @@ export default defineComponent({
     })
 
     const fetchProjects = async () => {
-      await store.dispatch('projects/fetchProjects', currentPage.value)
+      await store.dispatch('projects/fetchProjects', {
+        page: currentPage.value,
+        council: city.value ? city.value.value.id : null,
+      })
       if (totalItems.value) {
         totalPages.value = Math.ceil(totalItems.value / itemsPerPage.value)
       }
@@ -128,9 +131,13 @@ export default defineComponent({
     })
     fetchProjects()
 
-    watch(city, () => {
-      fetchProjects()
-    })
+    watch(
+      () => city.value,
+      () => {
+        console.log(city.value)
+        fetchProjects()
+      }
+    )
 
     return {
       projects,
