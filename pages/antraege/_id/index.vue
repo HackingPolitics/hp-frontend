@@ -18,7 +18,10 @@
       v-if="!isLoading && project && !error"
       :title="project.title"
     >
-      <application-header :project="project"></application-header>
+      <application-header
+        :project="project"
+        :user-membership-role="userMembershipRole"
+      ></application-header>
       <modal ref="projectMemberShipModal">
         <project-memberships-apply-project-form
           :project="project"
@@ -87,6 +90,8 @@
                 :application-step="applicationStep"
                 :project-id="projectId"
                 :step-number="index + 1"
+                :online-users="onlineUsers"
+                :area="applicationStep.area"
               />
             </nuxt-link>
             <application-edit-progress-card
@@ -173,6 +178,9 @@ import {
   useMeta,
 } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
+import { AwarenessState } from '~/types/collaborations'
+import { IProjectMembership } from '~/types/apiSchema'
+
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -192,9 +200,13 @@ export default defineComponent({
       vm.routeBefore = previousRoute
     })
   },
+  meta: {
+    area: 'Dashboard',
+  },
+  layout: 'collaboration',
+  middleware: ['getCurrentArea'],
   setup() {
     const route = useRoute()
-
     const projectId = ref<string>(route.value.params.id)
 
     const store = useStore<RootState>()
@@ -222,6 +234,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.topic').toString(),
         href: 'antraege-id-thema',
+        area: 'Thema',
         step: {
           total: 4,
           done: project?.value?.categories?.length
@@ -234,6 +247,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.problems').toString(),
         href: 'antraege-id-problem',
+        area: 'Problem',
         step: {
           total: 2,
           done: project?.value?.actionMandate
@@ -250,6 +264,7 @@ export default defineComponent({
           .t('page.application.arguments_counterarguments')
           .toString(),
         href: 'antraege-id-argumente',
+        area: 'Argumente',
         step: {
           total: 2,
           done: project?.value?.arguments?.length
@@ -264,6 +279,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.fraction').toString(),
         href: 'antraege-id-fraktion-interessen',
+        area: 'Fraktion',
         step: {
           total: 1,
           done: project?.value?.fractionDetails?.length ? 1 : 0,
@@ -272,6 +288,7 @@ export default defineComponent({
       {
         title: context.i18n.t('page.application.strategy').toString(),
         href: 'antraege-id-strategie',
+        area: 'Strategie',
         step: {
           total: 1,
           done: project?.value?.partners?.length ? 1 : 0,
@@ -280,6 +297,15 @@ export default defineComponent({
     ])
 
     const user = computed(() => store.state.auth.user)
+
+    const userMembershipRole = computed((): string | undefined => {
+      if (user.value?.projectMemberships) {
+        return user.value.projectMemberships?.find(
+          (membership: IProjectMembership) =>
+            membership?.project?.id === parseInt(projectId.value)
+        )?.role
+      }
+    })
 
     const projectMemberShipModal = ref()
 
@@ -320,6 +346,12 @@ export default defineComponent({
         progress = progress + 10
       }
       return progress
+    })
+
+    const onlineUsers = computed(() => {
+      return store.state.collaboration.awarenessStates.map(
+        (state: AwarenessState) => state.user
+      )
     })
 
     useMeta({
@@ -386,6 +418,7 @@ export default defineComponent({
         },
       ],
     })
+
     return {
       applicationSteps,
       projectId,
@@ -397,6 +430,8 @@ export default defineComponent({
       user,
       error,
       projectProgress,
+      onlineUsers,
+      userMembershipRole,
     }
   },
   data() {

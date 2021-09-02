@@ -17,7 +17,10 @@
       duration-150
       ease-in-out
     "
+    v-bind="$attrs"
     @click="$emit('click')"
+    @mouseover="$emit('mouseover')"
+    @mouseleave="$emit('mouseleave')"
   >
     <slot />
   </button>

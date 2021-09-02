@@ -4,25 +4,28 @@
       <forms-form-section
         :title="$t('forms.problems.actionMandate.title')"
         :subtitle="$t('forms.problems.actionMandate.introduction')"
+        :locked="fieldIsLocked('problem_action_mandate')"
+        :locked-text="setLockedFieldText('problem_action_mandate')"
       >
         <draggable
           :list="actionMandates"
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
-          @update="updateProblemPriority($event)"
+          @update="updateActionMandatePriority($event)"
+          @start="setLockedField('problem_action_mandate')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
-              v-for="problem in actionMandates"
-              :key="problem.id"
+              v-for="actionMandate in actionMandates"
+              :key="actionMandate.id"
               class="inline-flex w-full justify-center cursor-move"
             >
-              <forms-list-item-input
-                :value="problem.description"
+              <forms-collaboration-input
+                :model="actionMandate.description"
                 name="description"
                 type="text"
-                element-class="inline-flex w-full"
+                :input-type="2"
                 validation="required"
                 :placeholder="
                   $t('forms.problems.actionMandate.placeholder.description')
@@ -31,8 +34,11 @@
                   $t('validation.problems.actionMandate.description')
                 "
                 @validation="validation = $event"
-                @focusout="updateProblem($event, problem.id)"
-                @delete="deleteProblem(problem.id)"
+                @focusout="
+                  updateActionMandate($event.target.value, actionMandate.id)
+                "
+                @focus="setLockedField('problem_action_mandate')"
+                @delete="deleteActionMandate(actionMandate.id)"
               >
                 <template #prefix>
                   <div
@@ -50,13 +56,13 @@
                     ></outline-menu-alt-4-icon>
                   </div>
                 </template>
-              </forms-list-item-input>
+              </forms-collaboration-input>
             </li>
           </transition-group>
         </draggable>
         <div class="border-t-2 pt-6">
           <FormulateForm
-            v-if="newProblemForm"
+            v-if="newActionMandateForm"
             ref="problemForm"
             v-model="createProblemForm"
             class="flex items-center"
@@ -93,7 +99,7 @@
             </button>
           </FormulateForm>
           <base-button
-            v-if="!newProblemForm"
+            v-if="!newActionMandateForm"
             class="
               bg-white
               text-purple-500
@@ -102,14 +108,14 @@
               items-center
               hover:text-white hover:bg-purple-500
             "
-            @click="newProblemForm = true"
+            @click="openActionMandateForm"
           >
             {{ $t('forms.problems.actionMandate.add') }}</base-button
           >
           <div
-            v-if="newProblemForm"
+            v-if="newActionMandateForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newProblemForm = false"
+            @click="closeActionMandateForm"
           >
             Abbrechen
           </div>
@@ -134,6 +140,7 @@ import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
+import collaborations from '~/composables/collaborations'
 
 interface MandateForm {
   problems?: IProblem[]
@@ -154,7 +161,17 @@ export default defineComponent({
     const actionMandates = ref<IProblem[]>([])
     const createProblemForm = ref<MandateForm>({})
 
+    const actionMandateDescriptions = ref([])
+
     const context = useContext()
+
+    const {
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+    } = collaborations()
 
     /*
      workaround for resetting form and validation because
@@ -162,8 +179,6 @@ export default defineComponent({
      */
     const validation = ref<IValidation>({ hasErrors: false })
     const formKey = ref(1)
-
-    const store = useStore<RootState>()
 
     onMounted(() => {
       if (project.value?.actionMandates) {
@@ -179,7 +194,8 @@ export default defineComponent({
         actionMandates.value.sort((a, b) => b.priority - a.priority)
       },
       {
-        deep: true, // immediate: true
+        immediate: true,
+        deep: true,
       }
     )
 
@@ -189,31 +205,38 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>(
-          'action_mandates',
-          actionMandates.value,
-          payload
-        ).then(() => {
-          formKey.value++
-          newProblemForm.value = false
-        })
+        await createProjectEntity<IProblem>('action_mandates', payload).then(
+          () => {
+            formKey.value++
+            newActionMandateForm.value = false
+            setFieldUpdated()
+          }
+        )
       }
     }
-    const deleteProblem = async (id: number | string) => {
+    const deleteActionMandate = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('action_mandates', id, actionMandates.value)
+      await deleteProjectEntity('action_mandates', id).then(() => {
+        setFieldUpdated()
+      })
     }
 
-    const updateProblem = async (desc: string, id: number | string) => {
+    const updateActionMandate = async (desc: string, id: number | string) => {
       if (!validation.value.hasErrors) {
         const payload = {
           description: desc,
         }
-        await updateProjectEntity<IProblem>('action_mandates', id, payload)
+        await updateProjectEntity<IProblem>(
+          'action_mandates',
+          id,
+          payload
+        ).then(() => {
+          setFieldUpdated()
+        })
       }
     }
 
-    const updateProblemPriority = async () => {
+    const updateActionMandatePriority = async () => {
       const allAsyncResults: Promise<any>[] = []
 
       for (let index = 0; index < actionMandates.value.length; index++) {
@@ -230,24 +253,39 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then((res) => {
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          'actionMandates',
-          res.map((e) => e.data),
-        ])
+        setFieldUpdated()
       })
     }
 
-    const newProblemForm = ref(false)
+    const newActionMandateForm = ref(false)
+
+    const openActionMandateForm = () => {
+      setLockedField('problem_action_mandate')
+      newActionMandateForm.value = true
+    }
+
+    const closeActionMandateForm = () => {
+      resetLockedField()
+      newActionMandateForm.value = false
+    }
+
     return {
       actionMandates,
       formKey,
       createProblemForm,
       validation,
-      deleteProblem,
+      deleteActionMandate,
       createProblem,
-      updateProblem,
-      updateProblemPriority,
-      newProblemForm,
+      updateActionMandate,
+      updateActionMandatePriority,
+      newActionMandateForm,
+      openActionMandateForm,
+      closeActionMandateForm,
+      fieldIsLocked,
+      setLockedField,
+      resetLockedField,
+      setLockedFieldText,
+      actionMandateDescriptions,
     }
   },
 })

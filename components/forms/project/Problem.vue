@@ -4,6 +4,8 @@
       <forms-form-section
         :title="$t('forms.problems.problems.title')"
         :subtitle="$t('forms.problems.problems.introduction')"
+        :locked="fieldIsLocked('problems')"
+        :locked-text="setLockedFieldText('problems')"
       >
         <draggable
           :list="problems"
@@ -11,6 +13,7 @@
           ghost-class="ghost"
           handle=".handle"
           @update="updateProblemPriority($event)"
+          @start="setLockedField('problems')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
             <li
@@ -18,20 +21,18 @@
               :key="problem.id"
               class="inline-flex w-full justify-center cursor-move"
             >
-              <forms-list-item-input
-                :value="problem.description"
-                name="description"
+              <forms-collaboration-input
+                :model="problem.description"
                 type="text"
-                element-class="inline-flex w-full"
                 validation="required"
+                :input-type="2"
                 :placeholder="
                   $t('forms.problems.problems.placeholder.description')
                 "
-                :validation-name="
-                  $t('validation.problems.problems.description')
-                "
+                :validation-name="$t('validation.problems.description')"
+                @focus="setLockedField('problems')"
                 @validation="validation = $event"
-                @focusout="updateProblem($event, problem.id)"
+                @focusout="updateProblem($event.target.value, problem.id)"
                 @delete="deleteProblem(problem.id)"
               >
                 <template #prefix>
@@ -50,7 +51,7 @@
                     ></outline-menu-alt-4-icon>
                   </div>
                 </template>
-              </forms-list-item-input>
+              </forms-collaboration-input>
             </li>
           </transition-group>
         </draggable>
@@ -67,7 +68,7 @@
               type="text"
               name="description"
               validation="required"
-              :validation-name="$t('validation.problems.problems.description')"
+              :validation-name="$t('validation.problems.description')"
               error-behavior="submit"
               :placeholder="
                 $t('forms.problems.problems.placeholder.description')
@@ -100,14 +101,14 @@
               items-center
               hover:text-white hover:bg-purple-500
             "
-            @click="newProblemForm = true"
+            @click="openProblemForm"
           >
             {{ $t('forms.problems.problems.add') }}</base-button
           >
           <div
             v-if="newProblemForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newProblemForm = false"
+            @click="closeProblemForm"
           >
             Abbrechen
           </div>
@@ -120,21 +121,18 @@
 <script lang="ts">
 import {
   defineComponent,
-  onMounted,
   watch,
   ref,
-  useStore,
   useContext,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
 import { IProblem } from '~/types/apiSchema'
-import { RootState } from '~/store'
 
 import editApplication from '~/composables/editApplication'
 import { IValidation } from '~/types/vueFormulate'
+import collaborations from '~/composables/collaborations'
 
 interface ProblemForm {
-  problems?: IProblem[]
   description?: string
   project?: string
 }
@@ -154,21 +152,20 @@ export default defineComponent({
 
     const context = useContext()
 
+    const {
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      resetLockedField,
+      setFieldUpdated,
+    } = collaborations()
+
     /*
      workaround for resetting form and validation because
      $formulate plugin is not support for vue 3 now
      */
     const validation = ref<IValidation>({ hasErrors: false })
     const formKey = ref(1)
-
-    const store = useStore<RootState>()
-
-    onMounted(() => {
-      if (project.value?.problems) {
-        problems.value = cloneDeep(project.value.problems)
-        problems.value.sort((a, b) => b.priority - a.priority)
-      }
-    })
 
     watch(
       project,
@@ -177,7 +174,8 @@ export default defineComponent({
         problems.value.sort((a, b) => b.priority - a.priority)
       },
       {
-        deep: true, // immediate: true
+        deep: true,
+        immediate: true,
       }
     )
 
@@ -187,19 +185,22 @@ export default defineComponent({
           description: createProblemForm.value.description,
           project: project.value['@id'],
         }
-        await createProjectEntity<IProblem>(
-          'problems',
-          problems.value,
-          payload
-        ).then(() => {
-          formKey.value++
-          newProblemForm.value = false
-        })
+        await createProjectEntity<IProblem>('problems', payload)
+          .then(() => {
+            formKey.value++
+            newProblemForm.value = false
+            setFieldUpdated()
+          })
+          .catch(() => {
+            resetLockedField()
+          })
       }
     }
     const deleteProblem = async (id: number | string) => {
       // @ts-ignore#
-      await deleteProjectEntity('problems', id, problems.value)
+      await deleteProjectEntity('problems', id, problems.value).then(() => {
+        setFieldUpdated()
+      })
     }
 
     const updateProblem = async (desc: string, id: number | string) => {
@@ -207,7 +208,11 @@ export default defineComponent({
         const payload = {
           description: desc,
         }
-        await updateProjectEntity<IProblem>('problems', id, payload)
+        await updateProjectEntity<IProblem>('problems', id, payload).then(
+          () => {
+            setFieldUpdated()
+          }
+        )
       }
     }
 
@@ -227,12 +232,23 @@ export default defineComponent({
           .finally()
         allAsyncResults.push(asyncResult)
       }
-      await Promise.all(allAsyncResults).then((res) => {
-        store.commit('projects/SET_PROJECT_PROPERTY', [
-          'problems',
-          res.map((e) => e.data),
-        ])
-      })
+      await Promise.all(allAsyncResults)
+        .then(() => {
+          setFieldUpdated()
+        })
+        .catch(() => {
+          resetLockedField()
+        })
+    }
+
+    const openProblemForm = () => {
+      setLockedField('problems')
+      newProblemForm.value = true
+    }
+
+    const closeProblemForm = () => {
+      resetLockedField()
+      newProblemForm.value = false
     }
 
     const newProblemForm = ref(false)
@@ -246,6 +262,12 @@ export default defineComponent({
       updateProblem,
       updateProblemPriority,
       newProblemForm,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      openProblemForm,
+      closeProblemForm,
+      resetLockedField,
     }
   },
 })

@@ -44,12 +44,14 @@
             </div>
 
             <div class="inline-flex items-center">
-              <p class="text-sm font-medium text-gray-600">
-                {{ project.council.location }}
-              </p>
-              <outline-location-marker-icon
-                class="w-5 h-5 ml-1 mr-4 text-gray-500"
-              ></outline-location-marker-icon>
+              <div v-if="project.council && project.council.location">
+                <p class="text-sm font-medium text-gray-600">
+                  {{ project.council.location }}
+                </p>
+                <outline-location-marker-icon
+                  class="w-5 h-5 ml-1 mr-4 text-gray-500"
+                ></outline-location-marker-icon>
+              </div>
               <chip
                 v-for="category in project.categories"
                 :key="category.id"
@@ -96,7 +98,9 @@
                 </div>
                 <div
                   v-if="
-                    hasActiveApplications && hasActiveApplications.length > 0
+                    hasActiveApplications &&
+                    hasActiveApplications.length &&
+                    userIsCoordinator > 0
                   "
                   class="
                     text-purple-500 text-sm
@@ -139,12 +143,25 @@
                 </div>
               </div>
             </div>
+            <div v-if="userMembershipRole === 'applicant'" class="mt-4">
+              <base-button
+                class="
+                  text-red-700
+                  bg-red-100
+                  hover:bg-red-200
+                  focus:outline-none
+                "
+                @click="applicationCancelationModalIsOpen = true"
+              >
+                {{ $t('page.application.cancelApplication') }}
+              </base-button>
+            </div>
           </div>
         </div>
         <div class="flex flex-col">
           <toggle-visability-button
-            v-if="isCoordinator"
-            :state="project.state === 'public' ? true : false"
+            v-if="userIsCoordinator"
+            :state="project.state === 'public'"
             @toggle="changeProjectState"
           ></toggle-visability-button>
         </div>
@@ -160,11 +177,19 @@
           x
         </div>
         <application-members-list
+          :user-is-coordinator="userIsCoordinator"
           :memberships="project.memberships"
           :project-id="project.id"
         ></application-members-list>
       </div>
     </base-modal>
+    <alert-modal
+      :title="$t('alert.cancelApplication.title')"
+      :message="$t('alert.cancelApplication.message')"
+      :is-modal-open="applicationCancelationModalIsOpen"
+      @close-modal="applicationCancelationModalIsOpen = false"
+      @confirm-action="deleteApplication"
+    />
   </div>
 </template>
 
@@ -174,6 +199,7 @@ import {
   ref,
   computed,
   useStore,
+  useRouter,
   PropType,
   toRefs,
 } from '@nuxtjs/composition-api'
@@ -198,12 +224,17 @@ export default defineComponent({
       type: Object as PropType<IProject>,
       default: null,
     },
+    userMembershipRole: {
+      type: String,
+      default: null,
+    },
   },
   setup(props) {
     const { project } = toRefs(props)
     const editMode = ref(false)
     const projectForm = ref<ProjectForm>({ title: '' })
     const store = useStore<RootState>()
+    const router = useRouter()
 
     const updateProjectTitle = () => {
       store.dispatch('projects/updateProject', [
@@ -215,7 +246,7 @@ export default defineComponent({
       editMode.value = false
     }
 
-    const isCoordinator = computed(() => {
+    const userIsCoordinator = computed(() => {
       if (project.value.memberships) {
         const check = project.value.memberships.find(
           (member: IProjectMembership) =>
@@ -225,15 +256,6 @@ export default defineComponent({
         return !!check
       }
       return false
-    })
-
-    const userMembershipRole = computed((): string | undefined => {
-      if (project.value.memberships) {
-        return project.value.memberships.find(
-          (membership: IProjectMembership) =>
-            membership?.user?.id === store.state.auth.user?.id
-        )?.role
-      }
     })
 
     const changeProjectState = (flag: boolean) => {
@@ -249,7 +271,7 @@ export default defineComponent({
         project.value.id,
         { state: 'public' },
       ])
-      store.dispatch('projects/setProject', response.data)
+      await store.dispatch('projects/setProject', response.data)
     }
 
     const hideProject = async () => {
@@ -257,17 +279,26 @@ export default defineComponent({
         project.value.id,
         { state: 'private' },
       ])
-      store.dispatch('projects/setProject', response.data)
+      await store.dispatch('projects/setProject', response.data)
     }
-
+    const applicationCancelationModalIsOpen = ref(false)
     const isModalOpen = ref(false)
     const addUser = () => {
       isModalOpen.value = true
     }
 
+    const deleteApplication = async () => {
+      const projectMemberShipId = `project=${project.value.id};user=${store.state.auth.user?.id}`
+      await store.dispatch(
+        'projects/deleteProjectMemberShip',
+        projectMemberShipId
+      )
+      router.push('/antraege')
+    }
+
     const hasActiveApplications = computed(() => {
-      const applcations = cloneDeep(project.value.memberships)
-      return applcations.filter(
+      const applications = cloneDeep(project.value.memberships ?? [])
+      return applications.filter(
         (el: IProjectMembership) => el.role === 'applicant'
       )
     })
@@ -278,12 +309,13 @@ export default defineComponent({
       updateProjectTitle,
       publishProject,
       hideProject,
-      userMembershipRole,
       hasActiveApplications,
-      isCoordinator,
+      userIsCoordinator,
       changeProjectState,
       addUser,
       isModalOpen,
+      applicationCancelationModalIsOpen,
+      deleteApplication,
     }
   },
 })

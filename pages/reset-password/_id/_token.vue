@@ -53,7 +53,10 @@
       </FormulateForm>
     </div>
   </div>
-  <div v-else-if="response && response.success" key="success-notice">
+  <div
+    v-else-if="response && response.data && response.data.success"
+    key="success-notice"
+  >
     <div class="my-8">
       <div
         class="
@@ -128,7 +131,12 @@
       </div>
     </div>
   </div>
-  <div v-else-if="response && !response.success" key="error-notice">
+  <div
+    v-else-if="
+      response && !(response && response.data && response.data.success)
+    "
+    key="error-notice"
+  >
     <div class="my-8">
       <div
         class="

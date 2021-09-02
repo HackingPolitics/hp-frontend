@@ -3,6 +3,7 @@ import { FractionsState } from './fractions'
 import { CouncilState } from './councils'
 import { ProjectsState } from '~/store/projects'
 import { CategoriesState } from '~/store/categories'
+import { CollaborationState } from '~/store/collaboration'
 import { IUser } from '~/types/apiSchema'
 
 export const state = () => ({})
@@ -20,4 +21,5 @@ export interface RootState {
   fractions: FractionsState
   councils: CouncilState
   auth: NuxtAuth
+  collaboration: CollaborationState
 }

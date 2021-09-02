@@ -14,7 +14,7 @@ export default {
         case 'file':
           return ''
         case 'text':
-          return 'mb-4 flex-1'
+          return 'mb-4 flex-1 border-0'
         case 'textarea':
           return 'mb-4 flex-1'
         case 'group':
@@ -24,6 +24,10 @@ export default {
       }
     },
     input(context) {
+      if (context.attrs?.disabled) {
+        return 'shadow-sm block sm:text-sm border-gray-300 bg-gray-200 rounded-md w-full'
+      }
+
       switch (context.classification) {
         case 'text':
           return 'shadow-sm focus:ring-purple-500 focus:border-purple-500 block sm:text-sm border-gray-300 rounded-md w-full'
