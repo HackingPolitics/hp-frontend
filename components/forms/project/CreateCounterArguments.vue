@@ -1,59 +1,42 @@
 <template>
   <div>
     <FormulateForm
-      v-if="formIsOpen"
       v-model="formData"
-      class="flex items-center"
+      class="flex flex-row justify-start items-start"
       @submit="submit()"
     >
-      <FormulateInput
-        :key="formKey"
-        name="description"
-        type="text"
-        :placeholder="$t('forms.counter_arguments.placeholder.description')"
-        :validation-name="$t('validation.name.counter_arguments.description')"
-        validation="required"
-      >
-      </FormulateInput>
-      <button type="submit" class="w-12 mb-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 text-green-500 mx-auto"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+      <div class="w-1/2">
+        <FormulateInput
+          :key="formKey"
+          name="description"
+          type="text"
+          :placeholder="$t('forms.counter_arguments.placeholder.description')"
+          :validation-name="$t('validation.name.counter_arguments.description')"
+          validation="required"
+          input-class="list-input-text "
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-      </button>
+        </FormulateInput>
+      </div>
+      <div class="flex items-start justfiy-start">
+        <button
+          type="submit"
+          class="
+            mb-4
+            ml-2
+            px-3
+            py-2.5
+            bg-green-700
+            text-white
+            flex
+            items-start
+            rounded-md
+            cursor-pointer
+          "
+        >
+          <outline-check-icon class="w-5 h-5"></outline-check-icon>
+        </button>
+      </div>
     </FormulateForm>
-    <base-button
-      v-if="!formIsOpen"
-      class="
-        bg-white
-        text-red-500
-        border border-gray-400
-        flex
-        items-center
-        hover:text-white hover:bg-red-500
-      "
-      @click="toggleForm"
-    >
-      <outline-thumb-down-icon class="h-4 w-4 mr-2" />
-      Gegenargument hinzufügen</base-button
-    >
-    <div
-      v-if="formIsOpen"
-      class="text-red-500 text-sm cursor-pointer text-right"
-      @click="toggleForm"
-    >
-      Abbrechen
-    </div>
   </div>
 </template>
 
@@ -71,12 +54,8 @@ export default defineComponent({
   setup(_, context) {
     const formData = ref({})
     const submit = () => context.emit('submit', formData)
-    const formIsOpen = ref(false)
 
-    const toggleForm = () => {
-      formIsOpen.value = !formIsOpen.value
-    }
-    return { formData, formIsOpen, toggleForm, submit }
+    return { formData, submit }
   },
 })
 </script>
