@@ -31,7 +31,6 @@ import { RootState } from '~/store'
 import { TokenUpdateMessage } from '~/services/hocuspocus/OutgoingMessages/TokenUpdateMessage'
 import { JwtPayloadWithUser } from '~/store/authentication'
 import { AwarenessState, StateUser } from '~/types/collaborations'
-import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   name: 'Collaboration',
@@ -112,6 +111,10 @@ export default defineComponent({
       return store.state.collaboration.recentProjectSaved
     })
 
+    const editorOnlineUsers = computed(() => {
+      return store.state.collaboration.editorOnlineUsers
+    })
+
     onMounted(() => {
       if (getToken()) {
         provider.value = new HocuspocusProvider({
@@ -175,6 +178,13 @@ export default defineComponent({
       () => currentArea.value,
       (newVal) => {
         setAwarenessState({ area: newVal })
+      }
+    )
+
+    watch(
+      () => editorOnlineUsers.value,
+      (newVal) => {
+        provider.value.setAwarenessField('editorOnlineUsers', newVal)
       }
     )
 
