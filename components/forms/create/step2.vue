@@ -18,7 +18,7 @@
       :placeholder="$t('forms.proposal.forms.description.placeholder')"
       :help="$t('forms.proposal.forms.description.help')"
       type="textarea"
-      name="description"
+      name="goal"
       validation="required"
       :validation-messages="{
         required: `${$t(
