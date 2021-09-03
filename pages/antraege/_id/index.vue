@@ -181,7 +181,6 @@ import { RootState } from '~/store'
 import { AwarenessState } from '~/types/collaborations'
 import { IProjectMembership } from '~/types/apiSchema'
 
-
 // only mockup interface for rendering and testing
 interface ApplicationStep {
   title: string
@@ -318,7 +317,7 @@ export default defineComponent({
       if (project.value?.title) {
         progress = progress + 10
       }
-      if (project.value?.description) {
+      if (project.value?.goal) {
         progress = progress + 10
       }
       if (project.value?.topic) {
@@ -364,9 +363,7 @@ export default defineComponent({
         {
           hid: 'description',
           name: 'description',
-          content: project.value?.description
-            ? project.value?.description
-            : 'Antrag',
+          content: project.value?.goal ? project.value?.goal : 'Antrag',
         },
         {
           hid: 'og:image',
@@ -383,9 +380,7 @@ export default defineComponent({
         {
           hid: 'og:description',
           name: 'og:description',
-          content: project.value?.description
-            ? project.value?.description
-            : null,
+          content: project.value?.goal ? project.value?.goal : null,
         },
         {
           hid: 'og:site_name',
@@ -402,9 +397,7 @@ export default defineComponent({
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: project.value?.description
-            ? project.value?.description
-            : null,
+          content: project.value?.goal ? project.value?.goal : null,
         },
         {
           hid: 'twitter:card',
