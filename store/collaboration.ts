@@ -4,7 +4,7 @@ import { AwarenessState, StateUser } from '~/types/collaborations'
 export interface CollaborationState {
   awarenessStates: AwarenessState[]
   currentArea: string | null
-  onlineUsers: StateUser[] | null
+  editorOnlineUsers: StateUser[]
   lockedField: string | null
   lockedFields: any
   lockedSince: number | null
@@ -15,7 +15,7 @@ export interface CollaborationState {
 const defaultProjectsState: CollaborationState = {
   awarenessStates: [],
   currentArea: null,
-  onlineUsers: null,
+  editorOnlineUsers: [],
   lockedField: null,
   lockedFields: null,
   lockedSince: null,
@@ -33,8 +33,8 @@ export const mutations: MutationTree<RootState> = {
   SET_CURRENT_AREA(state, area) {
     state.currentArea = area
   },
-  SET_ONLINE_USERS(state, users) {
-    state.onlineUsers = users
+  SET_EDITOR_ONLINE_USERS(state, users) {
+    state.editorOnlineUsers = users
   },
   SET_AWARENESS_STATES(state, val) {
     state.awarenessStates = val

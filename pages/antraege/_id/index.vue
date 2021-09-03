@@ -102,7 +102,7 @@
             />
           </div>
         </div>
-        <div v-if="false" class="pb-5 border-b border-gray-200 mb-8">
+        <div class="mt-5 border-b border-gray-200 mb-8">
           <div
             class="
               -ml-2
@@ -130,7 +130,55 @@
               })
             "
           >
-            <application-list></application-list>
+            <div class="bg-white">
+              <a href="#" class="block hover:bg-gray-50">
+                <div class="px-4 py-4 flex items-center sm:px-6">
+                  <div
+                    class="
+                      min-w-0
+                      flex-1
+                      sm:flex sm:items-center sm:justify-between
+                    "
+                  >
+                    <div class="truncate">
+                      <div class="flex text-sm">
+                        <p class="font-medium text-indigo-600 truncate">
+                          Dokumentitel
+                        </p>
+                        <p
+                          class="ml-1 flex-shrink-0 font-normal text-gray-500"
+                        ></p>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                      <div
+                        v-for="(onlineUser, index) in editorOnlineUsers"
+                        :key="index"
+                        class="flex overflow-hidden -space-x-1 v"
+                      >
+                        <base-avatar :user="onlineUser" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-5 flex-shrink-0">
+                    <!-- Heroicon name: solid/chevron-right -->
+                    <svg
+                      class="h-5 w-5 text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
           </nuxt-link>
         </div>
       </div>
@@ -214,6 +262,10 @@ export default defineComponent({
 
     const project = computed(() => {
       return store.state.projects.project
+    })
+
+    const editorOnlineUsers = computed(() => {
+      return store.state.collaboration.editorOnlineUsers
     })
 
     const isLoading = computed(() => {
@@ -424,6 +476,7 @@ export default defineComponent({
       error,
       projectProgress,
       onlineUsers,
+      editorOnlineUsers,
       userMembershipRole,
     }
   },

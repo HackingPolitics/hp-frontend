@@ -1,9 +1,4 @@
-import {
-  computed,
-  ComputedRef,
-  useContext,
-  useStore,
-} from '@nuxtjs/composition-api'
+import { computed, ref, useContext, useStore } from '@nuxtjs/composition-api'
 import { RootState } from '~/store'
 import { IProject } from '~/types/apiSchema'
 
@@ -56,7 +51,7 @@ export default function () {
   }
 
   const setFieldUpdated = () => {
-    store.commit('collaboration/SET_LOCKED_FIELD', null)
+    resetLockedField()
     store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
   }
 
