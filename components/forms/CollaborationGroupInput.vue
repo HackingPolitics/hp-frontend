@@ -56,7 +56,7 @@
         >
         </forms-collaboration-input>
 
-        <div class="flex flex-col ml-5">
+        <div class="flex flex-col lg:ml-5">
           <forms-collaboration-input
             ref="counterArgument"
             :input-type="1"

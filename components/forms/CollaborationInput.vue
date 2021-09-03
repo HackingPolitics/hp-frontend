@@ -39,7 +39,7 @@
     v-bind="$attrs"
     element-class="flex flex-col w-full items-center pr-1.5"
     input-class="border-0 w-full "
-    outer-class="px-2 py-0 w-full ml-3 mb-4 border-0"
+    outer-class="lg:px-2 py-0 w-full lg:ml-3 mb-4 border-0"
     v-on="$listeners"
   >
     <slot></slot>
