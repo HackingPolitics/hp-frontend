@@ -247,7 +247,7 @@ export default defineComponent({
       if (activeFraction && activeFraction.value && props.fractionDetails) {
         return props.fractionDetails.find((detail: IFractionDetails) => {
           if (activeFraction && activeFraction.value) {
-            return activeFraction.value.id === detail.fraction.id
+            return activeFraction.value.id === detail.fraction?.id
           }
           return undefined
         })
