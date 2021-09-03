@@ -102,7 +102,7 @@
             />
           </div>
         </div>
-        <div class="mt-16 border-b border-gray-200 mb-8">
+        <div v-if="canEdit" class="mt-16 border-b border-gray-200 mb-8">
           <div
             class="
               -ml-2
