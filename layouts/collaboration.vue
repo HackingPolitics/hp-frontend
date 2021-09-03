@@ -61,10 +61,9 @@ export default defineComponent({
     const fetchUser = async () => {
       // @ts-ignore
       const token = context.$auth.strategy.token.get()
-
-      const decoded = jwtDecode<JwtPayloadWithUser>(token)
       if (token) {
         try {
+          const decoded = jwtDecode<JwtPayloadWithUser>(token)
           const user = await axios.get(`/users/${decoded.id}`)
           context.$auth.setUser(user.data)
           currentUser.value = {
@@ -114,60 +113,62 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      provider.value = new HocuspocusProvider({
-        url: context.$config.WS_URL,
-        name: 'project-' + projectId.value,
-        parameters: { authToken: getToken() },
-        onConnect: () => {
-          status.value = 'connected'
-        },
-        onMessage: ({ _event, _message }) => {
-          // any document update is applied *after* this hook
-          // console.log(`[message] ◀️ ${message.name}`, event)
-        },
-        onOutgoingMessage: () => {
-          // console.info(`[message] ▶️ ${message.name} (${message.description})`)
-        },
-        onClose: ({ event }) => {
-          // hocuspocus-server/CloseEvent.ts:Forbidden
-          if (event.code === 4403) {
-            // prevent the provider from endlessly retrying
-            provider.value.disconnect()
-            // eslint-disable-next-line no-console
-            console.log('WS disconnected, authentication failure')
-          }
+      if (getToken()) {
+        provider.value = new HocuspocusProvider({
+          url: context.$config.WS_URL,
+          name: 'project-' + projectId.value,
+          parameters: { authToken: getToken() },
+          onConnect: () => {
+            status.value = 'connected'
+          },
+          onMessage: ({ _event, _message }) => {
+            // any document update is applied *after* this hook
+            // console.log(`[message] ◀️ ${message.name}`, event)
+          },
+          onOutgoingMessage: () => {
+            // console.info(`[message] ▶️ ${message.name} (${message.description})`)
+          },
+          onClose: ({ event }) => {
+            // hocuspocus-server/CloseEvent.ts:Forbidden
+            if (event.code === 4403) {
+              // prevent the provider from endlessly retrying
+              provider.value.disconnect()
+              // eslint-disable-next-line no-console
+              console.log('WS disconnected, authentication failure')
+            }
 
-          status.value = 'disconnected'
-        },
-        onDisconnect: () => {
-          if (provider.value.shouldConnect) {
-            // eslint-disable-next-line no-console
-            console.log(
-              'WS connection closed unexpectedly, trying to reconnect...'
+            status.value = 'disconnected'
+          },
+          onDisconnect: () => {
+            if (provider.value.shouldConnect) {
+              // eslint-disable-next-line no-console
+              console.log(
+                'WS connection closed unexpectedly, trying to reconnect...'
+              )
+            }
+          },
+          onAwarenessChange: ({ states }) => {
+            awarenessStates.value = states
+            const reduced = reduceStates(states)
+            lockedFields.value = reduced.fields
+            store.commit(
+              'collaboration/SET_LOCKED_FIELDS',
+              cloneDeep(lockedFields.value)
             )
-          }
-        },
-        onAwarenessChange: ({ states }) => {
-          awarenessStates.value = states
-          const reduced = reduceStates(states)
-          lockedFields.value = reduced.fields
-          store.commit(
-            'collaboration/SET_LOCKED_FIELDS',
-            cloneDeep(lockedFields.value)
-          )
-          store.commit(
-            'collaboration/SET_AWARENESS_STATES',
-            cloneDeep(awarenessStates.value)
-          )
-          store.commit(
-            'collaboration/SET_RECENT_PROJECT_SAVED',
-            cloneDeep(reduced.recentProjectSaved)
-          )
-        },
-      })
-      setTimeout(sendTokenUpdate.bind(this), 5000)
+            store.commit(
+              'collaboration/SET_AWARENESS_STATES',
+              cloneDeep(awarenessStates.value)
+            )
+            store.commit(
+              'collaboration/SET_RECENT_PROJECT_SAVED',
+              cloneDeep(reduced.recentProjectSaved)
+            )
+          },
+        })
+        setTimeout(sendTokenUpdate.bind(this), 5000)
 
-      setAwarenessState()
+        setAwarenessState()
+      }
     })
 
     watch(
