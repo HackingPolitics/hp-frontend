@@ -1,107 +1,124 @@
 <template>
-  <forms-form-section
-    :title="$t('forms.fractioninterests.interests.title')"
-    :subtitle="$t('forms.fractioninterests.interests.description')"
-    :locked="fieldIsLocked('fraction-interest')"
-    :locked-text="setLockedFieldText('fraction-interest')"
-  >
-    <div class="mt-4">
-      <div class="sm:hidden">
-        <label for="tabs" class="sr-only">Select a tab</label>
-        <select
-          id="tabs"
-          name="tabs"
-          class="
-            block
-            w-full
-            focus:ring-indigo-500 focus:border-indigo-500
-            border-gray-300
-            rounded-md
-          "
-        >
-          <option v-for="fraction in fractions" :key="fraction.id">
-            {{ fraction.name }}
-          </option>
-        </select>
-      </div>
-      <div class="hidden sm:block">
-        <nav class="flex space-x-4" aria-label="Tabs">
-          <button
-            v-for="fraction in fractions"
-            :key="fraction.id"
-            class="px-3 py-2 font-medium rounded-md"
-            :class="
-              activeFraction && activeFraction.id === fraction.id
-                ? 'bg-purple-200 text-purple-700'
-                : 'text-gray-500 hover:text-gray-700'
-            "
-            @click="activeFraction = fraction"
-          >
-            {{ fraction.name }}
-          </button>
-        </nav>
-      </div>
-    </div>
-    <div class="mt-4">
-      <div v-if="fractionInterests && fractionInterests.length">
-        <forms-collaboration-input
-          v-for="(interest, index) in fractionInterests"
-          :key="interest.id"
-          :model="interest.description"
-          :wrapper-class="['border-l-4']"
-          type="textarea"
-          @focusout="updateInterest($event, interest.id)"
-          @focus="setLockedField('fraction-interest')"
-        >
-        </forms-collaboration-input>
-      </div>
-      <div v-else class="w-full text-center text-gray-500 py-6">
-        {{ $t('forms.fractioninterests.interests.noInterests') }}
-      </div>
-    </div>
+  <div class="bg-white p-4 mt-8">
+    <div class="">
+      <div class="grid grid-cols-3 gap-8">
+        <div class="mt-4">
+          <div class="sm:hidden">
+            <label for="tabs" class="sr-only">Select a tab</label>
+            <select
+              id="tabs"
+              name="tabs"
+              class="
+                block
+                w-full
+                focus:ring-indigo-500 focus:border-indigo-500
+                border-gray-300
+                rounded-md
+              "
+            >
+              <option v-for="fraction in fractions" :key="fraction.id">
+                {{ fraction.name }}
+              </option>
+            </select>
+          </div>
+          <div class="hidden sm:block">
+            <nav class="space-y-4" aria-label="Tabs">
+              <div
+                v-for="fraction in fractions"
+                :key="fraction.id"
+                class="
+                  px-3
+                  py-2
+                  font-medium
+                  block
+                  border-l-4
+                  hover:bg-gray-100
+                  cursor-pointer
+                "
+                :class="
+                  activeFraction && activeFraction.id === fraction.id
+                    ? 'bg-purple-200 text-purple-700'
+                    : 'text-gray-700 hover:text-gray-700'
+                "
+                :style="`border-color: ${fraction.color}`"
+                @click="activeFraction = fraction"
+              >
+                {{ fraction.name }}
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="mt-4 col-span-2">
+          <h3 class="font-semibold text-gray-800 text-xl">
+            {{ $t('forms.fractioninterests.interests.title') }}
+          </h3>
+          <p class="text-sm text-gray-500 my-2">
+            {{ $t('forms.fractioninterests.interests.description') }}
+          </p>
+          <div v-if="fractionInterests && fractionInterests.length">
+            <FormulateInput
+              v-for="interest in fractionInterests"
+              :key="interest.id"
+              :value="interest.description"
+              type="textarea"
+              @focusout="updateInterest($event, interest.id)"
+            >
+            </FormulateInput>
+          </div>
+          <div v-else class="w-full text-center text-gray-500 py-6">
+            {{ $t('forms.fractioninterests.interests.noInterests') }}
+          </div>
 
-    <FormulateForm
-      v-if="activeFraction && newInterestForm"
-      v-model="formData"
-      class="mt-4"
-      @submit="createFractionInterest"
-    >
-      <FormulateInput
-        type="textarea"
-        name="description"
-        validation="required"
-      />
-      <FormulateInput type="submit">
-        <i18n path="forms.fractioninterests.interests.addInterest" tag="span">
-          <template #fraction>
-            {{ activeFraction.name }}
-          </template>
-        </i18n>
-      </FormulateInput>
-    </FormulateForm>
-    <base-button
-      v-if="!newInterestForm"
-      class="
-        bg-white
-        mt-8
-        text-purple-500
-        border border-gray-400
-        flex
-        items-center
-        hover:text-white hover:bg-purple-500
-      "
-      @click="openFractionInterestForm"
-    >
-      {{ $t('forms.fractioninterests.interests.newInterest') }}</base-button
-    >
-    <div
-      v-if="newInterestForm"
-      class="text-red-500 text-sm cursor-pointer text-right"
-      @click="closeFractionInterestForm"
-    >
-      {{ $t('cancel') }}
+          <FormulateForm
+            v-if="activeFraction && newInterestForm"
+            v-model="formData"
+            class="mt-4"
+            @submit="createFractionInterest"
+          >
+            <FormulateInput
+              type="textarea"
+              name="description"
+              validation="required"
+            />
+            <FormulateInput type="submit">
+              <i18n
+                path="forms.fractioninterests.interests.addInterest"
+                tag="span"
+              >
+                <template #fraction>
+                  {{ activeFraction.name }}
+                </template>
+              </i18n>
+            </FormulateInput>
+          </FormulateForm>
+          <base-button
+            v-if="!newInterestForm"
+            class="
+              bg-white
+              mt-8
+              text-purple-500
+              border border-gray-400
+              flex
+              items-center
+              hover:text-white hover:bg-purple-500
+            "
+            @click="newInterestForm = true"
+          >
+            {{
+              $t('forms.fractioninterests.interests.newInterest')
+            }}</base-button
+          >
+          <div
+            v-if="newInterestForm"
+            class="text-red-500 text-sm cursor-pointer text-right"
+            @click="newInterestForm = false"
+          >
+            {{ $t('cancel') }}
+          </div>
+        </div>
+      </div>
     </div>
-  </forms-form-section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -118,7 +135,6 @@ import {
 import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
-import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   props: {
@@ -157,29 +173,17 @@ export default defineComponent({
       return store.state.projects.project?.['@id']
     })
 
-    const {
-      recentProjectSaved,
-      projectSaved,
-      setLockedField,
-      fieldIsLocked,
-      setLockedFieldText,
-      resetLockedField,
-      setFieldUpdated,
-    } = collaborations()
-
     const createFractionDetail = async () => {
       if (projectId.value && activeFraction.value) {
         try {
-          const response =
-            // @ts-ignore
-            await context.$api.fractionDetails.createFractionDetails({
-              project: projectId.value,
-              fraction: activeFraction.value?.['@id'],
-            })
+          const response = await axios.post('/fraction_details', {
+            project: projectId.value,
+            fraction: activeFraction.value?.['@id'],
+          })
+
+          console.log(response)
           return response
-        } catch (error) {
-          resetLockedField()
-        }
+        } catch (error) {}
       }
     }
 
@@ -187,14 +191,10 @@ export default defineComponent({
       if (activeFractionDetails.value) {
         if (activeFraction.value) {
           try {
-            await axios
-              .post('/fraction_interests', {
-                description: formData?.value?.description,
-                fractionDetails: activeFractionDetails.value?.['@id'],
-              })
-              .then(() => {
-                setFieldUpdated()
-              })
+            await axios.post('/fraction_interests', {
+              description: formData?.value?.description,
+              fractionDetails: activeFractionDetails.value?.['@id'],
+            })
 
             // @ts-ignore
             context.$notify({
@@ -204,8 +204,8 @@ export default defineComponent({
             })
             formData.value.description = null
             newInterestForm.value = false
+            store.dispatch('projects/fetchProject', route.value.params.id)
           } catch (error) {
-            resetLockedField()
             // @ts-ignore
             context.$notify({
               title: 'Interesse konnte nicht erstellt werden',
@@ -218,14 +218,10 @@ export default defineComponent({
         const fractionDetails = await createFractionDetail()
         // create new details and add interest
         try {
-          await axios
-            .post('/fraction_interests', {
-              description: formData?.value?.description,
-              fractionDetails: fractionDetails?.data?.['@id'],
-            })
-            .then(() => {
-              resetLockedField()
-            })
+          await axios.post('/fraction_interests', {
+            description: formData?.value?.description,
+            fractionDetails: fractionDetails?.data?.['@id'],
+          })
 
           // @ts-ignore
           context.$notify({
@@ -250,7 +246,7 @@ export default defineComponent({
     const activeFractionDetails = computed(() => {
       if (activeFraction && activeFraction.value && props.fractionDetails) {
         return props.fractionDetails.find((detail: IFractionDetails) => {
-          if (activeFraction && activeFraction.value && detail?.fraction) {
+          if (activeFraction && activeFraction.value) {
             return activeFraction.value.id === detail.fraction.id
           }
           return undefined
@@ -268,21 +264,18 @@ export default defineComponent({
 
     const updateInterest = async (event: any, id: number | string) => {
       try {
-        await axios
-          .put(`/fraction_interests/${id}`, {
-            description: event.target.value,
-          })
-          .then(() => {
-            setFieldUpdated()
-            // @ts-ignore
-            context.$notify({
-              title: 'Interesse aktualisierut',
-              duration: 300,
-              type: 'success',
-            })
-          })
+        await axios.put(`/fraction_interests/${id}`, {
+          description: event.target.value,
+        })
+
+        // @ts-ignore
+        context.$notify({
+          title: 'Interesse aktualisiert',
+          duration: 300,
+          type: 'success',
+        })
+        store.dispatch('projects/fetchProject', route.value.params.id)
       } catch (error) {
-        resetLockedField()
         // @ts-ignore
         context.$notify({
           title: 'Interesse konnte nicht erstellt werden',
@@ -291,17 +284,6 @@ export default defineComponent({
         })
       }
     }
-
-    const openFractionInterestForm = () => {
-      setLockedField('fraction-interest')
-      newInterestForm.value = true
-    }
-
-    const closeFractionInterestForm = () => {
-      resetLockedField()
-      newInterestForm.value = false
-    }
-
     return {
       createFractionInterest,
       activeFraction,
@@ -310,13 +292,6 @@ export default defineComponent({
       newInterestForm,
       activeFractionDetails,
       updateInterest,
-      recentProjectSaved,
-      projectSaved,
-      setLockedField,
-      fieldIsLocked,
-      setLockedFieldText,
-      openFractionInterestForm,
-      closeFractionInterestForm,
     }
   },
 })
