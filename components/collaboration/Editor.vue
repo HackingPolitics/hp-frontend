@@ -1,6 +1,41 @@
 <template>
   <div id="proposal-collab">
-    <h2 class="text-2xl font-normal mt-4 text-blue-gray-900">
+    <h2 class="text-2xl py-4 font-normal mt-4 text-blue-gray-900">
+      Einführung
+    </h2>
+
+    <div v-if="introductionEditor" class="editor">
+      <collaboration-menu-bar
+        class="editor__header"
+        :editor="introductionEditor"
+      />
+      <editor-content class="editor__content" :editor="introductionEditor" />
+      <div class="editor__footer">
+        <div :class="`editor__status editor__status--${status}`">
+          <template v-if="status === 'connected'">
+            {{ states.length }} user{{ states.length === 1 ? '' : 's' }} online
+          </template>
+          <template v-else> offline </template>
+        </div>
+      </div>
+    </div>
+    <h2 class="text-2xl py-4 font-normal mt-4 text-blue-gray-900">Grund</h2>
+    <div v-if="reasoningEditor" class="editor">
+      <collaboration-menu-bar
+        class="editor__header"
+        :editor="reasoningEditor"
+      />
+      <editor-content class="editor__content" :editor="reasoningEditor" />
+      <div class="editor__footer">
+        <div :class="`editor__status editor__status--${status}`">
+          <template v-if="status === 'connected'">
+            {{ states.length }} user{{ states.length === 1 ? '' : 's' }} online
+          </template>
+          <template v-else> offline </template>
+        </div>
+      </div>
+    </div>
+    <h2 class="text-2xl py-4 font-normal mt-4 text-blue-gray-900">
       Handlungsauftrag
     </h2>
     <div v-if="actionMandateEditor" class="editor">
@@ -19,7 +54,7 @@
       </div>
     </div>
 
-    <h2 class="text-2xl font-normal mt-4 text-blue-gray-900">
+    <h2 class="text-2xl py-4 font-normal mt-4 text-blue-gray-900">
       Bearbeitungskommentar
     </h2>
     <div v-if="commentEditor" class="editor">
@@ -35,7 +70,9 @@
       </div>
     </div>
 
-    <div id="collab-status">
+    <div class="h-8"></div>
+
+    <!--    <div id="collab-status">
       <h2 class="text-2xl font-normal mt-4 text-blue-gray-900">
         Collab-Status
       </h2>
@@ -127,7 +164,7 @@
       >
         {{ currentUser.lockedField ? currentUser.lockedField : '[keins]' }}
       </button>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -140,6 +177,7 @@ import Highlight from '@tiptap/extension-highlight'
 import CharacterCount from '@tiptap/extension-character-count'
 import * as Y from 'yjs'
 import { defineComponent } from '@nuxtjs/composition-api'
+import { cloneDeep } from 'lodash'
 import {
   HocuspocusProvider,
   WebSocketStatus,
@@ -234,8 +272,9 @@ export default defineComponent({
       provider: null,
       yDoc: null,
 
-      // @todo add introduction, reasoning
       actionMandateEditor: null,
+      introductionEditor: null,
+      reasoningEditor: null,
       commentEditor: null,
 
       // holds the timestamp when the WS server last sent the data (successfully) to the backend
@@ -255,6 +294,8 @@ export default defineComponent({
       // internal
       syncState: null,
       timer: null,
+
+      projectId: this.$route.params.id,
     }
   },
 
@@ -273,7 +314,7 @@ export default defineComponent({
     // die Antragstext-Seite ist.
     this.provider = new HocuspocusProvider({
       url: this.$config.WS_URL,
-      name: 'proposal-1', // @todo replace "1" with the real project ID
+      name: 'proposal-' + this.projectId,
       document: this.ydoc,
       parameters: { authToken: this.getToken() },
       onConnect: () => {
@@ -310,7 +351,10 @@ export default defineComponent({
         const reduced = reduceStates(states)
         this.areas = reduced.areas
         this.lockedFields = reduced.fields
-        this.onlineUsers = reduced.users
+        this.$store.commit(
+          'collaboration/SET_EDITOR_ONLINE_USERS',
+          cloneDeep(reduced.users)
+        )
       },
     })
 
@@ -326,6 +370,46 @@ export default defineComponent({
         Collaboration.configure({
           document: this.ydoc,
           field: 'actionMandate',
+        }),
+        CollaborationCursor.configure({
+          provider: this.provider,
+          user: this.currentUser,
+        }),
+      ],
+    })
+
+    this.introductionEditor = new Editor({
+      extensions: [
+        StarterKit.configure({
+          history: false,
+        }),
+        Highlight,
+        CharacterCount.configure({
+          limit: 10000,
+        }),
+        Collaboration.configure({
+          document: this.ydoc,
+          field: 'introduction',
+        }),
+        CollaborationCursor.configure({
+          provider: this.provider,
+          user: this.currentUser,
+        }),
+      ],
+    })
+
+    this.reasoningEditor = new Editor({
+      extensions: [
+        StarterKit.configure({
+          history: false,
+        }),
+        Highlight,
+        CharacterCount.configure({
+          limit: 10000,
+        }),
+        Collaboration.configure({
+          document: this.ydoc,
+          field: 'reasoning',
         }),
         CollaborationCursor.configure({
           provider: this.provider,
@@ -477,7 +561,8 @@ export default defineComponent({
 .editor {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 50%;
+  margin-bottom: 2rem;
   color: #0d0d0d;
   background-color: #fff;
 
