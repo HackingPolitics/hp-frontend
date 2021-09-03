@@ -23,9 +23,9 @@ export default defineComponent({
       // @ts-ignore
       const token = context.$auth.strategy.token.get()
 
-      const decoded = jwtDecode<JwtPayloadWithUser>(token)
       if (token) {
         try {
+          const decoded = jwtDecode<JwtPayloadWithUser>(token)
           const user = await axios.get(`/users/${decoded.id}`)
           context.$auth.setUser(user.data)
         } catch (error) {

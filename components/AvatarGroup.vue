@@ -15,20 +15,34 @@
       />
       <span
         v-else-if="avatar.user && avatar.user.firstName"
-        class="inline-flex items-center justify-center h-8 w-8 rounded-full"
-        :class="getRandomBgColor()"
+        class="
+          inline-flex
+          items-center
+          justify-center
+          h-8
+          w-8
+          rounded-full
+          border-purple-700 border-2
+        "
       >
-        <span class="text-xs font-medium leading-none text-white">{{
+        <span class="text-xs font-medium leading-none text-purple-700">{{
           avatar.user.firstName.charAt(0).toUpperCase()
         }}</span>
       </span>
       <span
         v-else
-        class="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100"
-        :class="getRandomBgColor()"
+        class="
+          inline-block
+          h-8
+          w-8
+          rounded-full
+          overflow-hidden
+          bg-white
+          border-purple-700 border-2
+        "
       >
         <svg
-          class="h-full w-full text-gray-300"
+          class="h-full w-full text-purple-300"
           fill="currentColor"
           viewBox="0 0 24 24"
         >

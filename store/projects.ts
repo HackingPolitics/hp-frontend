@@ -136,11 +136,14 @@ export const actions: ActionTree<RootState, RootState> = {
   setProject({ commit }, payload) {
     commit('SET_PROJECT', payload)
   },
-  async fetchProjects({ commit }, page = 1) {
-    console.log(page)
+  async fetchProjects({ commit }, payload) {
     commit('SET_LOADING_FLAG', true)
     try {
-      const response = await this.$axios.get(`/projects?page=${page}`)
+      const response = await this.$axios.get(
+        `/projects?page=${payload.page}${
+          payload.council ? '&council=' + payload.council : ''
+        }`
+      )
       commit('SET_PROJECTS', response.data)
       commit('SET_LOADING_FLAG', false)
       return response.data['hydra:member']
