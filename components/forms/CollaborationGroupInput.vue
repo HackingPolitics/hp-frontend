@@ -50,6 +50,7 @@
           :validation-name="options.subValidationName"
           :placeholder="options.subPlaceholder"
           validation="required"
+          @focus="$emit('sub-focus')"
           @save="$emit('sub-focusout', { value: $event, id: sub.id })"
           @validation="validationNegations = $event"
           @delete="$emit('sub-delete', sub.id)"
