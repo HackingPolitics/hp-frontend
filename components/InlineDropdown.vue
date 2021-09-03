@@ -4,7 +4,7 @@
     <div class="relative inline-block text-left">
       <div class="flex justify-center items-center space-x-2">
         <div class="font-semibold text-3xl text-purple-500">
-          {{ value }}
+          {{ value.label }}
         </div>
         <button
           id="menu-button"
@@ -90,7 +90,7 @@
               tabindex="-1"
               @click="$emit('input', option)"
             >
-              {{ option }}
+              {{ option.label }}
             </div>
           </div>
         </div>

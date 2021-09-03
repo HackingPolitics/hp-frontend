@@ -44,13 +44,16 @@
             </div>
 
             <div class="inline-flex items-center">
-              <div v-if="project.council && project.council.location">
+              <div
+                v-if="project.council && project.council.location"
+                class="flex mr-4"
+              >
+                <outline-location-marker-icon
+                  class="w-5 h-5 mr-2 text-gray-500"
+                ></outline-location-marker-icon>
                 <p class="text-sm font-medium text-gray-600">
                   {{ project.council.location }}
                 </p>
-                <outline-location-marker-icon
-                  class="w-5 h-5 ml-1 mr-4 text-gray-500"
-                ></outline-location-marker-icon>
               </div>
               <chip
                 v-for="category in project.categories"
