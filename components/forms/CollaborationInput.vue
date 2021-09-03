@@ -18,7 +18,7 @@
     v-on="$listeners"
   >
     <template #prefix>
-      <div class="inline-flex items-center space-x-2 pr-4 handle cursor-move">
+      <div class="inline-flex items-center space-x-2 handle cursor-move">
         <slot name="prefix"></slot>
       </div>
     </template>
@@ -37,24 +37,44 @@
     v-else-if="inputType === 3"
     v-model="inputModel"
     v-bind="$attrs"
-    element-class="inline-flex w-full items-center"
-    input-class="border-0 w-full"
-    outer-class="p-2 w-full mb-4 border-0"
+    element-class="flex flex-col w-full items-center pr-1.5"
+    input-class="border-0 w-full "
+    outer-class="lg:px-2 py-0 w-full lg:ml-3 mb-4 border-0"
     v-on="$listeners"
   >
-    <template #prefix>
-      <div class="inline-flex items-center space-x-2 px-4">
-        <outline-chat-alt-2-icon class="w-5 h-5"></outline-chat-alt-2-icon>
-      </div>
-    </template>
     <slot></slot>
     <template #suffix>
-      <remove-button
-        input-class="flex items-center ml-4"
-        type="button"
-        @click="$emit('delete')"
-        ><solid-x-icon class="h-5 w-5"
-      /></remove-button>
+      <div class="flex flex-row w-full items-center justify-end mt-4 space-x-2">
+        <button
+          class="
+            px-2.5
+            py-1.5
+            bg-gray-100
+            flex
+            items-center
+            rounded-md
+            cursor-pointer
+          "
+          @click="$emit('delete')"
+        >
+          <outline-trash-icon class="w-4 h-4"></outline-trash-icon>
+        </button>
+        <button
+          class="
+            px-2.5
+            py-1.5
+            bg-green-700
+            text-white
+            flex
+            items-center
+            rounded-md
+            cursor-pointer
+          "
+          @click="$emit('save', inputModel)"
+        >
+          <outline-check-icon class="w-4 h-4"></outline-check-icon>
+        </button>
+      </div>
     </template>
   </FormulateInput>
 </template>
