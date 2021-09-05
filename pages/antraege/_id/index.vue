@@ -122,16 +122,19 @@
               <span class="font-medium text-lg">{{ $t('pdfPreview') }}</span>
             </button>
           </div>
-          <nuxt-link
-            :to="
-              localePath({
-                name: 'antraege-id-schreiben',
-                params: { id: projectId },
-              })
-            "
-          >
-            <div class="bg-white">
-              <a href="#" class="block hover:bg-gray-50">
+          <div v-for="proposal in project.proposals" :key="proposal.id">
+            <nuxt-link
+              :to="
+                localePath({
+                  name: 'antraege-id-proposalId-proposalIri-schreiben',
+                  params: {
+                    proposalIri: proposal['@id'],
+                    proposalId: proposal.id,
+                  },
+                })
+              "
+            >
+              <div class="bg-white block hover:bg-gray-50 mb-4">
                 <div class="px-4 py-4 flex items-center sm:px-6">
                   <div
                     class="
@@ -143,10 +146,10 @@
                     <div class="truncate">
                       <div class="flex text-sm">
                         <p class="font-medium text-indigo-600 truncate">
-                          Dokumentitel
+                          {{ proposal.title }}
                         </p>
                         <p
-                          class="ml-1 flex-shrink-0 font-normal text-gray-500"
+                          class="mr-1 flex-shrink-0 font-normal text-gray-500"
                         ></p>
                       </div>
                     </div>
@@ -177,9 +180,9 @@
                     </svg>
                   </div>
                 </div>
-              </a>
-            </div>
-          </nuxt-link>
+              </div>
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </layouts-single-view>

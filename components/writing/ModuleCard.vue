@@ -1,15 +1,8 @@
 <template>
   <div
-    class="
-      my-4
-      rounded-lg
-      relative
-      group
-      bg-white
-      p-6
-      focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500
-    "
-    @click="$emit('copy')"
+    class="my-4 rounded-lg relative group bg-white p-6"
+    :class="{ 'ring-2 ring-inset ring-indigo-500': active }"
+    @click="$emit('click')"
   >
     <div class="mt-4">
       <h3 class="text-lg font-medium">
@@ -23,7 +16,7 @@
         <slot></slot>
       </p>
     </div>
-    <span
+    <FormulateInput
       class="
         pointer-events-none
         absolute
@@ -32,15 +25,17 @@
         text-gray-300
         group-hover:text-gray-400
       "
+      type="button"
       aria-hidden="true"
+      @click="$emit('copy')"
     >
       <outline-duplicate-icon class="h-6 w-6"></outline-duplicate-icon>
-    </span>
+    </FormulateInput>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ModuleCard',
@@ -52,6 +47,10 @@ export default defineComponent({
     text: {
       type: String,
       default: '',
+    },
+    active: {
+      type: Boolean,
+      default: false,
     },
   },
   setup() {},

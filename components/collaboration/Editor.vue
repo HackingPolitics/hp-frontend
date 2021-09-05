@@ -296,6 +296,7 @@ export default defineComponent({
       timer: null,
 
       projectId: this.$route.params.id,
+      proposalId: this.$route.params.proposalId,
     }
   },
 
@@ -314,7 +315,7 @@ export default defineComponent({
     // die Antragstext-Seite ist.
     this.provider = new HocuspocusProvider({
       url: this.$config.WS_URL,
-      name: 'proposal-' + this.projectId,
+      name: 'proposal-' + this.proposalId,
       document: this.ydoc,
       parameters: { authToken: this.getToken() },
       onConnect: () => {

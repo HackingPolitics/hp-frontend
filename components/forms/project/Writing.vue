@@ -7,6 +7,7 @@
         </button>
       </div>
       <writing-sidebar
+        class="pr-4"
         :sidebar-open="sidebarOpen"
         @close-sidebar="sidebarOpen = false"
       />
