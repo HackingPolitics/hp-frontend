@@ -7,6 +7,7 @@
       <forms-collaboration-input
         :model="project.title"
         type="text"
+        name="Titel"
         validation="required"
         :disabled="fieldIsLocked('applicationTitle')"
         :help="setLockedFieldText('applicationTitle')"
@@ -24,6 +25,7 @@
         :model="project.topic"
         type="textarea"
         rows="5"
+        name="Thema"
         validation="required"
         :disabled="fieldIsLocked('applicationTopic')"
         :help="setLockedFieldText('applicationTopic')"
@@ -41,8 +43,8 @@
       <forms-collaboration-input
         :model="project.goal"
         type="textarea"
+        name="Ziel"
         rows="5"
-        validation="required"
         :disabled="fieldIsLocked('applicationGoal')"
         :help="setLockedFieldText('applicationGoal')"
         @focus="setLockedField('applicationGoal')"
@@ -63,7 +65,7 @@
         name="category"
         limit="2"
         :options="categoryOptions"
-        @change="updateProject()"
+        @change="updateProject({ categories: $event })"
       />
     </forms-form-section>
   </div>
@@ -123,6 +125,7 @@ export default defineComponent({
      *Das Feld, was sich nicht ändert wird nicht beschrieben
      * */
     const fillForm = () => {
+      categories.value = []
       project.value?.categories?.forEach((category) => {
         if (category['@id']) categories?.value?.push(category['@id'])
       })

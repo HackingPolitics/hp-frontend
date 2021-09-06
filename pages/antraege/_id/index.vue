@@ -102,7 +102,7 @@
             />
           </div>
         </div>
-        <div class="mt-5 border-b border-gray-200 mb-8">
+        <div v-if="canEdit" class="mt-16 border-b border-gray-200 mb-8">
           <div
             class="
               -ml-2
@@ -117,7 +117,7 @@
               {{ $t('page.application.write') }}
             </h3>
 
-            <button class="inline-flex items-center">
+            <button v-if="false" class="inline-flex items-center">
               <solid-eye-icon class="w-7 h-7 pr-2"></solid-eye-icon>
               <span class="font-medium text-lg">{{ $t('pdfPreview') }}</span>
             </button>
@@ -163,21 +163,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="ml-5 flex-shrink-0">
-                    <!-- Heroicon name: solid/chevron-right -->
-                    <svg
-                      class="h-5 w-5 text-gray-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
+                  <div class="flex mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                    <div
+                      v-for="(onlineUser, index) in editorOnlineUsers"
+                      :key="index"
+                      class="flex overflow-hidden -space-x-1 -ml-4"
                     >
-                      <path
-                        fill-rule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
+                      <base-avatar :user="onlineUser" />
+                    </div>
                   </div>
                 </div>
               </div>

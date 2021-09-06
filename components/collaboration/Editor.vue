@@ -562,7 +562,7 @@ export default defineComponent({
 .editor {
   display: flex;
   flex-direction: column;
-  height: 50%;
+  //   height: 50%;
   margin-bottom: 2rem;
   color: #0d0d0d;
   background-color: #fff;

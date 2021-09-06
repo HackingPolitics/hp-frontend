@@ -55,7 +55,7 @@ export default defineComponent({
         selectedValues.value.splice(selectedValues.value.indexOf(value), 1) // unselect
         // eslint-disable-next-line
         props.context.model = selectedValues.value
-        context.emit('change')
+        context.emit('change', selectedValues.value)
       } else if (
         !props.context.limit ||
         selectedValues.value.length < props.context.limit
@@ -63,7 +63,7 @@ export default defineComponent({
         selectedValues.value.push(value)
         // eslint-disable-next-line
         props.context.model = selectedValues.value
-        context.emit('change')
+        context.emit('change', selectedValues.value)
       }
     }
 
@@ -76,6 +76,7 @@ export default defineComponent({
     }
 
     return {
+      selectedValues,
       setValue,
       setActiveClass,
     }
