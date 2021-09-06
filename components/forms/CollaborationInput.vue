@@ -3,7 +3,6 @@
     v-if="inputType === 1"
     v-model="inputModel"
     v-bind="$attrs"
-    validation="required"
     v-on="$listeners"
   >
   </FormulateInput>
