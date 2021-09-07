@@ -1,9 +1,12 @@
 <template>
   <div class="bg-white p-4 mt-8">
     <div class="">
+      <p class="text-sm text-gray-500 my-2">
+        {{ $t('forms.fractioninterests.interests.description') }}
+      </p>
       <div class="grid grid-cols-3 gap-8">
         <div class="mt-4">
-          <div class="sm:hidden">
+          <!-- <div class="sm:hidden">
             <label for="tabs" class="sr-only">Select a tab</label>
             <select
               id="tabs"
@@ -20,7 +23,7 @@
                 {{ fraction.name }}
               </option>
             </select>
-          </div>
+          </div> -->
           <div class="hidden sm:block">
             <nav class="space-y-4" aria-label="Tabs">
               <div
@@ -29,11 +32,12 @@
                 class="
                   px-3
                   py-2
-                  font-medium
-                  block
+                  font-semibold
                   border-l-4
                   hover:bg-gray-100
                   cursor-pointer
+                  flex
+                  items-center
                 "
                 :class="
                   activeFraction && activeFraction.id === fraction.id
@@ -43,29 +47,49 @@
                 :style="`border-color: ${fraction.color}`"
                 @click="activeFraction = fraction"
               >
-                {{ fraction.name }}
+                <span
+                  class="rounded-full h-2 w-2 mr-4"
+                  :class="
+                    checkSelected(fraction) ? 'bg-green-500' : 'bg-gray-400'
+                  "
+                ></span>
+                {{ fraction.memberCount }} {{ fraction.name }}
               </div>
             </nav>
           </div>
         </div>
         <div class="mt-4 col-span-2">
-          <h3 class="font-semibold text-gray-800 text-xl">
-            {{ $t('forms.fractioninterests.interests.title') }}
-          </h3>
-          <p class="text-sm text-gray-500 my-2">
-            {{ $t('forms.fractioninterests.interests.description') }}
-          </p>
+          <div class="w-full flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-gray-800 text-xl">
+              {{ $t('forms.fractioninterests.interests.title') }}
+            </h3>
+            <div class="text-sm flex items-center text-gray-500 space-x-2">
+              <span>Als Partnerstimme markieren</span>
+              <base-toggle
+                :value="
+                  activeFractionDetails
+                    ? activeFractionDetails.possiblePartner
+                    : false
+                "
+                @input="togglePartnerStatus"
+              ></base-toggle>
+            </div>
+          </div>
+
           <div v-if="fractionInterests && fractionInterests.length">
             <FormulateInput
               v-for="interest in fractionInterests"
               :key="interest.id"
               :value="interest.description"
               type="textarea"
+              :input-class="[
+                `border-l-4 shadow-none rounded-none border-t-0 border-b-0 border-r-0 bg-[${activeFraction.color}]`,
+              ]"
               @focusout="updateInterest($event, interest.id)"
             >
             </FormulateInput>
           </div>
-          <div v-else class="w-full text-center text-gray-500 py-6">
+          <div v-else class="w-full text-sm text-gray-500 py-6">
             {{ $t('forms.fractioninterests.interests.noInterests') }}
           </div>
 
@@ -284,6 +308,41 @@ export default defineComponent({
         })
       }
     }
+
+    const checkSelected = (fraction: IFraction) => {
+      const check = props?.fractionDetails?.find(
+        (el: IFractionDetails) => el.fraction?.id === fraction.id
+      )
+      return check ? check.possiblePartner : false
+    }
+
+    const togglePartnerStatus = async () => {
+      if (props.fractionDetails?.possiblePartner) {
+        try {
+          // @ts-ignore
+          await context.$api.fractionDetails.updateFractionDetails(
+            props.fractionDetails.id,
+            {
+              possiblePartner: !props.fractionDetails.possiblePartner,
+            }
+          )
+          await store.dispatch('projects/fetchProject', route.value.params.id)
+        } catch (error) {}
+      } else {
+        try {
+          // create fraction details
+          const response = await createFractionDetail()
+          // @ts-ignore
+          await context.$api.fractionDetails.updateFractionDetails(
+            response?.data.id,
+            {
+              possiblePartner: true,
+            }
+          )
+          await store.dispatch('projects/fetchProject', route.value.params.id)
+        } catch (error) {}
+      }
+    }
     return {
       createFractionInterest,
       activeFraction,
@@ -292,6 +351,8 @@ export default defineComponent({
       newInterestForm,
       activeFractionDetails,
       updateInterest,
+      checkSelected,
+      togglePartnerStatus,
     }
   },
 })

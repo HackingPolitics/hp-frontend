@@ -65,7 +65,6 @@ import {
   useRoute,
   useStore,
 } from '@nuxtjs/composition-api'
-import { useAxios } from '~/composables/useAxios'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
 import { RootState } from '~/store'
 

@@ -36,7 +36,7 @@
       </div>
 
       <div class="flex mt-12 justify-center items-center space-x-12">
-        <div class="w-1/2 flex flex-col justify-center">
+        <div class="flex flex-col justify-center">
           <charts-base-pie-chart :data="data"></charts-base-pie-chart>
 
           <i18n
@@ -53,10 +53,10 @@
             </template>
           </i18n>
           <div v-else class="w-56 py-8 text-center mx-auto">
-            Die Stimmen reichen für eine Mehrheit aus
+            {{ $t('forms.fractioninterests.enoughVotes') }}
           </div>
         </div>
-        <div class="w-1/2">
+        <!-- <div class="w-1/2">
           <div
             v-for="fraction in fractions"
             :key="fraction.id"
@@ -67,7 +67,7 @@
               :fraction-details="getFractioDetails(fraction)"
             ></fraction-list-item>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <forms-project-fraction-interest
@@ -85,7 +85,6 @@ import {
   ref,
   computed,
   useStore,
-  useContext,
   watch,
 } from '@nuxtjs/composition-api'
 import { cloneDeep } from 'lodash'
@@ -107,14 +106,12 @@ export default defineComponent({
     const formData = ref(null)
 
     const store = useStore<RootState>()
-    const context = useContext()
 
     const councilId = computed(() => {
       return store.state.projects.project?.council?.id
     })
 
     const project = computed(() => {
-      console.log(store.state.projects?.project)
       return store.state.projects?.project
     })
 
@@ -157,7 +154,7 @@ export default defineComponent({
             return {
               ...el.fraction,
               memberCount: fractions.value?.find(
-                (fraction) => fraction.id === el?.fraction?.id
+                (fraction) => fraction.id === el.fraction.id
               )?.memberCount,
             }
           })
@@ -168,12 +165,10 @@ export default defineComponent({
     const createFractionDetail = async () => {
       if (projectId.value && fractions.value) {
         try {
-          const response =
-            // @ts-ignore
-            await context.$api.fractionDetails.createFractionDetails({
-              project: projectId.value,
-              fraction: '/fractions/10',
-            })
+          const response = await axios.post('/fraction_details', {
+            project: projectId.value,
+            fraction: '/fractions/10',
+          })
 
           console.log(response)
         } catch (error) {}
@@ -219,7 +214,7 @@ export default defineComponent({
 
     const getFractioDetails = (fraction: IFraction) => {
       return fractionDetails.value.find(
-        (el: IFractionDetails) => fraction.id === el?.fraction?.id
+        (el: IFractionDetails) => fraction.id === el.fraction.id
       )
     }
 

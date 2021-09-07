@@ -145,7 +145,7 @@
       "enoughVotes": "Die Stimmen reichen für eine Mehrheit aus",
       "votes": "Stimmen",
       "interests": {
-        "title": "Eigeninteressen der Fraktionen",
+        "title": "Eigeninteressen",
         "description": "Wähle eine Fraktion aus, um ihre Eigeninteressen zu sammeln und anzuzeigen.",
         "noInterests": "Noch keine Eigeninteressen gefunden",
         "addInterest": "Eigeninteresse für {fraction} hinzufügen",
