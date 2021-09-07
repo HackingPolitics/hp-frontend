@@ -63,7 +63,6 @@
                 flex-grow flex flex-col
                 justify-between
                 divide-y divide-gray-400
-                overflow-y-scroll
               "
             >
               <dd v-for="(tab, index) in tabs" :key="index">
@@ -338,7 +337,8 @@ export default defineComponent({
     )
     const proposal = computed(() => {
       return project.value?.proposals.find(
-        (proposal) => proposal.id.toString() === route.value.params.proposalId
+        (proposal: any) =>
+          proposal.id.toString() === route.value.params.proposalId
       )
     })
 
@@ -400,7 +400,7 @@ export default defineComponent({
     const findUsed = (used: string, iri: string | number) => {
       if (used && proposal.value?.[used])
         return proposal.value[used].find(
-          (e) => e[getProposalKey(used)]['@id'] === iri
+          (e: any) => e[getProposalKey(used)]['@id'] === iri
         )
     }
 

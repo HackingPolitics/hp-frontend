@@ -313,52 +313,53 @@ export default defineComponent({
     // bei Seitenwechsel. Und einen für das jeweilige proposal-x das bearbeitet werden soll, dort
     // sollten nur die Editoren dranhängen, kann also hier auf der  Seite bleiben wenn das
     // die Antragstext-Seite ist.
-    this.provider = new HocuspocusProvider({
-      url: this.$config.WS_URL,
-      name: 'proposal-' + this.proposalId,
-      document: this.ydoc,
-      parameters: { authToken: this.getToken() },
-      onConnect: () => {
-        this.status = 'connected'
-      },
-      onMessage: ({ _event, _message }) => {
-        // any document update is applied *after* this hook
-        // console.log(`[message] ◀️ ${message.name}`, event)
-      },
-      onOutgoingMessage: ({ _message }) => {
-        // console.info(`[message] ▶️ ${message.name} (${message.description})`)
-      },
-      onClose: ({ event }) => {
-        // hocuspocus-server/CloseEvent.ts:Forbidden
-        if (event.code === 4403) {
-          // prevent the provider from endlessly retrying
-          this.provider.disconnect()
-          // eslint-disable-next-line no-console
-          console.log('WS disconnected, authentication failure')
-        }
+    if (!isNaN(this.proposalId)) {
+      this.provider = new HocuspocusProvider({
+        url: this.$config.WS_URL,
+        name: 'proposal-' + this.proposalId,
+        document: this.ydoc,
+        parameters: { authToken: this.getToken() },
+        onConnect: () => {
+          this.status = 'connected'
+        },
+        onMessage: ({ _event, _message }) => {
+          // any document update is applied *after* this hook
+          // console.log(`[message] ◀️ ${message.name}`, event)
+        },
+        onOutgoingMessage: ({ _message }) => {
+          // console.info(`[message] ▶️ ${message.name} (${message.description})`)
+        },
+        onClose: ({ event }) => {
+          // hocuspocus-server/CloseEvent.ts:Forbidden
+          if (event.code === 4403) {
+            // prevent the provider from endlessly retrying
+            this.provider.disconnect()
+            // eslint-disable-next-line no-console
+            console.log('WS disconnected, authentication failure')
+          }
 
-        this.status = 'disconnected'
-      },
-      onDisconnect: () => {
-        if (this.provider.shouldConnect) {
-          // eslint-disable-next-line no-console
-          console.log(
-            'WS connection closed unexpectedly, trying to reconnect...'
+          this.status = 'disconnected'
+        },
+        onDisconnect: () => {
+          if (this.provider.shouldConnect) {
+            // eslint-disable-next-line no-console
+            console.log(
+              'WS connection closed unexpectedly, trying to reconnect...'
+            )
+          }
+        },
+        onAwarenessChange: ({ states }) => {
+          this.states = states
+          const reduced = reduceStates(states)
+          this.areas = reduced.areas
+          this.lockedFields = reduced.fields
+          this.$store.commit(
+            'collaboration/SET_EDITOR_ONLINE_USERS',
+            cloneDeep(reduced.users)
           )
-        }
-      },
-      onAwarenessChange: ({ states }) => {
-        this.states = states
-        const reduced = reduceStates(states)
-        this.areas = reduced.areas
-        this.lockedFields = reduced.fields
-        this.$store.commit(
-          'collaboration/SET_EDITOR_ONLINE_USERS',
-          cloneDeep(reduced.users)
-        )
-      },
-    })
-
+        },
+      })
+    }
     this.actionMandateEditor = new Editor({
       extensions: [
         StarterKit.configure({
