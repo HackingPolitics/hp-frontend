@@ -86,7 +86,7 @@
     "husky": "^7.0.2",
     "jest": "^27.1.0",
     "lint-staged": "^11.1.2",
-    "nuxt-vite": "^0.2.2",
+    "nuxt-vite": "^0.2.4",
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "remixicon": "^2.5.0",
