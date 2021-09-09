@@ -26,8 +26,8 @@
         <project-memberships-apply-project-form
           :project="project"
           :user="user"
-          @cancel="toggleModal()"
-          @application-submitted="toggleModal()"
+          @cancel="toggleModal('projectMembership')"
+          @application-submitted="toggleModal('projectMembership')"
         />
       </modal>
 
@@ -64,7 +64,7 @@
                 duration-150
                 ease-in-out
               "
-              @click="toggleModal()"
+              @click="toggleModal('projectMembership')"
             >
               {{ $t('page.application.apply_project') }}
             </button>
@@ -123,19 +123,32 @@
             </button>
           </div>
           <div v-for="proposal in project.proposals" :key="proposal.id">
-            <nuxt-link
-              :to="
-                localePath({
-                  name: 'antraege-id-proposalId-proposalIri-schreiben',
-                  params: {
-                    proposalIri: proposal['@id'],
-                    proposalId: proposal.id,
-                  },
-                })
+            <div
+              class="
+                bg-white
+                block
+                hover:bg-gray-50
+                mb-4
+                flex
+                justify-between
+                px-4
+                py-4
+                flex
+                items-center
               "
             >
-              <div class="bg-white block hover:bg-gray-50 mb-4">
-                <div class="px-4 py-4 flex items-center sm:px-6">
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'antraege-id-proposalId-proposalIri-schreiben',
+                    params: {
+                      proposalIri: proposal['@id'],
+                      proposalId: proposal.id,
+                    },
+                  })
+                "
+              >
+                <div class="flex items-center sm:px-6">
                   <div
                     class="
                       min-w-0
@@ -144,16 +157,21 @@
                     "
                   >
                     <div class="truncate">
-                      <div class="flex text-sm">
-                        <p class="font-medium text-indigo-600 truncate">
+                      <div class="text-sm">
+                        <h3
+                          class="font-medium text-lg text-indigo-600 truncate"
+                        >
                           {{ proposal.title }}
+                        </h3>
+                        <p class="mr-1 flex-shrink-0 font-normal text-gray-500">
+                          {{ $t('updatedAt') }}
+                          {{
+                            format(parseISO(proposal.updatedAt), 'dd.MM.yyyy')
+                          }}
                         </p>
-                        <p
-                          class="mr-1 flex-shrink-0 font-normal text-gray-500"
-                        ></p>
                       </div>
                     </div>
-                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                    <!--                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
                       <div
                         v-for="(onlineUser, index) in editorOnlineUsers"
                         :key="index"
@@ -161,20 +179,59 @@
                       >
                         <base-avatar :user="onlineUser" />
                       </div>
-                    </div>
-                  </div>
-                  <div class="flex mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
-                    <div
-                      v-for="(onlineUser, index) in editorOnlineUsers"
-                      :key="index"
-                      class="flex overflow-hidden -space-x-1 -ml-4"
-                    >
-                      <base-avatar :user="onlineUser" />
-                    </div>
+                    </div>-->
                   </div>
                 </div>
-              </div>
-            </nuxt-link>
+              </nuxt-link>
+              <FormulateInput
+                v-if="userMembershipRole === 'coordinator'"
+                type="button"
+                @click="deleteProposal(proposal.id)"
+                ><outline-trash-icon class="w-5 h-5"
+              /></FormulateInput>
+            </div>
+          </div>
+          <div class="bg-white block hover:bg-gray-50 mb-4">
+            <transition
+              enter-to-class="transition opacity-100  duration-100"
+              leave-active-class="transition opacity-0 duration-100"
+              mode="out-in"
+            >
+              <button
+                v-if="!proposalFormIsOpen"
+                class="px-4 py-6 flex items-center sm:px-6"
+                @click="toggleModal('createProposal')"
+              >
+                <outline-pencil-alt-icon class="h-5 w-5 mr-2" />
+                <span>Antrag erstellen</span>
+              </button>
+              <FormulateForm
+                v-else
+                v-model="proposalCreateForm"
+                class="flex space-x-4 px-4 py-4 flex"
+                @submit="createProposal"
+              >
+                <div class="w-1/4">
+                  <h3 class="text-lg font-medium leading-6 text-gray-900">
+                    Antrag erstellen
+                  </h3>
+                  <p class="mt-1 text-sm text-gray-500">
+                    Gebe dem Dokument ein Namen und trage den Sponsor ein um
+                    anzufangen.
+                  </p>
+                </div>
+                <FormulateInput name="title" label="Titel" />
+                <FormulateInput name="sponsor" label="Sponsor" />
+                <div class="flex-col space-y-2">
+                  <FormulateInput type="submit" label="Erstellen" />
+                  <FormulateInput
+                    type="button"
+                    label="Abbrechen"
+                    @click="toggleModal('createProposal')"
+                  />
+                </div>
+              </FormulateForm>
+            </transition>
           </div>
         </div>
       </div>
@@ -218,12 +275,15 @@ import {
   ref,
   useContext,
   useRoute,
+  useRouter,
   useStore,
   useMeta,
 } from '@nuxtjs/composition-api'
+import { parseISO, format } from 'date-fns'
 import { RootState } from '~/store'
 import { AwarenessState } from '~/types/collaborations'
 import { IProjectMembership } from '~/types/apiSchema'
+import { useAxios } from '~/composables/useAxios'
 
 // only mockup interface for rendering and testing
 interface ApplicationStep {
@@ -232,6 +292,12 @@ interface ApplicationStep {
   step?: {
     total: number
   }
+}
+
+interface ProposalForm {
+  title: string
+  sponsor: string
+  project: string
 }
 
 export default defineComponent({
@@ -249,12 +315,16 @@ export default defineComponent({
   layout: 'collaboration',
   middleware: ['getCurrentArea'],
   setup() {
+    const axios = useAxios()
     const route = useRoute()
+    const router = useRouter()
     const projectId = ref<string>(route.value.params.id)
 
     const store = useStore<RootState>()
 
     store.dispatch('projects/fetchProject', projectId.value)
+
+    const proposalFormIsOpen = ref(false)
 
     const project = computed(() => {
       return store.state.projects.project
@@ -354,10 +424,49 @@ export default defineComponent({
       }
     })
 
+    const proposalFormIsLoading = ref(false)
+    const proposalCreateForm = ref({})
+
+    const createProposal = async () => {
+      proposalFormIsLoading.value = true
+      if (project.value['@id']) {
+        proposalCreateForm.value.project = project.value['@id']
+        await axios.post('/proposals', proposalCreateForm.value).then((res) => {
+          if (res?.data && res.data.id && res.data['@id'])
+            router.push(
+              context.localePath({
+                name: 'antraege-id-proposalId-proposalIri-schreiben',
+                params: {
+                  proposalIri: res.data['@id'],
+                  proposalId: res.data.id,
+                },
+              })
+            )
+        })
+        proposalFormIsLoading.value = false
+      }
+    }
+
+    const deleteProposal = async (id: string | number) => {
+      if (id) {
+        await axios.delete(/proposals/ + id).then(async () => {
+          await store.dispatch('projects/fetchProject', projectId.value)
+          context.$notify({
+            title: 'Antragschreiben gelöscht',
+            duration: 300,
+            type: 'success',
+          })
+        })
+      }
+    }
+
     const projectMemberShipModal = ref()
 
-    const toggleModal = () => {
-      projectMemberShipModal.value?.toggleModal()
+    const toggleModal = (modal) => {
+      if (modal === 'projectMembership')
+        projectMemberShipModal.value?.toggleModal()
+      if (modal === 'createProposal')
+        proposalFormIsOpen.value = !proposalFormIsOpen.value
     }
 
     const projectProgress = computed(() => {
@@ -474,6 +583,12 @@ export default defineComponent({
       onlineUsers,
       editorOnlineUsers,
       userMembershipRole,
+      proposalFormIsOpen,
+      parseISO,
+      format,
+      createProposal,
+      proposalCreateForm,
+      deleteProposal,
     }
   },
   data() {

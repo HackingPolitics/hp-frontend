@@ -300,7 +300,9 @@ export default defineComponent({
     }
   },
 
-  mounted() {
+  async mounted() {
+    await this.$auth.refreshTokens()
+
     this.ydoc = new Y.Doc()
     this.syncState = this.ydoc.getMap('syncState')
 

@@ -374,5 +374,6 @@
     "field": {
       "usedBy": "arbeitet gerade an dieses Feld ..."
     }
-  }
+  },
+  "updatedAt": "Zuletzt geändert am"
 }
