@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <pie-chart :chart-data="data" :options="options"></pie-chart>
+  <div class="h-52 overflow-hidden">
+    <pie-chart class="-mt-24" :chart-data="data" :options="options"></pie-chart>
     <!-- <chc-empty-list-message
       v-else
       message="Keine Daten verfügbar"
@@ -31,10 +31,9 @@ export default defineComponent({
   setup(_, { emit }) {
     const options = ref({
       responsive: true,
-      maintainAspectRatio: true,
-      height: 200,
-      circumference: 3.13,
-      rotation: -3.12,
+      maintainAspectRatio: false,
+      circumference: Math.PI,
+      rotation: -Math.PI,
       plugins: {
         legend: false,
         title: {

@@ -71,7 +71,7 @@
                     ? activeFractionDetails.possiblePartner
                     : false
                 "
-                @input="togglePartnerStatus"
+                @input="togglePartnerStatus(activeFractionDetails)"
               ></base-toggle>
             </div>
           </div>
@@ -204,8 +204,6 @@ export default defineComponent({
             project: projectId.value,
             fraction: activeFraction.value?.['@id'],
           })
-
-          console.log(response)
           return response
         } catch (error) {}
       }
@@ -316,19 +314,21 @@ export default defineComponent({
       return check ? check.possiblePartner : false
     }
 
-    const togglePartnerStatus = async () => {
-      if (props.fractionDetails?.possiblePartner) {
+    const togglePartnerStatus = async (fraction: IFractionDetails) => {
+      if (fraction) {
+        // fraction exists, update possible partner status
         try {
           // @ts-ignore
           await context.$api.fractionDetails.updateFractionDetails(
-            props.fractionDetails.id,
+            fraction.id,
             {
-              possiblePartner: !props.fractionDetails.possiblePartner,
+              possiblePartner: !fraction.possiblePartner,
             }
           )
           await store.dispatch('projects/fetchProject', route.value.params.id)
         } catch (error) {}
       } else {
+        // fraction didn't exists on project, create fraction and set partner status to true
         try {
           // create fraction details
           const response = await createFractionDetail()
