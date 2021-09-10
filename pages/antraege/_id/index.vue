@@ -425,7 +425,11 @@ export default defineComponent({
     })
 
     const proposalFormIsLoading = ref(false)
-    const proposalCreateForm = ref({})
+    const proposalCreateForm = ref<ProposalForm>({
+      title: '',
+      sponsor: '',
+      project: '',
+    })
 
     const createProposal = async () => {
       proposalFormIsLoading.value = true
@@ -449,8 +453,9 @@ export default defineComponent({
 
     const deleteProposal = async (id: string | number) => {
       if (id) {
-        await axios.delete(/proposals/ + id).then(async () => {
+        await axios.delete(/proposals/ + id.toString()).then(async () => {
           await store.dispatch('projects/fetchProject', projectId.value)
+          // @ts-ignore
           context.$notify({
             title: 'Antragschreiben gelöscht',
             duration: 300,
@@ -462,7 +467,7 @@ export default defineComponent({
 
     const projectMemberShipModal = ref()
 
-    const toggleModal = (modal) => {
+    const toggleModal = (modal: string) => {
       if (modal === 'projectMembership')
         projectMemberShipModal.value?.toggleModal()
       if (modal === 'createProposal')
