@@ -34,6 +34,8 @@ export default defineComponent({
       maintainAspectRatio: false,
       circumference: Math.PI,
       rotation: -Math.PI,
+      borderAlign: 'center',
+      cutoutPercentage: 40,
       plugins: {
         legend: false,
         title: {

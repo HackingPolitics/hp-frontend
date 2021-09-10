@@ -37,8 +37,12 @@
 
       <div class="flex mt-12 justify-center items-center space-x-12">
         <div class="flex flex-col justify-center">
-          <charts-base-pie-chart :data="data"></charts-base-pie-chart>
-
+          <div class="relative">
+            <charts-base-pie-chart :data="data"></charts-base-pie-chart>
+            <div
+              class="w-1 h-full bg-green-500 absolute top-0 z-30 inset-x-1/2"
+            ></div>
+          </div>
           <i18n
             v-if="neededVotes > 0"
             path="forms.fractioninterests.votesCounter"
@@ -154,7 +158,7 @@ export default defineComponent({
             return {
               ...el.fraction,
               memberCount: fractions.value?.find(
-                (fraction) => fraction.id === el.fraction.id
+                (fraction) => fraction.id === el.fraction?.id
               )?.memberCount,
             }
           })
@@ -165,12 +169,10 @@ export default defineComponent({
     const createFractionDetail = async () => {
       if (projectId.value && fractions.value) {
         try {
-          const response = await axios.post('/fraction_details', {
+          await axios.post('/fraction_details', {
             project: projectId.value,
             fraction: '/fractions/10',
           })
-
-          console.log(response)
         } catch (error) {}
       }
     }
@@ -214,13 +216,34 @@ export default defineComponent({
 
     const getFractioDetails = (fraction: IFraction) => {
       return fractionDetails.value.find(
-        (el: IFractionDetails) => fraction.id === el.fraction.id
+        (el: IFractionDetails) => fraction.id === el.fraction?.id
       )
+    }
+
+    const hexToRgbA = (hex: string, alpha: number = 1) => {
+      let c
+      console.log(hex)
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        c = hex.substring(1).split('')
+        if (c.length === 3) {
+          c = [c[0], c[0], c[1], c[1], c[2], c[2]]
+        }
+        c = '0x' + c.join('')
+        const result = `rgba(${[
+          (parseInt(c) >> 16) & 255,
+          (parseInt(c) >> 8) & 255,
+          parseInt(c) & 255,
+        ].join(',')},${alpha})`
+        console.log(result)
+        return result
+      }
+      return hex
     }
 
     const data = computed(() => {
       return {
         labels: orderedFractions.value.map((el: Fraction) => el.name),
+
         datasets: [
           {
             label: council.value?.title,
@@ -233,18 +256,10 @@ export default defineComponent({
               ) {
                 return el.color
               }
-              return '#fff'
+              return hexToRgbA(el.color, 0.25)
             }),
-            borderColor: orderedFractions.value.map((el: Fraction) => {
-              if (
-                !selectedFractions.value.find(
-                  (fraction: IFraction) => fraction.id === el.id
-                )
-              ) {
-                return el.color
-              }
-              return el.color
-            }),
+            borderColor: '#fff',
+            borderWidth: 4,
           },
         ],
       }
