@@ -98,8 +98,11 @@ export default defineComponent({
       if (isLoggedIn.value) {
         await store
           .dispatch('projects/createProject', formData.value)
-          .then((res) => {
-            if (res?.data) router.push({ path: `/antraege/${res.data.id}` })
+          .then(async (res) => {
+            if (res?.data) {
+              await context.$auth.refreshTokens()
+              router.push({ path: `/antraege/${res.data.id}` })
+            }
           })
       } else {
         store.commit('projects/SET_CREATED_PROJECT', formData.value)
