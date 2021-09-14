@@ -183,12 +183,25 @@
                   </div>
                 </div>
               </nuxt-link>
-              <FormulateInput
-                v-if="userMembershipRole === 'coordinator'"
-                type="button"
-                @click="deleteProposal(proposal.id)"
-                ><outline-trash-icon class="w-5 h-5"
-              /></FormulateInput>
+              <div class="inline-flex space-x-2">
+                <FormulateInput
+                  type="button"
+                  @click="createDocument(proposal.id)"
+                  ><outline-document-add-icon class="w-5 h-5"
+                /></FormulateInput>
+                <FormulateInput
+                  v-if="proposal.documentFile !== null"
+                  type="button"
+                  @click="downloadDocument(proposal.id)"
+                  ><outline-document-download-icon class="w-5 h-5"
+                /></FormulateInput>
+                <FormulateInput
+                  v-if="userMembershipRole === 'coordinator'"
+                  type="button"
+                  @click="deleteProposal(proposal.id)"
+                  ><outline-trash-icon class="w-5 h-5"
+                /></FormulateInput>
+              </div>
             </div>
           </div>
           <div class="bg-white block hover:bg-gray-50 mb-4">
@@ -280,6 +293,7 @@ import {
   useMeta,
 } from '@nuxtjs/composition-api'
 import { parseISO, format } from 'date-fns'
+import { cloneDeep } from 'lodash'
 import { RootState } from '~/store'
 import { AwarenessState } from '~/types/collaborations'
 import { IProjectMembership } from '~/types/apiSchema'
@@ -465,6 +479,52 @@ export default defineComponent({
       }
     }
 
+    const getToken = () => {
+      // @ts-ignore
+      const prefixed = cloneDeep(context.$auth.strategy.token.get()) || ''
+      return prefixed.replace(
+        // @ts-ignore
+        `${context.$auth.strategy.options.token.type} `,
+        ''
+      )
+    }
+
+    const createDocument = async (id: string | number) => {
+      if (id) {
+        await axios
+          .post(/proposals/ + id.toString() + '/export', {})
+          .then(async () => {
+            await store.dispatch('projects/fetchProject', projectId.value)
+            // @ts-ignore
+            context.$notify({
+              title: 'Antragsdokument wird erstellt',
+              duration: 300,
+              type: 'success',
+            })
+          })
+      }
+    }
+
+    const downloadDocument = async (id: string | number) => {
+      if (id) {
+        await axios
+          .post(/proposals/ + id.toString() + '/document-download', {
+            bearer: getToken(),
+          })
+          .then((res) => {
+            const fileURL = window.URL.createObjectURL(new Blob([res.data]))
+            const fileLink = document.createElement('a')
+
+            fileLink.href = fileURL
+            fileLink.setAttribute('download', 'file.txt')
+
+            document.body.appendChild(fileLink)
+
+            fileLink.click()
+          })
+      }
+    }
+
     const projectMemberShipModal = ref()
 
     const toggleModal = (modal: string) => {
@@ -594,6 +654,8 @@ export default defineComponent({
       createProposal,
       proposalCreateForm,
       deleteProposal,
+      createDocument,
+      downloadDocument,
     }
   },
   data() {
