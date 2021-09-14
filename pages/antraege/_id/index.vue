@@ -189,12 +189,22 @@
                   @click="createDocument(proposal.id)"
                   ><outline-document-add-icon class="w-5 h-5"
                 /></FormulateInput>
-                <FormulateInput
+                <form
                   v-if="proposal.documentFile !== null"
-                  type="button"
-                  @click="downloadDocument(proposal.id)"
-                  ><outline-document-download-icon class="w-5 h-5"
-                /></FormulateInput>
+                  method="post"
+                  target="_blank"
+                  :action="
+                    $config.API_URL +
+                    'proposals/' +
+                    proposal.id.toString() +
+                    '/document-download'
+                  "
+                >
+                  <input type="hidden" name="bearer" :value="getToken()" />
+                  <button class="form-button">
+                    <outline-document-download-icon class="w-5 h-5" />
+                  </button>
+                </form>
                 <FormulateInput
                   v-if="userMembershipRole === 'coordinator'"
                   type="button"
@@ -493,34 +503,16 @@ export default defineComponent({
       if (id) {
         await axios
           .post(/proposals/ + id.toString() + '/export', {})
-          .then(async () => {
-            await store.dispatch('projects/fetchProject', projectId.value)
+          .then(() => {
+            setInterval(async () => {
+              await store.dispatch('projects/fetchProject', projectId.value)
+            }, 30000)
             // @ts-ignore
             context.$notify({
               title: 'Antragsdokument wird erstellt',
               duration: 300,
               type: 'success',
             })
-          })
-      }
-    }
-
-    const downloadDocument = async (id: string | number) => {
-      if (id) {
-        await axios
-          .post(/proposals/ + id.toString() + '/document-download', {
-            bearer: getToken(),
-          })
-          .then((res) => {
-            const fileURL = window.URL.createObjectURL(new Blob([res.data]))
-            const fileLink = document.createElement('a')
-
-            fileLink.href = fileURL
-            fileLink.setAttribute('download', 'file.txt')
-
-            document.body.appendChild(fileLink)
-
-            fileLink.click()
           })
       }
     }
@@ -655,7 +647,7 @@ export default defineComponent({
       proposalCreateForm,
       deleteProposal,
       createDocument,
-      downloadDocument,
+      getToken,
     }
   },
   data() {
