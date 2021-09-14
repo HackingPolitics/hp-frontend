@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-200 flex flex-col justify-between">
-    <div class="flex-1 overflow-scroll relative">
+    <div class="flex-1 overflow-y-auto relative">
       <Nuxt />
     </div>
     <base-footer></base-footer>

@@ -118,7 +118,6 @@ export default defineComponent({
           data: credentials.value,
         })
         // @todo Philipp: remove debug, try/catch around jwtDecode
-        console.log(response)
         // @ts-ignore
         const decoded = jwtDecode<JwtPayloadWithUser>(response.data.token)
         try {
@@ -126,14 +125,15 @@ export default defineComponent({
           context.$auth.setUser(user.data)
 
           if (store.state.projects.createdProject) {
-            await store.dispatch(
-              'projects/createProject',
-              store.state.projects.createdProject
-            )
+            await store
+              .dispatch(
+                'projects/createProject',
+                store.state.projects.createdProject
+              )
+              .then(async () => await context.$auth.refreshTokens())
           }
 
           router.push('/antraege')
-          console.log(user)
         } catch (error) {
           console.log('user', error.response.data)
         }
