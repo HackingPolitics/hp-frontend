@@ -183,12 +183,35 @@
                   </div>
                 </div>
               </nuxt-link>
-              <FormulateInput
-                v-if="userMembershipRole === 'coordinator'"
-                type="button"
-                @click="deleteProposal(proposal.id)"
-                ><outline-trash-icon class="w-5 h-5"
-              /></FormulateInput>
+              <div class="inline-flex space-x-2">
+                <FormulateInput
+                  type="button"
+                  @click="createDocument(proposal.id)"
+                  ><outline-document-add-icon class="w-5 h-5"
+                /></FormulateInput>
+                <form
+                  v-if="proposal.documentFile !== null"
+                  method="post"
+                  target="_blank"
+                  :action="
+                    $config.API_URL +
+                    'proposals/' +
+                    proposal.id.toString() +
+                    '/document-download'
+                  "
+                >
+                  <input type="hidden" name="bearer" :value="getToken()" />
+                  <button class="form-button">
+                    <outline-document-download-icon class="w-5 h-5" />
+                  </button>
+                </form>
+                <FormulateInput
+                  v-if="userMembershipRole === 'coordinator'"
+                  type="button"
+                  @click="deleteProposal(proposal.id)"
+                  ><outline-trash-icon class="w-5 h-5"
+                /></FormulateInput>
+              </div>
             </div>
           </div>
           <div class="bg-white block hover:bg-gray-50 mb-4">
@@ -280,6 +303,7 @@ import {
   useMeta,
 } from '@nuxtjs/composition-api'
 import { parseISO, format } from 'date-fns'
+import { cloneDeep } from 'lodash'
 import { RootState } from '~/store'
 import { AwarenessState } from '~/types/collaborations'
 import { IProjectMembership } from '~/types/apiSchema'
@@ -465,6 +489,34 @@ export default defineComponent({
       }
     }
 
+    const getToken = () => {
+      // @ts-ignore
+      const prefixed = cloneDeep(context.$auth.strategy.token.get()) || ''
+      return prefixed.replace(
+        // @ts-ignore
+        `${context.$auth.strategy.options.token.type} `,
+        ''
+      )
+    }
+
+    const createDocument = async (id: string | number) => {
+      if (id) {
+        await axios
+          .post(/proposals/ + id.toString() + '/export', {})
+          .then(() => {
+            setInterval(async () => {
+              await store.dispatch('projects/fetchProject', projectId.value)
+            }, 30000)
+            // @ts-ignore
+            context.$notify({
+              title: 'Antragsdokument wird erstellt',
+              duration: 300,
+              type: 'success',
+            })
+          })
+      }
+    }
+
     const projectMemberShipModal = ref()
 
     const toggleModal = (modal: string) => {
@@ -594,6 +646,8 @@ export default defineComponent({
       createProposal,
       proposalCreateForm,
       deleteProposal,
+      createDocument,
+      getToken,
     }
   },
   data() {
