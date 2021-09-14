@@ -67,7 +67,10 @@ export default defineComponent({
           context.$auth.setUser(user.data)
           currentUser.value = {
             // @ts-ignore#
-            name: context.$auth.user?.username || '[not logged in]',
+            username: context.$auth.user?.username || '[not logged in]',
+            firstName: context.$auth.user?.firstName,
+            // @ts-ignore#
+            lastName: context.$auth.user?.lastName,
             // @ts-ignore#
             id: context.$auth.user?.id || 0,
             area: null,
@@ -84,7 +87,9 @@ export default defineComponent({
 
     // @ts-ignore#
     const currentUser = ref<StateUser>({
-      name: context.$auth.user?.username || '[not logged in]',
+      username: context.$auth.user?.username || '[not logged in]',
+      firstName: context.$auth.user?.firstName,
+      lastName: context.$auth.user?.lastName,
       id: context.$auth.user?.id || 0,
       area: null,
       lockedField: null,

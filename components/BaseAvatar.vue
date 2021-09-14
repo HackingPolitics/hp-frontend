@@ -1,29 +1,40 @@
 <template>
-  <span
-    class="
-      rounded-full
-      overflow-hidden
-      flex
-      items-center
-      justify-center
-      bg-white
-      text-purple-500
-      font-semibold
-      text-sm
-      hover:bg-purple-100
-      uppercase
-      border-2 border-purple-700
+  <tool-tip
+    :active="toolTip"
+    :tool-tip-text="
+      user && user.firstName && user.lastName
+        ? `${user.firstName} ${user.lastName}`
+        : user && user.username
     "
-    :class="getAvatarSize(size)"
   >
-    {{
-      user && user.username
-        ? user.username.slice(0, 1)
-        : user && user.name
-        ? user.name.slice(0, 1)
-        : 'k.a.'
-    }}
-  </span>
+    <span
+      class="
+        rounded-full
+        overflow-hidden
+        flex
+        items-center
+        justify-center
+        bg-white
+        text-purple-500
+        font-semibold
+        text-sm
+        hover:bg-purple-100
+        uppercase
+        border-2 border-purple-700
+      "
+      :class="getAvatarSize(size)"
+    >
+      {{
+        user && user.firstName && user.lastName
+          ? `${user.firstName.slice(0, 1)}.${user.lastName.slice(0, 1)}`
+          : user && user.username
+          ? user.username.slice(0, 1)
+          : user && user.name
+          ? user.name.slice(0, 1)
+          : 'k.a.'
+      }}
+    </span>
+  </tool-tip>
 </template>
 <script lang="ts">
 export default {
@@ -46,6 +57,10 @@ export default {
       validator: (value: string) => {
         return ['light', 'dark'].includes(value)
       },
+    },
+    toolTip: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
