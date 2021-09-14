@@ -1,7 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-200 flex flex-col justify-between">
     <div class="flex-1 overflow-scroll relative">
-      <Nuxt />
+      <loading-indicator
+        v-if="isLoading"
+        class="layout-loading-indicator"
+      ></loading-indicator>
+      <Nuxt v-else />
     </div>
     <base-footer></base-footer>
     <notification-toast />
@@ -46,6 +50,8 @@ export default defineComponent({
     const store = useStore<RootState>()
     const axios = useAxios()
 
+    const isLoading = ref(false)
+
     const route = useRoute()
 
     const projectId = ref<String>(route.value.params.id)
@@ -59,6 +65,7 @@ export default defineComponent({
 
     const fetchUser = async () => {
       // @ts-ignore
+      isLoading.value = true
       const token = context.$auth.strategy.token.get()
       if (token) {
         try {
@@ -82,6 +89,7 @@ export default defineComponent({
           console.log(error)
         }
       }
+      isLoading.value = false
     }
     fetchUser()
 
@@ -345,6 +353,7 @@ export default defineComponent({
       currentArea,
       lockedField,
       projectSaved,
+      isLoading,
     }
   },
 })

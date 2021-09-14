@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative min-h-screen">
     <menu-project-nav
       :title="
         routeBefore && routeBefore === '/'
@@ -259,7 +259,10 @@
         </div>
       </div>
     </layouts-single-view>
-    <loading-indicator v-else-if="isLoading"></loading-indicator>
+    <loading-indicator
+      v-else-if="isLoading"
+      class="layout-loading-indicator"
+    ></loading-indicator>
     <div v-else-if="error" class="mx-auto max-w-screen-xl">
       <div
         class="
