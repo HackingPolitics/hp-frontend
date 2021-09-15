@@ -64,8 +64,8 @@ export default defineComponent({
     const lockedFields = ref({})
 
     const fetchUser = async () => {
-      // @ts-ignore
       isLoading.value = true
+      // @ts-ignore
       const token = context.$auth.strategy.token.get()
       if (token) {
         try {
@@ -122,10 +122,6 @@ export default defineComponent({
 
     const recentProjectSaved = computed(() => {
       return store.state.collaboration.recentProjectSaved
-    })
-
-    const editorOnlineUsers = computed(() => {
-      return store.state.collaboration.editorOnlineUsers
     })
 
     onMounted(() => {
@@ -191,13 +187,6 @@ export default defineComponent({
       () => currentArea.value,
       (newVal) => {
         setAwarenessState({ area: newVal })
-      }
-    )
-
-    watch(
-      () => editorOnlineUsers.value,
-      (newVal) => {
-        provider.value.setAwarenessField('editorOnlineUsers', newVal)
       }
     )
 
@@ -283,7 +272,7 @@ export default defineComponent({
       for (const client of clients) {
         // ein Benutzer kann mit mehreren Clients online sein -> reduce
         if (!users[client.user.id]) {
-          users[client.user.id] = client.user.name
+          users[client.user.id] = { ...client.user }
         }
 
         // Ein Benutzer muss nicht zwingend in einem (relevanten) Bereich sein,
@@ -297,7 +286,7 @@ export default defineComponent({
 
           // ein Benutzer kann mit mehreren Clients online & im gleichen Bereich sein -> reduce
           if (!areas[client.user.area][client.user.id]) {
-            areas[client.user.area][client.user.id] = client.user.name
+            areas[client.user.area][client.user.id] = { ...client.user }
           }
         }
 
@@ -327,7 +316,7 @@ export default defineComponent({
             fields[client.user.lockedField] = {
               locked: true,
               since: client.user.lockedSince,
-              by: client.user.name,
+              by: client.user.username,
             }
           }
         }

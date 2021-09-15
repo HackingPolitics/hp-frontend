@@ -26,8 +26,8 @@ export default defineComponent({
     const isLoading = ref(false)
 
     const fetchUser = async () => {
-      // @ts-ignore
       isLoading.value = true
+      // @ts-ignore
       const token = context.$auth.strategy.token.get()
 
       if (token) {

@@ -21,6 +21,10 @@ import { RootState } from '~/store'
 
 export default defineComponent({
   name: 'ApplicationWriting',
+  meta: {
+    area: 'Schreiben',
+  },
+  layout: 'collaboration',
   setup() {
     const store = useStore<RootState>()
 

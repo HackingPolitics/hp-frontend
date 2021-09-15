@@ -7,7 +7,16 @@
     <slot></slot>
     <div
       v-if="active && toolTipOn"
-      class="tooltip bg-purple-500 text-white p-2"
+      class="
+        tooltip
+        rounded
+        bg- bg-white
+        border-purple-500 border
+        text-purple-500
+        p-2
+        text-sm
+        z-99
+      "
     >
       {{ toolTipText }}
     </div>
@@ -25,7 +34,7 @@ export default defineComponent({
     },
     active: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   setup() {
@@ -45,6 +54,7 @@ export default defineComponent({
 
 <style scoped>
 .tooltip {
+  z-index: 1000;
   min-width: 8rem;
   text-align: center;
   top: calc(100% + 11px);
