@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative min-h-screen">
     <menu-project-nav
       :title="
         routeBefore && routeBefore === '/'
@@ -171,24 +171,30 @@
                         </p>
                       </div>
                     </div>
-                    <!--                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
                       <div
-                        v-for="(onlineUser, index) in editorOnlineUsers"
+                        v-for="(onlineUser, index) in onlineUsers"
                         :key="index"
-                        class="flex overflow-hidden -space-x-1 v"
+                        class="flex -space-x-1"
                       >
-                        <base-avatar :user="onlineUser" />
+                        <base-avatar
+                          v-if="onlineUser.area === `proposal/${proposal.id}`"
+                          tool-tip
+                          :user="user"
+                        />
                       </div>
-                    </div>-->
+                    </div>
                   </div>
                 </div>
               </nuxt-link>
               <div class="inline-flex space-x-2">
-                <FormulateInput
-                  type="button"
-                  @click="createDocument(proposal.id)"
-                  ><outline-document-add-icon class="w-5 h-5"
-                /></FormulateInput>
+                <tool-tip tool-tip-text="Dokument erstellen">
+                  <FormulateInput
+                    type="button"
+                    @click="createDocument(proposal.id)"
+                    ><outline-document-add-icon class="w-5 h-5"
+                  /></FormulateInput>
+                </tool-tip>
                 <form
                   v-if="proposal.documentFile !== null"
                   method="post"
@@ -201,9 +207,11 @@
                   "
                 >
                   <input type="hidden" name="bearer" :value="getToken()" />
-                  <button class="form-button">
-                    <outline-document-download-icon class="w-5 h-5" />
-                  </button>
+                  <tool-tip tool-tip-text="Dokument herunterladen">
+                    <button class="form-button">
+                      <outline-document-download-icon class="w-5 h-5" />
+                    </button>
+                  </tool-tip>
                 </form>
                 <FormulateInput
                   v-if="userMembershipRole === 'coordinator'"
@@ -259,7 +267,10 @@
         </div>
       </div>
     </layouts-single-view>
-    <loading-indicator v-else-if="isLoading"></loading-indicator>
+    <loading-indicator
+      v-else-if="isLoading"
+      class="layout-loading-indicator"
+    ></loading-indicator>
     <div v-else-if="error" class="mx-auto max-w-screen-xl">
       <div
         class="
@@ -352,10 +363,6 @@ export default defineComponent({
 
     const project = computed(() => {
       return store.state.projects.project
-    })
-
-    const editorOnlineUsers = computed(() => {
-      return store.state.collaboration.editorOnlineUsers
     })
 
     const isLoading = computed(() => {
@@ -638,7 +645,6 @@ export default defineComponent({
       error,
       projectProgress,
       onlineUsers,
-      editorOnlineUsers,
       userMembershipRole,
       proposalFormIsOpen,
       parseISO,

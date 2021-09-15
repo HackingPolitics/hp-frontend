@@ -34,7 +34,7 @@
               v-if="user.area === concept.area && user.name !== userName"
               class="mr-1"
             >
-              <base-avatar :user="user"></base-avatar>
+              <base-avatar tool-tip :user="user"></base-avatar>
             </div>
           </div>
         </li>

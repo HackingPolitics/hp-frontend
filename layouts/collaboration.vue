@@ -1,7 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-200 flex flex-col justify-between">
-    <div class="flex-1 overflow-y-auto relative">
-      <Nuxt />
+    <div class="flex-1 overflow-scroll relative">
+      <loading-indicator
+        v-if="isLoading"
+        class="layout-loading-indicator"
+      ></loading-indicator>
+      <Nuxt v-else />
     </div>
     <base-footer></base-footer>
     <notification-toast />
@@ -46,6 +50,8 @@ export default defineComponent({
     const store = useStore<RootState>()
     const axios = useAxios()
 
+    const isLoading = ref(false)
+
     const route = useRoute()
 
     const projectId = ref<String>(route.value.params.id)
@@ -58,6 +64,7 @@ export default defineComponent({
     const lockedFields = ref({})
 
     const fetchUser = async () => {
+      isLoading.value = true
       // @ts-ignore
       const token = context.$auth.strategy.token.get()
       if (token) {
@@ -67,7 +74,10 @@ export default defineComponent({
           context.$auth.setUser(user.data)
           currentUser.value = {
             // @ts-ignore#
-            name: context.$auth.user?.username || '[not logged in]',
+            username: context.$auth.user?.username || '[not logged in]',
+            firstName: context.$auth.user?.firstName,
+            // @ts-ignore#
+            lastName: context.$auth.user?.lastName,
             // @ts-ignore#
             id: context.$auth.user?.id || 0,
             area: null,
@@ -79,12 +89,15 @@ export default defineComponent({
           console.log(error)
         }
       }
+      isLoading.value = false
     }
     fetchUser()
 
     // @ts-ignore#
     const currentUser = ref<StateUser>({
-      name: context.$auth.user?.username || '[not logged in]',
+      username: context.$auth.user?.username || '[not logged in]',
+      firstName: context.$auth.user?.firstName,
+      lastName: context.$auth.user?.lastName,
       id: context.$auth.user?.id || 0,
       area: null,
       lockedField: null,
@@ -109,10 +122,6 @@ export default defineComponent({
 
     const recentProjectSaved = computed(() => {
       return store.state.collaboration.recentProjectSaved
-    })
-
-    const editorOnlineUsers = computed(() => {
-      return store.state.collaboration.editorOnlineUsers
     })
 
     onMounted(() => {
@@ -178,13 +187,6 @@ export default defineComponent({
       () => currentArea.value,
       (newVal) => {
         setAwarenessState({ area: newVal })
-      }
-    )
-
-    watch(
-      () => editorOnlineUsers.value,
-      (newVal) => {
-        provider.value.setAwarenessField('editorOnlineUsers', newVal)
       }
     )
 
@@ -270,7 +272,7 @@ export default defineComponent({
       for (const client of clients) {
         // ein Benutzer kann mit mehreren Clients online sein -> reduce
         if (!users[client.user.id]) {
-          users[client.user.id] = client.user.name
+          users[client.user.id] = { ...client.user }
         }
 
         // Ein Benutzer muss nicht zwingend in einem (relevanten) Bereich sein,
@@ -284,7 +286,7 @@ export default defineComponent({
 
           // ein Benutzer kann mit mehreren Clients online & im gleichen Bereich sein -> reduce
           if (!areas[client.user.area][client.user.id]) {
-            areas[client.user.area][client.user.id] = client.user.name
+            areas[client.user.area][client.user.id] = { ...client.user }
           }
         }
 
@@ -314,7 +316,7 @@ export default defineComponent({
             fields[client.user.lockedField] = {
               locked: true,
               since: client.user.lockedSince,
-              by: client.user.name,
+              by: client.user.username,
             }
           }
         }
@@ -340,6 +342,7 @@ export default defineComponent({
       currentArea,
       lockedField,
       projectSaved,
+      isLoading,
     }
   },
 })

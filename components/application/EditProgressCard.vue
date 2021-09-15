@@ -33,7 +33,7 @@
       class="text-gray-500 mt-4 inline-flex"
     >
       <div v-if="user.area === area" class="mr-1">
-        <base-avatar :user="user"></base-avatar>
+        <base-avatar tool-tip :user="user"></base-avatar>
       </div>
     </div>
   </div>

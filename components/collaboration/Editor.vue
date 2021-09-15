@@ -71,100 +71,6 @@
     </div>
 
     <div class="h-8"></div>
-
-    <!--    <div id="collab-status">
-      <h2 class="text-2xl font-normal mt-4 text-blue-gray-900">
-        Collab-Status
-      </h2>
-      <div>Zeitstempel letzte Änderung Proposal via WS: {{ savedAt }}</div>
-
-      <h3 class="text-lg font-normal mt-4 text-blue-gray-900">
-        Online Clients (mehrere Browser(-tabs) etc.)
-      </h3>
-      <ul>
-        <li v-for="state in states" :key="state.clientId">
-          <span
-            :style="`background-color: ${state.user.color}; width: 1rem; height: 1rem; margin-right: 0.5rem; display: inline-block;`"
-          />
-          #{{ state.clientId }} {{ state.user.name }} (ID: {{ state.user.id }})
-          <div v-if="state.user.area">
-            Ist im Bereich "{{ state.user.area }}.
-          </div>
-          <div v-if="state.user.lockedField">
-            Bearbeitet Feld "{{ state.user.lockedField }}" seit
-            {{ state.user.lockedSince }}
-          </div>
-        </li>
-      </ul>
-
-      <h3 class="text-lg font-normal mt-4 text-blue-gray-900">
-        Bereiche der App
-      </h3>
-      <ul>
-        <li v-for="(area, name) in areas" :key="name">
-          {{ name }}
-          <ul>
-            <li v-for="(user, id) in area" :key="id">{{ user }} ({{ id }})</li>
-          </ul>
-        </li>
-      </ul>
-
-      <h3 class="text-lg font-normal mt-4 text-blue-gray-900">
-        Gesperrte Felder
-      </h3>
-      <ul>
-        <li v-for="(field, name) in lockedFields" :key="name">
-          {{ name }}: {{ field.locked ? 'gesperrt von' : 'frei' }}
-          <span v-if="field.locked">
-            {{ field.by }} (seit {{ field.since }})
-          </span>
-        </li>
-      </ul>
-
-      <h3 class="text-lg font-normal mt-4 text-blue-gray-900">
-        Online Users (nicht Clients!)
-      </h3>
-      <ul>
-        <li v-for="(user, id) in onlineUsers" :key="id">
-          {{ user }} ({{ id }})
-        </li>
-      </ul>
-
-      <h3 class="text-lg font-normal mt-4 text-blue-gray-900">Mein Status</h3>
-      Ich bin aktuell in Bereich ...
-      <select @change="changeArea">
-        <option></option>
-        <option>Thema</option>
-        <option>Handlung</option>
-        <option>Partner</option>
-      </select>
-      <br />
-
-      Ich bearbeite gerade ein Feld...
-      <button
-        class="
-          flex
-          justify-center
-          py-2
-          px-4
-          border
-          text-sm
-          font-medium
-          rounded-md
-          bg-purple-500
-          text-white
-          hover:border-purple-600 hover:text-600
-          focus:outline-none focus:border-purple-700 focus:shadow-outline-purple
-          active:border-purple-700
-          transition
-          duration-150
-          ease-in-out
-        "
-        @click="toggleFormLocked"
-      >
-        {{ currentUser.lockedField ? currentUser.lockedField : '[keins]' }}
-      </button>
-    </div>-->
   </div>
 </template>
 
@@ -198,7 +104,7 @@ const reduceStates = (clients) => {
   for (const client of clients) {
     // ein Benutzer kann mit mehreren Clients online sein -> reduce
     if (!users[client.user.id]) {
-      users[client.user.id] = client.user.name
+      users[client.user.id] = { ...client.user }
     }
 
     // Ein Benutzer muss nicht zwingend in einem (relevanten) Bereich sein,
@@ -212,7 +118,7 @@ const reduceStates = (clients) => {
 
       // ein Benutzer kann mit mehreren Clients online & im gleichen Bereich sein -> reduce
       if (!areas[client.user.area][client.user.id]) {
-        areas[client.user.area][client.user.id] = client.user.name
+        areas[client.user.area][client.user.id] = { ...client.user }
       }
     }
 
@@ -239,7 +145,7 @@ const reduceStates = (clients) => {
         fields[client.user.lockedField] = {
           locked: true,
           since: client.user.lockedSince,
-          by: client.user.name,
+          by: client.user.username,
         }
       }
     }
@@ -252,7 +158,6 @@ export default defineComponent({
   components: {
     EditorContent,
   },
-
   data() {
     return {
       // Der Status des aktuellen Users im aktuellen Client: Wo in der Anwendung ist er,
@@ -261,7 +166,9 @@ export default defineComponent({
       // gleichzeitig an alle User.
       // Wird
       currentUser: {
-        name: this.$auth.user.username || '[not logged in]',
+        username: this.$auth.user.username || '[not logged in]',
+        firstName: this.$auth.user.firstName,
+        lastName: this.$auth.user.lastName,
         id: this.$auth.user.id | 0,
         color: this.getRandomColor(),
         lockedField: null,
@@ -302,6 +209,11 @@ export default defineComponent({
 
   async mounted() {
     await this.$auth.refreshTokens()
+
+    this.$store.commit(
+      'collaboration/SET_CURRENT_AREA',
+      'proposal/' + this.proposalId
+    )
 
     this.ydoc = new Y.Doc()
     this.syncState = this.ydoc.getMap('syncState')
@@ -355,10 +267,6 @@ export default defineComponent({
           const reduced = reduceStates(states)
           this.areas = reduced.areas
           this.lockedFields = reduced.fields
-          this.$store.commit(
-            'collaboration/SET_EDITOR_ONLINE_USERS',
-            cloneDeep(reduced.users)
-          )
         },
       })
     }
@@ -509,30 +417,11 @@ export default defineComponent({
       return prefixed.replace(`${this.$auth.strategy.options.token.type} `, '')
     },
 
-    toggleFormLocked() {
-      if (this.currentUser.lockedField) {
-        this.setAwarenessState({
-          lockedField: null,
-          lockedSince: null,
-        })
-      } else {
-        this.setAwarenessState({
-          lockedField: this.getRandomField(),
-          lockedSince: Date.now(),
-        })
-      }
-    },
-
-    changeArea(e) {
-      this.setAwarenessState({ area: e.currentTarget.value })
-    },
-
     setAwarenessState(values = {}) {
       this.currentUser = {
         ...this.currentUser,
         ...values,
       }
-      console.log(this.currentUser)
       this.provider.setAwarenessField('user', this.currentUser)
     },
 
@@ -545,16 +434,6 @@ export default defineComponent({
         '#70CFF8',
         '#94FADB',
         '#B9F18D',
-      ])
-    },
-
-    getRandomField() {
-      return getRandomElement([
-        'Problem',
-        'Titel',
-        'Impact',
-        'Handlungsauftrag 2',
-        'Partner 1',
       ])
     },
   },
