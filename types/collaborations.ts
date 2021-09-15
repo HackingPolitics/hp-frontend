@@ -1,5 +1,7 @@
 export interface StateUser {
-  name: string | null
+  username: string | null
+  firstname: string | null
+  lastName: string | null
   area: string | null
   id: string | number
   lockedField: string | null

@@ -69,16 +69,6 @@
             >Profil</nuxt-link
           >
 
-          <nuxt-link
-            id="user-menu-item-1"
-            :to="localePath('/einstellungen')"
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700"
-            role="menuitem"
-            tabindex="-1"
-            >Einstellungen</nuxt-link
-          >
-
           <div
             id="user-menu-item-2"
             class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"

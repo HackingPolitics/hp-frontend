@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative min-h-screen">
     <menu-project-nav
       :title="
         routeBefore && routeBefore === '/'
@@ -171,24 +171,55 @@
                         </p>
                       </div>
                     </div>
-                    <!--                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
+                    <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
                       <div
-                        v-for="(onlineUser, index) in editorOnlineUsers"
+                        v-for="(onlineUser, index) in onlineUsers"
                         :key="index"
-                        class="flex overflow-hidden -space-x-1 v"
+                        class="flex -space-x-1"
                       >
-                        <base-avatar :user="onlineUser" />
+                        <base-avatar
+                          v-if="onlineUser.area === `proposal/${proposal.id}`"
+                          tool-tip
+                          :user="user"
+                        />
                       </div>
-                    </div>-->
+                    </div>
                   </div>
                 </div>
               </nuxt-link>
-              <FormulateInput
-                v-if="userMembershipRole === 'coordinator'"
-                type="button"
-                @click="deleteProposal(proposal.id)"
-                ><outline-trash-icon class="w-5 h-5"
-              /></FormulateInput>
+              <div class="inline-flex space-x-2">
+                <tool-tip tool-tip-text="Dokument erstellen">
+                  <FormulateInput
+                    type="button"
+                    @click="createDocument(proposal.id)"
+                    ><outline-document-add-icon class="w-5 h-5"
+                  /></FormulateInput>
+                </tool-tip>
+                <form
+                  v-if="proposal.documentFile !== null"
+                  method="post"
+                  target="_blank"
+                  :action="
+                    $config.API_URL +
+                    'proposals/' +
+                    proposal.id.toString() +
+                    '/document-download'
+                  "
+                >
+                  <input type="hidden" name="bearer" :value="getToken()" />
+                  <tool-tip tool-tip-text="Dokument herunterladen">
+                    <button class="form-button">
+                      <outline-document-download-icon class="w-5 h-5" />
+                    </button>
+                  </tool-tip>
+                </form>
+                <FormulateInput
+                  v-if="userMembershipRole === 'coordinator'"
+                  type="button"
+                  @click="deleteProposal(proposal.id)"
+                  ><outline-trash-icon class="w-5 h-5"
+                /></FormulateInput>
+              </div>
             </div>
           </div>
           <div class="bg-white block hover:bg-gray-50 mb-4">
@@ -236,7 +267,10 @@
         </div>
       </div>
     </layouts-single-view>
-    <loading-indicator v-else-if="isLoading"></loading-indicator>
+    <loading-indicator
+      v-else-if="isLoading"
+      class="layout-loading-indicator"
+    ></loading-indicator>
     <div v-else-if="error" class="mx-auto max-w-screen-xl">
       <div
         class="
@@ -280,6 +314,7 @@ import {
   useMeta,
 } from '@nuxtjs/composition-api'
 import { parseISO, format } from 'date-fns'
+import { cloneDeep } from 'lodash'
 import { RootState } from '~/store'
 import { AwarenessState } from '~/types/collaborations'
 import { IProjectMembership } from '~/types/apiSchema'
@@ -328,10 +363,6 @@ export default defineComponent({
 
     const project = computed(() => {
       return store.state.projects.project
-    })
-
-    const editorOnlineUsers = computed(() => {
-      return store.state.collaboration.editorOnlineUsers
     })
 
     const isLoading = computed(() => {
@@ -465,6 +496,34 @@ export default defineComponent({
       }
     }
 
+    const getToken = () => {
+      // @ts-ignore
+      const prefixed = cloneDeep(context.$auth.strategy.token.get()) || ''
+      return prefixed.replace(
+        // @ts-ignore
+        `${context.$auth.strategy.options.token.type} `,
+        ''
+      )
+    }
+
+    const createDocument = async (id: string | number) => {
+      if (id) {
+        await axios
+          .post(/proposals/ + id.toString() + '/export', {})
+          .then(() => {
+            setInterval(async () => {
+              await store.dispatch('projects/fetchProject', projectId.value)
+            }, 30000)
+            // @ts-ignore
+            context.$notify({
+              title: 'Antragsdokument wird erstellt',
+              duration: 300,
+              type: 'success',
+            })
+          })
+      }
+    }
+
     const projectMemberShipModal = ref()
 
     const toggleModal = (modal: string) => {
@@ -586,7 +645,6 @@ export default defineComponent({
       error,
       projectProgress,
       onlineUsers,
-      editorOnlineUsers,
       userMembershipRole,
       proposalFormIsOpen,
       parseISO,
@@ -594,6 +652,8 @@ export default defineComponent({
       createProposal,
       proposalCreateForm,
       deleteProposal,
+      createDocument,
+      getToken,
     }
   },
   data() {

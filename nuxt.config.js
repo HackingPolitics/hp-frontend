@@ -51,6 +51,7 @@ export default {
   },
   publicRuntimeConfig: {
     WS_URL: process.env.WS_URL,
+    API_URL: process.env.API_URL,
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components

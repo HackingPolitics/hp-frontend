@@ -44,6 +44,12 @@ h1, h2, h3, h4, h5 {
   transition: transform 0.5s;
 }
 
+.layout-loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
 *,
 *::before,
 *::after {
