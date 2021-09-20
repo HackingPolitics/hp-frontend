@@ -31,7 +31,7 @@
             class="text-gray-500 mt-4 inline-flex"
           >
             <div
-              v-if="user.area === concept.area && user.name !== userName"
+              v-if="user.area === concept.area && user.username !== userName"
               class="mr-1"
             >
               <base-avatar tool-tip :user="user"></base-avatar>

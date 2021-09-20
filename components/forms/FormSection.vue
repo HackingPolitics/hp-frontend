@@ -15,7 +15,7 @@
     <div :class="{ 'pt-6': title, 'opacity-25 pointer-events-none': locked }">
       <slot></slot>
     </div>
-    <span v-if="locked" class="absolute right-2 bottom-2 p-4">
+    <span v-if="locked" class="absolute right-2 bottom-0 p-4">
       {{ lockedText }}
     </span>
   </div>

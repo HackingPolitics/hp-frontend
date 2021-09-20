@@ -12,7 +12,9 @@
         :disabled="fieldIsLocked('applicationTitle')"
         :help="setLockedFieldText('applicationTitle')"
         @validation="validation = $event"
-        @focusout="updateProject({ title: $event.target.value })"
+        @focusout="
+          updateProject({ title: $event.target.value }, 'applicationTitle')
+        "
         @focus="setLockedField('applicationTitle')"
       >
       </forms-collaboration-input>
@@ -30,7 +32,9 @@
         :disabled="fieldIsLocked('applicationTopic')"
         :help="setLockedFieldText('applicationTopic')"
         @validation="validation = $event"
-        @focusout="updateProject({ topic: $event.target.value })"
+        @focusout="
+          updateProject({ topic: $event.target.value }, 'applicationTopic')
+        "
         @focus="setLockedField('applicationTopic')"
       >
       </forms-collaboration-input>
@@ -49,7 +53,9 @@
         :help="setLockedFieldText('applicationGoal')"
         @focus="setLockedField('applicationGoal')"
         @validation="validation = $event"
-        @focusout="updateProject({ goal: $event.target.value })"
+        @focusout="
+          updateProject({ goal: $event.target.value }, 'applicationGoal')
+        "
       >
       </forms-collaboration-input>
     </forms-form-section>
@@ -65,7 +71,7 @@
         name="category"
         limit="2"
         :options="categoryOptions"
-        @change="updateProject({ categories: $event })"
+        @change="updateProject({ categories: $event }, null)"
       />
     </forms-form-section>
   </div>
@@ -85,12 +91,6 @@ import { IProject } from '~/types/apiSchema'
 import { IValidation } from '~/types/vueFormulate'
 
 import collaborations from '~/composables/collaborations'
-
-interface TopicFormData {
-  topic?: string
-  title: string
-  goal: string
-}
 
 export default defineComponent({
   name: 'TopicForm',
@@ -142,12 +142,12 @@ export default defineComponent({
       }
     )
 
-    const updateProject = async (payload: any) => {
+    const updateProject = async (payload: any, fieldName: string | null) => {
       if (!validation.value.hasErrors && project.value) {
         await store
           .dispatch('projects/updateProject', [project.value?.id, payload])
           .then(() => {
-            setFieldUpdated()
+            setFieldUpdated(fieldName)
           })
           .catch(() => {
             resetLockedField()

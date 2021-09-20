@@ -23,6 +23,10 @@ export default function () {
     return store.state.collaboration.lockedFields
   })
 
+  const lockedField = computed(() => {
+    return store.state.collaboration.lockedField
+  })
+
   const setLockedField = (fieldName: string | null) => {
     store.commit('collaboration/SET_LOCKED_FIELD', fieldName)
     store.commit('collaboration/SET_LOCKED_SINCE', Date.now())
@@ -50,8 +54,8 @@ export default function () {
       : null
   }
 
-  const setFieldUpdated = () => {
-    resetLockedField()
+  const setFieldUpdated = (fieldName: string | null) => {
+    if (fieldName === lockedField.value) resetLockedField()
     store.commit('collaboration/SET_PROJECT_SAVED', Date.now())
   }
 

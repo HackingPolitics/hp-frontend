@@ -209,7 +209,7 @@ export default defineComponent({
           () => {
             formKey.value++
             newActionMandateForm.value = false
-            setFieldUpdated()
+            setFieldUpdated('problem_action_mandate')
           }
         )
       }
@@ -217,7 +217,7 @@ export default defineComponent({
     const deleteActionMandate = async (id: number | string) => {
       // @ts-ignore#
       await deleteProjectEntity('action_mandates', id).then(() => {
-        setFieldUpdated()
+        setFieldUpdated('problem_action_mandate')
       })
     }
 
@@ -231,7 +231,7 @@ export default defineComponent({
           id,
           payload
         ).then(() => {
-          setFieldUpdated()
+          setFieldUpdated('problem_action_mandate')
         })
       }
     }
@@ -252,8 +252,8 @@ export default defineComponent({
           .finally()
         allAsyncResults.push(asyncResult)
       }
-      await Promise.all(allAsyncResults).then((res) => {
-        setFieldUpdated()
+      await Promise.all(allAsyncResults).then(() => {
+        setFieldUpdated('problem_action_mandate')
       })
     }
 

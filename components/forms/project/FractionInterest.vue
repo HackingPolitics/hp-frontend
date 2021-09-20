@@ -76,19 +76,25 @@
             </div>
           </div>
 
-          <div v-if="fractionInterests && fractionInterests.length">
-            <FormulateInput
+          <forms-form-section
+            v-if="fractionInterests && fractionInterests.length"
+            :locked="fieldIsLocked('fraction_interests')"
+            :locked-text="setLockedFieldText('fraction_interests')"
+          >
+            <forms-collaboration-input
               v-for="interest in fractionInterests"
               :key="interest.id"
-              :value="interest.description"
+              :model="interest.description"
               type="textarea"
               :input-class="[
                 `border-l-4 shadow-none rounded-none border-t-0 border-b-0 border-r-0 bg-[${activeFraction.color}]`,
               ]"
+              :disabled="fieldIsLocked('fraction_interests')"
               @focusout="updateInterest($event, interest.id)"
+              @focus="setLockedField('fraction_interests')"
             >
-            </FormulateInput>
-          </div>
+            </forms-collaboration-input>
+          </forms-form-section>
           <div v-else class="w-full text-sm text-gray-500 py-6">
             {{ $t('forms.fractioninterests.interests.noInterests') }}
           </div>
@@ -126,7 +132,7 @@
               items-center
               hover:text-white hover:bg-purple-500
             "
-            @click="newInterestForm = true"
+            @click="openInterestForm()"
           >
             {{
               $t('forms.fractioninterests.interests.newInterest')
@@ -135,7 +141,7 @@
           <div
             v-if="newInterestForm"
             class="text-red-500 text-sm cursor-pointer text-right"
-            @click="newInterestForm = false"
+            @click="closeInterestForm()"
           >
             {{ $t('cancel') }}
           </div>
@@ -159,6 +165,7 @@ import {
 import { useAxios } from '~/composables/useAxios'
 import { RootState } from '~/store'
 import { IFraction, IFractionDetails } from '~/types/apiSchema'
+import collaborations from '~/composables/collaborations'
 
 export default defineComponent({
   props: {
@@ -172,6 +179,14 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const {
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      setFieldUpdated,
+      resetLockedField,
+    } = collaborations()
+
     const activeFraction = ref<IFraction | null>(null)
     watch(
       () => props.fractions,
@@ -196,6 +211,15 @@ export default defineComponent({
     const projectId = computed(() => {
       return store.state.projects.project?.['@id']
     })
+
+    const openInterestForm = () => {
+      setLockedField('fraction_interests')
+      newInterestForm.value = true
+    }
+    const closeInterestForm = () => {
+      resetLockedField()
+      newInterestForm.value = false
+    }
 
     const createFractionDetail = async () => {
       if (projectId.value && activeFraction.value) {
@@ -225,7 +249,8 @@ export default defineComponent({
               type: 'success',
             })
             formData.value.description = null
-            newInterestForm.value = false
+            closeInterestForm()
+            setFieldUpdated('fraction_interests')
             store.dispatch('projects/fetchProject', route.value.params.id)
           } catch (error) {
             // @ts-ignore
@@ -286,9 +311,13 @@ export default defineComponent({
 
     const updateInterest = async (event: any, id: number | string) => {
       try {
-        await axios.put(`/fraction_interests/${id}`, {
-          description: event.target.value,
-        })
+        await axios
+          .put(`/fraction_interests/${id}`, {
+            description: event.target.value,
+          })
+          .then(() => {
+            setFieldUpdated('fraction_interests')
+          })
 
         // @ts-ignore
         context.$notify({
@@ -353,6 +382,12 @@ export default defineComponent({
       updateInterest,
       checkSelected,
       togglePartnerStatus,
+      setLockedField,
+      fieldIsLocked,
+      setLockedFieldText,
+      setFieldUpdated,
+      openInterestForm,
+      closeInterestForm,
     }
   },
 })
