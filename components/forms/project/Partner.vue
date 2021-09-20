@@ -2,7 +2,7 @@
   <FormulateForm
     v-model="partnerFormData[partner.id]"
     :disabled="!editPartnerFormIsOpen"
-    @submit="updatePartner(partner.id)"
+    @submit="updatePartner(partner.id, `strategy_${partner.id}`)"
   >
     <div class="flex flex-wrap">
       <forms-collaboration-input
@@ -41,7 +41,7 @@
       <FormulateInput
         outer-class="absolute top-0 right-2 py-4 mr-2 border-0"
         type="button"
-        @click="deletePartner(partner.id)"
+        @click="deletePartner(partner.id, `strategy_${partner.id}`)"
       >
         <outline-trash-icon class="h-5 w-5"></outline-trash-icon>
       </FormulateInput>
@@ -114,7 +114,7 @@ export default defineComponent({
     const { setLockedField, resetLockedField, setFieldUpdated } =
       collaborations()
 
-    const updatePartner = async (id: string | number) => {
+    const updatePartner = async (id: string | number, fieldName: string) => {
       if (project.value && typeof project.value['@id'] === 'string') {
         const payload: PartnerArguments = {
           ...partnerFormData.value[id],
@@ -123,16 +123,16 @@ export default defineComponent({
         ;(await updateProjectEntity)<IPartner>('partners', id, payload).then(
           () => {
             togglePartnerForm()
-            setFieldUpdated()
+            setFieldUpdated(fieldName)
           }
         )
       }
     }
 
-    const deletePartner = async (id: string | number) => {
+    const deletePartner = async (id: string | number, fieldName: string) => {
       // @ts-ignore
       await deleteProjectEntity('partners', id, props.partners).then(() =>
-        setFieldUpdated()
+        setFieldUpdated(fieldName)
       )
     }
 

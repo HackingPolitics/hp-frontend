@@ -112,7 +112,7 @@ export default defineComponent({
         }
         await createProjectEntity<IPartner>('partners', payload).then(() => {
           formKey.value++
-          setFieldUpdated()
+          setFieldUpdated('strategy')
         })
       }
     }

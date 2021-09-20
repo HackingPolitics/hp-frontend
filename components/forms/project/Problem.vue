@@ -12,7 +12,7 @@
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
-          @update="updateProblemPriority($event)"
+          @update="updateProblemPriority()"
           @start="setLockedField('problems')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
@@ -189,7 +189,7 @@ export default defineComponent({
           .then(() => {
             formKey.value++
             newProblemForm.value = false
-            setFieldUpdated()
+            setFieldUpdated('problems')
           })
           .catch(() => {
             resetLockedField()
@@ -199,7 +199,7 @@ export default defineComponent({
     const deleteProblem = async (id: number | string) => {
       // @ts-ignore#
       await deleteProjectEntity('problems', id, problems.value).then(() => {
-        setFieldUpdated()
+        setFieldUpdated('problems')
       })
     }
 
@@ -210,7 +210,7 @@ export default defineComponent({
         }
         await updateProjectEntity<IProblem>('problems', id, payload).then(
           () => {
-            setFieldUpdated()
+            setFieldUpdated('problems')
           }
         )
       }
@@ -234,7 +234,7 @@ export default defineComponent({
       }
       await Promise.all(allAsyncResults)
         .then(() => {
-          setFieldUpdated()
+          setFieldUpdated('problems')
         })
         .catch(() => {
           resetLockedField()

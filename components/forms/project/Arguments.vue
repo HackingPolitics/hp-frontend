@@ -13,7 +13,13 @@
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
-          @update="updatePriority(counterArguments, 'counter_arguments')"
+          @update="
+            updatePriority(
+              counterArguments,
+              'counter_arguments',
+              'counter_arguments'
+            )
+          "
           @start="setLockedField('counter_arguments')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
@@ -44,11 +50,14 @@
                     ? updateEntity(
                         'counter_arguments',
                         { description: $event },
-                        counterArgument.id
+                        counterArgument.id,
+                        'counter_arguments'
                       )
                     : {}
                 "
-                @primary-delete="deleteEntity('counter_arguments', $event)"
+                @primary-delete="
+                  deleteEntity('counter_arguments', $event, 'counter_arguments')
+                "
                 @sub-validation="validationNegations = $event"
                 @sub-focus="setLockedField('counter_arguments')"
                 @sub-focusout="
@@ -87,7 +96,7 @@
           :sort="true"
           ghost-class="ghost"
           handle=".handle"
-          @update="updatePriority(argumentations, 'arguments')"
+          @update="updatePriority(argumentations, 'arguments', 'arguments')"
           @start="setLockedField('arguments')"
         >
           <transition-group tag="ul" type="transition" name="flip-list">
@@ -109,12 +118,15 @@
                     ? updateEntity(
                         'arguments',
                         { description: $event.target.value },
-                        argumentation.id
+                        argumentation.id,
+                        'arguments'
                       )
                     : {}
                 "
                 @focus="setLockedField('arguments')"
-                @delete="deleteEntity('arguments', argumentation.id)"
+                @delete="
+                  deleteEntity('arguments', argumentation.id, 'arguments')
+                "
               >
                 <template #prefix>
                   <div
@@ -220,7 +232,7 @@ export default defineComponent({
       formData: IArgument | ICounterArgument
     ) => {
       await createArgumentType('counter_arguments', formData).then(() =>
-        setFieldUpdated()
+        setFieldUpdated('counter_arguments')
       )
     }
 
@@ -238,7 +250,7 @@ export default defineComponent({
           payload
         ).then((res) => {
           formKey.value++
-          setFieldUpdated()
+          setFieldUpdated('arguments')
           return res
         })
       }
@@ -247,7 +259,8 @@ export default defineComponent({
     const updateEntity = async (
       endpoint: string,
       data: IProposal | IArgument | ICounterArgument,
-      id: string | number
+      id: string | number,
+      fieldName: string
     ) => {
       if (project.value && typeof project.value['@id'] === 'string') {
         const payload: IProposal | IArgument | ICounterArgument = {
@@ -259,24 +272,29 @@ export default defineComponent({
           id,
           payload
         ).then(() => {
-          setFieldUpdated()
+          setFieldUpdated(fieldName)
         })
       }
     }
 
-    const deleteEntity = async (endpoint: string, id: number | string) => {
+    const deleteEntity = async (
+      endpoint: string,
+      id: number | string,
+      fieldName: string
+    ) => {
       // @ts-ignore
       await deleteProjectEntity<IArgument | ICounterArgument>(
         endpoint,
         id
       ).then(() => {
-        setFieldUpdated()
+        setFieldUpdated(fieldName)
       })
     }
 
     const updatePriority = async (
       entity: ICounterArgument | IArgument,
-      endpoint: string
+      endpoint: string,
+      fieldName: string
     ) => {
       const allAsyncResults: Promise<any>[] = []
 
@@ -293,7 +311,7 @@ export default defineComponent({
         allAsyncResults.push(asyncResult)
       }
       await Promise.all(allAsyncResults).then(() => {
-        setFieldUpdated()
+        setFieldUpdated(fieldName)
       })
     }
 
@@ -315,12 +333,12 @@ export default defineComponent({
         // @ts-ignore
         await context.$api.negations
           .update(data.id, payload)
-          .then(() => setFieldUpdated())
+          .then(() => setFieldUpdated('counter_arguments'))
       } else {
         // @ts-ignore
         await context.$api.negations
           .create(payload)
-          .then(() => setFieldUpdated())
+          .then(() => setFieldUpdated('counter_arguments'))
       }
     }
 

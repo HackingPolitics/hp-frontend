@@ -23,7 +23,7 @@
           :help="setLockedFieldText('problem-impact')"
           @focus="setLockedField('problem-impact')"
           @validation="validation = $event"
-          @focusout="updateProject($event.target.value)"
+          @focusout="updateProject($event.target.value, 'problem-impact')"
         >
         </forms-collaboration-input>
       </forms-form-section>
@@ -72,7 +72,7 @@ export default defineComponent({
       }
     )
 
-    const updateProject = (val: string) => {
+    const updateProject = (val: string, fieldName: string) => {
       if (!validation.value.hasErrors) {
         store.dispatch('projects/updateProject', [
           project.value?.id,
@@ -80,7 +80,7 @@ export default defineComponent({
             impact: val,
           },
         ])
-        setFieldUpdated()
+        setFieldUpdated(fieldName)
       }
     }
 
