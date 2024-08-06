@@ -9630,10 +9630,10 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lib0@^0.2.31, lib0@^0.2.34, lib0@^0.2.41, lib0@^0.2.42:
-  version "0.2.42"
-  resolved "https://registry.yarnpkg.com/lib0/-/lib0-0.2.42.tgz#6d8bf1fb8205dec37a953c521c5ee403fd8769b0"
-  integrity sha512-8BNM4MiokEKzMvSxTOC3gnCBisJH+jL67CnSnqzHv3jli3pUvGC8wz+0DQ2YvGr4wVQdb2R2uNNPw9LEpVvJ4Q==
+lib0@^0.2.31, lib0@^0.2.34, lib0@^0.2.41, lib0@^0.2.42, lib0@^0.2.96:
+  version "0.2.96"
+  resolved "https://registry.yarnpkg.com/lib0/-/lib0-0.2.96.tgz#ae6f98b96576f645f953ab8f8c5fa28783af19dc"
+  integrity sha512-xeV9M34+D4HD1sd6xAarnWYgU7pKau64bvmPySibX85G+hx/KonzISpO409K6OS9IVLORWfQZkKBRZV5sQegFQ==
   dependencies:
     isomorphic.js "^0.2.4"
 
